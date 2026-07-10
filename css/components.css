@@ -469,9 +469,10 @@ textarea.form-field__control {
 .menu-overlay[data-open]::before { opacity: 1; }
 .menu-overlay[data-open] .menu-overlay__frame { transform: translateX(0); }
 
-/* Inner layout of the sliding panel (positioning lives in the block above). */
+/* Inner layout of the sliding panel (positioning lives in the block above).
+   Tighter horizontal padding than the page gutter — this is a narrow panel. */
 .menu-overlay__frame {
-  padding: var(--space-sm) var(--gutter) var(--space-2xl);
+  padding: var(--space-md) clamp(1.5rem, 4vw, 3rem) var(--space-2xl);
   display: flex;
   flex-direction: column;
 }
@@ -487,21 +488,15 @@ textarea.form-field__control {
   gap: var(--space-md);
 }
 
+/* Always a column now — the menu is a narrow right-side panel, so links stack
+   above the aside (contact/socials) rather than sitting in a wide side-by-side
+   row (which overflowed the panel). */
 .menu-overlay__body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: var(--space-2xl);
-  margin-top: var(--space-2xl);
-}
-
-@media (min-width: 1024px) {
-  .menu-overlay__body {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: var(--space-3xl);
-  }
+  gap: var(--space-xl);
+  margin-top: var(--space-xl);
 }
 
 /* Link list ------------------------------------------------------------------ */
@@ -546,7 +541,7 @@ textarea.form-field__control {
   color: var(--text);
   text-decoration: none;
   padding-bottom: 0.08em;
-  white-space: nowrap;
+  min-width: 0;
 }
 
 .menu-overlay__link::after {
