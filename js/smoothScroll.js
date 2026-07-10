@@ -21,8 +21,8 @@
 
 import { prefersReducedMotion } from "./utils.js";
 
-const LERP = 0.12;        // easing factor per frame — gentle, never sluggish
-const WHEEL_MULT = 1;     // 1:1 wheel delta; easing does the smoothing
+const LERP = 0.22;        // easing factor per frame — snappy, responsive (was 0.12/sluggish)
+const WHEEL_MULT = 1.15;  // slightly amplify wheel travel so it feels quick, not floaty
 const SETTLE_EPS = 0.4;   // px; below this we snap and stop the rAF loop
 
 export function initSmoothScroll() {

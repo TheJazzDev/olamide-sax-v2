@@ -11,8 +11,10 @@ import { $, $$, prefersReducedMotion } from "./utils.js";
 import { initNavigation } from "./navigation.js";
 import { initSmoothScroll } from "./smoothScroll.js";
 import { initReveals } from "./reveal.js";
-import { initBreathLine } from "./breathLine.js";
-import { initCursor } from "./cursor.js";
+// SET ASIDE (signature under rework — uncomment to restore the Breath Line):
+// import { initBreathLine } from "./breathLine.js";
+// SET ASIDE (removed on request — uncomment to restore the custom cursor):
+// import { initCursor } from "./cursor.js";
 import { initGallery } from "./gallery.js";
 import { initVideos } from "./videos.js";
 import { initContact } from "./contact.js";
@@ -49,15 +51,14 @@ function init() {
   // GSAP motion foundation (Task 6). Order matters: smooth-scroll first so the
   // eased scroll is in place before reveals bind to ScrollTrigger, then reveals
   // (which add the .js-anim-ready gate only if GSAP loaded + motion allowed),
-  // then the custom cursor. Each self-guards under reduced-motion / touch /
-  // GSAP-absent, so all are safe to call unconditionally on every page.
+  // Each self-guards under reduced-motion / touch / GSAP-absent, so all are
+  // safe to call unconditionally on every page.
   initSmoothScroll();
   initReveals();
-  // THE BREATH LINE (Task 7). After reveals so .js-anim-ready + the hero title
-  // reveal are in place (birth coordinates with the title), before the cursor.
-  // Self-gated: injects nothing under GSAP-absent / reduced-motion / JS-off.
-  initBreathLine();
-  initCursor();
+  // SET ASIDE (signature under rework — uncomment to restore the Breath Line):
+  // initBreathLine();
+  // SET ASIDE (removed on request — uncomment to restore the custom cursor):
+  // initCursor();
 
   // Archive UI — each is page-guarded internally (no-ops if its markup is absent).
   // These RENDER their grids, so they must run before media-motion binds to the
