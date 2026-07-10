@@ -273,25 +273,32 @@ function buildBreathingHeadline(gsap, ScrollTrigger) {
   const units =
     $$(".split-word", el).length > 0 ? $$(".split-word", el) : [el];
 
-  let quickTo = units.map((u) =>
-    gsap.quickTo(u, "letterSpacing", { duration: 0.6, ease: "power2.out" })
-  );
+  // Transform-only breathing (compositor-friendly, no layout reflow): a gentle
+  // lift + a whisper of vertical "swell" — like a held note. Keep off any
+  // layout-triggering property (e.g. letter-spacing) to protect 60fps.
+  units.forEach((u) => {
+    u.style.willChange = "transform";
+    u.style.transformOrigin = "center bottom";
+  });
   let yTo = units.map((u) =>
     gsap.quickTo(u, "y", { duration: 0.7, ease: "power2.out" })
   );
+  let scaleTo = units.map((u) =>
+    gsap.quickTo(u, "scaleY", { duration: 0.7, ease: "power2.out" })
+  );
 
-  // Bounds: tracking drifts up to ~0.06em, lift up to ~4px — subtle.
+  // Bounds: lift up to ~4px, swell up to ~1.5% — subtle.
   ScrollTrigger.create({
     trigger: el,
     start: "top bottom",
     end: "bottom top",
     onUpdate: (self) => {
       const v = Math.min(Math.abs(self.getVelocity()) / 1200, 1); // 0..1
-      const track = 0.06 * v; // em
       const lift = -4 * v; // px
+      const swell = 1 + 0.015 * v; // scaleY
       units.forEach((_, i) => {
-        quickTo[i](`${track}em`);
         yTo[i](lift);
+        scaleTo[i](swell);
       });
     },
     onLeave: () => settle(),
@@ -300,8 +307,8 @@ function buildBreathingHeadline(gsap, ScrollTrigger) {
 
   function settle() {
     units.forEach((_, i) => {
-      quickTo[i]("0em");
       yTo[i](0);
+      scaleTo[i](1);
     });
   }
 
