@@ -27,7 +27,7 @@ command -v ffmpeg >/dev/null || {
 
 # 1 · Plan the cut (validates the timeline; prints friendly errors itself).
 PLAN_OUT=$(python3 "$HERE/plan-shots.py")
-echo "$PLAN_OUT" | grep -v '^AUDIO_SOURCE='
+echo "$PLAN_OUT" | grep -v '^AUDIO_SOURCE=' || true
 AUDIO_SOURCE=$(echo "$PLAN_OUT" | sed -n 's/^AUDIO_SOURCE=//p')
 
 # 2 · Cut the master.

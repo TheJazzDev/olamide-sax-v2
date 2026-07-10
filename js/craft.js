@@ -39,26 +39,27 @@ export function initCraft() {
   });
 
   const covers = panels.length - 1; // number of slide-in transitions
-  const HOLD = 0.6;                  // linger units at start + end
-  // Total timeline length in "units": HOLD + one unit per cover + HOLD.
-  const total = HOLD + covers + HOLD;
+  const START_HOLD = 0.35;           // brief linger on panel 1 before covering
+  // Total timeline length in "units": a short opening hold + one per cover.
+  // No trailing hold — release promptly once the last panel lands.
+  const total = START_HOLD + covers;
 
   const tl = gsap.timeline({
     defaults: { ease: "power2.inOut" },
     scrollTrigger: {
       trigger: viewport,
       pin: true,
-      scrub: 1.1,                    // slightly higher = smoother, more weight
+      scrub: 1,
       start: "top top",
-      // Longer end → more scroll distance = each transition feels deliberate.
-      end: () => "+=" + window.innerHeight * (total * 1.15),
+      // ~0.85 screen-height of scroll per unit → snappy, not over-long.
+      end: () => "+=" + window.innerHeight * (total * 0.85),
       invalidateOnRefresh: true,
       anticipatePin: 1,
     },
   });
 
-  // Opening hold (linger on panel 1 before the first cover).
-  tl.to({}, { duration: HOLD });
+  // Brief opening hold (linger on panel 1 before the first cover).
+  tl.to({}, { duration: START_HOLD });
 
   panels.slice(1).forEach((panel, idx) => {
     const prev = panels[idx]; // the panel being covered
@@ -66,9 +67,6 @@ export function initCraft() {
     // Gently push the covered panel back (parallax depth) as it's covered.
     tl.to(prev, { xPercent: -12, scale: 0.96, duration: 1 }, "<");
   });
-
-  // Closing hold (linger on the last panel before the pin releases).
-  tl.to({}, { duration: HOLD });
 
   return () => tl.scrollTrigger && tl.scrollTrigger.kill();
 }

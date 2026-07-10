@@ -17,14 +17,27 @@
   background: var(--ink);
 }
 
-.craft__intro {
-  margin-bottom: clamp(2rem, 5vh, 4rem);
-}
-
 /* The pinned stage — one screen tall. */
 .craft-viewport {
   position: relative;
   height: 100svh;
+}
+
+/* Intro overlays the TOP of the stage and stays above the panels, so the
+   "IV · The Craft — Three voices, one performer." heading is visible the whole
+   time the videos scroll beneath it. */
+.craft__intro {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  padding: clamp(1.5rem, 5vh, 3.5rem) clamp(1.5rem, 6vw, 6rem) 0;
+  pointer-events: none;   /* never block the panels/scroll */
+}
+.craft__intro .sec-head__title {
+  margin-top: var(--space-sm);
+  max-width: 18ch;
 }
 
 /* Fallback (no GSAP): panels just stack vertically and scroll normally. */

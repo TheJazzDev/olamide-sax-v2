@@ -306,19 +306,18 @@
          STATICALLY; each is a data-craft-movement hook for pin/cross-fade (Task 8).
          ==================================================================== -->
     <section class="craft" aria-labelledby="craft-title" data-craft>
-      <div class="container">
+      <!-- The pinned stage. The intro is INSIDE it (overlaid, top) so the
+           "IV · The Craft — Three voices, one performer." heading stays visible
+           the whole time the panels scroll. -->
+      <div class="craft-viewport" data-craft-viewport>
         <div class="craft__intro">
           <p class="movement-index">
             <span class="movement-index__num">IV</span>
             <span class="movement-index__name">The Craft</span>
           </p>
-          <h2 class="sec-head__title" id="craft-title" style="margin-top: var(--space-md);">Three voices, one performer.</h2>
+          <h2 class="sec-head__title" id="craft-title">Three voices, one performer.</h2>
         </div>
-      </div>
 
-      <!-- Horizontal panel track (GSAP pins this + translates the panels).
-           Falls back to a normal horizontal-scroll strip if JS/GSAP is off. -->
-      <div class="craft-viewport" data-craft-viewport>
         <div class="craft-track" data-craft-track>
 
           <article class="craft-panel" data-craft-panel>
