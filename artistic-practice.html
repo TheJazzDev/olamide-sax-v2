@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Artistic Practice — Olamide Sax · Genres & The Sound</title>
+  <meta name="description" content="The artistic practice of Olamide Sax — African Contemporary and Afro-fusion, Gospel and instrumental worship. Rich saxophone melodies, soulful vocals, dynamic keyboard and authentic African rhythms, across cultural, civic, church and private stages." />
+
+  <!-- Preload the two display faces used above the fold. -->
+  <link rel="preload" href="assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/archivo-400.woff2" as="font" type="font/woff2" crossorigin />
+
+  <!-- CSS cascade order: reset → tokens → typography → layout → frame → components → home → archive → pages → animations → responsive -->
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/typography.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/frame.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/home.css" />
+  <link rel="stylesheet" href="css/archive.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+
+<body>
+  <!-- THE FILM-FRAME (signature device). Decorative to AT. -->
+  <div class="frame" aria-hidden="true">
+    <span class="frame__corner frame__corner--tl">Olamide Sax</span>
+    <span class="frame__corner frame__corner--tr">Practice</span>
+    <span class="frame__corner frame__corner--bl">UK / Nigeria</span>
+    <span class="frame__corner frame__corner--br">The Sound</span>
+    <!-- Reserved lane for the Breath Line (Task 7) — no visual yet. -->
+    <div class="frame__spine"></div>
+  </div>
+
+  <!-- Film grain veil + stage-warm bloom (ambient). -->
+  <div class="grain" aria-hidden="true"></div>
+  <div class="stage-bloom stage-bloom--fixed" aria-hidden="true"></div>
+
+  <!-- NAV (canonical partial — byte-identical to v2/partials/nav.html) -->
+  <nav class="site-nav" aria-label="Primary">
+    <a class="site-nav__wordmark" href="/index.html">
+      <span class="site-nav__wordmark-text">Olamide<span class="site-nav__wordmark-accent">Sax</span></span>
+    </a>
+
+    <button
+      type="button"
+      class="nav-toggle"
+      id="nav-toggle"
+      aria-haspopup="dialog"
+      aria-expanded="false"
+      aria-controls="menu-overlay"
+      aria-label="Open menu"
+    >
+      <span class="nav-toggle__label label">Menu</span>
+      <span class="nav-toggle__glyph" aria-hidden="true">
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+      </span>
+    </button>
+  </nav>
+
+  <!-- FULL-SCREEN MENU OVERLAY ================================================ -->
+  <div
+    class="menu-overlay"
+    id="menu-overlay"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Site menu"
+  >
+    <div class="menu-overlay__frame">
+      <div class="menu-overlay__top">
+        <a class="site-nav__wordmark site-nav__wordmark--overlay" href="/index.html">
+          <span class="site-nav__wordmark-text">Olamide<span class="site-nav__wordmark-accent">Sax</span></span>
+        </a>
+
+        <button
+          type="button"
+          class="nav-toggle nav-toggle--close"
+          id="nav-close"
+          aria-label="Close menu"
+        >
+          <span class="nav-toggle__label label">Close</span>
+          <span class="nav-toggle__glyph nav-toggle__glyph--x" aria-hidden="true">
+            <span class="nav-toggle__bar"></span>
+            <span class="nav-toggle__bar"></span>
+          </span>
+        </button>
+      </div>
+
+      <div class="menu-overlay__body">
+        <ol class="menu-overlay__links" data-menu-links>
+          <li class="menu-overlay__item">
+            <span class="menu-overlay__index numeral">01</span>
+            <a class="menu-overlay__link" href="/index.html">Home</a>
+          </li>
+          <li class="menu-overlay__item">
+            <span class="menu-overlay__index numeral">02</span>
+            <a class="menu-overlay__link" href="/about.html">About</a>
+          </li>
+          <li class="menu-overlay__item">
+            <span class="menu-overlay__index numeral">03</span>
+            <a class="menu-overlay__link" href="/artistic-practice.html">Artistic&nbsp;Practice</a>
+          </li>
+          <li class="menu-overlay__item">
+            <span class="menu-overlay__index numeral">04</span>
+            <a class="menu-overlay__link" href="/media.html">Media</a>
+          </li>
+          <li class="menu-overlay__item">
+            <span class="menu-overlay__index numeral">05</span>
+            <a class="menu-overlay__link" href="/gallery.html">Gallery</a>
+          </li>
+          <li class="menu-overlay__item">
+            <span class="menu-overlay__index numeral">06</span>
+            <a class="menu-overlay__link" href="/press.html">Press</a>
+          </li>
+          <li class="menu-overlay__item">
+            <span class="menu-overlay__index numeral">07</span>
+            <a class="menu-overlay__link" href="/timeline.html">Timeline</a>
+          </li>
+          <li class="menu-overlay__item">
+            <span class="menu-overlay__index numeral">08</span>
+            <a class="menu-overlay__link" href="/contact.html">Contact</a>
+          </li>
+        </ol>
+
+        <div class="menu-overlay__aside">
+          <a class="btn btn--brass menu-overlay__cta" href="/contact.html">Book Olamide</a>
+
+          <div class="menu-overlay__contact stack-sm">
+            <p class="label">Enquiries</p>
+            <a class="link-underline" href="mailto:Olaniyanolamidephillip@gmail.com">Olaniyanolamidephillip@gmail.com</a>
+            <p class="text-muted" style="font-size: var(--step--1);">United Kingdom</p>
+          </div>
+
+          <ul class="menu-overlay__socials row row--wrap">
+            <li>
+              <a class="label link-underline" href="https://www.tiktok.com/@olamidesax" target="_blank" rel="noopener noreferrer">TikTok</a>
+            </li>
+            <li>
+              <a class="label link-underline" href="https://www.instagram.com/olamide.sax" target="_blank" rel="noopener noreferrer">Instagram</a>
+            </li>
+            <li>
+              <a class="label link-underline" href="https://www.facebook.com/share/19kyBuitHZ/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">Facebook</a>
+            </li>
+            <li>
+              <a class="label link-underline" href="https://youtube.com/@olamidesax" target="_blank" rel="noopener noreferrer">YouTube</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="v2" id="main">
+
+    <!-- ====================================================================
+         MASTHEAD — one <h1> for the page.
+         ==================================================================== -->
+    <section class="section section--flush-top archive-head" aria-labelledby="practice-title" data-animate="archive-head">
+      <div class="container">
+        <p class="eyebrow eyebrow--brass archive-head__eyebrow">The Sound</p>
+        <h1 class="archive-head__title" id="practice-title">Artistic Practice</h1>
+        <p class="archive-head__lead">
+          African Contemporary at its heart — a warm, improvisational Afro-fusion
+          that carries African rhythm into soulful melody. Here is the sound,
+          the genres and the rooms it is made for.
+        </p>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         THE SOUND — the four qualities that define it.
+         ==================================================================== -->
+    <section class="section practice-sound" aria-labelledby="sound-heading" data-animate="sound">
+      <div class="container">
+        <div class="sec-head">
+          <div>
+            <p class="movement-index">
+              <span class="movement-index__num">01</span>
+              <span class="movement-index__name">The Sound</span>
+            </p>
+            <h2 class="sec-head__title" id="sound-heading" style="margin-top: var(--space-md);">Four voices in one performance.</h2>
+          </div>
+        </div>
+
+        <p class="practice-intro__text">
+          Olamide&rsquo;s <strong>African Contemporary</strong> sound is built from four elements
+          held in balance — the horn, the voice, the keys and the drum. Together they
+          make an Afro-fusion that is at once rooted and modern.
+        </p>
+
+        <dl class="sound-list">
+          <div class="sound-item">
+            <dt class="sound-item__name">Rich saxophone melodies</dt>
+            <dd class="sound-item__desc">
+              The horn carries the breath — soaring, warm-toned lines at the centre of every set.
+            </dd>
+          </div>
+          <div class="sound-item">
+            <dt class="sound-item__name">Soulful vocals</dt>
+            <dd class="sound-item__desc">
+              A vocalist first — melody, call-and-response and the griot&rsquo;s storytelling brought into the room.
+            </dd>
+          </div>
+          <div class="sound-item">
+            <dt class="sound-item__name">Dynamic keyboard</dt>
+            <dd class="sound-item__desc">
+              The harmonic foundation — chords, texture and live improvisation binding the movements together.
+            </dd>
+          </div>
+          <div class="sound-item">
+            <dt class="sound-item__name">Authentic African rhythms</dt>
+            <dd class="sound-item__desc">
+              The pulse of home beneath it all — Yoruba percussion keeping time under every phrase.
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         GENRES — African Contemporary (primary) · Gospel & Worship.
+         ==================================================================== -->
+    <section class="section practice-genres" aria-labelledby="genres-heading" data-animate="genres">
+      <div class="container">
+        <div class="sec-head">
+          <div>
+            <p class="movement-index">
+              <span class="movement-index__num">02</span>
+              <span class="movement-index__name">Genres</span>
+            </p>
+            <h2 class="sec-head__title" id="genres-heading" style="margin-top: var(--space-md);">Where the sound lives.</h2>
+          </div>
+        </div>
+
+        <div class="genre-grid">
+          <article class="genre" data-genre="contemporary">
+            <p class="eyebrow eyebrow--brass genre__eyebrow">Primary</p>
+            <h3 class="genre__title">African Contemporary</h3>
+            <p class="genre__body">
+              The heart of the practice — a modern African sound that fuses saxophone,
+              voice and keys with authentic rhythm. Improvisational, warm and built for
+              a live room, it moves easily between the intimate and the ceremonial.
+            </p>
+          </article>
+
+          <article class="genre" data-genre="gospel">
+            <p class="eyebrow eyebrow--brass genre__eyebrow">Also</p>
+            <h3 class="genre__title">Gospel &amp; Instrumental Worship</h3>
+            <p class="genre__body">
+              A dedicated worship register — instrumental gospel led by the saxophone,
+              with keys and voice shaping reflective, spirit-led sets for churches and
+              services. The same breath, turned toward worship.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         REPERTOIRE — what a set can hold.
+         ==================================================================== -->
+    <section class="section section--tight practice-repertoire" aria-labelledby="repertoire-heading" data-animate="repertoire">
+      <div class="container">
+        <div class="sec-head">
+          <div>
+            <p class="movement-index">
+              <span class="movement-index__num">03</span>
+              <span class="movement-index__name">Repertoire</span>
+            </p>
+            <h2 class="sec-head__title" id="repertoire-heading" style="margin-top: var(--space-md);">A set, shaped to the room.</h2>
+          </div>
+        </div>
+        <div class="repertoire">
+          <p class="repertoire__body">
+            Every set is arranged for its occasion — Afro-fusion originals and reinterpreted
+            favourites, soulful ballads, upbeat groove and instrumental worship. Whether the
+            room asks for celebration, reflection or ceremony, the repertoire bends to meet it,
+            with live improvisation keeping each performance one of a kind.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         PARTICIPATORY ARTS — more than performance.
+         ==================================================================== -->
+    <section class="section section--tight practice-participatory" aria-labelledby="participatory-heading" data-animate="participatory">
+      <div class="container">
+        <div class="sec-head">
+          <div>
+            <p class="movement-index">
+              <span class="movement-index__num">04</span>
+              <span class="movement-index__name">Participatory Arts</span>
+            </p>
+            <h2 class="sec-head__title" id="participatory-heading" style="margin-top: var(--space-md);">More than performance.</h2>
+          </div>
+        </div>
+        <div class="repertoire">
+          <p class="repertoire__body">
+            Every performance begins with music and ends with connection. As a
+            participatory artist and creative facilitator, Olamide creates workshops
+            that combine music, wellbeing, storytelling, memory work and community
+            participation — inviting people not only to listen, but to take part and
+            belong. He collaborates with leading UK cultural organisations, including
+            <strong>Stand &amp; Be Counted Theatre</strong>,
+            <strong>darts &amp; Maya Productions</strong> and <strong>ArtBomb UK</strong>,
+            and has led recent work from the record-breaking
+            <strong>World Record Football Scarf Procession</strong> to the
+            <strong>Eco Art Fashion Show</strong> and <strong>Sharrow Festival</strong>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         PERFORMANCE CONTEXTS — the rooms the sound is made for.
+         ==================================================================== -->
+    <section class="section section--tight practice-contexts" aria-labelledby="contexts-heading" data-animate="contexts">
+      <div class="container">
+        <div class="sec-head">
+          <div>
+            <p class="movement-index">
+              <span class="movement-index__num">05</span>
+              <span class="movement-index__name">Performance Contexts</span>
+            </p>
+            <h2 class="sec-head__title" id="contexts-heading" style="margin-top: var(--space-md);">Where he plays.</h2>
+          </div>
+        </div>
+        <ul class="context-list" aria-label="Performance contexts">
+          <li class="context-tag">Festivals</li>
+          <li class="context-tag">Theatre Productions</li>
+          <li class="context-tag">Concerts</li>
+          <li class="context-tag">Participatory Arts</li>
+          <li class="context-tag">Creative Health Projects</li>
+          <li class="context-tag">Cultural Events</li>
+          <li class="context-tag">Workshops &amp; Education</li>
+          <li class="context-tag">Civic Occasions</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         INVITATION — quiet resolution → contact.
+         ==================================================================== -->
+    <section class="section invitation" aria-labelledby="practice-invite" data-animate="invitation">
+      <div class="container">
+        <div class="invitation__inner">
+          <p class="movement-index" style="justify-content: center;">
+            <span class="movement-index__num">&mdash;</span>
+            <span class="movement-index__name">The Invitation</span>
+          </p>
+          <h2 class="invitation__title" id="practice-invite">Let&rsquo;s create something meaningful.</h2>
+          <p class="invitation__avail">
+            Available for festivals, theatre productions, concerts, participatory
+            arts, creative health projects, cultural events and workshops — UK &amp;
+            international.
+          </p>
+          <a class="btn btn--brass invitation__cta" href="/contact.html">Book Olamide</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER (canonical partial — byte-identical to v2/partials/footer.html) -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__top">
+        <div class="site-footer__brand stack-sm">
+          <a class="site-nav__wordmark site-nav__wordmark--footer" href="/index.html">
+            <span class="site-nav__wordmark-text">Olamide<span class="site-nav__wordmark-accent">Sax</span></span>
+          </a>
+          <p class="site-footer__tagline text-muted">
+            UK-based Nigerian Afro-Fusion artist — Multi-Instrumentalist&nbsp;·&nbsp;Participatory Artist&nbsp;·&nbsp;Creative Facilitator
+          </p>
+        </div>
+
+        <nav class="site-footer__links" aria-label="Footer">
+          <p class="label">Explore</p>
+          <ul class="stack-sm">
+            <li><a class="link-underline" href="/index.html">Home</a></li>
+            <li><a class="link-underline" href="/about.html">About</a></li>
+            <li><a class="link-underline" href="/artistic-practice.html">Artistic Practice</a></li>
+            <li><a class="link-underline" href="/media.html">Media</a></li>
+            <li><a class="link-underline" href="/gallery.html">Gallery</a></li>
+            <li><a class="link-underline" href="/press.html">Press</a></li>
+            <li><a class="link-underline" href="/timeline.html">Timeline</a></li>
+            <li><a class="link-underline" href="/contact.html">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="site-footer__contact">
+          <p class="label">Contact</p>
+          <ul class="stack-sm">
+            <li><a class="link-underline" href="mailto:Olaniyanolamidephillip@gmail.com">Olaniyanolamidephillip@gmail.com</a></li>
+            <li class="text-muted">United Kingdom</li>
+          </ul>
+        </div>
+
+        <div class="site-footer__socials">
+          <p class="label">Follow</p>
+          <ul class="row row--wrap" style="margin-top: var(--space-sm);">
+            <li>
+              <a
+                class="icon-link"
+                href="https://www.tiktok.com/@olamidesax"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Olamide Sax on TikTok"
+              >
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path fill="currentColor" d="M16.6 5.82c-1.02-.88-1.66-2.16-1.66-3.58h-3.06v13.6a3.14 3.14 0 1 1-2.19-3.02V9.68a6.2 6.2 0 1 0 5.25 6.12V9.4a8.2 8.2 0 0 0 4.6 1.4V7.75c-1.06 0-2.06-.4-2.94-1.13Z"/>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a
+                class="icon-link"
+                href="https://www.instagram.com/olamide.sax"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Olamide Sax on Instagram"
+              >
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+                  <circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+                  <circle cx="17.35" cy="6.65" r="1.1" fill="currentColor"/>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a
+                class="icon-link"
+                href="https://www.facebook.com/share/19kyBuitHZ/?mibextid=wwXIfr"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Olamide Sax on Facebook"
+              >
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path fill="currentColor" d="M14.5 21v-7.6h2.55l.38-2.96h-2.93V8.55c0-.86.24-1.44 1.47-1.44h1.57V4.46c-.27-.04-1.2-.12-2.28-.12-2.26 0-3.8 1.38-3.8 3.9v2.18H8.99v2.96h2.47V21h3.04Z"/>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a
+                class="icon-link"
+                href="https://youtube.com/@olamidesax"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Olamide Sax on YouTube"
+              >
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <rect x="2.5" y="6" width="19" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/>
+                  <path fill="currentColor" d="M10.6 9.5v5l4.3-2.5-4.3-2.5Z"/>
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="site-footer__rule" />
+
+      <div class="site-footer__bottom">
+        <p class="site-footer__colophon text-muted">
+          &copy; <span data-year>2026</span> Olamide Sax. Founder &amp; Lead Artist, Lammy Wonder Music Entertainment.
+        </p>
+        <p class="site-footer__made text-muted">A living archive, built one performance at a time.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

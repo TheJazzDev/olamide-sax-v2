@@ -1,0 +1,108 @@
+/* ============================================================================
+   responsive.css — Olamide Sax V2 · mobile-first breakpoint overrides
+   Loaded LAST. Base styles are mobile-appropriate; these scale UP and add a
+   few DOWN-tweaks for very small screens. Moderate mobile sizing (~60–70%).
+   Breakpoints: sm 640 · md 768 · lg 1024 · xl 1280.
+   ========================================================================== */
+
+/* ── Very small (< 480px) — keep everything calm, no h-scroll at 375px ──── */
+@media (max-width: 479px) {
+
+  :root {
+    /* Tighten the section rhythm a touch so mobile isn't cavernous. */
+    --section-y: clamp(64px, 12vh, 120px);
+    --frame-inset: 14px;
+    --grid-gap: 1rem;
+  }
+
+  /* On the smallest screens the frame keeps the two PRIMARY corners
+     (wordmark + section index) and drops the secondary pair to avoid
+     collisions with narrow content. */
+  .frame__corner--bl,
+  .frame__corner--br {
+    display: none;
+  }
+
+  /* Collapse the 12-col grid to a single column by default. */
+  .grid > [class*="col-"] {
+    grid-column: 1 / -1;
+  }
+  /* Neutralise explicit starts on mobile (no offset asymmetry). */
+  [class*="start-"] { grid-column-start: auto; }
+
+  .hang-left { margin-left: 0; }
+  .hang-up   { margin-top: 0; }
+
+  /* Body prose fills the measure on small screens. */
+  p { max-width: 100%; }
+}
+
+/* ── sm (>= 640px) ──────────────────────────────────────────────────────── */
+@media (min-width: 640px) {
+  :root {
+    --frame-inset: clamp(18px, 3vw, 28px);
+  }
+
+  /* Restore corner metadata once there is room. */
+  .frame__corner--bl,
+  .frame__corner--br { display: block; }
+
+  /* Two-column baseline for grid children that opt in via .sm-col-*. */
+  .sm-col-6 { grid-column: span 6; }
+  .sm-col-4 { grid-column: span 4; }
+  .sm-col-8 { grid-column: span 8; }
+}
+
+/* ── md (>= 768px) ──────────────────────────────────────────────────────── */
+@media (min-width: 768px) {
+  :root {
+    --frame-inset: clamp(24px, 3.2vw, 34px);
+  }
+
+  .md-col-3 { grid-column: span 3; }
+  .md-col-4 { grid-column: span 4; }
+  .md-col-5 { grid-column: span 5; }
+  .md-col-6 { grid-column: span 6; }
+  .md-col-7 { grid-column: span 7; }
+  .md-col-8 { grid-column: span 8; }
+
+  .md-start-2 { grid-column-start: 2; }
+  .md-start-3 { grid-column-start: 3; }
+  .md-start-4 { grid-column-start: 4; }
+
+  /* Restore flex-row behaviour for responsive rows. */
+  .row--stack-mobile { flex-direction: row; }
+}
+
+/* ── lg (>= 1024px) ─────────────────────────────────────────────────────── */
+@media (min-width: 1024px) {
+  :root {
+    --frame-inset: clamp(28px, 2.6vw, 40px);
+  }
+
+  .lg-col-3 { grid-column: span 3; }
+  .lg-col-4 { grid-column: span 4; }
+  .lg-col-6 { grid-column: span 6; }
+  .lg-col-7 { grid-column: span 7; }
+  .lg-col-8 { grid-column: span 8; }
+
+  .lg-start-2 { grid-column-start: 2; }
+  .lg-start-3 { grid-column-start: 3; }
+  .lg-start-5 { grid-column-start: 5; }
+  .lg-start-7 { grid-column-start: 7; }
+}
+
+/* ── xl (>= 1280px) ─────────────────────────────────────────────────────── */
+@media (min-width: 1280px) {
+  .xl-col-4 { grid-column: span 4; }
+  .xl-col-6 { grid-column: span 6; }
+  .xl-col-8 { grid-column: span 8; }
+}
+
+/* ── Below md: rows stack by default when tagged ────────────────────────── */
+@media (max-width: 767px) {
+  .row--stack-mobile {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

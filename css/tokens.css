@@ -1,0 +1,201 @@
+/* ============================================================================
+   tokens.css — Olamide Sax V2 · Design tokens (single source of truth)
+   Dark-dominant, single committed theme. Warm-biased neutrals only —
+   NEVER pure grey / black / white. All values live here; other files consume.
+   ========================================================================== */
+
+:root {
+  /* ==========================================================================
+     1 · CORE PALETTE (V2, exact — verbatim from spec)
+     ======================================================================== */
+  --ink:         #0B0A08;   /* warm near-black — the stage dark            */
+  --umber:       #171310;   /* raised warm surface / second ground        */
+  --bone:        #F3EDE3;   /* warm off-white — the light                 */
+  --ash:         #A39A8C;   /* warm mid grey — muted text, hairlines      */
+  --brass:       #B8863B;   /* aged brass — the Breath Line's color       */
+  --brass-light: #D8B87E;   /* lit brass — highlight / hover              */
+  --ember:       #7A3B24;   /* terracotta — heritage warmth               */
+
+  /* Derived warm tints (rgba of the above — for hairlines, glows, veils).
+     Kept as channel triplets so alpha can be composed inline where needed. */
+  --bone-rgb:   243 237 227;
+  --ash-rgb:    163 154 140;
+  --brass-rgb:  184 134  59;
+  --ink-rgb:     11  10   8;
+  --ember-rgb:  122  59  36;
+
+  /* ==========================================================================
+     2 · SEMANTIC ALIASES
+     ======================================================================== */
+  --bg:            var(--ink);      /* dominant background            */
+  --bg-raised:     var(--umber);    /* raised surface                 */
+  --bg-invert:     var(--bone);     /* light "movement" interludes    */
+  --text:          var(--bone);     /* primary text                   */
+  --text-invert:   var(--ink);      /* text on light interludes       */
+  --muted:         var(--ash);      /* secondary / captions           */
+  --accent:        var(--brass);    /* the through-line color         */
+  --accent-lit:    var(--brass-light);
+  --heritage:      var(--ember);
+
+  /* ==========================================================================
+     3 · HAIRLINES & BORDERS  (this design favors hairline over heavy)
+     ======================================================================== */
+  --hairline:        rgb(var(--ash-rgb) / 0.22);   /* default frame/rule    */
+  --hairline-soft:   rgb(var(--ash-rgb) / 0.12);   /* faint divider         */
+  --hairline-strong: rgb(var(--ash-rgb) / 0.40);   /* emphasised rule       */
+  --hairline-brass:  rgb(var(--brass-rgb) / 0.55); /* accent rule           */
+  --border-width:    1px;                          /* the frame is thin     */
+
+  /* ==========================================================================
+     4 · RADII  (minimal — sharp/hairline is the register, not rounded)
+     ======================================================================== */
+  --radius-xs:  2px;
+  --radius-sm:  3px;
+  --radius-md:  5px;   /* used sparingly; media frames stay near-sharp */
+  --radius-none: 0;
+
+  /* ==========================================================================
+     5 · SPACING  (8px rhythm)
+     ======================================================================== */
+  --space-3xs:  0.25rem;   /*  4px */
+  --space-2xs:  0.5rem;    /*  8px */
+  --space-xs:   0.75rem;   /* 12px */
+  --space-sm:   1rem;      /* 16px */
+  --space-md:   1.5rem;    /* 24px */
+  --space-lg:   2rem;      /* 32px */
+  --space-xl:   3rem;      /* 48px */
+  --space-2xl:  4rem;      /* 64px */
+  --space-3xl:  6rem;      /* 96px */
+  --space-4xl:  8rem;      /* 128px */
+
+  /* Section vertical rhythm — LARGE, breathing (fluid). */
+  --section-y:  clamp(96px, 14vh, 220px);
+
+  /* Responsive page gutters (film-frame + container share this feel). */
+  --gutter:     clamp(1.25rem, 5vw, 5rem);
+
+  /* ==========================================================================
+     6 · TYPE — FAMILIES
+     ======================================================================== */
+  --font-display: "Fraunces", "Fraunces Fallback", Georgia, "Times New Roman", serif;
+  --font-body:    "Archivo",  "Archivo Fallback", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-label:   var(--font-body);     /* uppercase, wide-tracked */
+  /* Editorial-italic uses --font-display + font-style:italic (Fraunces italic). */
+
+  /* ==========================================================================
+     7 · TYPE — FLUID SCALE (--step-0 … --step-9)
+     Body baseline at step-0; hero reaches clamp(3.5rem,14vw,13rem).
+     ======================================================================== */
+  --step--1: clamp(0.78rem, 0.75rem + 0.15vw, 0.86rem);   /* small/caption  */
+  --step-0:  clamp(1rem,    0.96rem + 0.2vw,  1.125rem);  /* body           */
+  --step-1:  clamp(1.2rem,  1.12rem + 0.4vw,  1.5rem);    /* lead           */
+  --step-2:  clamp(1.45rem, 1.3rem  + 0.75vw, 2rem);      /* card title     */
+  --step-3:  clamp(1.75rem, 1.5rem  + 1.25vw, 2.75rem);   /* sub-heading    */
+  --step-4:  clamp(2.1rem,  1.7rem  + 2vw,    3.75rem);   /* heading        */
+  --step-5:  clamp(2.5rem,  1.9rem  + 3vw,    5rem);      /* section head   */
+  --step-6:  clamp(3rem,    2rem    + 5vw,    7rem);      /* large display  */
+  --step-7:  clamp(3.5rem,  2rem    + 7.5vw,  9.5rem);    /* xl display     */
+  --step-8:  clamp(4rem,    1.5rem  + 11vw,   11.5rem);   /* hero-ish       */
+  --step-9:  clamp(3.5rem,  1rem    + 14vw,   13rem);     /* HERO soloist   */
+
+  /* Optical weight range for the display serif (used HUGE + LIGHT). */
+  --display-weight:        340;   /* the soloist wants to be light   */
+  --display-weight-bold:   560;
+  --body-weight:           400;
+  --body-weight-strong:    600;
+
+  /* Line-heights */
+  --leading-tight:  1.02;   /* huge display                     */
+  --leading-snug:   1.12;   /* headings                         */
+  --leading-normal: 1.5;    /* body                             */
+  --leading-loose:  1.65;   /* long-form body                   */
+
+  /* Tracking */
+  --tracking-display: -0.02em;  /* large serif tightens slightly  */
+  --tracking-body:     0;
+  --tracking-label:    0.28em;  /* wide-tracked uppercase label   */
+  --tracking-eyebrow:  0.22em;
+
+  /* Measure (line length) */
+  --measure:       66ch;   /* body ~62–68ch                     */
+  --measure-tight: 46ch;
+  --measure-wide:  78ch;
+
+  /* ==========================================================================
+     8 · SHADOWS  (subtle, WARM only — never a hard grey drop)
+     ======================================================================== */
+  --shadow-soft:
+    0 1px 2px  rgb(var(--ink-rgb) / 0.30),
+    0 8px 24px rgb(var(--ink-rgb) / 0.35);
+  --shadow-lift:
+    0 2px 4px   rgb(var(--ink-rgb) / 0.35),
+    0 18px 48px rgb(var(--ink-rgb) / 0.45);
+  /* Warm inner catch — like brass catching stage light. */
+  --shadow-brass-glow: 0 0 0 1px rgb(var(--brass-rgb) / 0.20),
+                       0 0 40px  rgb(var(--brass-rgb) / 0.10);
+
+  /* ==========================================================================
+     9 · STAGE-WARM GLOW  (the spotlight bloom — tempo, not decoration)
+     Very low opacity radial; intensifies as a section becomes active (JS later).
+     ======================================================================== */
+  --stage-warm: radial-gradient(
+      120% 80% at 50% 0%,
+      rgb(var(--brass-rgb) / 0.10) 0%,
+      rgb(var(--ember-rgb) / 0.05) 30%,
+      transparent 70%
+    );
+  --stage-warm-strong: radial-gradient(
+      100% 70% at 50% 10%,
+      rgb(var(--brass-rgb) / 0.18) 0%,
+      rgb(var(--ember-rgb) / 0.08) 35%,
+      transparent 72%
+    );
+  --glow-opacity-rest:   0.35;   /* JS lerps toward -active */
+  --glow-opacity-active: 1;
+
+  /* ==========================================================================
+     10 · EASING & DURATION  (breath-paced)
+     ======================================================================== */
+  --ease-out:    cubic-bezier(0.16, 1, 0.30, 1);   /* signature ease-out   */
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-breath: cubic-bezier(0.37, 0, 0.63, 1);   /* symmetric, held note */
+
+  --dur-fast:   0.35s;
+  --dur-base:   0.6s;
+  --dur-slow:   1s;
+  --dur-drift:  1.8s;    /* slow ambient breathing */
+
+  /* ==========================================================================
+     11 · FILM-FRAME  (the signature layout device)
+     ======================================================================== */
+  --frame-inset:      clamp(16px, 3.2vw, 40px);   /* responsive inset       */
+  --frame-color:      var(--hairline);            /* Ash hairline           */
+  --frame-width:      var(--border-width);
+  --frame-meta-size:  var(--step--1);             /* corner metadata type   */
+  /* Slim edge lane reserved for the future Breath Line (Task 7).
+     Documented hook — the line will live inside this lane, left edge. */
+  --breath-lane:      clamp(20px, 3vw, 34px);
+
+  /* ==========================================================================
+     12 · GRAIN / FILM  (film-grain overlay strength)
+     ======================================================================== */
+  --grain-opacity:  0.05;
+
+  /* ==========================================================================
+     13 · Z-INDEX SCALE
+     ======================================================================== */
+  --z-base:     0;
+  --z-content:  1;
+  --z-frame:    50;    /* film-frame sits above content, below nav overlay  */
+  --z-breath:   60;    /* Breath Line spine                                 */
+  --z-nav:      100;
+  --z-overlay:  200;   /* full-screen menu                                  */
+  --z-cursor:   300;
+
+  /* ==========================================================================
+     14 · LAYOUT WIDTHS
+     ======================================================================== */
+  --container-max: 1440px;
+  --grid-columns:  12;
+  --grid-gap:      clamp(1rem, 2.2vw, 2rem);
+}

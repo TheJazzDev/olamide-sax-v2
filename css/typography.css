@@ -1,0 +1,190 @@
+/* ============================================================================
+   typography.css — Olamide Sax V2
+   Self-hosted @font-face (swap). Fraunces = the DISPLAY SERIF soloist
+   (used HUGE + LIGHT). Archivo = humanist grotesque body. Fraunces italic =
+   editorial voice. Label = Archivo uppercase, wide-tracked.
+   ========================================================================== */
+
+/* ── @font-face ─────────────────────────────────────────────────────────── */
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("../assets/fonts/fraunces.woff2") format("woff2");
+  font-weight: 100 900;          /* variable — we drive it via --display-weight */
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("../assets/fonts/fraunces-italic.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Archivo";
+  src: url("../assets/fonts/archivo-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Archivo";
+  src: url("../assets/fonts/archivo-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Metric-adjusted fallbacks to reduce layout shift on swap. */
+@font-face {
+  font-family: "Archivo Fallback";
+  src: local("Arial"), local("Helvetica Neue"), local("sans-serif");
+  ascent-override: 92%;
+  descent-override: 24%;
+  line-gap-override: 0%;
+  size-adjust: 101%;
+}
+@font-face {
+  font-family: "Fraunces Fallback";
+  src: local("Georgia"), local("Times New Roman"), local("serif");
+  ascent-override: 96%;
+  descent-override: 26%;
+  line-gap-override: 0%;
+  size-adjust: 104%;
+}
+
+/* ── Base type ──────────────────────────────────────────────────────────── */
+
+body {
+  font-family: var(--font-body);
+  font-weight: var(--body-weight);
+  font-size: var(--step-0);
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-body);
+  font-optical-sizing: auto;
+  font-variant-ligatures: common-ligatures;
+}
+
+/* ── Headings — the serif soloist (HUGE + LIGHT) ────────────────────────── */
+
+h1, h2, h3, h4, h5, h6,
+.display {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-display);
+  text-wrap: balance;               /* elegant ragged headings */
+  font-optical-sizing: auto;
+  color: var(--text);
+}
+
+h1, .display-hero {
+  font-size: var(--step-9);
+  line-height: var(--leading-tight);
+  font-weight: var(--display-weight);   /* keep the hero LIGHT */
+}
+
+h2 { font-size: var(--step-5); }
+h3 { font-size: var(--step-4); }
+h4 { font-size: var(--step-3); }
+h5 { font-size: var(--step-2); }
+h6 { font-size: var(--step-1); font-weight: var(--display-weight-bold); }
+
+/* Display size utilities (huge serif moments, decoupled from semantics). */
+.display-9 { font-family: var(--font-display); font-weight: var(--display-weight);
+             font-size: var(--step-9); line-height: var(--leading-tight);
+             letter-spacing: var(--tracking-display); text-wrap: balance; }
+.display-8 { font-family: var(--font-display); font-weight: var(--display-weight);
+             font-size: var(--step-8); line-height: var(--leading-tight);
+             letter-spacing: var(--tracking-display); text-wrap: balance; }
+.display-7 { font-family: var(--font-display); font-weight: var(--display-weight);
+             font-size: var(--step-7); line-height: var(--leading-tight);
+             letter-spacing: var(--tracking-display); text-wrap: balance; }
+.display-6 { font-family: var(--font-display); font-weight: var(--display-weight);
+             font-size: var(--step-6); line-height: var(--leading-snug);
+             letter-spacing: var(--tracking-display); text-wrap: balance; }
+
+/* ── Editorial italic — the writer's voice (Fraunces italic) ────────────── */
+
+.editorial,
+.pull-quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: var(--display-weight);
+  letter-spacing: 0;
+  text-wrap: balance;
+}
+.pull-quote {
+  font-size: var(--step-4);
+  line-height: var(--leading-snug);
+  max-width: var(--measure-tight);
+}
+
+/* ── Body / paragraphs ──────────────────────────────────────────────────── */
+
+p {
+  max-width: var(--measure);       /* ~62–68ch measure */
+  text-wrap: pretty;
+}
+
+.lead {
+  font-size: var(--step-1);
+  line-height: var(--leading-loose);
+  color: var(--text);
+  max-width: var(--measure-wide);
+}
+
+.text-muted { color: var(--muted); }
+.text-accent { color: var(--accent); }
+
+strong, b { font-weight: var(--body-weight-strong); }
+em, i     { font-style: italic; }
+
+/* ── Label & eyebrow — Archivo, uppercase, wide-tracked ─────────────────── */
+
+.eyebrow,
+.label {
+  font-family: var(--font-label);
+  font-weight: var(--body-weight-strong);
+  text-transform: uppercase;
+  font-size: var(--step--1);
+  color: var(--muted);
+  display: inline-block;
+}
+
+.label   { letter-spacing: var(--tracking-label); }
+.eyebrow { letter-spacing: var(--tracking-eyebrow); }
+
+.label--brass,
+.eyebrow--brass { color: var(--accent); }
+
+/* Roman-numeral section index (frame + section headers). */
+.numeral {
+  font-family: var(--font-body);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: var(--tracking-eyebrow);
+}
+
+/* ── Links (base draw-underline lives in components.css, Task 2) ────────── */
+
+a { color: inherit; }
+
+/* ── Accessibility ──────────────────────────────────────────────────────── */
+
+.u-visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.u-no-wrap { white-space: nowrap; }
+.u-balance { text-wrap: balance; }

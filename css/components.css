@@ -1,0 +1,682 @@
+/* ============================================================================
+   components.css — Olamide Sax V2 · shared components
+   Nav, full-screen menu overlay, footer colophon, buttons, draw-underline
+   links, labels, cards, forms, icons. LUXURY register: hairline borders,
+   sharp edges, brass draw-underlines, generous spacing, restraint. No
+   rounded pills, no drop-shadow cards. Depends on tokens.css + typography.css.
+   Loaded AFTER frame.css, BEFORE animations.css (see page <head> order).
+   ========================================================================== */
+
+/* ============================================================================
+   1 · DRAW-UNDERLINE LINK  (base treatment, deferred from typography.css)
+   A brass underline that draws in from the left on hover/focus. The base
+   utility any inline text link can wear; nav/footer links extend it.
+   ========================================================================== */
+
+.link-underline {
+  position: relative;
+  display: inline-block;
+  color: var(--text);
+  text-decoration: none;
+  padding-bottom: 0.15em;
+}
+
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.link-underline:hover::after,
+.link-underline:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* Already-drawn variant (e.g. current nav item) — sits filled at rest. */
+.link-underline--active::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link-underline::after { transition: none; }
+}
+
+/* ============================================================================
+   2 · BUTTONS
+   Sharp edges, hairline or brass-fill. No pill radius, no drop-shadow.
+   ========================================================================== */
+
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2xs);
+  font-family: var(--font-label);
+  font-weight: var(--body-weight-strong);
+  font-size: var(--step--1);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  white-space: nowrap;
+  border: var(--border-width) solid var(--hairline-strong);
+  border-radius: var(--radius-none);
+  background: transparent;
+  color: var(--text);
+  padding: 0.7rem 1.1rem;
+  min-height: 44px;
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out);
+}
+
+@media (min-width: 640px) {
+  .btn { padding: 0.8rem 1.5rem; }
+}
+
+.btn:hover,
+.btn:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent-lit);
+}
+
+/* Brass — the one filled, confident CTA (used sparingly). */
+.btn--brass {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--ink);
+}
+
+.btn--brass:hover,
+.btn--brass:focus-visible {
+  background: var(--accent-lit);
+  border-color: var(--accent-lit);
+  color: var(--ink);
+}
+
+/* Ghost — hairline only, transparent, the quiet secondary action. */
+.btn--ghost {
+  border-color: var(--hairline);
+  color: var(--muted);
+}
+
+.btn--ghost:hover,
+.btn--ghost:focus-visible {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn { transition: none; }
+}
+
+/* ============================================================================
+   3 · LABELS / EYEBROWS (component context — base type lives in typography.css)
+   ========================================================================== */
+
+.label--on-dark { color: var(--muted); }
+
+/* ============================================================================
+   4 · CARD
+   Hairline border, sharp corners, no shadow. Content-first.
+   ========================================================================== */
+
+.card {
+  position: relative;
+  border: var(--border-width) solid var(--hairline);
+  border-radius: var(--radius-none);
+  padding: var(--space-md);
+  background: transparent;
+  transition: border-color var(--dur-fast) var(--ease-out);
+}
+
+@media (min-width: 640px) {
+  .card { padding: var(--space-lg); }
+}
+
+.card:hover,
+.card:focus-within {
+  border-color: var(--hairline-brass);
+}
+
+.card__eyebrow { margin-bottom: var(--space-2xs); }
+.card__title { margin-top: var(--space-2xs); }
+.card__body { margin-top: var(--space-sm); color: var(--muted); }
+.card__meta {
+  margin-top: var(--space-md);
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--hairline-soft);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card { transition: none; }
+}
+
+/* ============================================================================
+   5 · FORM FIELDS  (underline-only — no boxed inputs)
+   ========================================================================== */
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}
+
+.form-field__label {
+  font-family: var(--font-label);
+  font-size: var(--step--1);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--muted);
+}
+
+.form-field__control {
+  width: 100%;
+  border: none;
+  border-bottom: var(--border-width) solid var(--hairline-strong);
+  border-radius: var(--radius-none);
+  background: transparent;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  padding-block: var(--space-xs);
+  transition: border-color var(--dur-fast) var(--ease-out);
+}
+
+.form-field__control:hover {
+  border-color: var(--ash);
+}
+
+.form-field__control:focus-visible {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.form-field__control::placeholder {
+  color: var(--muted);
+  opacity: 0.7;
+}
+
+textarea.form-field__control {
+  min-height: 8rem;
+}
+
+.form-field__hint {
+  font-size: var(--step--1);
+  color: var(--muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .form-field__control { transition: none; }
+}
+
+/* ============================================================================
+   6 · ICONS
+   ========================================================================== */
+
+.icon {
+  width: 1.1rem;
+  height: 1.1rem;
+  display: block;
+  color: currentColor;
+}
+
+@media (min-width: 640px) {
+  .icon { width: 1.25rem; height: 1.25rem; }
+}
+
+.icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  min-width: 44px;
+  min-height: 44px;
+  color: var(--muted);
+  border: var(--border-width) solid var(--hairline);
+  border-radius: var(--radius-none);
+  transition: color var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out);
+}
+
+.icon-link:hover,
+.icon-link:focus-visible {
+  color: var(--accent-lit);
+  border-color: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon-link { transition: none; }
+}
+
+/* ============================================================================
+   7 · SITE NAV  (collapsed — Menu trigger only; frame carries the wordmark)
+   Fixed, positioned INSIDE the film-frame's inset so it never collides with
+   the frame's corner metadata. The frame's top-left corner already reads
+   "OLAMIDE SAX" (see frame.css), so the nav's own wordmark link is present
+   for a11y/keyboard (a real, focusable Home link — visible on :focus so
+   keyboard users see where focus is) but stays visually-hidden at rest to
+   avoid double-printing the brand name on top of the frame corner. The Menu
+   trigger sits clear of the frame's top-right corner (offset below it).
+   ========================================================================== */
+
+.site-nav {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: var(--z-nav);
+  pointer-events: none;   /* bar itself is transparent to clicks except children */
+}
+
+.site-nav > * {
+  pointer-events: auto;
+}
+
+/* Wordmark — visually hidden at rest (frame corner is the visible mark);
+   a real Home link, shown on focus for keyboard users. */
+
+.site-nav__wordmark {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+  font-family: var(--font-display);
+  font-weight: var(--display-weight-bold);
+  color: var(--text);
+  text-decoration: none;
+  line-height: 1;
+}
+
+.site-nav__wordmark:focus-visible {
+  position: fixed;
+  width: auto; height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  clip-path: none;
+  top: calc(var(--frame-inset) + 10px);
+  left: calc(var(--frame-inset) + 10px);
+  z-index: var(--z-nav);
+  font-size: var(--step-0);
+  padding: var(--space-2xs) var(--space-sm);
+  background: var(--bg);
+  border: var(--border-width) solid var(--accent);
+}
+
+.site-nav__wordmark-accent { color: var(--accent); }
+
+/* Overlay + footer wordmarks are genuinely visible brand marks (no frame
+   corner competing with them there), so they keep normal in-flow styling. */
+.site-nav__wordmark--overlay,
+.site-nav__wordmark--footer {
+  position: static;
+  width: auto; height: auto;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  clip: auto;
+  clip-path: none;
+  white-space: normal;
+  letter-spacing: 0.02em;
+}
+
+.site-nav__wordmark--overlay {
+  font-size: var(--step-1);
+}
+
+.site-nav__wordmark--footer {
+  font-size: var(--step-2);
+}
+
+/* Menu toggle ---------------------------------------------------------------- */
+/* Positioned inside the frame inset, offset below the frame's top-right
+   corner metadata (numeral label) so the two never overlap. */
+
+.nav-toggle {
+  position: fixed;
+  top: calc(var(--frame-inset) + 34px);
+  right: calc(var(--frame-inset) + clamp(10px, 1.4vw, 18px));
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  min-width: 44px;
+  min-height: 44px;
+  padding: var(--space-2xs) var(--space-sm);
+  background: var(--bg);
+  border: var(--border-width) solid var(--hairline);
+  border-radius: var(--radius-none);
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out);
+}
+
+@media (min-width: 640px) {
+  .nav-toggle { top: calc(var(--frame-inset) + 38px); }
+}
+
+/* The close trigger lives inside the overlay's own header row, not fixed. */
+.nav-toggle--close {
+  position: static;
+}
+
+.nav-toggle:hover,
+.nav-toggle:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent-lit);
+}
+
+.nav-toggle__label {
+  font-size: var(--step--1);
+}
+
+.nav-toggle__glyph {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 16px;
+}
+
+.nav-toggle__bar {
+  display: block;
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  transition: transform var(--dur-fast) var(--ease-out),
+              opacity var(--dur-fast) var(--ease-out);
+}
+
+/* Close variant renders an X from the same two bars. */
+.nav-toggle__glyph--x .nav-toggle__bar:first-child {
+  transform: translateY(2.5px) rotate(45deg);
+}
+.nav-toggle__glyph--x .nav-toggle__bar:last-child {
+  transform: translateY(-2.5px) rotate(-45deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-toggle,
+  .nav-toggle__bar { transition: none; }
+}
+
+/* ============================================================================
+   8 · MENU OVERLAY  (full-screen, editorial)
+   Hidden by default; JS toggles the data-open attribute (NOT a class — see
+   navigation.js contract). Large Fraunces serif links, contact line, socials
+   as tracked labels. Body scroll lock handled in JS.
+   ========================================================================== */
+
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  background: var(--bg);
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  overflow-y: auto;
+  transition: opacity var(--dur-base) var(--ease-out),
+              visibility 0s linear var(--dur-base);
+}
+
+/* Warm bloom behind the overlay content — same stage-warm language. */
+.menu-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--stage-warm-strong);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.menu-overlay[data-open] {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity var(--dur-base) var(--ease-out), visibility 0s linear 0s;
+}
+
+.menu-overlay__frame {
+  position: relative;
+  z-index: 1;
+  min-height: 100%;
+  min-height: 100dvh;
+  padding: var(--space-sm) var(--gutter) var(--space-2xl);
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 640px) {
+  .menu-overlay__frame { padding-top: var(--space-md); }
+}
+
+.menu-overlay__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.menu-overlay__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+  margin-top: var(--space-2xl);
+}
+
+@media (min-width: 1024px) {
+  .menu-overlay__body {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-3xl);
+  }
+}
+
+/* Link list ------------------------------------------------------------------ */
+
+.menu-overlay__links {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-overlay__item {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-md);
+  padding-block: var(--space-xs);
+  border-bottom: 1px solid var(--hairline-soft);
+}
+
+.menu-overlay__item:first-child {
+  border-top: 1px solid var(--hairline-soft);
+}
+
+@media (min-width: 640px) {
+  .menu-overlay__item { padding-block: var(--space-sm); }
+}
+
+.menu-overlay__index {
+  font-size: var(--step--1);
+  color: var(--muted);
+  min-width: 2ch;
+}
+
+.menu-overlay__link {
+  position: relative;
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-size: clamp(1.75rem, 6vw + 0.5rem, 4rem);
+  line-height: 1.05;
+  letter-spacing: var(--tracking-display);
+  color: var(--text);
+  text-decoration: none;
+  padding-bottom: 0.08em;
+}
+
+.menu-overlay__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--dur-base) var(--ease-out),
+              letter-spacing var(--dur-base) var(--ease-out);
+}
+
+.menu-overlay__link:hover,
+.menu-overlay__link:focus-visible {
+  letter-spacing: 0.01em;
+  color: var(--accent-lit);
+}
+
+.menu-overlay__link:hover::after,
+.menu-overlay__link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-overlay__link,
+  .menu-overlay__link::after { transition: none; }
+}
+
+/* Aside: CTA, contact, socials ------------------------------------------------ */
+
+.menu-overlay__aside {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-lg);
+}
+
+@media (min-width: 1024px) {
+  .menu-overlay__aside {
+    min-width: 22rem;
+    max-width: 24rem;
+  }
+}
+
+.menu-overlay__cta {
+  width: 100%;
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .menu-overlay__cta { width: auto; }
+}
+
+.menu-overlay__contact a {
+  display: inline-block;
+  word-break: break-word;
+}
+
+.menu-overlay__socials {
+  gap: var(--space-md);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-overlay,
+  .menu-overlay[data-open] { transition: none; }
+}
+
+/* Lock body scroll while the overlay is open (JS adds this to <body>). */
+.has-menu-open {
+  overflow: hidden;
+}
+
+/* ============================================================================
+   9 · SITE FOOTER  (editorial colophon)
+   ========================================================================== */
+
+.site-footer {
+  position: relative;
+  border-top: var(--border-width) solid var(--hairline);
+  padding-block: var(--space-2xl) var(--space-xl);
+}
+
+.site-footer__top {
+  display: grid;
+  gap: var(--space-xl);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .site-footer__top { grid-template-columns: repeat(2, 1fr); gap: var(--space-2xl); }
+}
+
+@media (min-width: 1024px) {
+  .site-footer__top {
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: var(--space-xl);
+  }
+}
+
+.site-footer__brand { max-width: 32ch; }
+
+.site-footer__tagline {
+  font-size: var(--step--1);
+  line-height: var(--leading-loose);
+}
+
+.site-footer__links ul,
+.site-footer__contact ul {
+  margin-top: var(--space-sm);
+  font-size: var(--step--1);
+}
+
+.site-footer__links a,
+.site-footer__contact a {
+  color: var(--muted);
+  font-size: var(--step--1);
+}
+
+.site-footer__links a:hover,
+.site-footer__links a:focus-visible,
+.site-footer__contact a:hover,
+.site-footer__contact a:focus-visible {
+  color: var(--accent-lit);
+}
+
+.site-footer__rule {
+  border: none;
+  border-top: 1px solid var(--hairline-soft);
+  margin-block: var(--space-xl);
+}
+
+.site-footer__bottom {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}
+
+@media (min-width: 640px) {
+  .site-footer__bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.site-footer__colophon,
+.site-footer__made {
+  font-size: var(--step--1);
+}

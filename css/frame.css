@@ -1,0 +1,104 @@
+/* ============================================================================
+   frame.css — Olamide Sax V2 · THE FILM-FRAME (signature layout device)
+   A persistent thin inset hairline border around the viewport (Ash), with
+   FIXED corner metadata slots. Reusable structure — markup lives per page.
+
+   Markup contract (place once per page, direct child of <body>):
+
+     <div class="frame" aria-hidden="true">
+       <span class="frame__corner frame__corner--tl">OLAMIDE SAX</span>
+       <span class="frame__corner frame__corner--tr">I / VII</span>
+       <span class="frame__corner frame__corner--bl">UK / NIGERIA</span>
+       <span class="frame__corner frame__corner--br">EST. 2026</span>
+     </div>
+
+   The border itself is drawn on .frame::before (single inset box). The four
+   corners are positioned relative to the same inset. A slim edge lane is
+   reserved on the LEFT for the future Breath Line (Task 7) — see .frame__spine.
+   ========================================================================== */
+
+.frame {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-frame);
+  pointer-events: none;            /* never intercepts clicks/scroll */
+  /* aria-hidden in markup — decorative to AT. */
+}
+
+/* The hairline rectangle. Drawn (not just shown) via animations.css. */
+.frame::before {
+  content: "";
+  position: absolute;
+  inset: var(--frame-inset);
+  border: var(--frame-width) solid var(--frame-color);
+  border-radius: var(--radius-none);   /* sharp corners — editorial */
+}
+
+/* ── Corner metadata slots ──────────────────────────────────────────────── */
+
+.frame__corner {
+  position: absolute;
+  font-family: var(--font-label);
+  font-size: var(--frame-meta-size);
+  font-weight: var(--body-weight-strong);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-eyebrow);
+  color: var(--muted);
+  line-height: 1;
+  white-space: nowrap;
+  /* Nudge the labels just inside the hairline. */
+  --corner-pad: clamp(10px, 1.4vw, 18px);
+}
+
+/* Position each corner relative to the frame inset, padded off the line. */
+.frame__corner--tl {
+  top:  calc(var(--frame-inset) + var(--corner-pad));
+  left: calc(var(--frame-inset) + var(--corner-pad));
+}
+.frame__corner--tr {
+  top:   calc(var(--frame-inset) + var(--corner-pad));
+  right: calc(var(--frame-inset) + var(--corner-pad));
+  text-align: right;
+}
+.frame__corner--bl {
+  bottom: calc(var(--frame-inset) + var(--corner-pad));
+  left:   calc(var(--frame-inset) + var(--corner-pad));
+}
+.frame__corner--br {
+  bottom: calc(var(--frame-inset) + var(--corner-pad));
+  right:  calc(var(--frame-inset) + var(--corner-pad));
+  text-align: right;
+}
+
+/* The wordmark corner reads slightly brighter — it is the brand. */
+.frame__corner--tl {
+  color: var(--text);
+  font-weight: var(--body-weight-strong);
+  letter-spacing: 0.24em;
+}
+
+/* Section index numeral (top-right) uses tabular figures. */
+.frame__corner--tr {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Reserved edge lane for the Breath Line (Task 7) ────────────────────── */
+/* Documented HOOK ONLY — we do not draw the line here. The spine will be a
+   brass SVG/canvas path living inside this fixed left lane, running between
+   the top and bottom hairlines. Kept as an empty positioned container so the
+   markup + geometry are ready when Task 7 lands.                            */
+.frame__spine {
+  position: absolute;
+  top:    var(--frame-inset);
+  bottom: var(--frame-inset);
+  left:   calc(var(--frame-inset) + var(--corner-pad, 14px));
+  width:  var(--breath-lane);
+  /* transparent placeholder — no visual yet. */
+  pointer-events: none;
+}
+
+/* ============================================================================
+   Mobile: the frame tightens but SURVIVES. Corner metadata may shorten
+   (use .frame__corner--compact spans in markup, or CSS below hides secondary
+   corners on the smallest screens). Detailed breakpoints in responsive.css.
+   ========================================================================== */

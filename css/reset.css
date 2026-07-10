@@ -1,0 +1,145 @@
+/* ============================================================================
+   reset.css — Olamide Sax V2
+   Modern, minimal reset. Warm-biased base (never pure black/grey/white).
+   Loaded FIRST. Depends on tokens.css for --bg / --text / --accent fallbacks,
+   but carries its own safe fallbacks so it degrades alone.
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  /* Smooth-scroll is a JS concern in V2; keep native off so reduced-motion
+     and GSAP smooth-scroll never fight. */
+  scroll-behavior: auto;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;                 /* no horizontal body scroll, ever */
+  line-height: 1.5;
+  background-color: var(--bg, #0B0A08);   /* warm ink, not pure black */
+  color: var(--text, #F3EDE3);            /* warm bone, not pure white */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-synthesis: none;
+}
+
+/* Media defaults ---------------------------------------------------------- */
+img,
+picture,
+video,
+canvas,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+img,
+video {
+  height: auto;
+}
+
+/* Warm placeholder tone while images load (never a grey box). */
+img {
+  background-color: var(--umber, #171310);
+}
+
+/* Forms ------------------------------------------------------------------- */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  letter-spacing: inherit;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* Links ------------------------------------------------------------------- */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Lists ------------------------------------------------------------------- */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Tables ------------------------------------------------------------------ */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+fieldset {
+  border: none;
+}
+
+legend {
+  padding: 0;
+}
+
+/* Isolation hooks --------------------------------------------------------- */
+#root,
+#app,
+main {
+  isolation: isolate;
+}
+
+/* Focus ------------------------------------------------------------------- */
+:focus {
+  outline: none;                      /* mouse users: no ring */
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent, #B8863B);
+  outline-offset: 3px;
+  border-radius: var(--radius-xs, 2px);
+}
+
+/* Selection --------------------------------------------------------------- */
+::selection {
+  background-color: var(--brass, #B8863B);
+  color: var(--ink, #0B0A08);
+}
+
+/* ----------------------------------------------------------------------------
+   Global reduced-motion guard. Individual modules also neutralise their own
+   keyframes, but this is the safety net: no animation, transition, or
+   smooth-scroll survives for users who ask for stillness.
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

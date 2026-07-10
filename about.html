@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Olamide Sax · The Artist Behind the Sound</title>
+  <meta name="description" content="About Olamide Sax (Olamide Phillips Olaniyan) — a Nigerian-born, UK-based Afro-fusion artist, multi-instrumentalist, participatory artist and creative facilitator. A decade of saxophone, Yoruba percussion, piano, vocals and storytelling across theatre, festivals and participatory arts." />
+
+  <!-- Preload the two display faces used above the fold. -->
+  <link rel="preload" href="assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/archivo-400.woff2" as="font" type="font/woff2" crossorigin />
+
+  <!-- CSS cascade order: reset → tokens → typography → layout → frame → components → home → archive → pages → animations → responsive -->
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/typography.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/frame.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/home.css" />
+  <link rel="stylesheet" href="css/archive.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+
+<body>
+  <!-- THE FILM-FRAME (signature device). Decorative to AT. -->
+  <div class="frame" aria-hidden="true">
+    <span class="frame__corner frame__corner--tl">Olamide Sax</span>
+    <span class="frame__corner frame__corner--tr">About</span>
+    <span class="frame__corner frame__corner--bl">UK / Nigeria</span>
+    <span class="frame__corner frame__corner--br">The Story</span>
+    <!-- Reserved lane for the Breath Line (Task 7) — no visual yet. -->
+    <div class="frame__spine"></div>
+  </div>
+
+  <!-- Film grain veil + stage-warm bloom (ambient). -->
+  <div class="grain" aria-hidden="true"></div>
+  <div class="stage-bloom stage-bloom--fixed" aria-hidden="true"></div>
+
+  <!-- NAV (canonical partial — byte-identical to v2/partials/nav.html) -->
+  <nav class="site-nav" aria-label="Primary">
+    <a class="site-nav__wordmark" href="/index.html">
+      <span class="site-nav__wordmark-text">Olamide<span class="site-nav__wordmark-accent">Sax</span></span>
+    </a>
+
+    <button
+      type="button"
+      class="nav-toggle"
+      id="nav-toggle"
+      aria-haspopup="dialog"
+      aria-expanded="false"
+      aria-controls="menu-overlay"
+      aria-label="Open menu"
+    >
+      <span class="nav-toggle__label label">Menu</span>
+      <span class="nav-toggle__glyph" aria-hidden="true">
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+      </span>
+    </button>
+  </nav>
+
+  <!-- FULL-SCREEN MENU OVERLAY ================================================ -->
+  <div
+    class="menu-overlay"
+    id="menu-overlay"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Site menu"
+  >
+    <div class="menu-overlay__frame">
+      <div class="menu-overlay__top">
+        <a class="site-nav__wordmark site-nav__wordmark--overlay" href="/index.html">
+          <span class="site-nav__wordmark-text">Olamide<span class="site-nav__wordmark-accent">Sax</span></span>
+        </a>
+
+        <button
+          type="button"
+          class="nav-toggle nav-toggle--close"
+          id="nav-close"
+          aria-label="Close menu"
+        >
+          <span class="nav-toggle__label label">Close</span>
+          <span class="nav-toggle__glyph nav-toggle__glyph--x" aria-hidden="true">
+            <span class="nav-toggle__bar"></span>
+            <span class="nav-toggle__bar"></span>
+          </span>
+        </button>
+      </div>
+
+      <div class="menu-overlay__body">
+        <ol class="menu-overlay__links" data-menu-links>
+          <li class="menu-overlay__item">
+            <span class="menu-overlay__index numeral">01</span>
+            <a class="menu-overlay__link" href="/index.html">Home</a>
+          </li>
+          <li class="menu-overlay__item">
+            <span class="menu-overlay__index numeral">02</span>
+            <a class="menu-overlay__link" href="/about.html">About</a>
+          </li>
+          <li class="menu-overlay__item">
+            <span class="menu-overlay__index numeral">03</span>
+            <a class="menu-overlay__link" href="/artistic-practice.html">Artistic&nbsp;Practice</a>
+          </li>
+          <li class="menu-overlay__item">
+            <span class="menu-overlay__index numeral">04</span>
+            <a class="menu-overlay__link" href="/media.html">Media</a>
+          </li>
+          <li class="menu-overlay__item">
+            <span class="menu-overlay__index numeral">05</span>
+            <a class="menu-overlay__link" href="/gallery.html">Gallery</a>
+          </li>
+          <li class="menu-overlay__item">
+            <span class="menu-overlay__index numeral">06</span>
+            <a class="menu-overlay__link" href="/press.html">Press</a>
+          </li>
+          <li class="menu-overlay__item">
+            <span class="menu-overlay__index numeral">07</span>
+            <a class="menu-overlay__link" href="/timeline.html">Timeline</a>
+          </li>
+          <li class="menu-overlay__item">
+            <span class="menu-overlay__index numeral">08</span>
+            <a class="menu-overlay__link" href="/contact.html">Contact</a>
+          </li>
+        </ol>
+
+        <div class="menu-overlay__aside">
+          <a class="btn btn--brass menu-overlay__cta" href="/contact.html">Book Olamide</a>
+
+          <div class="menu-overlay__contact stack-sm">
+            <p class="label">Enquiries</p>
+            <a class="link-underline" href="mailto:Olaniyanolamidephillip@gmail.com">Olaniyanolamidephillip@gmail.com</a>
+            <p class="text-muted" style="font-size: var(--step--1);">United Kingdom</p>
+          </div>
+
+          <ul class="menu-overlay__socials row row--wrap">
+            <li>
+              <a class="label link-underline" href="https://www.tiktok.com/@olamidesax" target="_blank" rel="noopener noreferrer">TikTok</a>
+            </li>
+            <li>
+              <a class="label link-underline" href="https://www.instagram.com/olamide.sax" target="_blank" rel="noopener noreferrer">Instagram</a>
+            </li>
+            <li>
+              <a class="label link-underline" href="https://www.facebook.com/share/19kyBuitHZ/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">Facebook</a>
+            </li>
+            <li>
+              <a class="label link-underline" href="https://youtube.com/@olamidesax" target="_blank" rel="noopener noreferrer">YouTube</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="v2" id="main">
+
+    <!-- ====================================================================
+         MASTHEAD — one <h1> + a hung museum-print portrait.
+         ==================================================================== -->
+    <section class="section section--flush-top archive-head" aria-labelledby="about-title" data-animate="archive-head">
+      <div class="container">
+        <div class="about-head__inner">
+          <div class="about-head__text">
+            <p class="eyebrow eyebrow--brass archive-head__eyebrow">The Artist Behind the Sound</p>
+            <h1 class="archive-head__title" id="about-title">Olamide Sax</h1>
+            <p class="archive-head__lead">
+              Olamide Phillips Olaniyan — a Nigerian-born, UK-based Afro-fusion
+              artist, multi-instrumentalist, participatory artist and creative
+              facilitator. Ten years and more of live performance, blending
+              saxophone, Yoruba percussion, piano, vocals and storytelling.
+            </p>
+          </div>
+
+          <figure class="about-head__portrait">
+            <div class="frame-media">
+              <img src="assets/images/gallery/sax-bw-01.jpg" width="1040" height="1387"
+                   alt="Museum-print black-and-white portrait of Olamide Sax mid-performance on saxophone." loading="eager" />
+            </div>
+            <figcaption class="exhibit-label about-head__caption">
+              <span class="exhibit-label__meta">Portrait · B&amp;W</span>
+              <span class="exhibit-label__title">The breath between notes</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         PULL-QUOTE — the one Fraunces-italic moment for the page.
+         ==================================================================== -->
+    <section class="section section--tight about-quote" aria-label="In his own register" data-animate="about-quote">
+      <div class="container">
+        <blockquote class="about-quote__text">
+          <span class="about-quote__mark" aria-hidden="true">&ldquo;</span>Music becomes art when it creates memories, and becomes culture when everyone becomes part of it.<span class="about-quote__mark" aria-hidden="true">&rdquo;</span>
+        </blockquote>
+        <p class="about-quote__by">Olamide Sax</p>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         THE MOVEMENTS — biography as numbered beats.
+         Origin · Craft · Stage · Present.
+         ==================================================================== -->
+    <section class="section movements-section" aria-labelledby="movements-heading" data-animate="movements">
+      <div class="container">
+        <h2 class="u-visually-hidden" id="movements-heading">Biography in movements</h2>
+
+        <div class="movements">
+          <article class="movement" data-movement="origin">
+            <div class="movement__head">
+              <span class="movement__num">Movement 01</span>
+              <h3 class="movement__title">Origin</h3>
+            </div>
+            <div class="movement__body">
+              <p>
+                The story begins in 2010, in <strong>Yoruba percussion</strong>. Olamide first found his
+                voice on the <span class="movement__terms">cord/omele</span>, the
+                <span class="movement__terms">djembe</span>, the <span class="movement__terms">omele&nbsp;bàtá</span>
+                and the <span class="movement__terms">talking&nbsp;drum</span> &mdash; learning to speak in
+                rhythm before he ever reached for melody.
+              </p>
+              <p>
+                That grounding in the pulse of home became the foundation for everything that
+                followed. Before he was a saxophonist, he was a percussionist &mdash; and the drum
+                still keeps time under every phrase he plays.
+              </p>
+            </div>
+          </article>
+
+          <article class="movement" data-movement="craft">
+            <div class="movement__head">
+              <span class="movement__num">Movement 02</span>
+              <h3 class="movement__title">Craft</h3>
+            </div>
+            <div class="movement__body">
+              <p>
+                Over more than a decade, the percussionist grew into a multi-instrumentalist.
+                Saxophone, <strong>vocals</strong> and <strong>keyboard</strong> joined the rhythm, and
+                a sound took shape: warm, improvisational <strong>Afro-fusion</strong> that fuses
+                African rhythm with soulful melody.
+              </p>
+              <p>
+                Live improvisation is at the centre of the craft &mdash; the horn carrying the breath,
+                the voice telling the story, the keys holding the harmony. Three voices, one performer.
+              </p>
+            </div>
+          </article>
+
+          <article class="movement" data-movement="stage">
+            <div class="movement__head">
+              <span class="movement__num">Movement 03</span>
+              <h3 class="movement__title">Stage</h3>
+            </div>
+            <div class="movement__body">
+              <p>
+                The work has carried Olamide across the UK&rsquo;s stages — from concert halls and
+                theatres to festivals and community spaces. He led live saxophone through the
+                record-breaking <strong>World Record Football Scarf Procession</strong> with
+                <strong>Stand &amp; Be Counted Theatre</strong>, brought live Afro-fusion to the
+                <strong>Eco Art Fashion Show</strong>, and performed with Sound Café&rsquo;s Afrobeat
+                ensemble at <strong>Sharrow Festival</strong>.
+              </p>
+              <p>
+                He opened on saxophone in <strong>ÀTÙPÀ at CAST</strong> as <strong>Adigun</strong>,
+                performed at <strong>BME United Doncaster</strong> and before the
+                <strong>Lord Mayor of Sheffield</strong> — each a room held by the same ancestral breath.
+              </p>
+            </div>
+          </article>
+
+          <article class="movement" data-movement="present">
+            <div class="movement__head">
+              <span class="movement__num">Movement 04</span>
+              <h3 class="movement__title">Present</h3>
+            </div>
+            <div class="movement__body">
+              <p>
+                Beyond the stage, Olamide works as a <strong>participatory artist and creative
+                facilitator</strong> — creating workshops that combine music, wellbeing,
+                storytelling, memory work and community participation. He collaborates with leading
+                UK cultural organisations including <strong>Stand &amp; Be Counted Theatre</strong>,
+                <strong>darts &amp; Maya Productions</strong> and <strong>ArtBomb UK</strong>.
+              </p>
+              <p>
+                Every performance begins with music. It ends with connection. His performances invite
+                people to dance; his workshops invite people to participate; his practice invites
+                people to belong. In 2026 he was named <strong>Best Instrumentalist of the Year</strong>
+                at the <strong>Eko Heritage Awards</strong>.
+              </p>
+              <p>
+                The next movement is still being written. To follow it, see the
+                <a class="link-underline" href="/timeline.html">full timeline</a> or
+                <a class="link-underline" href="/contact.html">let&rsquo;s create something meaningful</a>.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         INVITATION — quiet resolution → contact.
+         ==================================================================== -->
+    <section class="section invitation" aria-labelledby="about-invite" data-animate="invitation">
+      <div class="container">
+        <div class="invitation__inner">
+          <p class="movement-index" style="justify-content: center;">
+            <span class="movement-index__num">&mdash;</span>
+            <span class="movement-index__name">The Invitation</span>
+          </p>
+          <h2 class="invitation__title" id="about-invite">Let&rsquo;s create something meaningful.</h2>
+          <p class="invitation__avail">
+            Available for festivals, theatre productions, concerts, participatory
+            arts, creative health projects, cultural events and workshops — UK &amp;
+            international.
+          </p>
+          <a class="btn btn--brass invitation__cta" href="/contact.html">Book Olamide</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER (canonical partial — byte-identical to v2/partials/footer.html) -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__top">
+        <div class="site-footer__brand stack-sm">
+          <a class="site-nav__wordmark site-nav__wordmark--footer" href="/index.html">
+            <span class="site-nav__wordmark-text">Olamide<span class="site-nav__wordmark-accent">Sax</span></span>
+          </a>
+          <p class="site-footer__tagline text-muted">
+            UK-based Nigerian Afro-Fusion artist — Multi-Instrumentalist&nbsp;·&nbsp;Participatory Artist&nbsp;·&nbsp;Creative Facilitator
+          </p>
+        </div>
+
+        <nav class="site-footer__links" aria-label="Footer">
+          <p class="label">Explore</p>
+          <ul class="stack-sm">
+            <li><a class="link-underline" href="/index.html">Home</a></li>
+            <li><a class="link-underline" href="/about.html">About</a></li>
+            <li><a class="link-underline" href="/artistic-practice.html">Artistic Practice</a></li>
+            <li><a class="link-underline" href="/media.html">Media</a></li>
+            <li><a class="link-underline" href="/gallery.html">Gallery</a></li>
+            <li><a class="link-underline" href="/press.html">Press</a></li>
+            <li><a class="link-underline" href="/timeline.html">Timeline</a></li>
+            <li><a class="link-underline" href="/contact.html">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="site-footer__contact">
+          <p class="label">Contact</p>
+          <ul class="stack-sm">
+            <li><a class="link-underline" href="mailto:Olaniyanolamidephillip@gmail.com">Olaniyanolamidephillip@gmail.com</a></li>
+            <li class="text-muted">United Kingdom</li>
+          </ul>
+        </div>
+
+        <div class="site-footer__socials">
+          <p class="label">Follow</p>
+          <ul class="row row--wrap" style="margin-top: var(--space-sm);">
+            <li>
+              <a
+                class="icon-link"
+                href="https://www.tiktok.com/@olamidesax"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Olamide Sax on TikTok"
+              >
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path fill="currentColor" d="M16.6 5.82c-1.02-.88-1.66-2.16-1.66-3.58h-3.06v13.6a3.14 3.14 0 1 1-2.19-3.02V9.68a6.2 6.2 0 1 0 5.25 6.12V9.4a8.2 8.2 0 0 0 4.6 1.4V7.75c-1.06 0-2.06-.4-2.94-1.13Z"/>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a
+                class="icon-link"
+                href="https://www.instagram.com/olamide.sax"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Olamide Sax on Instagram"
+              >
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+                  <circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+                  <circle cx="17.35" cy="6.65" r="1.1" fill="currentColor"/>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a
+                class="icon-link"
+                href="https://www.facebook.com/share/19kyBuitHZ/?mibextid=wwXIfr"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Olamide Sax on Facebook"
+              >
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path fill="currentColor" d="M14.5 21v-7.6h2.55l.38-2.96h-2.93V8.55c0-.86.24-1.44 1.47-1.44h1.57V4.46c-.27-.04-1.2-.12-2.28-.12-2.26 0-3.8 1.38-3.8 3.9v2.18H8.99v2.96h2.47V21h3.04Z"/>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a
+                class="icon-link"
+                href="https://youtube.com/@olamidesax"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Olamide Sax on YouTube"
+              >
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <rect x="2.5" y="6" width="19" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/>
+                  <path fill="currentColor" d="M10.6 9.5v5l4.3-2.5-4.3-2.5Z"/>
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="site-footer__rule" />
+
+      <div class="site-footer__bottom">
+        <p class="site-footer__colophon text-muted">
+          &copy; <span data-year>2026</span> Olamide Sax. Founder &amp; Lead Artist, Lammy Wonder Music Entertainment.
+        </p>
+        <p class="site-footer__made text-muted">A living archive, built one performance at a time.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

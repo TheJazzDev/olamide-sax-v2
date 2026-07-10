@@ -1,0 +1,111 @@
+/* ============================================================================
+   animations.css — Olamide Sax V2 · CSS keyframes only (NO JS motion here)
+   Film grain · stage-warm bloom · film-frame draw. All neutralised under
+   prefers-reduced-motion. Kinetic type / scroll motion belong to GSAP (later).
+   ========================================================================== */
+
+/* ── Film grain ─────────────────────────────────────────────────────────── */
+/* A fixed grain veil. Attach .grain to a decorative overlay element. The
+   texture is a tiny inline SVG noise, tiled — self-contained, no asset.     */
+
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-frame);
+  pointer-events: none;
+  opacity: var(--grain-opacity);
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 140px 140px;
+  animation: grain-shift 6s steps(6) infinite;
+}
+
+@keyframes grain-shift {
+  0%   { transform: translate(0, 0); }
+  20%  { transform: translate(-4%, 3%); }
+  40%  { transform: translate(3%, -4%); }
+  60%  { transform: translate(-3%, 2%); }
+  80%  { transform: translate(4%, -2%); }
+  100% { transform: translate(0, 0); }
+}
+
+/* ── Stage-warm bloom ───────────────────────────────────────────────────── */
+/* Soft radial warm-light glow that breathes very subtly (the spotlight).
+   Sits behind content. JS (later) can boost opacity as a section activates. */
+
+.stage-bloom {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-base);
+  pointer-events: none;
+  background: var(--stage-warm);
+  opacity: var(--glow-opacity-rest);
+  animation: stage-breathe var(--dur-drift) var(--ease-breath) infinite alternate;
+}
+
+.stage-bloom--fixed {
+  position: fixed;
+}
+
+@keyframes stage-breathe {
+  from { opacity: calc(var(--glow-opacity-rest) * 0.7); }
+  to   { opacity: var(--glow-opacity-rest); }
+}
+
+/* ── Film-frame draw ────────────────────────────────────────────────────── */
+/* The hairline border "draws" on load, then the corner metadata fades up.
+   Uses clip-path so the rectangle appears to be inscribed. Purely cosmetic;
+   the frame is fully present without it.                                     */
+
+.frame::before {
+  animation: frame-draw var(--dur-slow) var(--ease-out) both;
+}
+
+.frame__corner {
+  animation: corner-in var(--dur-base) var(--ease-out) both;
+  animation-delay: var(--dur-slow);
+}
+
+@keyframes frame-draw {
+  from {
+    clip-path: inset(0 100% 100% 0);
+    opacity: 0;
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+}
+
+@keyframes corner-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Generic reveal helper (CSS-only fallback shimmer) ──────────────────── */
+/* NOTE: real reveals are JS-gated behind .js-anim-ready (progressive
+   enhancement). This is only an optional ambient float for decor elements.  */
+
+@keyframes drift-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================================
+   Reduced-motion neutralisation. Content is fully present statically;
+   we simply stop every keyframe here.
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .grain        { animation: none; }
+  .stage-bloom  { animation: none; opacity: var(--glow-opacity-rest); }
+  .frame::before {
+    animation: none;
+    clip-path: none;
+    opacity: 1;
+  }
+  .frame__corner {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

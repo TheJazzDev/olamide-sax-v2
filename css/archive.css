@@ -1,0 +1,486 @@
+/* ============================================================================
+   archive.css — Olamide Sax V2 · the living-archive pages (Task 4)
+   Section composition for media.html · gallery.html · press.html. Consumes
+   tokens + typography + layout + components + reuses home.css's shared
+   .frame-media / .exhibit-label / .movement-index / .sec-head / .video-facade.
+
+   Register: cinematic editorial-luxury, unchanged. Hairlines not cards, sharp
+   edges, ~1 brass element per viewport, whitespace does the work. Scalable —
+   the same slot reads curated at a dozen and elegant at a hundred. Static
+   only; inert data-* hooks left for later. Loaded AFTER home.css, before
+   responsive.css (so it can still tune down at breakpoints).
+   ========================================================================== */
+
+/* ============================================================================
+   0 · ARCHIVE PAGE HEAD  (shared intro for every archive page)
+   A quiet editorial masthead: eyebrow, one serif <h1>, a lead line.
+   ========================================================================== */
+
+.archive-head {
+  padding-top: calc(var(--section-y) * 0.9);
+  padding-bottom: var(--space-xl);
+}
+.archive-head__eyebrow { margin-bottom: var(--space-md); }
+.archive-head__title {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-size: var(--step-7);
+  line-height: 1;
+  letter-spacing: var(--tracking-display);
+  color: var(--text);
+  margin: 0;
+  max-width: 14ch;
+}
+.archive-head__lead {
+  margin-top: var(--space-lg);
+  color: var(--muted);
+  font-size: var(--step-1);
+  line-height: var(--leading-loose);
+  max-width: 52ch;
+}
+
+/* ============================================================================
+   1 · ARCHIVE HUB (media.html) — entry points to the four archives.
+   A short editorial index of doorways: Performances · Gallery · Videos · Press.
+   ========================================================================== */
+
+.hub-index {
+  margin-top: var(--space-2xl);
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--hairline);
+}
+.hub-entry {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: var(--space-md) var(--space-lg);
+  align-items: baseline;
+  padding-block: var(--space-lg);
+  border-bottom: 1px solid var(--hairline-soft);
+  text-decoration: none;
+  color: var(--text);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.hub-entry:hover,
+.hub-entry:focus-visible { color: var(--accent-lit); }
+.hub-entry__index {
+  font-family: var(--font-body);
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--body-weight-strong);
+  font-size: var(--step--1);
+  letter-spacing: var(--tracking-eyebrow);
+  color: var(--accent);
+}
+.hub-entry__name {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-size: var(--step-4);
+  line-height: 1;
+  color: inherit;
+}
+.hub-entry__desc {
+  grid-column: 2;
+  margin-top: var(--space-2xs);
+  color: var(--muted);
+  font-size: var(--step--1);
+  max-width: 44ch;
+}
+.hub-entry__go {
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  font-size: var(--step--1);
+  color: var(--muted);
+  white-space: nowrap;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.hub-entry:hover .hub-entry__go,
+.hub-entry:focus-visible .hub-entry__go { color: var(--accent); }
+
+@media (max-width: 639px) {
+  .hub-entry { grid-template-columns: auto 1fr; }
+  .hub-entry__go { grid-column: 2; justify-self: start; margin-top: var(--space-2xs); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hub-entry, .hub-entry__go { transition: none; }
+}
+
+/* ============================================================================
+   2 · PERFORMANCES BY YEAR (media.html) — a grouped editorial ledger.
+   Each year is a header hung beside its events; events are hairline rows.
+   ========================================================================== */
+
+.perf-year { border-top: 1px solid var(--hairline); }
+.perf-year + .perf-year { margin-top: var(--space-xl); }
+
+.perf-year__grid {
+  display: grid;
+  gap: var(--space-md);
+}
+@media (min-width: 768px) {
+  .perf-year__grid {
+    grid-template-columns: 0.3fr 1fr;
+    gap: var(--space-2xl);
+    align-items: start;
+  }
+}
+.perf-year__label {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-size: var(--step-5);
+  line-height: 1;
+  color: var(--accent-lit);
+  padding-top: var(--space-lg);
+  margin: 0;
+}
+@media (min-width: 768px) {
+  .perf-year__label { position: sticky; top: var(--space-2xl); }
+}
+
+.perf-list { display: grid; gap: 0; }
+.perf-event {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-2xs) var(--space-md);
+  align-items: baseline;
+  padding-block: var(--space-lg);
+  border-bottom: 1px solid var(--hairline-soft);
+}
+.perf-event:first-child { border-top: 1px solid var(--hairline-soft); }
+.perf-event__title {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-size: var(--step-2);
+  line-height: 1.1;
+  color: var(--text);
+  margin: 0;
+}
+.perf-event__venue {
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  font-size: var(--step--1);
+  color: var(--accent);
+  margin-top: var(--space-2xs);
+}
+.perf-event__role {
+  font-style: italic;
+  font-family: var(--font-display);
+  color: var(--muted);
+}
+.perf-event__date {
+  font-variant-numeric: tabular-nums;
+  font-size: var(--step--1);
+  color: var(--muted);
+  white-space: nowrap;
+  text-align: right;
+}
+.perf-event__note {
+  grid-column: 1 / -1;
+  margin-top: var(--space-xs);
+  color: var(--muted);
+  font-size: var(--step--1);
+  line-height: var(--leading-normal);
+  max-width: 56ch;
+}
+
+/* ============================================================================
+   3 · VIDEO ARCHIVE (media.html) — light category tabs + facade cards.
+   Reuses .video-facade (home.css) for each card's poster/play/label; adds
+   the card foot (title + meta) and the tablist chrome + the grid.
+   ========================================================================== */
+
+/* Tabs / chips — shared shell used by both video tabs and gallery filter chips.
+   Underline-only, no pills, sharp. The active item wears a brass underline. */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs) var(--space-lg);
+  margin-top: var(--space-lg);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--hairline);
+}
+.filter-chip {
+  position: relative;
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: var(--space-2xs) 0;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  font-size: var(--step--1);
+  color: var(--muted);
+  cursor: pointer;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.filter-chip::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: var(--space-2xs);
+  width: 100%;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.filter-chip:hover,
+.filter-chip:focus-visible { color: var(--text); }
+.filter-chip.is-active,
+.filter-chip[aria-pressed="true"],
+.filter-chip[aria-selected="true"] { color: var(--accent-lit); }
+.filter-chip.is-active::after,
+.filter-chip[aria-pressed="true"]::after,
+.filter-chip[aria-selected="true"]::after { transform: scaleX(1); }
+@media (prefers-reduced-motion: reduce) {
+  .filter-chip, .filter-chip::after { transition: none; }
+}
+
+/* Video grid + cards -------------------------------------------------------- */
+.video-grid {
+  margin-top: var(--space-xl);
+  display: grid;
+  gap: var(--space-lg) var(--space-md);
+  grid-template-columns: 1fr;
+}
+@media (min-width: 560px) {
+  .video-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-xl) var(--space-lg); }
+}
+@media (min-width: 1024px) {
+  .video-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+.video-card { min-width: 0; }
+.video-card__facade { display: block; }
+.video-card__foot { margin-top: var(--space-sm); }
+.video-card__title {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-size: var(--step-2);
+  line-height: 1.15;
+  color: var(--text);
+  margin: 0;
+}
+.video-card__meta {
+  margin-top: var(--space-2xs);
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  font-size: var(--step--1);
+  color: var(--muted);
+}
+
+/* ============================================================================
+   4 · GALLERY (gallery.html) — scalable editorial mosaic.
+   auto-fill grid so the layout stays elegant from a dozen to a hundred
+   cells without per-cell rules. Every cell is a .frame-media (video-first).
+   ========================================================================== */
+
+.gallery-grid {
+  margin-top: var(--space-xl);
+  display: grid;
+  gap: var(--space-md);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+}
+@media (min-width: 768px) {
+  .gallery-grid {
+    gap: var(--space-lg);
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  }
+}
+
+.gallery-cell { min-width: 0; margin: 0; }
+.gallery-cell__media { aspect-ratio: 4 / 5; }
+/* A quiet editorial rhythm: every 5th cell runs taller (portrait accent),
+   every 7th runs wide — a mosaic feel that survives any item count. */
+.gallery-cell:nth-child(5n + 1) .gallery-cell__media { aspect-ratio: 3 / 4; }
+.gallery-cell:nth-child(7n + 3) .gallery-cell__media { aspect-ratio: 1 / 1; }
+
+@media (min-width: 768px) {
+  /* Let occasional cells span two columns for a curated-abundance mosaic. */
+  .gallery-cell:nth-child(7n + 1) { grid-column: span 2; }
+  .gallery-cell:nth-child(7n + 1) .gallery-cell__media { aspect-ratio: 16 / 10; }
+}
+
+.gallery-cell__caption { margin-top: var(--space-sm); }
+
+/* Empty state (defensive — a filtered category with no items). */
+.archive-empty {
+  margin-top: var(--space-2xl);
+  padding: var(--space-2xl) 0;
+  border-top: 1px solid var(--hairline);
+  text-align: center;
+  color: var(--muted);
+}
+.archive-empty__line {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: var(--display-weight);
+  font-size: var(--step-3);
+  color: var(--text);
+  margin: 0 auto;
+  max-width: 24ch;
+}
+.archive-empty__sub {
+  margin: var(--space-sm) auto 0;
+  font-size: var(--step--1);
+  max-width: 40ch;
+}
+
+.gallery-count {
+  margin-top: var(--space-md);
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  font-size: var(--step--1);
+  color: var(--muted);
+}
+
+/* ============================================================================
+   5 · PRESS LEDGER (press.html) — editorial rows, NO cards.
+   Hairline-ruled <article> rows: brass source label, serif title, excerpt,
+   date, draw-underline "Read Article". Feature tier reads slightly larger.
+   ========================================================================== */
+
+.press-ledger {
+  margin-top: var(--space-2xl);
+  border-top: 1px solid var(--hairline);
+}
+.press-entry {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-sm) var(--space-lg);
+  align-items: baseline;
+  padding-block: var(--space-2xl);
+  border-bottom: 1px solid var(--hairline-soft);
+}
+.press-entry__source {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-sm) var(--space-md);
+}
+.press-entry__source-name {
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  font-size: var(--step--1);
+  color: var(--accent);
+}
+.press-entry__tier {
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-eyebrow);
+  font-size: 0.68rem;
+  color: var(--muted);
+  border: 1px solid var(--hairline);
+  padding: 2px 8px;
+}
+.press-entry__date {
+  font-variant-numeric: tabular-nums;
+  font-size: var(--step--1);
+  color: var(--muted);
+  margin-left: auto;
+}
+.press-entry__title {
+  grid-column: 1 / -1;
+  margin-top: var(--space-sm);
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-size: var(--step-3);
+  line-height: 1.12;
+  color: var(--text);
+  max-width: 24ch;
+}
+.press-entry--feature .press-entry__title { font-size: var(--step-4); max-width: 20ch; }
+.press-entry__excerpt {
+  grid-column: 1 / -1;
+  margin-top: var(--space-md);
+  color: var(--muted);
+  line-height: var(--leading-loose);
+  max-width: 60ch;
+}
+.press-entry__read {
+  grid-column: 1 / -1;
+  margin-top: var(--space-lg);
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  font-size: var(--step--1);
+}
+
+/* Notable mentions — a lighter tail block below the ledger. */
+.press-mentions { margin-top: var(--space-3xl); }
+.press-mentions__list {
+  margin-top: var(--space-lg);
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--hairline-soft);
+  max-width: 52rem;
+}
+.press-mention {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-md);
+  align-items: baseline;
+  padding-block: var(--space-md);
+  border-bottom: 1px solid var(--hairline-soft);
+}
+.press-mention__name {
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  font-size: var(--step--1);
+  color: var(--accent);
+  white-space: nowrap;
+}
+.press-mention__note { color: var(--muted); font-size: var(--step--1); }
+
+/* A single large breathing pull-quote closing the press page. */
+.press-pull {
+  margin-top: var(--space-3xl);
+  padding-top: var(--space-2xl);
+  border-top: 1px solid var(--hairline);
+}
+.press-pull__quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: var(--display-weight);
+  font-size: var(--step-5);
+  line-height: 1.14;
+  color: var(--text);
+  max-width: 20ch;
+  text-wrap: balance;
+  margin: 0;
+}
+.press-pull__quote .press-pull__mark { color: var(--accent); font-style: normal; }
+.press-pull__cite {
+  margin-top: var(--space-lg);
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  font-size: var(--step--1);
+  color: var(--muted);
+}
+
+@media (max-width: 639px) {
+  .press-entry__date { margin-left: 0; }
+  .press-mention { grid-template-columns: 1fr; gap: var(--space-2xs); }
+}
+
+/* ============================================================================
+   6 · SHARED — a modest section rhythm for archive sections (tighter than the
+   homepage's cinematic spacing, since archives carry more content per screen).
+   ========================================================================== */
+
+.archive-section { padding-block: clamp(64px, 9vh, 132px); }
+/* When an archive section follows the masthead directly (grid/ledger), it
+   sits flush to the head — the head already carries the top rhythm. */
+.archive-section.section--flush-top { padding-top: 0; }
+.archive-section__head { margin-bottom: var(--space-lg); }

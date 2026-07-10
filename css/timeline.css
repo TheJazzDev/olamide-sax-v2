@@ -1,0 +1,214 @@
+/* ============================================================================
+   timeline.css — Olamide Sax V2 · THE TIMELINE (Task 5)
+   The signature page for the Breath Line's "timeline" role. Career milestones
+   unfold as nodes along a single central vertical line. Built STATIC here —
+   a hairline brass line + dated nodes phrased like movements. Task 7 drives
+   the line via data-breath-timeline / data-timeline / data-timeline-node.
+
+   Register unchanged: cinematic editorial-luxury. Hairlines not cards, sharp
+   edges, ~1 brass moment per viewport, whitespace does the work. Loaded AFTER
+   home.css (reuses .archive-head / .movement-index / .frame-media), before
+   responsive.css so it can still tune down at breakpoints.
+   ========================================================================== */
+
+/* ── The composition well — holds the line + the run of nodes ───────────── */
+
+.timeline {
+  position: relative;
+  margin-top: var(--space-2xl);
+}
+
+/* The Breath Line's static bed: a hairline brass rule running the full height
+   of the node run. Left-hung on mobile, centred from md up. Task 7 replaces
+   the still fill with the animated brass path inside .timeline__line. */
+.timeline__line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  /* Mobile: the line hangs at the left, nodes sit to its right. */
+  left: 5px;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0,
+    var(--hairline-brass) 8%,
+    var(--hairline-brass) 92%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+/* A faint brass halo, kept as a slim 3px-wide bed directly beside the line
+   (NO blur — a blurred full-height element inflates into a huge ellipse). */
+.timeline__line::before {
+  content: "";
+  position: absolute;
+  top: 8%;
+  bottom: 8%;
+  left: -1px;
+  width: 3px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgb(var(--brass-rgb) / 0.10),
+    transparent
+  );
+  opacity: 0.6;
+}
+
+/* ── The nodes — each a movement along the line ─────────────────────────── */
+
+.timeline__nodes {
+  position: relative;
+  display: grid;
+  gap: var(--space-2xl);
+}
+@media (min-width: 768px) {
+  .timeline__nodes { gap: var(--space-3xl); }
+}
+
+.timeline-milestone {
+  position: relative;
+  /* Mobile: content clears the left line + its marker. */
+  padding-left: var(--space-2xl);
+}
+
+/* The node marker — a hairline brass ring seated ON the line.
+   Explicitly sized + flex:none so it can NEVER stretch to a grid/flex track
+   (a stretched border-radius:50% box would paint as a large ellipse). */
+.timeline-milestone__mark {
+  position: absolute;
+  top: 0.35em;
+  left: 0;
+  box-sizing: border-box;
+  width: 12px;
+  height: 12px;
+  min-width: 12px;
+  min-height: 12px;
+  flex: none;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at center,
+    var(--accent) 0 2px,
+    var(--bg) 3px
+  );
+  transform: translateX(-50%);
+  /* Node sits centred on the mobile line (left:5px, marker translated -50%). */
+  margin-left: 5px;
+}
+
+.timeline-milestone__year {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-size: var(--step-3);
+  line-height: 1;
+  letter-spacing: var(--tracking-display);
+  color: var(--accent-lit);
+}
+/* Undated milestones: a quiet era marker, deliberately NOT styled as a date so
+   an invented year is never implied. Real years (2010, 2026) keep the numeral above. */
+.timeline-milestone__year--era {
+  font-family: var(--font-label);
+  font-weight: 500;
+  font-size: var(--step--1);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.timeline-milestone__title {
+  margin-top: var(--space-xs);
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-size: var(--step-2);
+  line-height: 1.12;
+  color: var(--text);
+}
+.timeline-milestone__line {
+  margin-top: var(--space-sm);
+  color: var(--muted);
+  line-height: var(--leading-loose);
+  max-width: 44ch;
+}
+.timeline-milestone__meta {
+  margin-top: var(--space-sm);
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  font-size: var(--step--1);
+  color: var(--accent);
+}
+
+/* ── md+ : the line runs down the CENTRE; nodes alternate side to side ───── */
+@media (min-width: 768px) {
+  .timeline__line {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .timeline-milestone {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: start;
+    padding-left: 0;
+    column-gap: var(--space-2xl);
+  }
+
+  /* Marker seats in the centre column, on the line. place-self keeps it a
+     fixed 12px dot — never stretched to the (auto) column or the tall row. */
+  .timeline-milestone__mark {
+    position: static;
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0.35em 0 0 0;
+    transform: none;
+    place-self: start center;
+  }
+
+  /* Text block occupies one side; the other side stays open (the breath). */
+  .timeline-milestone__body {
+    grid-row: 1;
+    max-width: 34ch;
+  }
+  /* Odd milestones read on the LEFT (right-aligned toward the line). */
+  .timeline-milestone:nth-child(odd) .timeline-milestone__body {
+    grid-column: 1;
+    text-align: right;
+    justify-self: end;
+  }
+  .timeline-milestone:nth-child(odd) .timeline-milestone__line,
+  .timeline-milestone:nth-child(odd) .timeline-milestone__meta {
+    margin-left: auto;
+  }
+  /* Even milestones read on the RIGHT. */
+  .timeline-milestone:nth-child(even) .timeline-milestone__body {
+    grid-column: 3;
+    text-align: left;
+    justify-self: start;
+  }
+}
+
+/* On mobile the body is just flow content beneath the year (no grid). */
+.timeline-milestone__body { min-width: 0; }
+
+/* ── Coda — the line resolves into a closing note + CTA ─────────────────── */
+.timeline-coda {
+  position: relative;
+  margin-top: var(--space-3xl);
+  padding-top: var(--space-2xl);
+  border-top: 1px solid var(--hairline-soft);
+  text-align: center;
+}
+.timeline-coda__line {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: var(--display-weight);
+  font-size: var(--step-3);
+  line-height: 1.15;
+  color: var(--text);
+  max-width: 24ch;
+  margin-inline: auto;
+}
+.timeline-coda__cta { margin-top: var(--space-lg); }
+
+/* ── Reduced motion: the still line + markers ARE the design (Task 7 no-op).
+   Nothing kinetic here — the static line is intentional and needs no override. */

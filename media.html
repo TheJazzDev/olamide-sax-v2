@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Media — Olamide Sax · Performances, Videos, Gallery & Press</title>
+  <meta name="description" content="The Olamide Sax media archive — recent performances, the video archive, the gallery and the press ledger. A living archive of an Afro-fusion artist's live and participatory work." />
+
+  <!-- Preload the two display faces used above the fold. -->
+  <link rel="preload" href="assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/archivo-400.woff2" as="font" type="font/woff2" crossorigin />
+
+  <!-- CSS cascade order: reset → tokens → typography → layout → frame → components → home → archive → animations → responsive -->
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/typography.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/frame.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/home.css" />
+  <link rel="stylesheet" href="css/archive.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+
+<body>
+  <!-- THE FILM-FRAME (signature device). Decorative to AT. -->
+  <div class="frame" aria-hidden="true">
+    <span class="frame__corner frame__corner--tl">Olamide Sax</span>
+    <span class="frame__corner frame__corner--tr">Media</span>
+    <span class="frame__corner frame__corner--bl">UK / Nigeria</span>
+    <span class="frame__corner frame__corner--br">The Archive</span>
+    <!-- Reserved lane for the Breath Line (Task 7) — no visual yet. -->
+    <div class="frame__spine"></div>
+  </div>
+
+  <!-- Film grain veil + stage-warm bloom (ambient). -->
+  <div class="grain" aria-hidden="true"></div>
+  <div class="stage-bloom stage-bloom--fixed" aria-hidden="true"></div>
+
+  <!-- NAV (canonical partial — byte-identical to v2/partials/nav.html) -->
+  <nav class="site-nav" aria-label="Primary">
+    <a class="site-nav__wordmark" href="/index.html">
+      <span class="site-nav__wordmark-text">Olamide<span class="site-nav__wordmark-accent">Sax</span></span>
+    </a>
+
+    <button
+      type="button"
+      class="nav-toggle"
+      id="nav-toggle"
+      aria-haspopup="dialog"
+      aria-expanded="false"
+      aria-controls="menu-overlay"
+      aria-label="Open menu"
+    >
+      <span class="nav-toggle__label label">Menu</span>
+      <span class="nav-toggle__glyph" aria-hidden="true">
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+      </span>
+    </button>
+  </nav>
+
+  <!-- FULL-SCREEN MENU OVERLAY ================================================ -->
+  <div
+    class="menu-overlay"
+    id="menu-overlay"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Site menu"
+  >
+    <div class="menu-overlay__frame">
+      <div class="menu-overlay__top">
+        <a class="site-nav__wordmark site-nav__wordmark--overlay" href="/index.html">
+          <span class="site-nav__wordmark-text">Olamide<span class="site-nav__wordmark-accent">Sax</span></span>
+        </a>
+
+        <button
+          type="button"
+          class="nav-toggle nav-toggle--close"
+          id="nav-close"
+          aria-label="Close menu"
+        >
+          <span class="nav-toggle__label label">Close</span>
+          <span class="nav-toggle__glyph nav-toggle__glyph--x" aria-hidden="true">
+            <span class="nav-toggle__bar"></span>
+            <span class="nav-toggle__bar"></span>
+          </span>
+        </button>
+      </div>
+
+      <div class="menu-overlay__body">
+        <ol class="menu-overlay__links" data-menu-links>
+          <li class="menu-overlay__item">
+            <span class="menu-overlay__index numeral">01</span>
+            <a class="menu-overlay__link" href="/index.html">Home</a>
+          </li>
+          <li class="menu-overlay__item">
+            <span class="menu-overlay__index numeral">02</span>
+            <a class="menu-overlay__link" href="/about.html">About</a>
+          </li>
+          <li class="menu-overlay__item">
+            <span class="menu-overlay__index numeral">03</span>
+            <a class="menu-overlay__link" href="/artistic-practice.html">Artistic&nbsp;Practice</a>
+          </li>
+          <li class="menu-overlay__item">
+            <span class="menu-overlay__index numeral">04</span>
+            <a class="menu-overlay__link" href="/media.html">Media</a>
+          </li>
+          <li class="menu-overlay__item">
+            <span class="menu-overlay__index numeral">05</span>
+            <a class="menu-overlay__link" href="/gallery.html">Gallery</a>
+          </li>
+          <li class="menu-overlay__item">
+            <span class="menu-overlay__index numeral">06</span>
+            <a class="menu-overlay__link" href="/press.html">Press</a>
+          </li>
+          <li class="menu-overlay__item">
+            <span class="menu-overlay__index numeral">07</span>
+            <a class="menu-overlay__link" href="/timeline.html">Timeline</a>
+          </li>
+          <li class="menu-overlay__item">
+            <span class="menu-overlay__index numeral">08</span>
+            <a class="menu-overlay__link" href="/contact.html">Contact</a>
+          </li>
+        </ol>
+
+        <div class="menu-overlay__aside">
+          <a class="btn btn--brass menu-overlay__cta" href="/contact.html">Book Olamide</a>
+
+          <div class="menu-overlay__contact stack-sm">
+            <p class="label">Enquiries</p>
+            <a class="link-underline" href="mailto:Olaniyanolamidephillip@gmail.com">Olaniyanolamidephillip@gmail.com</a>
+            <p class="text-muted" style="font-size: var(--step--1);">United Kingdom</p>
+          </div>
+
+          <ul class="menu-overlay__socials row row--wrap">
+            <li>
+              <a class="label link-underline" href="https://www.tiktok.com/@olamidesax" target="_blank" rel="noopener noreferrer">TikTok</a>
+            </li>
+            <li>
+              <a class="label link-underline" href="https://www.instagram.com/olamide.sax" target="_blank" rel="noopener noreferrer">Instagram</a>
+            </li>
+            <li>
+              <a class="label link-underline" href="https://www.facebook.com/share/19kyBuitHZ/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">Facebook</a>
+            </li>
+            <li>
+              <a class="label link-underline" href="https://youtube.com/@olamidesax" target="_blank" rel="noopener noreferrer">YouTube</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="v2" id="main">
+
+    <!-- ====================================================================
+         MASTHEAD — the hub intro. One <h1> for the page.
+         ==================================================================== -->
+    <section class="section section--flush-top archive-head" aria-labelledby="media-title" data-animate="archive-head">
+      <div class="container">
+        <p class="eyebrow eyebrow--brass archive-head__eyebrow">The Living Archive</p>
+        <h1 class="archive-head__title" id="media-title">Media</h1>
+        <p class="archive-head__lead">
+          The whole performance, kept. Every gig, screening, frame and column —
+          gathered here as one archive that grows a phrase at a time. Enter by
+          performances, videos, gallery or press.
+        </p>
+
+        <!-- Doorways into the four archives. -->
+        <nav class="hub-index" aria-label="Archive sections">
+          <a class="hub-entry" href="#performances">
+            <span class="hub-entry__index">01</span>
+            <span class="hub-entry__name">Performances</span>
+            <span class="hub-entry__go">By year →</span>
+            <span class="hub-entry__desc">Live and staged appearances, grouped by year — Doncaster to Sheffield.</span>
+          </a>
+          <a class="hub-entry" href="#videos">
+            <span class="hub-entry__index">02</span>
+            <span class="hub-entry__name">Videos</span>
+            <span class="hub-entry__go">Live · Interviews · Music →</span>
+            <span class="hub-entry__desc">Performance clips and screenings, framed like a private viewing.</span>
+          </a>
+          <a class="hub-entry" href="/gallery.html">
+            <span class="hub-entry__index">03</span>
+            <span class="hub-entry__name">Gallery</span>
+            <span class="hub-entry__go">Enter the gallery →</span>
+            <span class="hub-entry__desc">Photos, behind the scenes and events — the venue walk.</span>
+          </a>
+          <a class="hub-entry" href="/press.html">
+            <span class="hub-entry__index">04</span>
+            <span class="hub-entry__name">Press</span>
+            <span class="hub-entry__go">Read the press →</span>
+            <span class="hub-entry__desc">Published articles and features — the story, in others' words.</span>
+          </a>
+        </nav>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         PERFORMANCES — by year (data-driven list rendered statically here;
+         mirrors data.js `performances`). data-animate hook inert.
+         ==================================================================== -->
+    <section class="section archive-section" id="performances" aria-labelledby="perf-heading" data-animate="performances">
+      <div class="container">
+        <div class="sec-head archive-section__head">
+          <div>
+            <p class="movement-index">
+              <span class="movement-index__num">01</span>
+              <span class="movement-index__name">Performances</span>
+            </p>
+            <h2 class="sec-head__title" style="margin-top: var(--space-md);">A career, by year.</h2>
+          </div>
+          <a class="link-underline sec-more" href="/timeline.html">The full timeline →</a>
+        </div>
+
+        <!-- Recent Highlights (real, undated — no fabricated years) -->
+        <div class="perf-year">
+          <div class="perf-year__grid">
+            <p class="perf-year__label">Recent Highlights</p>
+            <div class="perf-list">
+              <article class="perf-event">
+                <div>
+                  <h3 class="perf-event__title">World Record Football Scarf Procession</h3>
+                  <p class="perf-event__venue">Stand &amp; Be Counted Theatre</p>
+                </div>
+                <p class="perf-event__date">Recent</p>
+                <p class="perf-event__note">Leading live saxophone during the record-breaking public procession — thousands brought together through music and participation.</p>
+              </article>
+              <article class="perf-event">
+                <div>
+                  <h3 class="perf-event__title">Eco Art Fashion Show</h3>
+                  <p class="perf-event__venue">Multidisciplinary collaboration</p>
+                </div>
+                <p class="perf-event__date">Recent</p>
+                <p class="perf-event__note">Live Afro-fusion saxophone woven through sustainable fashion, visual arts and audience interaction.</p>
+              </article>
+              <article class="perf-event">
+                <div>
+                  <h3 class="perf-event__title">Sharrow Festival</h3>
+                  <p class="perf-event__venue">Sound Café Afrobeat ensemble</p>
+                </div>
+                <p class="perf-event__date">Recent</p>
+                <p class="perf-event__note">A featured member of the Afrobeat ensemble — high-energy sets and a shared celebration of rhythm and dance.</p>
+              </article>
+              <article class="perf-event">
+                <div>
+                  <h3 class="perf-event__title">ÀTÙPÀ <span class="perf-event__role">— as Adigun</span></h3>
+                  <p class="perf-event__venue">CAST</p>
+                </div>
+                <p class="perf-event__date">Recent</p>
+                <p class="perf-event__note">Opening saxophone; performing the role of Adigun.</p>
+              </article>
+              <article class="perf-event">
+                <div>
+                  <h3 class="perf-event__title">BME United Doncaster</h3>
+                  <p class="perf-event__venue">Doncaster</p>
+                </div>
+                <p class="perf-event__date">Recent</p>
+                <p class="perf-event__note">Afro-fusion performance for community and civic leaders during Black History Month.</p>
+              </article>
+              <article class="perf-event">
+                <div>
+                  <h3 class="perf-event__title">Spotlight, Sheffield</h3>
+                  <p class="perf-event__venue">Sheffield</p>
+                </div>
+                <p class="perf-event__date">Recent</p>
+                <p class="perf-event__note">A stirring performance before the Lord Mayor of Sheffield.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2026 (real dates) -->
+        <div class="perf-year">
+          <div class="perf-year__grid">
+            <p class="perf-year__label">2026</p>
+            <div class="perf-list">
+              <article class="perf-event">
+                <div>
+                  <h3 class="perf-event__title">Best Instrumentalist of the Year</h3>
+                  <p class="perf-event__venue">Eko Heritage Awards</p>
+                </div>
+                <p class="perf-event__date">2026</p>
+                <p class="perf-event__note">Winner — Eko Heritage Awards 2026.</p>
+              </article>
+              <article class="perf-event">
+                <div>
+                  <h3 class="perf-event__title">Open Mic Night</h3>
+                  <p class="perf-event__venue">Utopia Theatre</p>
+                </div>
+                <p class="perf-event__date">1 Mar 2026</p>
+                <p class="perf-event__note">An intimate improvisational set — saxophone, keys and vocals.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIDEOS — light category tabs (Live / Interviews / Music) + FACADE
+         cards rendered by videos.js from data.js. NO live iframe (Task 8).
+         ==================================================================== -->
+    <section class="section archive-section" id="videos" aria-labelledby="videos-heading" data-animate="videos">
+      <div class="container">
+        <div class="sec-head archive-section__head">
+          <div>
+            <p class="movement-index">
+              <span class="movement-index__num">02</span>
+              <span class="movement-index__name">Videos</span>
+            </p>
+            <h2 class="sec-head__title" id="videos-heading" style="margin-top: var(--space-md);">The screenings.</h2>
+          </div>
+        </div>
+
+        <!-- Tablist (accessible; roving tabindex handled in videos.js). -->
+        <div class="filter-bar" role="tablist" aria-label="Filter videos by category" data-videos-tabs>
+          <button type="button" class="filter-chip is-active" role="tab" data-tab="ALL" aria-selected="true" tabindex="0">All</button>
+          <button type="button" class="filter-chip" role="tab" data-tab="LIVE" aria-selected="false" tabindex="-1">Live</button>
+          <button type="button" class="filter-chip" role="tab" data-tab="INTERVIEW" aria-selected="false" tabindex="-1">Interviews</button>
+          <button type="button" class="filter-chip" role="tab" data-tab="MUSIC" aria-selected="false" tabindex="-1">Music Videos</button>
+        </div>
+
+        <!-- Facade cards rendered here by videos.js. NO iframe until Task 8. -->
+        <div class="video-grid" data-videos aria-live="polite"></div>
+
+        <!-- Empty state (hidden unless a category is empty). -->
+        <div class="archive-empty" data-videos-empty hidden>
+          <p class="archive-empty__line">No videos in this category yet.</p>
+          <p class="archive-empty__sub">New screenings are added as Olamide's live work is filmed.</p>
+        </div>
+
+        <noscript>
+          <p class="text-muted" style="margin-top: var(--space-lg);">
+            Enable JavaScript to browse the video archive, or
+            <a class="link-underline" href="https://youtube.com/@olamidesax" target="_blank" rel="noopener noreferrer">watch on YouTube</a>.
+          </p>
+        </noscript>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER (canonical partial — byte-identical to v2/partials/footer.html) -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__top">
+        <div class="site-footer__brand stack-sm">
+          <a class="site-nav__wordmark site-nav__wordmark--footer" href="/index.html">
+            <span class="site-nav__wordmark-text">Olamide<span class="site-nav__wordmark-accent">Sax</span></span>
+          </a>
+          <p class="site-footer__tagline text-muted">
+            UK-based Nigerian Afro-Fusion artist — Multi-Instrumentalist&nbsp;·&nbsp;Participatory Artist&nbsp;·&nbsp;Creative Facilitator
+          </p>
+        </div>
+
+        <nav class="site-footer__links" aria-label="Footer">
+          <p class="label">Explore</p>
+          <ul class="stack-sm">
+            <li><a class="link-underline" href="/index.html">Home</a></li>
+            <li><a class="link-underline" href="/about.html">About</a></li>
+            <li><a class="link-underline" href="/artistic-practice.html">Artistic Practice</a></li>
+            <li><a class="link-underline" href="/media.html">Media</a></li>
+            <li><a class="link-underline" href="/gallery.html">Gallery</a></li>
+            <li><a class="link-underline" href="/press.html">Press</a></li>
+            <li><a class="link-underline" href="/timeline.html">Timeline</a></li>
+            <li><a class="link-underline" href="/contact.html">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="site-footer__contact">
+          <p class="label">Contact</p>
+          <ul class="stack-sm">
+            <li><a class="link-underline" href="mailto:Olaniyanolamidephillip@gmail.com">Olaniyanolamidephillip@gmail.com</a></li>
+            <li class="text-muted">United Kingdom</li>
+          </ul>
+        </div>
+
+        <div class="site-footer__socials">
+          <p class="label">Follow</p>
+          <ul class="row row--wrap" style="margin-top: var(--space-sm);">
+            <li>
+              <a
+                class="icon-link"
+                href="https://www.tiktok.com/@olamidesax"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Olamide Sax on TikTok"
+              >
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path fill="currentColor" d="M16.6 5.82c-1.02-.88-1.66-2.16-1.66-3.58h-3.06v13.6a3.14 3.14 0 1 1-2.19-3.02V9.68a6.2 6.2 0 1 0 5.25 6.12V9.4a8.2 8.2 0 0 0 4.6 1.4V7.75c-1.06 0-2.06-.4-2.94-1.13Z"/>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a
+                class="icon-link"
+                href="https://www.instagram.com/olamide.sax"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Olamide Sax on Instagram"
+              >
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+                  <circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+                  <circle cx="17.35" cy="6.65" r="1.1" fill="currentColor"/>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a
+                class="icon-link"
+                href="https://www.facebook.com/share/19kyBuitHZ/?mibextid=wwXIfr"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Olamide Sax on Facebook"
+              >
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path fill="currentColor" d="M14.5 21v-7.6h2.55l.38-2.96h-2.93V8.55c0-.86.24-1.44 1.47-1.44h1.57V4.46c-.27-.04-1.2-.12-2.28-.12-2.26 0-3.8 1.38-3.8 3.9v2.18H8.99v2.96h2.47V21h3.04Z"/>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a
+                class="icon-link"
+                href="https://youtube.com/@olamidesax"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Olamide Sax on YouTube"
+              >
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <rect x="2.5" y="6" width="19" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/>
+                  <path fill="currentColor" d="M10.6 9.5v5l4.3-2.5-4.3-2.5Z"/>
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="site-footer__rule" />
+
+      <div class="site-footer__bottom">
+        <p class="site-footer__colophon text-muted">
+          &copy; <span data-year>2026</span> Olamide Sax. Founder &amp; Lead Artist, Lammy Wonder Music Entertainment.
+        </p>
+        <p class="site-footer__made text-muted">A living archive, built one performance at a time.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

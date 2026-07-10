@@ -1,0 +1,757 @@
+/* ============================================================================
+   home.css — Olamide Sax V2 · the curated homepage (Task 3)
+   Section-specific composition for index.html ONLY. Consumes tokens +
+   typography + layout + components. Loaded LAST-but-one, after components.css
+   and before responsive.css so the page can still tune down at breakpoints.
+
+   Register: cinematic editorial-luxury. Whitespace does the work. One serif
+   moment per viewport; ~1 brass element per viewport. Sharp edges, hairlines,
+   NO rounded cards, NO heavy shadows. Static only — inert data-* hooks left
+   for Tasks 6–8 (Breath Line, kinetic type, Craft pins, media blooms).
+
+   Media frames all share .frame-media: a hairline-bordered, ratio-locked,
+   warm-toned image well that fills gracefully whether the real asset is a
+   placeholder or hero-grade photography.
+   ========================================================================== */
+
+/* ── Shared: hung section index (Roman numeral + name) ──────────────────── */
+/* Each movement is labelled like a track on a set list. Kept quiet — it is
+   orientation, not decoration.                                              */
+
+.movement-index {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+  color: var(--muted);
+}
+.movement-index__num {
+  font-family: var(--font-body);
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--body-weight-strong);
+  letter-spacing: var(--tracking-eyebrow);
+  font-size: var(--step--1);
+  color: var(--accent);
+}
+.movement-index__name {
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  font-size: var(--step--1);
+}
+
+/* ── Shared: media well ─────────────────────────────────────────────────── */
+
+.frame-media {
+  position: relative;
+  overflow: hidden;
+  border: var(--border-width) solid var(--hairline);
+  background: var(--bg-raised);
+  /* Never exceed the containing column (guards against subpixel/grid overrun). */
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.frame-media > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Warm-graded, held slightly in shadow — unifies mixed placeholder shots. */
+  filter: saturate(0.92) contrast(1.02) brightness(0.94);
+}
+.frame-media--tall  { aspect-ratio: 3 / 4; }
+.frame-media--wide  { aspect-ratio: 16 / 9; }
+.frame-media--cine  { aspect-ratio: 21 / 9; }
+.frame-media--square{ aspect-ratio: 1 / 1; }
+
+/* Hung exhibition-label caption under a media well. */
+.exhibit-label {
+  margin-top: var(--space-sm);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2xs) var(--space-sm);
+  color: var(--muted);
+}
+.exhibit-label__meta {
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  font-size: var(--step--1);
+  color: var(--accent);
+}
+.exhibit-label__title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: var(--display-weight);
+  font-size: var(--step-1);
+  color: var(--text);
+  max-width: 40ch;
+}
+
+/* Marked-placeholder ribbon (dev affordance; quiet, corner of a media well). */
+.is-placeholder::after {
+  content: "Placeholder";
+  position: absolute;
+  top: var(--space-2xs);
+  left: var(--space-2xs);
+  font-family: var(--font-label);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: rgb(var(--ink-rgb) / 0.55);
+  padding: 2px 6px;
+  border: 1px solid var(--hairline);
+  pointer-events: none;
+}
+
+/* ============================================================================
+   I · HERO  — Birth / The Name
+   A HERO SHELL that reserves the stage for the Breath-Line saxophone assembly
+   (Task 7). The wordmark is the soloist; the portrait is held in shadow.
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding-block: var(--space-4xl) var(--space-3xl);
+  overflow: clip;
+}
+
+/* The reserved stage for the Breath-Line assembly (Task 7). No visual now —
+   just a positioned lane the future SVG/canvas can occupy behind the title. */
+.hero__stage {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-base);
+  pointer-events: none;
+}
+
+.hero__inner {
+  position: relative;
+  z-index: var(--z-content);
+  width: 100%;
+  display: grid;
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .hero__inner {
+    grid-template-columns: 1.7fr 1fr;
+    gap: var(--space-3xl);
+  }
+}
+
+.hero__lead { min-width: 0; }
+
+.hero__eyebrow { margin-bottom: var(--space-md); }
+
+/* The soloist — huge, LIGHT Fraunces. Sized to fit the title column so the
+   name never breaks mid-word; each word is its own line and stays whole.
+   The clamp's vw term keeps it fluid; the rem ceiling is tuned so "Olamide"
+   fits the lead column at large widths. */
+.hero__title {
+  font-size: clamp(3.25rem, 11vw, 10rem);
+  line-height: 0.94;
+  font-weight: var(--display-weight);
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin: 0;
+  hyphens: none;
+}
+/* Each word stays whole on its own line — never a mid-word break. */
+.hero__title-line { display: block; white-space: nowrap; }
+.hero__title-line--accent { color: var(--text); }
+
+.hero__meta {
+  margin-top: var(--space-lg);
+  color: var(--muted);
+  font-size: var(--step--1);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  max-width: 40ch;
+}
+
+/* Whisper CTA — a scroll cue, not a button. */
+.hero__cue {
+  margin-top: var(--space-2xl);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--muted);
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  font-size: var(--step--1);
+  text-decoration: none;
+}
+.hero__cue-line {
+  display: inline-block;
+  width: 3.5rem;
+  height: 1px;
+  background: var(--hairline-brass);
+  transform-origin: left center;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.hero__cue:hover .hero__cue-line,
+.hero__cue:focus-visible .hero__cue-line { transform: scaleX(1.35); }
+
+/* Portrait held in shadow — half-lit, warm-graded. */
+.hero__portrait {
+  position: relative;
+  justify-self: end;
+  width: 100%;
+  max-width: 26rem;
+}
+.hero__portrait .frame-media > img {
+  filter: saturate(0.9) contrast(1.05) brightness(0.8);
+}
+/* A soft warm falloff so the portrait dissolves into the stage dark. */
+.hero__portrait::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 40%,
+    rgb(var(--ink-rgb) / 0.55) 100%
+  );
+  pointer-events: none;
+}
+
+@media (max-width: 1023px) {
+  /* Title leads (presence before information); portrait becomes a held-in-
+     shadow accent beneath it, capped so the wordmark anchors the top. */
+  .hero__inner { gap: var(--space-lg); }
+  .hero__portrait {
+    justify-self: start;
+    max-width: 15rem;
+  }
+  .hero__portrait .frame-media { aspect-ratio: 4 / 5; }
+}
+@media (max-width: 1023px) and (min-width: 560px) {
+  /* Tablet: sit the portrait beside the title so both share the first screen. */
+  .hero__inner { grid-template-columns: 1.4fr 0.9fr; align-items: center; }
+  .hero__portrait { justify-self: end; max-width: 18rem; }
+}
+
+/* ============================================================================
+   II · THE STATEMENT  — a held hush, then ONE oversized Fraunces line.
+   ========================================================================== */
+
+.statement__hold { min-height: 22vh; }
+
+.statement__line {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-size: var(--step-6);
+  line-height: 1.06;
+  letter-spacing: var(--tracking-display);
+  color: var(--text);
+  max-width: 20ch;
+  text-wrap: balance;
+}
+.statement__line em {
+  font-style: italic;
+  color: var(--accent-lit);
+}
+
+.statement__body {
+  margin-top: var(--space-xl);
+  color: var(--muted);
+  max-width: var(--measure);
+  font-size: var(--step-0);
+  line-height: var(--leading-loose);
+}
+.statement__body strong { color: var(--text); font-weight: var(--body-weight-strong); }
+
+/* ============================================================================
+   III · THE ROOTS  — LIGHT interlude (Bone ground, Ink text). The rhythm shift.
+   Oversized "2010 —" hangs in the margin; a heritage image; link → About.
+   ========================================================================== */
+
+.roots { overflow: clip; }
+
+.roots__grid {
+  display: grid;
+  gap: var(--space-xl);
+  align-items: start;
+}
+@media (min-width: 768px) {
+  .roots__grid {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: var(--space-2xl);
+  }
+}
+
+.roots__year {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-size: var(--step-8);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: var(--text-invert);
+  margin: 0;
+}
+@media (min-width: 768px) {
+  /* Hang the year out into the left margin — editorial offset. */
+  .roots__year { margin-left: calc(-1 * var(--space-md)); }
+}
+
+.roots__copy {
+  margin-top: var(--space-lg);
+  max-width: 52ch;
+  color: color-mix(in oklab, var(--text-invert) 82%, var(--umber));
+  line-height: var(--leading-loose);
+}
+.roots__copy strong {
+  color: var(--text-invert);
+  font-weight: var(--body-weight-strong);
+}
+.roots__terms {
+  font-style: italic;
+  font-family: var(--font-display);
+}
+
+.roots__link { margin-top: var(--space-lg); }
+/* Link on the light ground needs Ink, not Bone. */
+.section--light .roots__link .link-underline { color: var(--text-invert); }
+
+.roots__media .frame-media {
+  border-color: rgb(var(--ink-rgb) / 0.18);
+  background: color-mix(in oklab, var(--bone) 88%, var(--umber));
+}
+.roots__media .frame-media > img {
+  filter: saturate(0.95) contrast(1.02) brightness(1);
+}
+.section--light .exhibit-label { color: color-mix(in oklab, var(--ash) 60%, var(--ink)); }
+
+/* ============================================================================
+   IV · THE CRAFT — three movements: Saxophone · Voice · Keys.
+   Full-bleed-ish image + one Fraunces word + one line of copy. Composed
+   STATICALLY so Task 8 can pin/cross-fade them (data-craft-movement hooks).
+   NO cards.
+   ========================================================================== */
+
+.craft__intro { margin-bottom: var(--space-2xl); }
+
+.craft__movements {
+  display: grid;
+  gap: var(--space-2xl);
+}
+@media (min-width: 768px) {
+  .craft__movements { gap: var(--space-3xl); }
+}
+
+.craft-movement {
+  position: relative;
+  display: grid;
+  gap: var(--space-lg);
+  align-items: center;
+}
+@media (min-width: 768px) {
+  .craft-movement {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+  }
+  /* Alternate the image side for rhythm. */
+  .craft-movement:nth-child(even) .craft-movement__media { order: 2; }
+}
+
+.craft-movement__media .frame-media { aspect-ratio: 4 / 5; }
+@media (min-width: 768px) {
+  .craft-movement__media .frame-media { aspect-ratio: 3 / 4; }
+}
+
+.craft-movement__word {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-size: var(--step-6);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin: 0;
+}
+.craft-movement__num {
+  font-family: var(--font-body);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--step--1);
+  letter-spacing: var(--tracking-eyebrow);
+  color: var(--accent);
+  display: block;
+  margin-bottom: var(--space-sm);
+}
+.craft-movement__copy {
+  margin-top: var(--space-md);
+  color: var(--muted);
+  max-width: 42ch;
+  line-height: var(--leading-loose);
+}
+
+/* ============================================================================
+   V · FEATURED PERFORMANCE — one cinematic gig, exhibition-label caption.
+   ========================================================================== */
+
+.featured-perf__media .frame-media { aspect-ratio: 16 / 9; }
+@media (min-width: 1024px) {
+  .featured-perf__media .frame-media { aspect-ratio: 21 / 9; }
+}
+.featured-perf__foot {
+  margin-top: var(--space-lg);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-md);
+}
+
+/* ============================================================================
+   VI · FEATURED VIDEO — YouTube FACADE (still + play affordance). No live
+   iframe now (Task 8 wires facade → iframe). data-yt hook carried.
+   ========================================================================== */
+
+.video-facade {
+  position: relative;
+  display: block;
+  width: 100%;
+  border: var(--border-width) solid var(--hairline);
+  background: var(--bg-raised);
+  cursor: pointer;
+  overflow: hidden;
+}
+.video-facade .frame-media {
+  border: 0;
+  aspect-ratio: 16 / 9;
+}
+.video-facade .frame-media > img { filter: saturate(0.9) brightness(0.72); }
+
+/* A quiet screening scrim so the play mark reads. */
+.video-facade::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(60% 60% at 50% 50%,
+              rgb(var(--ink-rgb) / 0.15) 0%,
+              rgb(var(--ink-rgb) / 0.5) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+.video-facade__play {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+.video-facade__play-mark {
+  width: clamp(56px, 8vw, 84px);
+  height: clamp(56px, 8vw, 84px);
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--hairline-brass);
+  border-radius: 50%;
+  color: var(--accent-lit);
+  background: rgb(var(--ink-rgb) / 0.35);
+  transition: border-color var(--dur-base) var(--ease-out),
+              transform var(--dur-base) var(--ease-out);
+}
+.video-facade:hover .video-facade__play-mark,
+.video-facade:focus-visible .video-facade__play-mark {
+  border-color: var(--accent);
+  transform: scale(1.06);
+}
+.video-facade__play-mark svg { width: 40%; height: 40%; fill: currentColor; }
+
+.video-facade__label {
+  position: absolute;
+  left: var(--space-md);
+  bottom: var(--space-md);
+  z-index: 2;
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  font-size: var(--step--1);
+  color: var(--text);
+}
+.video-facade__label span { color: var(--accent); }
+
+/* ============================================================================
+   VII · FEATURED GALLERY — Live Wall taste. A few stills; enter the gallery.
+   ========================================================================== */
+
+.live-wall {
+  display: grid;
+  gap: var(--space-md);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+/* Base (mobile): a simple 2-up grid; natural heights, no stretch. */
+.live-wall__cell { min-width: 0; }
+.live-wall__cell .frame-media { aspect-ratio: 4 / 3; }
+
+@media (min-width: 768px) {
+  .live-wall {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--space-lg);
+    grid-auto-flow: dense;
+  }
+  /* An editorial mosaic — not a uniform grid. */
+  .live-wall__cell:nth-child(1) { grid-column: span 7; }
+  .live-wall__cell:nth-child(2) { grid-column: span 5; }
+  .live-wall__cell:nth-child(3) { grid-column: span 5; }
+  .live-wall__cell:nth-child(4) { grid-column: span 7; }
+  /* Fill the row height only where the mosaic pairs uneven spans. */
+  .live-wall__cell .frame-media { height: 100%; }
+  .live-wall__cell:nth-child(1) .frame-media,
+  .live-wall__cell:nth-child(4) .frame-media { aspect-ratio: 16 / 10; }
+}
+
+/* ============================================================================
+   VIII · FEATURED PRESS — ONE large Fraunces-italic pull-quote + 3 real
+   press sources as tracked labels.
+   ========================================================================== */
+
+.press__quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: var(--display-weight);
+  font-size: var(--step-5);
+  line-height: 1.12;
+  letter-spacing: 0;
+  color: var(--text);
+  max-width: 20ch;
+  text-wrap: balance;
+  margin: 0;
+}
+.press__quote-mark { color: var(--accent); font-style: normal; }
+
+.press__sources {
+  margin-top: var(--space-2xl);
+  display: grid;
+  gap: 0;
+  max-width: 46rem;
+}
+.press__source {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: var(--space-md);
+  align-items: baseline;
+  padding-block: var(--space-md);
+  border-top: 1px solid var(--hairline-soft);
+}
+.press__source:last-child { border-bottom: 1px solid var(--hairline-soft); }
+.press__source-name {
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  font-size: var(--step--1);
+  color: var(--accent);
+  white-space: nowrap;
+}
+.press__source-title {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-size: var(--step-1);
+  color: var(--text);
+  line-height: 1.2;
+}
+.press__source-read {
+  font-size: var(--step--1);
+  white-space: nowrap;
+}
+@media (max-width: 639px) {
+  .press__source {
+    grid-template-columns: 1fr;
+    gap: var(--space-2xs);
+  }
+  .press__source-read { justify-self: start; margin-top: var(--space-2xs); }
+}
+
+/* ============================================================================
+   IX · TIMELINE TEASER — a few milestone nodes hinting career-as-composition.
+   data-timeline-teaser hook carried. Nodes sit on a hairline the future
+   Breath Line can inhabit.
+   ========================================================================== */
+
+.timeline-teaser__track {
+  margin-top: var(--space-2xl);
+  position: relative;
+  display: grid;
+  gap: var(--space-xl);
+}
+@media (min-width: 768px) {
+  .timeline-teaser__track {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-lg);
+  }
+  /* A hairline the nodes hang from — a still hint of the Breath Line. */
+  .timeline-teaser__track::before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--hairline);
+  }
+}
+
+.timeline-node {
+  position: relative;
+  padding-top: var(--space-lg);
+}
+.timeline-node::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border: 1px solid var(--accent);
+  background: var(--bg);
+  border-radius: 50%;
+  transform: translateY(0);
+}
+.timeline-node__year {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-size: var(--step-3);
+  color: var(--accent-lit);
+  line-height: 1;
+}
+.timeline-node__event {
+  margin-top: var(--space-sm);
+  color: var(--muted);
+  font-size: var(--step--1);
+  line-height: var(--leading-normal);
+  max-width: 26ch;
+}
+
+/* ============================================================================
+   X · THE INVITATION / RESOLUTION — quiet, confident title card. Reserves
+   data-breath-resolve where the Breath Line resolves into the wordmark
+   (Task 7). One brass CTA → contact.
+   ========================================================================== */
+
+.invitation {
+  position: relative;
+  text-align: center;
+  overflow: clip;
+}
+.invitation__inner {
+  position: relative;
+  z-index: var(--z-content);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+/* Reserved stage where the Breath Line resolves into the wordmark (Task 7). */
+.invitation__resolve {
+  position: relative;
+  width: 100%;
+  min-height: clamp(40px, 8vh, 90px);
+  pointer-events: none;
+}
+
+.invitation__title {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-size: var(--step-6);
+  line-height: 1.02;
+  letter-spacing: var(--tracking-display);
+  color: var(--text);
+  max-width: 16ch;
+  margin: 0;
+}
+.invitation__avail {
+  color: var(--muted);
+  max-width: 48ch;
+  line-height: var(--leading-loose);
+}
+.invitation__cta { margin-top: var(--space-md); }
+
+/* ── Shared section header (eyebrow index + optional "see all" link) ─────── */
+
+.sec-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+.sec-head__title {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-size: var(--step-4);
+  line-height: 1.05;
+  color: var(--text);
+  margin: 0;
+}
+.sec-head__title--serif-none { /* when a section already spends its serif elsewhere */ }
+.sec-more { font-size: var(--step--1); white-space: nowrap; }
+
+/* ── Small-screen calm-down (moderate mobile sizing) ────────────────────── */
+@media (max-width: 479px) {
+  .hero { padding-block: var(--space-3xl) var(--space-2xl); min-height: 92svh; }
+  .hero__meta { letter-spacing: 0.14em; }
+  .statement__hold { min-height: 10vh; }
+  .press__source { grid-template-columns: 1fr; }
+  .video-facade__label { left: var(--space-sm); bottom: var(--space-sm); }
+}
+
+/* ============================================================================
+   AMBIENT VIDEO LAYERS — real content pass.
+   Home hero holds a muted, low-opacity looping video BEHIND the title as an
+   ambient cinematic layer. Craft movements are video-first: a muted loop that
+   fills the media well over its poster. All videos degrade to poster-only
+   under prefers-reduced-motion (a tiny guard in main.js pauses + shows poster;
+   here we also keep the media well non-scrolling and width-safe).
+   ========================================================================== */
+
+/* Hero ambient video — fills the reserved stage, held far back and low. */
+.hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  object-fit: cover;
+  z-index: var(--z-base);
+  opacity: 0.28;
+  filter: saturate(0.85) contrast(1.02) brightness(0.6);
+  pointer-events: none;
+}
+/* A warm falloff over the video so the title stays legible. */
+.hero__video-veil {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-base);
+  pointer-events: none;
+  background: radial-gradient(
+    120% 90% at 30% 40%,
+    transparent 0%,
+    rgb(var(--ink-rgb) / 0.72) 100%
+  );
+}
+
+/* Craft movement video-first well — video fills the ratio-locked frame-media. */
+.craft-movement__media .frame-media > video,
+.frame-media > video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  object-fit: cover;
+  filter: saturate(0.92) contrast(1.02) brightness(0.94);
+}
+
+/* Reduced-motion: hide the ambient hero video entirely (poster/still remains
+   via the veil + title); the JS guard also pauses & unloads playback. */
+@media (prefers-reduced-motion: reduce) {
+  .hero__video { display: none; }
+}

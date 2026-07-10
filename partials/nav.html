@@ -1,0 +1,133 @@
+<!-- ============================================================================
+     nav.html — Olamide Sax V2 · CANONICAL nav partial
+     No build step: this markup is duplicated byte-identical into every page,
+     placed as the first child inside <body>, directly after the .frame /
+     .grain / .stage-bloom decorative layers and before <main>.
+
+     The film-frame already carries the wordmark in its top-left corner, so
+     this bar stays collapsed/minimal: a small secondary wordmark (kept for
+     a11y + pages where the frame corner may be visually crowded) and a
+     single "Menu" trigger that opens the full-screen overlay. No link
+     clutter in the bar itself — IA lives inside the overlay.
+
+     Contract (do not rename — later tasks depend on these exact hooks):
+       .site-nav               fixed bar, top
+       .site-nav__wordmark      small wordmark link → index.html
+       .nav-toggle              the Menu trigger (aria-controls, aria-expanded)
+       .menu-overlay            full-screen overlay panel
+       .menu-overlay[data-open] attribute reflects open state (no class toggle)
+     ========================================================================== -->
+
+<nav class="site-nav" aria-label="Primary">
+  <a class="site-nav__wordmark" href="/index.html">
+    <span class="site-nav__wordmark-text">Olamide<span class="site-nav__wordmark-accent">Sax</span></span>
+  </a>
+
+  <button
+    type="button"
+    class="nav-toggle"
+    id="nav-toggle"
+    aria-haspopup="dialog"
+    aria-expanded="false"
+    aria-controls="menu-overlay"
+    aria-label="Open menu"
+  >
+    <span class="nav-toggle__label label">Menu</span>
+    <span class="nav-toggle__glyph" aria-hidden="true">
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+    </span>
+  </button>
+</nav>
+
+<!-- FULL-SCREEN MENU OVERLAY ================================================ -->
+<div
+  class="menu-overlay"
+  id="menu-overlay"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Site menu"
+>
+  <div class="menu-overlay__frame">
+    <div class="menu-overlay__top">
+      <a class="site-nav__wordmark site-nav__wordmark--overlay" href="/index.html">
+        <span class="site-nav__wordmark-text">Olamide<span class="site-nav__wordmark-accent">Sax</span></span>
+      </a>
+
+      <button
+        type="button"
+        class="nav-toggle nav-toggle--close"
+        id="nav-close"
+        aria-label="Close menu"
+      >
+        <span class="nav-toggle__label label">Close</span>
+        <span class="nav-toggle__glyph nav-toggle__glyph--x" aria-hidden="true">
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+        </span>
+      </button>
+    </div>
+
+    <div class="menu-overlay__body">
+      <ol class="menu-overlay__links" data-menu-links>
+        <li class="menu-overlay__item">
+          <span class="menu-overlay__index numeral">01</span>
+          <a class="menu-overlay__link" href="/index.html">Home</a>
+        </li>
+        <li class="menu-overlay__item">
+          <span class="menu-overlay__index numeral">02</span>
+          <a class="menu-overlay__link" href="/about.html">About</a>
+        </li>
+        <li class="menu-overlay__item">
+          <span class="menu-overlay__index numeral">03</span>
+          <a class="menu-overlay__link" href="/artistic-practice.html">Artistic&nbsp;Practice</a>
+        </li>
+        <li class="menu-overlay__item">
+          <span class="menu-overlay__index numeral">04</span>
+          <a class="menu-overlay__link" href="/media.html">Media</a>
+        </li>
+        <li class="menu-overlay__item">
+          <span class="menu-overlay__index numeral">05</span>
+          <a class="menu-overlay__link" href="/gallery.html">Gallery</a>
+        </li>
+        <li class="menu-overlay__item">
+          <span class="menu-overlay__index numeral">06</span>
+          <a class="menu-overlay__link" href="/press.html">Press</a>
+        </li>
+        <li class="menu-overlay__item">
+          <span class="menu-overlay__index numeral">07</span>
+          <a class="menu-overlay__link" href="/timeline.html">Timeline</a>
+        </li>
+        <li class="menu-overlay__item">
+          <span class="menu-overlay__index numeral">08</span>
+          <a class="menu-overlay__link" href="/contact.html">Contact</a>
+        </li>
+      </ol>
+
+      <div class="menu-overlay__aside">
+        <a class="btn btn--brass menu-overlay__cta" href="/contact.html">Book Olamide</a>
+
+        <div class="menu-overlay__contact stack-sm">
+          <p class="label">Enquiries</p>
+          <a class="link-underline" href="mailto:Olaniyanolamidephillip@gmail.com">Olaniyanolamidephillip@gmail.com</a>
+          <p class="text-muted" style="font-size: var(--step--1);">United Kingdom</p>
+        </div>
+
+        <ul class="menu-overlay__socials row row--wrap">
+          <li>
+            <a class="label link-underline" href="https://www.tiktok.com/@olamidesax" target="_blank" rel="noopener noreferrer">TikTok</a>
+          </li>
+          <li>
+            <a class="label link-underline" href="https://www.instagram.com/olamide.sax" target="_blank" rel="noopener noreferrer">Instagram</a>
+          </li>
+          <li>
+            <a class="label link-underline" href="https://www.facebook.com/share/19kyBuitHZ/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">Facebook</a>
+          </li>
+          <li>
+            <a class="label link-underline" href="https://youtube.com/@olamidesax" target="_blank" rel="noopener noreferrer">YouTube</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

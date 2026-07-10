@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Press — Olamide Sax · Articles &amp; Features</title>
+  <meta name="description" content="Press for Olamide Sax — published articles and features from New Telegraph and The Nation on his Afro-fusion performances across the UK." />
+
+  <!-- Preload the two display faces used above the fold. -->
+  <link rel="preload" href="assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/archivo-400.woff2" as="font" type="font/woff2" crossorigin />
+
+  <!-- CSS cascade order: reset → tokens → typography → layout → frame → components → home → archive → animations → responsive -->
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/typography.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/frame.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/home.css" />
+  <link rel="stylesheet" href="css/archive.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+
+<body>
+  <!-- THE FILM-FRAME (signature device). Decorative to AT. -->
+  <div class="frame" aria-hidden="true">
+    <span class="frame__corner frame__corner--tl">Olamide Sax</span>
+    <span class="frame__corner frame__corner--tr">Press</span>
+    <span class="frame__corner frame__corner--bl">UK / Nigeria</span>
+    <span class="frame__corner frame__corner--br">In Their Words</span>
+    <!-- Reserved lane for the Breath Line (Task 7) — no visual yet. -->
+    <div class="frame__spine"></div>
+  </div>
+
+  <!-- Film grain veil + stage-warm bloom (ambient). -->
+  <div class="grain" aria-hidden="true"></div>
+  <div class="stage-bloom stage-bloom--fixed" aria-hidden="true"></div>
+
+  <!-- NAV (canonical partial — byte-identical to v2/partials/nav.html) -->
+  <nav class="site-nav" aria-label="Primary">
+    <a class="site-nav__wordmark" href="/index.html">
+      <span class="site-nav__wordmark-text">Olamide<span class="site-nav__wordmark-accent">Sax</span></span>
+    </a>
+
+    <button
+      type="button"
+      class="nav-toggle"
+      id="nav-toggle"
+      aria-haspopup="dialog"
+      aria-expanded="false"
+      aria-controls="menu-overlay"
+      aria-label="Open menu"
+    >
+      <span class="nav-toggle__label label">Menu</span>
+      <span class="nav-toggle__glyph" aria-hidden="true">
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+      </span>
+    </button>
+  </nav>
+
+  <!-- FULL-SCREEN MENU OVERLAY ================================================ -->
+  <div
+    class="menu-overlay"
+    id="menu-overlay"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Site menu"
+  >
+    <div class="menu-overlay__frame">
+      <div class="menu-overlay__top">
+        <a class="site-nav__wordmark site-nav__wordmark--overlay" href="/index.html">
+          <span class="site-nav__wordmark-text">Olamide<span class="site-nav__wordmark-accent">Sax</span></span>
+        </a>
+
+        <button
+          type="button"
+          class="nav-toggle nav-toggle--close"
+          id="nav-close"
+          aria-label="Close menu"
+        >
+          <span class="nav-toggle__label label">Close</span>
+          <span class="nav-toggle__glyph nav-toggle__glyph--x" aria-hidden="true">
+            <span class="nav-toggle__bar"></span>
+            <span class="nav-toggle__bar"></span>
+          </span>
+        </button>
+      </div>
+
+      <div class="menu-overlay__body">
+        <ol class="menu-overlay__links" data-menu-links>
+          <li class="menu-overlay__item">
+            <span class="menu-overlay__index numeral">01</span>
+            <a class="menu-overlay__link" href="/index.html">Home</a>
+          </li>
+          <li class="menu-overlay__item">
+            <span class="menu-overlay__index numeral">02</span>
+            <a class="menu-overlay__link" href="/about.html">About</a>
+          </li>
+          <li class="menu-overlay__item">
+            <span class="menu-overlay__index numeral">03</span>
+            <a class="menu-overlay__link" href="/artistic-practice.html">Artistic&nbsp;Practice</a>
+          </li>
+          <li class="menu-overlay__item">
+            <span class="menu-overlay__index numeral">04</span>
+            <a class="menu-overlay__link" href="/media.html">Media</a>
+          </li>
+          <li class="menu-overlay__item">
+            <span class="menu-overlay__index numeral">05</span>
+            <a class="menu-overlay__link" href="/gallery.html">Gallery</a>
+          </li>
+          <li class="menu-overlay__item">
+            <span class="menu-overlay__index numeral">06</span>
+            <a class="menu-overlay__link" href="/press.html">Press</a>
+          </li>
+          <li class="menu-overlay__item">
+            <span class="menu-overlay__index numeral">07</span>
+            <a class="menu-overlay__link" href="/timeline.html">Timeline</a>
+          </li>
+          <li class="menu-overlay__item">
+            <span class="menu-overlay__index numeral">08</span>
+            <a class="menu-overlay__link" href="/contact.html">Contact</a>
+          </li>
+        </ol>
+
+        <div class="menu-overlay__aside">
+          <a class="btn btn--brass menu-overlay__cta" href="/contact.html">Book Olamide</a>
+
+          <div class="menu-overlay__contact stack-sm">
+            <p class="label">Enquiries</p>
+            <a class="link-underline" href="mailto:Olaniyanolamidephillip@gmail.com">Olaniyanolamidephillip@gmail.com</a>
+            <p class="text-muted" style="font-size: var(--step--1);">United Kingdom</p>
+          </div>
+
+          <ul class="menu-overlay__socials row row--wrap">
+            <li>
+              <a class="label link-underline" href="https://www.tiktok.com/@olamidesax" target="_blank" rel="noopener noreferrer">TikTok</a>
+            </li>
+            <li>
+              <a class="label link-underline" href="https://www.instagram.com/olamide.sax" target="_blank" rel="noopener noreferrer">Instagram</a>
+            </li>
+            <li>
+              <a class="label link-underline" href="https://www.facebook.com/share/19kyBuitHZ/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">Facebook</a>
+            </li>
+            <li>
+              <a class="label link-underline" href="https://youtube.com/@olamidesax" target="_blank" rel="noopener noreferrer">YouTube</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="v2" id="main">
+
+    <!-- ====================================================================
+         MASTHEAD — one <h1>.
+         ==================================================================== -->
+    <section class="section section--flush-top archive-head" aria-labelledby="press-title" data-animate="archive-head">
+      <div class="container">
+        <p class="eyebrow eyebrow--brass archive-head__eyebrow">In Their Words</p>
+        <h1 class="archive-head__title" id="press-title">Press</h1>
+        <p class="archive-head__lead">
+          The performances, as others recorded them — and the recognition that
+          followed. An award-winning instrumentalist and published pieces on
+          Olamide Sax's Afro-fusion sets across the UK, from Doncaster to a
+          stage before the Lord Mayor of Sheffield.
+        </p>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         PRESS LEDGER — the 3 REAL articles as <article> rows (editorial, no
+         cards). Verbatim titles + verified external URLs (rel=noopener).
+         Mirrors data.js `press`. data-animate hook inert.
+         ==================================================================== -->
+    <section class="section section--flush-top archive-section" aria-labelledby="press-ledger-heading" data-animate="press">
+      <div class="container">
+        <h2 class="u-visually-hidden" id="press-ledger-heading">Published articles</h2>
+
+        <div class="press-ledger">
+          <!-- p-award · award (Eko Heritage Awards 2026) -->
+          <article class="press-entry press-entry--feature">
+            <div class="press-entry__source">
+              <span class="press-entry__source-name">Eko Heritage Awards</span>
+              <span class="press-entry__tier">Award</span>
+              <span class="press-entry__date">2026</span>
+            </div>
+            <h3 class="press-entry__title">Best Instrumentalist of the Year</h3>
+            <p class="press-entry__excerpt">
+              Winner — Eko Heritage Awards 2026 · Best Instrumentalist of the Year.
+              Recognition for a decade of Afro-fusion performance across the UK's
+              stages, festivals and cultural events.
+            </p>
+          </article>
+
+          <!-- p-01 · feature -->
+          <article class="press-entry press-entry--feature">
+            <div class="press-entry__source">
+              <span class="press-entry__source-name">New Telegraph</span>
+              <span class="press-entry__tier">Feature</span>
+              <span class="press-entry__date">2024</span>
+            </div>
+            <h3 class="press-entry__title">Olamide Sax Commands Spotlight Stage in Sheffield, Delivers Stirring Performance Before Lord Mayor</h3>
+            <p class="press-entry__excerpt">
+              A stirring Afro-fusion performance in Sheffield saw Olamide Sax command the
+              spotlight stage before the Lord Mayor — a moment that underlined his growing
+              presence on the UK's civic and cultural circuit.
+            </p>
+            <a class="link-underline press-entry__read"
+               href="https://newtelegraphng.com/olamide-sax-ignites-the-stage-with-stirring-performance-in-sheffield/"
+               target="_blank" rel="noopener noreferrer">Read Article →</a>
+          </article>
+
+          <!-- p-02 · standard -->
+          <article class="press-entry">
+            <div class="press-entry__source">
+              <span class="press-entry__source-name">New Telegraph</span>
+              <span class="press-entry__tier">Article</span>
+              <span class="press-entry__date">2024</span>
+            </div>
+            <h3 class="press-entry__title">Olamide Sax Delivers Afro-Fusion Performance At Black And Minority Ethnic United Doncaster Event</h3>
+            <p class="press-entry__excerpt">
+              At the Black and Minority Ethnic United Doncaster event, Olamide Sax delivered
+              an Afro-fusion performance blending saxophone, voice and the rhythm of home for
+              an audience of community and civic leaders.
+            </p>
+            <a class="link-underline press-entry__read"
+               href="https://newtelegraphng.com/olamide-sax-delivers-afro-fusion-performance-at-black-and-minority-ethnic-united-doncaster-event/"
+               target="_blank" rel="noopener noreferrer">Read Article →</a>
+          </article>
+
+          <!-- p-03 · standard -->
+          <article class="press-entry">
+            <div class="press-entry__source">
+              <span class="press-entry__source-name">The Nation</span>
+              <span class="press-entry__tier">Article</span>
+              <span class="press-entry__date">2026</span>
+            </div>
+            <h3 class="press-entry__title">Olamide Sax Thrills Guests at Open Mic</h3>
+            <p class="press-entry__excerpt">
+              Olamide Sax thrilled guests at an open mic night, turning an intimate room into a
+              stage with an improvisational set that moved between saxophone, keys and vocals.
+            </p>
+            <a class="link-underline press-entry__read"
+               href="https://thenationonlineng.net/olamide-sax-thrills-guests-at-open-mic/"
+               target="_blank" rel="noopener noreferrer">Read Article →</a>
+          </article>
+        </div>
+
+        <!-- Notable mentions — a lighter tail block. -->
+        <section class="press-mentions" aria-labelledby="mentions-heading">
+          <p class="movement-index">
+            <span class="movement-index__num">·</span>
+            <span class="movement-index__name" id="mentions-heading">Notable Mentions</span>
+          </p>
+          <div class="press-mentions__list">
+            <div class="press-mention">
+              <span class="press-mention__name">Utopia Theatre</span>
+              <span class="press-mention__note">Open mic night, 1 March 2026 — featured performer.</span>
+            </div>
+            <div class="press-mention">
+              <span class="press-mention__name">darts × Maya Productions</span>
+              <span class="press-mention__note">Traineeship in participatory arts.</span>
+            </div>
+            <div class="press-mention">
+              <span class="press-mention__name">ArtBomb UK</span>
+              <span class="press-mention__note">Collaborative participatory performance.</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- A single large breathing pull-quote closing the page. -->
+        <figure class="press-pull">
+          <blockquote class="press-pull__quote">
+            <span class="press-pull__mark" aria-hidden="true">&ldquo;</span>Olamide Sax commands the spotlight — a stirring, Afro-fusion performance that holds a room.<span class="press-pull__mark" aria-hidden="true">&rdquo;</span>
+          </blockquote>
+          <figcaption class="press-pull__cite">New Telegraph · Sheffield</figcaption>
+        </figure>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER (canonical partial — byte-identical to v2/partials/footer.html) -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__top">
+        <div class="site-footer__brand stack-sm">
+          <a class="site-nav__wordmark site-nav__wordmark--footer" href="/index.html">
+            <span class="site-nav__wordmark-text">Olamide<span class="site-nav__wordmark-accent">Sax</span></span>
+          </a>
+          <p class="site-footer__tagline text-muted">
+            UK-based Nigerian Afro-Fusion artist — Multi-Instrumentalist&nbsp;·&nbsp;Participatory Artist&nbsp;·&nbsp;Creative Facilitator
+          </p>
+        </div>
+
+        <nav class="site-footer__links" aria-label="Footer">
+          <p class="label">Explore</p>
+          <ul class="stack-sm">
+            <li><a class="link-underline" href="/index.html">Home</a></li>
+            <li><a class="link-underline" href="/about.html">About</a></li>
+            <li><a class="link-underline" href="/artistic-practice.html">Artistic Practice</a></li>
+            <li><a class="link-underline" href="/media.html">Media</a></li>
+            <li><a class="link-underline" href="/gallery.html">Gallery</a></li>
+            <li><a class="link-underline" href="/press.html">Press</a></li>
+            <li><a class="link-underline" href="/timeline.html">Timeline</a></li>
+            <li><a class="link-underline" href="/contact.html">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="site-footer__contact">
+          <p class="label">Contact</p>
+          <ul class="stack-sm">
+            <li><a class="link-underline" href="mailto:Olaniyanolamidephillip@gmail.com">Olaniyanolamidephillip@gmail.com</a></li>
+            <li class="text-muted">United Kingdom</li>
+          </ul>
+        </div>
+
+        <div class="site-footer__socials">
+          <p class="label">Follow</p>
+          <ul class="row row--wrap" style="margin-top: var(--space-sm);">
+            <li>
+              <a
+                class="icon-link"
+                href="https://www.tiktok.com/@olamidesax"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Olamide Sax on TikTok"
+              >
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path fill="currentColor" d="M16.6 5.82c-1.02-.88-1.66-2.16-1.66-3.58h-3.06v13.6a3.14 3.14 0 1 1-2.19-3.02V9.68a6.2 6.2 0 1 0 5.25 6.12V9.4a8.2 8.2 0 0 0 4.6 1.4V7.75c-1.06 0-2.06-.4-2.94-1.13Z"/>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a
+                class="icon-link"
+                href="https://www.instagram.com/olamide.sax"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Olamide Sax on Instagram"
+              >
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+                  <circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+                  <circle cx="17.35" cy="6.65" r="1.1" fill="currentColor"/>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a
+                class="icon-link"
+                href="https://www.facebook.com/share/19kyBuitHZ/?mibextid=wwXIfr"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Olamide Sax on Facebook"
+              >
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path fill="currentColor" d="M14.5 21v-7.6h2.55l.38-2.96h-2.93V8.55c0-.86.24-1.44 1.47-1.44h1.57V4.46c-.27-.04-1.2-.12-2.28-.12-2.26 0-3.8 1.38-3.8 3.9v2.18H8.99v2.96h2.47V21h3.04Z"/>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a
+                class="icon-link"
+                href="https://youtube.com/@olamidesax"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Olamide Sax on YouTube"
+              >
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <rect x="2.5" y="6" width="19" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/>
+                  <path fill="currentColor" d="M10.6 9.5v5l4.3-2.5-4.3-2.5Z"/>
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="site-footer__rule" />
+
+      <div class="site-footer__bottom">
+        <p class="site-footer__colophon text-muted">
+          &copy; <span data-year>2026</span> Olamide Sax. Founder &amp; Lead Artist, Lammy Wonder Music Entertainment.
+        </p>
+        <p class="site-footer__made text-muted">A living archive, built one performance at a time.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
