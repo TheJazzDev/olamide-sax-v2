@@ -35,6 +35,7 @@
   <!-- SET ASIDE (frame removed on request — uncomment to restore): <link rel="stylesheet" href="css/frame.css" /> -->
   <link rel="stylesheet" href="css/components.css" />
   <link rel="stylesheet" href="css/home.css" />
+  <link rel="stylesheet" href="css/craft.css" />
   <link rel="stylesheet" href="css/animations.css" />
   <link rel="stylesheet" href="css/motion.css" />
   <link rel="stylesheet" href="css/media-motion.css" />
@@ -216,6 +217,19 @@
       </div>
     </section>
 
+    <!-- Ambient sound: the performance audio from the artist's own set
+         (src-02), looped UNDER the film. Never autoplays — starts only from
+         the fixed sound toggle (initHeroAudio in js/heroAudio.js). Direct
+         child of <main> (NOT inside a section) so the section-child rule in
+         media-motion.css can't override the pill's position: fixed. -->
+    <audio data-hero-audio loop preload="none"
+           src="assets/audio/hero-ambience.m4a"></audio>
+    <button class="sound-toggle" data-sound-toggle type="button"
+            aria-pressed="false" aria-label="Play ambient sound">
+      <span class="sound-toggle__bars" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="sound-toggle__label">Sound</span>
+    </button>
+
     <!-- ====================================================================
          II · THE STATEMENT — a held hush, then ONE oversized Fraunces line.
          ==================================================================== -->
@@ -291,7 +305,7 @@
          Full-bleed-ish image + one Fraunces word + one line of copy. Composed
          STATICALLY; each is a data-craft-movement hook for pin/cross-fade (Task 8).
          ==================================================================== -->
-    <section class="section craft" aria-labelledby="craft-title" data-animate="craft">
+    <section class="craft" aria-labelledby="craft-title" data-craft>
       <div class="container">
         <div class="craft__intro">
           <p class="movement-index">
@@ -300,67 +314,70 @@
           </p>
           <h2 class="sec-head__title" id="craft-title" style="margin-top: var(--space-md);">Three voices, one performer.</h2>
         </div>
+      </div>
 
-        <div class="craft__movements">
-          <article class="craft-movement" data-craft-movement="saxophone">
-            <div class="craft-movement__media">
-              <div class="frame-media">
-                <video data-ambient-video autoplay muted loop playsinline
-                       preload="metadata" poster="assets/videos/clip-saxophone-poster.jpg"
-                       aria-label="Short silent loop of Olamide Sax playing saxophone.">
-                  <source src="assets/videos/clip-saxophone.mp4" type="video/mp4" />
-                </video>
-              </div>
+      <!-- Horizontal panel track (GSAP pins this + translates the panels).
+           Falls back to a normal horizontal-scroll strip if JS/GSAP is off. -->
+      <div class="craft-viewport" data-craft-viewport>
+        <div class="craft-track" data-craft-track>
+
+          <article class="craft-panel" data-craft-panel>
+            <div class="craft-panel__media">
+              <video data-ambient-video autoplay muted loop playsinline
+                     preload="metadata" poster="assets/videos/clip-saxophone-poster.jpg"
+                     aria-label="Short silent loop of Olamide Sax playing saxophone.">
+                <source src="assets/videos/clip-saxophone.mp4" type="video/mp4" />
+              </video>
+              <span class="craft-panel__scrim" aria-hidden="true"></span>
             </div>
-            <div class="craft-movement__text">
-              <span class="craft-movement__num">Movement 01</span>
-              <h3 class="craft-movement__word">Saxophone</h3>
-              <p class="craft-movement__copy">
+            <div class="craft-panel__text">
+              <span class="craft-panel__num">01</span>
+              <h3 class="craft-panel__word">Saxophone</h3>
+              <p class="craft-panel__copy">
                 The horn that carries the breath — soaring lines, warm tone,
                 the centre of every set.
               </p>
             </div>
           </article>
 
-          <article class="craft-movement" data-craft-movement="voice">
-            <div class="craft-movement__media">
-              <div class="frame-media">
-                <video data-ambient-video autoplay muted loop playsinline
-                       preload="metadata" poster="assets/videos/clip-festival-poster.jpg"
-                       aria-label="Short silent loop of a high-energy festival performance.">
-                  <source src="assets/videos/clip-festival.mp4" type="video/mp4" />
-                </video>
-              </div>
+          <article class="craft-panel" data-craft-panel>
+            <div class="craft-panel__media">
+              <video data-ambient-video autoplay muted loop playsinline
+                     preload="metadata" poster="assets/videos/clip-festival-poster.jpg"
+                     aria-label="Short silent loop of a high-energy festival performance.">
+                <source src="assets/videos/clip-festival.mp4" type="video/mp4" />
+              </video>
+              <span class="craft-panel__scrim" aria-hidden="true"></span>
             </div>
-            <div class="craft-movement__text">
-              <span class="craft-movement__num">Movement 02</span>
-              <h3 class="craft-movement__word">Voice</h3>
-              <p class="craft-movement__copy">
+            <div class="craft-panel__text">
+              <span class="craft-panel__num">02</span>
+              <h3 class="craft-panel__word">Voice</h3>
+              <p class="craft-panel__copy">
                 A vocalist first — carrying melody, call-and-response and the
                 griot&rsquo;s storytelling into the room.
               </p>
             </div>
           </article>
 
-          <article class="craft-movement" data-craft-movement="keys">
-            <div class="craft-movement__media">
-              <div class="frame-media">
-                <video data-ambient-video autoplay muted loop playsinline
-                       preload="metadata" poster="assets/videos/clip-participatory-poster.jpg"
-                       aria-label="Short silent loop of a participatory drumming and dance moment.">
-                  <source src="assets/videos/clip-participatory.mp4" type="video/mp4" />
-                </video>
-              </div>
+          <article class="craft-panel" data-craft-panel>
+            <div class="craft-panel__media">
+              <video data-ambient-video autoplay muted loop playsinline
+                     preload="metadata" poster="assets/videos/clip-participatory-poster.jpg"
+                     aria-label="Short silent loop of a participatory drumming and dance moment.">
+                <source src="assets/videos/clip-participatory.mp4" type="video/mp4" />
+              </video>
+              <span class="craft-panel__scrim" aria-hidden="true"></span>
             </div>
-            <div class="craft-movement__text">
-              <span class="craft-movement__num">Movement 03</span>
-              <h3 class="craft-movement__word">Participation</h3>
-              <p class="craft-movement__copy">
+            <div class="craft-panel__text">
+              <span class="craft-panel__num">03</span>
+              <h3 class="craft-panel__word">Participation</h3>
+              <p class="craft-panel__copy">
                 Where performance becomes shared — drumming circles, workshops
                 and celebration that invite the whole room to take part.
               </p>
             </div>
           </article>
+
         </div>
       </div>
     </section>

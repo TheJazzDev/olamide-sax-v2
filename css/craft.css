@@ -1,0 +1,125 @@
+/* ============================================================================
+   craft.css — Olamide Sax V3 · "The Craft" horizontal-scroll section
+   ----------------------------------------------------------------------------
+   A pinned horizontal scroll: three full-screen panels laid out in a row; GSAP
+   pins the viewport and translates the track sideways as you scroll (craft.js,
+   the canonical GSAP horizontal-scroll recipe).
+
+   PROGRESSIVE ENHANCEMENT: with JS/GSAP off, the track is simply a native
+   horizontal-scroll strip (overflow-x:auto) — fully usable, no pin. GSAP
+   upgrades it to the pinned scroll-driven version.
+   ========================================================================== */
+
+.craft {
+  position: relative;
+  padding-block: clamp(4rem, 10vh, 9rem) 0;
+}
+
+.craft__intro {
+  margin-bottom: clamp(2rem, 5vh, 4rem);
+}
+
+/* The viewport is one screen tall; the track is wider than the screen. */
+.craft-viewport {
+  position: relative;
+  /* Fallback (no JS): native horizontal scroll so all panels are reachable. */
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.craft-viewport::-webkit-scrollbar { display: none; }
+
+.craft-track {
+  display: flex;
+  /* Each panel is a full viewport wide → track is N × 100vw. */
+  width: max-content;
+  height: 100svh;
+}
+
+/* Once GSAP takes over, the viewport clips (no native scroll) — the pin +
+   translate drives it. This class is added by craft.js only when GSAP is on. */
+.craft.is-pinned .craft-viewport { overflow: hidden; }
+
+/* ── A single full-screen panel ─────────────────────────────────────────── */
+.craft-panel {
+  position: relative;
+  flex: 0 0 100vw;
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.craft-panel__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.craft-panel__media > video,
+.craft-panel__media > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.96) contrast(1.03);
+}
+/* Cinematic scrim so the text is always legible over the footage. */
+.craft-panel__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgb(var(--ink-rgb) / 0.86) 0%,
+    rgb(var(--ink-rgb) / 0.5) 38%,
+    rgb(var(--ink-rgb) / 0.15) 70%,
+    transparent 100%
+  );
+}
+
+.craft-panel__text {
+  position: relative;
+  z-index: 1;
+  padding: clamp(1.5rem, 5vw, 5rem);
+  max-width: 42rem;
+}
+.craft-panel__num {
+  font-family: var(--font-label);
+  font-size: var(--step--1);
+  letter-spacing: var(--tracking-label);
+  color: var(--accent-lit);
+}
+.craft-panel__word {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-size: clamp(3rem, 9vw, 8rem);
+  line-height: 0.95;
+  color: var(--text);
+  margin: 0.2em 0 0.4em;
+}
+.craft-panel__copy {
+  color: var(--bone);
+  font-size: var(--step-0);
+  max-width: 34ch;
+}
+
+/* ── Mobile / touch: don't pin — a clean vertical stack is calmer & safer ── */
+@media (max-width: 767px) {
+  .craft-track {
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+  }
+  .craft-panel {
+    flex: none;
+    width: 100%;
+    height: 78svh;
+  }
+  .craft.is-pinned .craft-viewport { overflow: visible; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* No pin/translate — panels read as a simple horizontal (desktop) or
+     stacked (mobile) strip. craft.js also skips the GSAP build entirely. */
+  .craft.is-pinned .craft-viewport { overflow-x: auto; overflow-y: hidden; }
+}

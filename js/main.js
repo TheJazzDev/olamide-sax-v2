@@ -19,6 +19,8 @@ import { initGallery } from "./gallery.js";
 import { initVideos } from "./videos.js";
 import { initContact } from "./contact.js";
 import { initMediaMotion, initYouTubeFacades } from "./media-motion.js";
+import { initHeroAudio } from "./heroAudio.js";
+import { initCraft } from "./craft.js";
 
 function setFooterYear() {
   const yearEl = $("[data-year]");
@@ -67,6 +69,8 @@ function init() {
   initVideos();
   // Booking form — page-guarded (no-ops if the contact form is absent).
   initContact();
+  // Ambient sound toggle — page-guarded (home hero only). Click-to-play only.
+  initHeroAudio();
   // Ambient videos → poster-only under reduced motion (no-ops if none present).
   // Runs BEFORE the pinned-Craft scene so, under reduced motion, the clips are
   // already stripped and the pin never builds (engineLive gate).
@@ -79,6 +83,9 @@ function init() {
   // initMediaMotion is fully behind engineLive() (GSAP + motion). No-ops under
   // reduced-motion / GSAP-absent → content stays in its final visible state.
   initMediaMotion();
+  // The Craft horizontal scroll (canonical GSAP pinned-horizontal recipe).
+  // Self-gates: no-ops under reduced-motion / GSAP-absent / mobile.
+  initCraft();
 }
 
 if (document.readyState === "loading") {

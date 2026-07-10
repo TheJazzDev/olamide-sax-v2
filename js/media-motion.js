@@ -55,7 +55,8 @@ export function initMediaMotion() {
   const ScrollTrigger = window.ScrollTrigger;
   gsap.registerPlugin(ScrollTrigger);
 
-  buildPinnedCraft(gsap, ScrollTrigger);
+  // Craft now handled by the dedicated horizontal-scroll module (craft.js).
+  // buildPinnedCraft(gsap, ScrollTrigger);  // SET ASIDE — replaced by craft.js
   buildGalleryMotion(gsap, ScrollTrigger);
   buildTimelineUnfold(gsap, ScrollTrigger);
   buildSectionTransitions(gsap, ScrollTrigger);
