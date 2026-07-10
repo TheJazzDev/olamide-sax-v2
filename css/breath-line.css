@@ -1,0 +1,174 @@
+/* ============================================================================
+   breath-line.css — Olamide Sax V3 · THE BREATH LINE (signature interaction)
+   ----------------------------------------------------------------------------
+   Styles for the site's signature: a single aged-brass line present from the
+   first moment to the last — birth (hero sax assembly), journey (scroll-spine),
+   resolution (wordmark flourish), and the timeline spine.
+
+   PROGRESSIVE ENHANCEMENT CONTRACT (identical to motion.css):
+   Every animated pre-state here is gated behind `html.js-anim-ready` — the
+   class js/reveal.js adds ONLY when GSAP loaded AND motion is allowed. Without
+   it, NONE of the animation surfaces exist (breathLine.js also injects its SVG
+   only when the engine is live), so JS-off / GSAP-fail / reduced-motion get no
+   Breath Line animation and all content stays fully visible and usable.
+
+   The spine is a THIN LEFT EDGE LANE, pointer-events:none, never a content
+   container, never covering text. Only stroke-dashoffset / transform / opacity
+   are animated (60fps). No layout properties animate here.
+   ========================================================================== */
+
+/* ── The JOURNEY spine — a fixed thin brass lane down the left edge ────────── */
+/* Injected by breathLine.js as a direct child of <body> only when the engine
+   is live. Fixed so it rides the film-frame's reserved left lane on every page.
+   Sits at --z-breath (above the frame hairline, below nav/overlay/cursor); it
+   is a slim edge lane so it never overlaps body text.                         */
+.breath-spine {
+  position: fixed;
+  top: var(--frame-inset);
+  bottom: var(--frame-inset);
+  /* Ride the frame's reserved left lane (matches .frame__spine geometry). */
+  left: calc(var(--frame-inset) + var(--corner-pad, 14px));
+  width: var(--breath-lane);
+  z-index: var(--z-breath);
+  pointer-events: none;      /* never intercepts clicks or scroll */
+  overflow: visible;
+  contain: layout paint;     /* isolate — the SVG never reflows the page */
+}
+
+.breath-spine__svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* The static bed the animated line rides over — a whisper of brass so the lane
+   never looks empty before the draw reaches a point. */
+.breath-spine__bed {
+  fill: none;
+  stroke: rgb(var(--brass-rgb) / 0.14);
+  stroke-width: 1;
+  stroke-linecap: round;
+}
+
+/* The live breathing line itself. */
+.breath-spine__line {
+  fill: none;
+  stroke: url(#breathSpineGrad);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* The progress "traveler" — a small brass bloom marking how far through the
+   performance you are. Rides the line via transform (set in JS). */
+.breath-spine__glow {
+  fill: var(--brass-light);
+  opacity: 0.9;
+}
+
+/* On the smallest screens the lane hugs tighter and calms (slimmer, quieter). */
+@media (max-width: 640px) {
+  .breath-spine {
+    left: calc(var(--frame-inset) + 6px);
+    width: 14px;
+  }
+  .breath-spine__line { stroke-width: 1.2; }
+}
+
+/* ── The BIRTH stage — hero saxophone assembly (index only) ────────────────── */
+/* breathLine.js injects an SVG into [data-breath-hero]. It draws on, assembles
+   the abstract-brass sax silhouette, holds, then dissolves. The stage already
+   sits behind the hero content (z-base) via home.css, so it never covers text. */
+.breath-birth {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  /* Only present when the engine is live; JS injects it. */
+}
+.breath-birth__svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.breath-birth__path {
+  fill: none;
+  stroke: url(#breathBirthGrad);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+/* Key dots — points of light along the horn. */
+.breath-birth__key {
+  fill: var(--brass-light);
+}
+
+/* ── The RESOLUTION flourish — brass underline beneath the wordmark ────────── */
+/* Injected into [data-breath-resolve]; draws a graceful brass flourish as the
+   invitation enters. Never a content container. */
+.breath-resolve {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+.breath-resolve__svg {
+  display: block;
+  width: min(320px, 70%);
+  height: 100%;
+  overflow: visible;
+}
+.breath-resolve__path {
+  fill: none;
+  stroke: url(#breathResolveGrad);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ── The TIMELINE spine — the existing static line becomes a drawn brass path ─ */
+/* breathLine.js injects an SVG overlay into [data-timeline]; the existing
+   .timeline__line static gradient stays as the fallback bed underneath. */
+.breath-timeline {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 5px;              /* matches .timeline__line mobile position */
+  width: 3px;
+  pointer-events: none;
+  overflow: visible;
+}
+@media (min-width: 768px) {
+  .breath-timeline {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+.breath-timeline__svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.breath-timeline__line {
+  fill: none;
+  stroke: url(#breathSpineGrad);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+/* Under reduced motion, breathLine.js never injects any of the above, so the
+   original static frame__spine + timeline__line remain as the elegant static
+   brand motif. Belt-and-braces: if any injected node survives, keep it still. */
+@media (prefers-reduced-motion: reduce) {
+  .breath-spine,
+  .breath-birth,
+  .breath-resolve,
+  .breath-timeline {
+    display: none !important;
+  }
+}

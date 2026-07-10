@@ -3,3 +3,6 @@
 .idea/
 *.log
 .superpowers/
+
+# Raw/source videos — kept locally, never committed (optimized clips live in assets/videos/)
+assets/videos/source/

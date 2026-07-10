@@ -11,6 +11,7 @@ import { $, $$, prefersReducedMotion } from "./utils.js";
 import { initNavigation } from "./navigation.js";
 import { initSmoothScroll } from "./smoothScroll.js";
 import { initReveals } from "./reveal.js";
+import { initBreathLine } from "./breathLine.js";
 import { initCursor } from "./cursor.js";
 import { initGallery } from "./gallery.js";
 import { initVideos } from "./videos.js";
@@ -51,6 +52,10 @@ function init() {
   // GSAP-absent, so all are safe to call unconditionally on every page.
   initSmoothScroll();
   initReveals();
+  // THE BREATH LINE (Task 7). After reveals so .js-anim-ready + the hero title
+  // reveal are in place (birth coordinates with the title), before the cursor.
+  // Self-gated: injects nothing under GSAP-absent / reduced-motion / JS-off.
+  initBreathLine();
   initCursor();
 
   // Archive UI — each is page-guarded internally (no-ops if its markup is absent).
