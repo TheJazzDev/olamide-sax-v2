@@ -21,6 +21,7 @@ import { initContact } from "./contact.js";
 import { initMediaMotion, initYouTubeFacades } from "./media-motion.js";
 import { initHeroAudio } from "./heroAudio.js";
 import { initCraft } from "./craft.js";
+import { initHeroIntro } from "./heroIntro.js";
 
 function setFooterYear() {
   const yearEl = $("[data-year]");
@@ -56,6 +57,10 @@ function init() {
   // Each self-guards under reduced-motion / touch / GSAP-absent, so all are
   // safe to call unconditionally on every page.
   initSmoothScroll();
+  // Cinematic hero entrance (home only) — mask-wipe name + choreographed
+  // sequence. Runs before initReveals so it owns the hero title. Self-gated:
+  // no-ops under reduced-motion / GSAP-absent (content stays visible).
+  initHeroIntro();
   initReveals();
   // SET ASIDE (signature under rework — uncomment to restore the Breath Line):
   // initBreathLine();

@@ -207,22 +207,26 @@
             </a>
           </div>
 
+          <!-- SET ASIDE (portrait removed — the full-bleed hero VIDEO is the
+               image now; the floating box competed with it. Uncomment to restore.)
           <div class="hero__portrait">
             <figure class="frame-media frame-media--tall">
               <img src="assets/images/gallery/sax-bw-01.jpg" width="1040" height="1387"
                    alt="Olamide Sax mid-performance on saxophone, held in warm stage shadow." loading="eager" />
             </figure>
           </div>
+          -->
         </div>
       </div>
     </section>
 
     <!-- Ambient sound: the performance audio from the artist's own set
-         (src-02), looped UNDER the film. Never autoplays — starts only from
-         the fixed sound toggle (initHeroAudio in js/heroAudio.js). Direct
+         (src-02), looped UNDER the film — quiet + 5% slow, ON by default as
+         far as browsers allow (autoplay if trusted, else the visitor's first
+         tap/click starts it; the pill mutes). See js/heroAudio.js. Direct
          child of <main> (NOT inside a section) so the section-child rule in
          media-motion.css can't override the pill's position: fixed. -->
-    <audio data-hero-audio loop preload="none"
+    <audio data-hero-audio loop preload="auto"
            src="assets/audio/hero-ambience.m4a"></audio>
     <button class="sound-toggle" data-sound-toggle type="button"
             aria-pressed="false" aria-label="Play ambient sound">

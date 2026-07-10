@@ -65,9 +65,14 @@ export function initReveals() {
 }
 
 /* ── Cinematic page-LOAD hero sequence (distinct from scroll reveals) ─────── */
+/* NOTE: the HOME hero is now handled by the dedicated heroIntro.js (mask-wipe
+   name + full choreographed sequence). buildHeroLoad only runs on OTHER pages'
+   heroes (archive heads etc.) — it skips the home hero to avoid double-firing. */
 function buildHeroLoad(gsap) {
   const hero = $("[data-animate='hero']") || $(".hero");
   if (!hero) return;
+  // Home hero (has a [data-animate="hero-title"]) → owned by heroIntro.js.
+  if (hero.querySelector('[data-animate="hero-title"]')) return;
 
   const eyebrow = $(".hero__eyebrow, .archive-head__eyebrow, .eyebrow", hero);
   const meta = $(".hero__meta", hero);
@@ -83,8 +88,6 @@ function buildHeroLoad(gsap) {
     gsap.set(eyebrow, { opacity: 0, y: 16 });
     tl.to(eyebrow, { opacity: 1, y: 0, duration: 0.7 }, 0);
   }
-  // The hero title itself is handled by buildKineticType (split words), which
-  // we cue slightly after the eyebrow via its own load trigger.
   if (meta) {
     gsap.set(meta, { opacity: 0, y: 14 });
     tl.to(meta, { opacity: 1, y: 0 }, 0.55);
@@ -101,25 +104,8 @@ function buildHeroLoad(gsap) {
 
 /* ── Kinetic "breathing" split-text reveals (phrased, musical stagger) ────── */
 function buildKineticType(gsap, ScrollTrigger) {
-  // Hero title: reveal its existing line spans on LOAD, phrased.
-  const heroTitle = $("[data-animate='hero-title']");
-  if (heroTitle) {
-    const hasLineSpans = heroTitle.querySelector(".hero__title-line");
-    const split = hasLineSpans
-      ? splitByExistingLines(heroTitle, ".hero__title-line")
-      : splitToWords(heroTitle);
-
-    gsap.set(split.words, { yPercent: 110, opacity: 0 });
-    gsap.to(split.words, {
-      yPercent: 0,
-      opacity: 1,
-      duration: 1.1,
-      ease: "power4.out",
-      // Phrased stagger: not a uniform march — a musical "swing".
-      stagger: { each: 0.14, ease: "sine.inOut" },
-      delay: 0.35,
-    });
-  }
+  // NOTE: the home hero title is owned by heroIntro.js (mask-wipe). We no longer
+  // animate [data-animate="hero-title"] here to avoid a double reveal.
 
   // Other kinetic lines / explicit splits: reveal on scroll, phrased.
   const splitTargets = $$(

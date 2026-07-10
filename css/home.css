@@ -140,24 +140,16 @@
   align-items: center;
 }
 
-@media (min-width: 1024px) {
-  .hero__inner {
-    grid-template-columns: 1.7fr 1fr;
-    gap: var(--space-3xl);
-  }
-}
-
+/* Single column now (the portrait is gone; the full-bleed video IS the image),
+   so the name gets the whole width and can go bigger. */
 .hero__lead { min-width: 0; }
 
 .hero__eyebrow { margin-bottom: var(--space-md); }
 
-/* The soloist — huge, LIGHT Fraunces. Sized to fit the title column so the
-   name never breaks mid-word; each word is its own line and stays whole.
-   The clamp's vw term keeps it fluid; the rem ceiling is tuned so "Olamide"
-   fits the lead column at large widths. */
+/* The soloist — huge, LIGHT Fraunces, now full-width so it can dominate. */
 .hero__title {
-  font-size: clamp(3.25rem, 11vw, 10rem);
-  line-height: 0.94;
+  font-size: clamp(3.5rem, 14vw, 13rem);
+  line-height: 0.9;
   font-weight: var(--display-weight);
   letter-spacing: -0.03em;
   color: var(--text);
@@ -167,6 +159,19 @@
 /* Each word stays whole on its own line — never a mid-word break. */
 .hero__title-line { display: block; white-space: nowrap; }
 .hero__title-line--accent { color: var(--text); }
+
+/* Mask-wipe: heroIntro.js wraps each line in .hero__mask (overflow clip) so the
+   line rising from yPercent 115→0 reads as emerging from behind an edge.
+   The pre-hidden state is gated behind .hero-intro-ready (added by JS only when
+   the intro runs) so JS-off / reduced-motion never hides the name. */
+.hero__mask {
+  display: block;
+  overflow: hidden;
+  /* a touch of vertical padding so descenders/ascenders aren't clipped */
+  padding-block: 0.06em;
+  margin-block: -0.06em;
+}
+.hero-intro-ready .hero__title-line { will-change: transform; }
 
 .hero__meta {
   margin-top: var(--space-lg);
