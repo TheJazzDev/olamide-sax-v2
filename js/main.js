@@ -9,6 +9,9 @@
 
 import { $, $$, prefersReducedMotion } from "./utils.js";
 import { initNavigation } from "./navigation.js";
+import { initSmoothScroll } from "./smoothScroll.js";
+import { initReveals } from "./reveal.js";
+import { initCursor } from "./cursor.js";
 import { initGallery } from "./gallery.js";
 import { initVideos } from "./videos.js";
 import { initContact } from "./contact.js";
@@ -40,6 +43,16 @@ function guardAmbientVideos() {
 function init() {
   initNavigation();
   setFooterYear();
+
+  // GSAP motion foundation (Task 6). Order matters: smooth-scroll first so the
+  // eased scroll is in place before reveals bind to ScrollTrigger, then reveals
+  // (which add the .js-anim-ready gate only if GSAP loaded + motion allowed),
+  // then the custom cursor. Each self-guards under reduced-motion / touch /
+  // GSAP-absent, so all are safe to call unconditionally on every page.
+  initSmoothScroll();
+  initReveals();
+  initCursor();
+
   // Archive UI — each is page-guarded internally (no-ops if its markup is absent).
   initGallery();
   initVideos();

@@ -1,0 +1,149 @@
+/* ============================================================================
+   motion.css — Olamide Sax V2 · GSAP motion pre-states (PROGRESSIVE ENHANCEMENT)
+   ----------------------------------------------------------------------------
+   THE CONTRACT: every "start hidden / start shifted" pre-state below is gated
+   behind `html.js-anim-ready`. That class is added by js/reveal.js ONLY after
+   BOTH checks pass: (1) GSAP actually loaded, (2) motion is allowed (no
+   prefers-reduced-motion). If GSAP is absent, or reduced-motion is on, or JS is
+   off entirely → the class is NEVER added → none of these rules apply → all
+   content renders in its final, fully-visible state. Nothing here may hide
+   content unconditionally.
+
+   Only opacity / transform are used (60fps). Kinetic-type split spans and the
+   cursor also live here. Everything is a no-op without the gate class.
+   ========================================================================== */
+
+/* ── Reveal pre-states (only while the engine is live) ───────────────────── */
+/* These set the "before" of a GSAP-driven reveal. reveal.js animates them to
+   opacity:1 / transform:none. The `will-change` is scoped to the pre-state so
+   we are not permanently promoting layers. */
+
+.js-anim-ready [data-animate="fade"] {
+  opacity: 0;
+  transform: translateY(24px);
+  will-change: opacity, transform;
+}
+
+/* Section-level hooks reveal their inner content on scroll; the section box
+   itself stays laid-out (so sticky/anchor offsets never shift). We fade the
+   direct meaningful children via a shared class reveal.js tags on. */
+.js-anim-ready .reveal-item {
+  opacity: 0;
+  transform: translateY(28px);
+  will-change: opacity, transform;
+}
+
+/* Split-text words/lines: hidden + lifted before the phrased stagger runs.
+   The readable text stays in the a11y tree (aria-label on the heading / a
+   visually-hidden copy); these generated spans are aria-hidden. */
+.js-anim-ready .split-line {
+  display: block;
+  overflow: hidden; /* mask for the rising words */
+}
+
+.js-anim-ready .split-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.9em);
+  will-change: opacity, transform;
+}
+
+/* Craft movements, timeline nodes, featured blocks: soft cinematic rise. */
+.js-anim-ready [data-craft-movement],
+.js-anim-ready [data-timeline-node] {
+  opacity: 0;
+  transform: translateY(32px);
+  will-change: opacity, transform;
+}
+
+/* Visually-hidden readable copy kept for the a11y tree when we split a title. */
+.split-a11y {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── Custom cursor ──────────────────────────────────────────────────────── */
+/* Rendered only when the cursor engine is live (fine pointer + motion allowed).
+   We NEVER hide the native cursor unless .has-custom-cursor is present, so
+   touch / keyboard / reduced-motion always keep the OS cursor. */
+
+.cursor-dot,
+.cursor-label {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: var(--z-cursor);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.cursor-dot {
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  border-radius: 50%;
+  background: var(--bone);
+  mix-blend-mode: difference;
+  transform: translate3d(-100px, -100px, 0) scale(1);
+}
+
+.cursor-label {
+  display: grid;
+  place-items: center;
+  min-width: 4.5rem;
+  min-height: 4.5rem;
+  margin: -2.25rem 0 0 -2.25rem;
+  padding: 0 0.75rem;
+  border-radius: 50%;
+  background: color-mix(in oklab, var(--brass) 88%, transparent);
+  color: var(--ink);
+  font-family: var(--font-label, inherit);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transform: translate3d(-100px, -100px, 0) scale(0.6);
+}
+
+/* Hide the native cursor ONLY when the custom one is actually active. */
+.has-custom-cursor,
+.has-custom-cursor a,
+.has-custom-cursor button,
+.has-custom-cursor .btn,
+.has-custom-cursor [role="button"] {
+  cursor: none;
+}
+
+/* ============================================================================
+   Hard reduced-motion backstop. Even if some class survived, force everything
+   to its final, visible, static state and disable the custom cursor. matchMedia
+   in JS already prevents the gate from being added, but this is belt+braces.
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .js-anim-ready [data-animate="fade"],
+  .js-anim-ready .reveal-item,
+  .js-anim-ready .split-word,
+  .js-anim-ready [data-craft-movement],
+  .js-anim-ready [data-timeline-node] {
+    opacity: 1 !important;
+    transform: none !important;
+    will-change: auto;
+  }
+
+  .cursor-dot,
+  .cursor-label {
+    display: none !important;
+  }
+
+  .has-custom-cursor,
+  .has-custom-cursor * {
+    cursor: auto !important;
+  }
+}
