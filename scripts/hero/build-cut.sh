@@ -18,7 +18,7 @@ WORK="$ROOT/assets/videos/_work"
 SHOTS="$ROOT/scripts/hero/shots.txt"
 OUT="$WORK/master.mp4"
 W=1920; H=1080; FPS=30
-XFADE_EARLY=0.8; XFADE_LATE=0.5   # shorter fades = punchier, more cinematic cuts
+XFADE_EARLY=1.0; XFADE_LATE=0.7   # longer fades so slice/radial transitions read
 mkdir -p "$WORK"
 [ -f "$SHOTS" ] || { echo "ERROR: no shot plan at $SHOTS" >&2; exit 1; }
 

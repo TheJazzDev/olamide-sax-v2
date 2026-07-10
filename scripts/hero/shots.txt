@@ -1,21 +1,21 @@
 # Shot plan — SRC  START  DUR  SPEED  XTYPE
-# USER v3 timestamps. Rotate sources 01->02->04, no adjacent repeats.
-# Varied transitions + Ken Burns zoom (in build-cut.sh). Natural grade.
+# USER v4: same 12 moments, CINEMATIC transitions (slices/radial/circle/blur),
+# later shots lengthened so the loop runs ~50s. Natural grade.
 # Moments: src-01 {15,135,140,160}  src-02 {8,16,33,40,57}  src-04 {280,556,1406}
 #
 # rotation 1 (open, a touch slower)
 src-01   160   4.5   0.64   fade
-src-02   16    4.0   0.70   slideleft
-src-04   556   4.0   0.72   slideup
+src-02   16    4.0   0.70   hlslice
+src-04   556   4.0   0.72   radial
 # rotation 2
-src-01   135   3.5   0.76   circleopen
-src-02   33    3.5   0.80   smoothright
-src-04   280   3.5   0.82   zoomin
-# rotation 3
-src-01   140   3.2   0.86   slidedown
-src-02   40    3.0   0.88   smoothup
-src-04   1406  3.0   0.90   slideright
-# rotation 4 (lift, tightest)
-src-01   15    2.8   0.92   circleclose
-src-02   57    2.6   0.94   slideleft
-src-02   8     2.6   0.96   zoomin
+src-01   135   3.5   0.76   hlwind
+src-02   33    3.5   0.80   hrslice
+src-04   280   3.5   0.82   distance
+# rotation 3 (shots start holding longer)
+src-01   140   3.6   0.86   horzopen
+src-02   40    3.8   0.88   vuslice
+src-04   1406  4.0   0.90   diagtl
+# rotation 4 (longest holds, big finish)
+src-01   15    4.2   0.92   hblur
+src-02   57    4.4   0.94   vertopen
+src-02   8     5.0   0.96   zoomin

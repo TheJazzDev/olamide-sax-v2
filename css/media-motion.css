@@ -124,7 +124,7 @@
    hidden) so it doesn't create a scroll container that would break the
    sticky media tabs or pinned Craft. */
 main > section.section { position: relative; overflow-x: clip; }
-main > section.section > *:not(.section-bloom) { position: relative; z-index: 1; }
+main > section.section > *:not(.section-bloom):not(.hero__stage) { position: relative; z-index: 1; }
 
 /* ── 6 · Featured media bloom pre-state ───────────────────────────────────── */
 .js-anim-ready .featured-perf__media .frame-media,
