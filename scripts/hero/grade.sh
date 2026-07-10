@@ -51,10 +51,22 @@ encode () {
   printf '  %-8s %s  (%s)\n' "$name" "$(basename "$out")" "$(du -h "$out" | cut -f1)"
 }
 
-encode brass   "$G_brass"
-encode teal    "$G_teal"
-encode moody   "$G_moody"
-encode natural "$G_natural"
+# Optional arg: render just ONE grade (e.g. `grade.sh natural`) — the site
+# ships natural, so the make-hero tool skips the other three. No arg = all 4.
+WHICH="${1:-all}"
+case "$WHICH" in
+  brass)   encode brass   "$G_brass" ;;
+  teal)    encode teal    "$G_teal" ;;
+  moody)   encode moody   "$G_moody" ;;
+  natural) encode natural "$G_natural" ;;
+  all)
+    encode brass   "$G_brass"
+    encode teal    "$G_teal"
+    encode moody   "$G_moody"
+    encode natural "$G_natural"
+    ;;
+  *) echo "ERROR: unknown grade '$WHICH' (brass|teal|moody|natural|all)" >&2; exit 1 ;;
+esac
 
 echo ""
 echo "=== grades ready in $OUTDIR ==="

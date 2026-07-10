@@ -1,14 +1,16 @@
 /* ============================================================================
-   craft.js — Olamide Sax V3 · "The Craft" horizontal scroll
+   craft.js — Olamide Sax V3 · "The Craft" stacked "cover" scroll
    ----------------------------------------------------------------------------
-   The canonical GSAP ScrollTrigger horizontal-scroll recipe (from gsap.com):
-   pin the viewport and translate the panel track sideways as the user scrolls
-   vertically. Because Lenis drives the scroll (smoothScroll.js) and feeds
-   ScrollTrigger.update, the motion is smooth and perfectly in sync.
+   Panels are stacked in the same spot; as the user scrolls, each subsequent
+   panel slides OVER the previous one (xPercent 100 → 0). Pinned + scrubbed via
+   ScrollTrigger, driven by Lenis (smoothScroll.js) so it's smooth + in sync.
 
-   PROGRESSIVE ENHANCEMENT: if GSAP/ScrollTrigger is missing or reduced-motion
-   is on, we do nothing — the CSS leaves the track as a native horizontal
-   scroll strip, fully usable.
+   Pacing: a HOLD at the start (linger on panel 1) and at the end (linger on the
+   last) before the pin releases — so it doesn't snap away the instant the last
+   panel arrives.
+
+   PROGRESSIVE ENHANCEMENT: no GSAP / reduced-motion / mobile → skip entirely;
+   the CSS shows the panels as a readable vertical stack.
    ========================================================================== */
 
 import { prefersReducedMotion } from "./utils.js";
@@ -19,52 +21,54 @@ export function initCraft() {
 
   const section = document.querySelector("[data-craft]");
   const viewport = document.querySelector("[data-craft-viewport]");
-  const track = document.querySelector("[data-craft-track]");
-  if (!section || !viewport || !track) return;
+  const panels = gsap.utils
+    ? gsap.utils.toArray("[data-craft-panel]")
+    : [...document.querySelectorAll("[data-craft-panel]")];
+  if (!section || !viewport || panels.length < 2) return;
 
-  // Bail on reduced-motion / missing deps / small screens (mobile = stacked).
   const isMobile = window.matchMedia("(max-width: 767px)").matches;
   if (!gsap || !ScrollTrigger || prefersReducedMotion() || isMobile) return;
 
   gsap.registerPlugin(ScrollTrigger);
-  section.classList.add("is-pinned");
+  section.classList.add("is-stacked");
 
-  const panels = gsap.utils.toArray("[data-craft-panel]", track);
+  // Stack order: first panel on the bottom, last on top. Panels after the
+  // first START off-screen to the right, then slide in to cover.
+  panels.forEach((p, i) => {
+    gsap.set(p, { zIndex: i, xPercent: i === 0 ? 0 : 100 });
+  });
 
-  // Distance the track must travel = its overflow beyond one viewport width.
-  const getScrollDistance = () => track.scrollWidth - window.innerWidth;
+  const covers = panels.length - 1; // number of slide-in transitions
+  const HOLD = 0.6;                  // linger units at start + end
+  // Total timeline length in "units": HOLD + one unit per cover + HOLD.
+  const total = HOLD + covers + HOLD;
 
-  const tween = gsap.to(track, {
-    x: () => -getScrollDistance(),
-    ease: "none",
+  const tl = gsap.timeline({
+    defaults: { ease: "power2.inOut" },
     scrollTrigger: {
       trigger: viewport,
       pin: true,
-      scrub: 1,                          // 1s catch-up = smooth, not 1:1 twitchy
+      scrub: 1.1,                    // slightly higher = smoother, more weight
       start: "top top",
-      end: () => "+=" + getScrollDistance(),
-      invalidateOnRefresh: true,         // recompute widths on resize/font load
+      // Longer end → more scroll distance = each transition feels deliberate.
+      end: () => "+=" + window.innerHeight * (total * 1.15),
+      invalidateOnRefresh: true,
       anticipatePin: 1,
     },
   });
 
-  // Subtle per-panel life: the incoming panel's text rises as it enters centre.
-  panels.forEach((panel) => {
-    const text = panel.querySelector(".craft-panel__text");
-    if (!text) return;
-    gsap.from(text, {
-      y: 60,
-      opacity: 0,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: panel,
-        containerAnimation: tween,       // <-- key: tie to the horizontal tween
-        start: "left center",
-        end: "center center",
-        scrub: true,
-      },
-    });
+  // Opening hold (linger on panel 1 before the first cover).
+  tl.to({}, { duration: HOLD });
+
+  panels.slice(1).forEach((panel, idx) => {
+    const prev = panels[idx]; // the panel being covered
+    tl.to(panel, { xPercent: 0, duration: 1 }, ">");
+    // Gently push the covered panel back (parallax depth) as it's covered.
+    tl.to(prev, { xPercent: -12, scale: 0.96, duration: 1 }, "<");
   });
 
-  return () => tween.scrollTrigger && tween.scrollTrigger.kill();
+  // Closing hold (linger on the last panel before the pin releases).
+  tl.to({}, { duration: HOLD });
+
+  return () => tl.scrollTrigger && tl.scrollTrigger.kill();
 }

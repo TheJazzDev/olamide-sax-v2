@@ -1,0 +1,40 @@
+# ============================================================
+#  HERO VIDEO TIMELINE  —  edit me, then double-click
+#  "Make Hero Video.command" in this folder. That's it.
+# ============================================================
+#
+#  HOW IT WORKS
+#  1. Put your videos in:  assets/videos/source/
+#  2. List your favourite moments below, one per line:
+#         <video file>   <time>
+#     Time can be  M:SS  (like 2:40)  or plain seconds (160).
+#  3. Double-click "Make Hero Video.command".
+#     It designs the cut (rotating between videos, slow open,
+#     lively finish, cinematic transitions), renders it, and
+#     puts it straight on the website's hero.
+#
+#  TIPS
+#  ·  The order you list moments matters: for each video, the
+#     first moment listed is used earliest in the film.
+#  ·  8–14 moments makes a nice 40–55 second loop.
+#  ·  Videos should be landscape and at least 1080p if possible.
+#
+# ------------------------------------------------------------
+
+src-01.mp4   2:40
+src-01.mp4   2:15
+src-01.mp4   2:20
+src-01.mp4   0:15
+
+src-02.mp4   0:16
+src-02.mp4   0:33
+src-02.mp4   0:40
+src-02.mp4   0:57
+src-02.mp4   0:08
+
+src-04.mp4   9:16
+src-04.mp4   4:40
+src-04.mp4   23:26
+
+# Which video's SOUND plays under the film (optional):
+audio: src-02.mp4
