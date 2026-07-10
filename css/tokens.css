@@ -169,6 +169,7 @@
      11 · FILM-FRAME  (the signature layout device)
      ======================================================================== */
   --frame-inset:      clamp(16px, 3.2vw, 40px);   /* responsive inset       */
+  --corner-pad:       clamp(10px, 1.4vw, 18px);   /* frame corner padding   */
   --frame-color:      var(--hairline);            /* Ash hairline           */
   --frame-width:      var(--border-width);
   --frame-meta-size:  var(--step--1);             /* corner metadata type   */

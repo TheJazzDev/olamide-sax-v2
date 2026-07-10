@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Olamide Sax">
+  <rect width="64" height="64" rx="12" fill="#0B0A08"/>
+  <!-- The Breath Line: a single brass stroke, curving like a held note / sax neck -->
+  <path d="M24 12 C24 24 40 26 40 36 C40 46 26 46 26 52"
+        fill="none" stroke="#B8863B" stroke-width="3.4"
+        stroke-linecap="round"/>
+  <!-- key-light points -->
+  <circle cx="40" cy="30" r="1.9" fill="#D8B87E"/>
+  <circle cx="39" cy="37" r="1.9" fill="#D8B87E"/>
+  <circle cx="35" cy="43" r="1.9" fill="#D8B87E"/>
+</svg>

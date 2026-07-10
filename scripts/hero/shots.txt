@@ -1,0 +1,20 @@
+# Shot plan — SRC  START  DUR  SPEED   (see build-cut.sh header)
+# Arc: slow dreamy open (0.5x) -> lift (up to 0.85x). Blind auto-sample.
+# Clean 1080p sources: src-01 (181s), src-02 (92s), src-04 (1451s).
+# src-03 is 480x854 low-res portrait — omitted (would look blurry in landscape).
+# On-screen time = DUR / SPEED. Targeting ~75s total.
+#
+# --- ACT 1: hush (slow, lingering) ---
+src-01   8     4.0   0.50
+src-04   120   4.0   0.52
+src-02   6     3.6   0.55
+# --- ACT 2: build ---
+src-04   360   3.5   0.62
+src-01   72    3.2   0.68
+src-02   44    3.0   0.72
+src-04   700   3.0   0.74
+# --- ACT 3: lift (near real-time, tighter) ---
+src-01   140   2.8   0.80
+src-04   1050  2.6   0.82
+src-02   66    2.4   0.84
+src-04   1300  2.4   0.85

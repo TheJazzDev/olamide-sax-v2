@@ -610,7 +610,11 @@ textarea.form-field__control {
 .site-footer {
   position: relative;
   border-top: var(--border-width) solid var(--hairline);
-  padding-block: var(--space-2xl) var(--space-xl);
+  /* Reserve bottom space for the fixed film-frame corner labels
+     (UK / NIGERIA · EST. 2026) so the footer bottom-bar never collides
+     with them at end-of-scroll. */
+  padding-block: var(--space-2xl)
+    calc(var(--frame-inset) + var(--corner-pad) + 2.5rem);
 }
 
 .site-footer__top {
