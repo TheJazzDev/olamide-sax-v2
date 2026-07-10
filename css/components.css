@@ -344,10 +344,20 @@ textarea.form-field__control {
 /* Positioned inside the frame inset, offset below the frame's top-right
    corner metadata (numeral label) so the two never overlap. */
 
+/* Both the Menu trigger AND the Close button share these fixed coordinates so
+   the cursor never moves between opening and closing (--nav-top / --nav-right
+   are the single source of truth for that spot). Close sits ABOVE the panel
+   (z-index) at the identical position. */
+:root {
+  --nav-top: clamp(18px, 2.4vw, 30px);
+  --nav-right: clamp(16px, 2.4vw, 34px);
+}
+
 .nav-toggle {
   position: fixed;
-  top: calc(var(--frame-inset) + 34px);
-  right: calc(var(--frame-inset) + clamp(10px, 1.4vw, 18px));
+  top: var(--nav-top);
+  right: var(--nav-right);
+  z-index: calc(var(--z-overlay) + 1); /* stay clickable above the panel */
   display: inline-flex;
   align-items: center;
   gap: var(--space-xs);
@@ -363,13 +373,12 @@ textarea.form-field__control {
               color var(--dur-fast) var(--ease-out);
 }
 
-@media (min-width: 640px) {
-  .nav-toggle { top: calc(var(--frame-inset) + 38px); }
-}
-
-/* The close trigger lives inside the overlay's own header row, not fixed. */
+/* Close trigger: identical fixed position to the Menu trigger (no cursor jump). */
 .nav-toggle--close {
-  position: static;
+  position: fixed;
+  top: var(--nav-top);
+  right: var(--nav-right);
+  z-index: calc(var(--z-overlay) + 2);
 }
 
 .nav-toggle:hover,
@@ -522,10 +531,56 @@ textarea.form-field__control {
   .menu-overlay__item { padding-block: var(--space-sm); }
 }
 
+/* Staggered entrance — each item rises + fades in after the panel slides in.
+   Items rest hidden; [data-open] plays them in sequence. */
+.menu-overlay__item {
+  opacity: 0;
+  transform: translateX(2.5rem);
+  transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
+}
+.menu-overlay[data-open] .menu-overlay__item {
+  opacity: 1;
+  transform: none;
+}
+.menu-overlay[data-open] .menu-overlay__item:nth-child(1) { transition-delay: 0.18s; }
+.menu-overlay[data-open] .menu-overlay__item:nth-child(2) { transition-delay: 0.24s; }
+.menu-overlay[data-open] .menu-overlay__item:nth-child(3) { transition-delay: 0.30s; }
+.menu-overlay[data-open] .menu-overlay__item:nth-child(4) { transition-delay: 0.36s; }
+.menu-overlay[data-open] .menu-overlay__item:nth-child(5) { transition-delay: 0.42s; }
+.menu-overlay[data-open] .menu-overlay__item:nth-child(6) { transition-delay: 0.48s; }
+.menu-overlay[data-open] .menu-overlay__item:nth-child(7) { transition-delay: 0.54s; }
+.menu-overlay[data-open] .menu-overlay__item:nth-child(8) { transition-delay: 0.60s; }
+/* The aside (socials) fades in after the links. */
+.menu-overlay__aside {
+  opacity: 0;
+  transition: opacity 0.5s var(--ease-out) 0.62s;
+}
+.menu-overlay[data-open] .menu-overlay__aside { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-overlay__item,
+  .menu-overlay__aside {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 .menu-overlay__index {
   font-size: var(--step--1);
   color: var(--muted);
   min-width: 2ch;
+}
+
+/* Active page: the current nav item, brass + drawn underline. */
+.menu-overlay__link[aria-current="page"] {
+  color: var(--accent-lit);
+}
+.menu-overlay__link[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+.menu-overlay__item:has(.menu-overlay__link[aria-current="page"]) .menu-overlay__index {
+  color: var(--accent);
 }
 
 .menu-overlay__link {

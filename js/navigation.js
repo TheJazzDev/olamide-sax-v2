@@ -36,12 +36,34 @@ function getFocusable(container) {
   return $$(FOCUSABLE_SELECTOR, container).filter(isVisible);
 }
 
+/**
+ * Set aria-current="page" on the menu link that matches the current URL, so
+ * the active page is highlighted (styled in components.css). Normalises
+ * "/", "/index.html" and trailing slashes to the same page.
+ */
+function markCurrentPage(overlay) {
+  const norm = (p) => {
+    p = p.replace(/\/index\.html$/, "/").replace(/\.html$/, "");
+    if (p !== "/" && p.endsWith("/")) p = p.slice(0, -1);
+    return p === "" ? "/" : p;
+  };
+  const here = norm(window.location.pathname);
+  $$(".menu-overlay__link", overlay).forEach((link) => {
+    const target = norm(new URL(link.href, window.location.origin).pathname);
+    if (target === here) link.setAttribute("aria-current", "page");
+    else link.removeAttribute("aria-current");
+  });
+}
+
 export function initNavigation() {
   const toggle = $("#nav-toggle") || $(".nav-toggle:not(.nav-toggle--close)");
   const overlay = $("#menu-overlay") || $(".menu-overlay");
   const closeBtn = $("#nav-close") || $(".nav-toggle--close");
 
   if (!toggle || !overlay) return;
+
+  // Mark the current page's menu link so it reads as "you are here".
+  markCurrentPage(overlay);
 
   let isOpen = false;
   let lastFocused = null;
