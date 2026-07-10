@@ -419,41 +419,58 @@ textarea.form-field__control {
    as tracked labels. Body scroll lock handled in JS.
    ========================================================================== */
 
+/* Right-side sliding panel — HALF-screen on desktop, full on mobile.
+   The overlay element itself is a full-viewport layer holding a backdrop
+   (::before) + the sliding panel (__frame). */
 .menu-overlay {
   position: fixed;
   inset: 0;
   z-index: var(--z-overlay);
-  background: var(--bg);
   visibility: hidden;
-  opacity: 0;
   pointer-events: none;
-  overflow-y: auto;
-  transition: opacity var(--dur-base) var(--ease-out),
-              visibility 0s linear var(--dur-base);
+  /* delay visibility flip until the slide-out finishes on close */
+  transition: visibility 0s linear 0.42s;
 }
 
-/* Warm bloom behind the overlay content — same stage-warm language. */
+/* Backdrop that dims the page behind the panel. Fades in with the panel. */
 .menu-overlay::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: var(--stage-warm-strong);
-  opacity: 0.6;
+  background: rgb(var(--ink-rgb) / 0.55);
+  opacity: 0;
+  transition: opacity 0.42s var(--ease-out);
   pointer-events: none;
+}
+
+/* The sliding panel itself. */
+.menu-overlay__frame {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  height: 100dvh;
+  width: 100%;
+  background: var(--bg);
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform 0.42s var(--ease-out);
+  box-shadow: -40px 0 80px -20px rgb(var(--ink-rgb) / 0.6);
+}
+@media (min-width: 768px) {
+  .menu-overlay__frame { width: 50vw; max-width: 620px; }
 }
 
 .menu-overlay[data-open] {
   visibility: visible;
-  opacity: 1;
   pointer-events: auto;
-  transition: opacity var(--dur-base) var(--ease-out), visibility 0s linear 0s;
+  transition: visibility 0s linear 0s;
 }
+.menu-overlay[data-open]::before { opacity: 1; }
+.menu-overlay[data-open] .menu-overlay__frame { transform: translateX(0); }
 
+/* Inner layout of the sliding panel (positioning lives in the block above). */
 .menu-overlay__frame {
-  position: relative;
-  z-index: 1;
-  min-height: 100%;
-  min-height: 100dvh;
   padding: var(--space-sm) var(--gutter) var(--space-2xl);
   display: flex;
   flex-direction: column;
@@ -521,12 +538,15 @@ textarea.form-field__control {
   display: inline-block;
   font-family: var(--font-display);
   font-weight: var(--display-weight);
-  font-size: clamp(1.75rem, 6vw + 0.5rem, 4rem);
+  /* Sized to fit the ~half-screen panel — the longest item ("Artistic
+     Practice") must not overflow. */
+  font-size: clamp(1.6rem, 4.5vw, 2.75rem);
   line-height: 1.05;
   letter-spacing: var(--tracking-display);
   color: var(--text);
   text-decoration: none;
   padding-bottom: 0.08em;
+  white-space: nowrap;
 }
 
 .menu-overlay__link::after {
@@ -601,6 +621,9 @@ textarea.form-field__control {
 /* Lock body scroll while the overlay is open (JS adds this to <body>). */
 .has-menu-open {
   overflow: hidden;
+  /* Pad by the scrollbar width (set in JS) so hiding the scrollbar doesn't
+     shift the page — kills the "jump" on menu open. */
+  padding-right: var(--sbw, 0px);
 }
 
 /* ============================================================================

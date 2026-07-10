@@ -52,6 +52,11 @@ export function initNavigation() {
     isOpen = true;
     lastFocused = document.activeElement;
 
+    // Compensate for the scrollbar width BEFORE locking scroll, so hiding the
+    // scrollbar doesn't shift the page (the "jump" on menu open).
+    const sbw = window.innerWidth - document.documentElement.clientWidth;
+    if (sbw > 0) document.body.style.setProperty("--sbw", sbw + "px");
+
     overlay.setAttribute("data-open", "");
     toggle.setAttribute("aria-expanded", "true");
     document.body.classList.add("has-menu-open");
@@ -70,6 +75,7 @@ export function initNavigation() {
     overlay.removeAttribute("data-open");
     toggle.setAttribute("aria-expanded", "false");
     document.body.classList.remove("has-menu-open");
+    document.body.style.removeProperty("--sbw");
 
     const returnTo = lastFocused && document.contains(lastFocused) ? lastFocused : toggle;
     returnTo.focus();

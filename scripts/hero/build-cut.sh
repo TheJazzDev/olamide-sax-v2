@@ -18,16 +18,19 @@ WORK="$ROOT/assets/videos/_work"
 SHOTS="$ROOT/scripts/hero/shots.txt"
 OUT="$WORK/master.mp4"
 W=1920; H=1080; FPS=30
-XFADE_EARLY=1.3; XFADE_LATE=0.6
+XFADE_EARLY=0.8; XFADE_LATE=0.5   # shorter fades = punchier, more cinematic cuts
 mkdir -p "$WORK"
 [ -f "$SHOTS" ] || { echo "ERROR: no shot plan at $SHOTS" >&2; exit 1; }
 
 # --- parse shot plan --------------------------------------------------------
-SRCS=(); STARTS=(); DURS=(); SPEEDS=(); SCREEN=()
-while read -r SRC START DUR SPEED _; do
+# 5th column XTYPE is the transition INTO this shot (fade, slideup, slideleft,
+# smoothright, circleopen, zoomin, ...). Optional; defaults to fade.
+SRCS=(); STARTS=(); DURS=(); SPEEDS=(); SCREEN=(); XTYPES=()
+while read -r SRC START DUR SPEED XTYPE _; do
   case "$SRC" in ''|\#*) continue;; esac
   [ -f "$SRC_DIR/$SRC.mp4" ] || { echo "  skip $SRC (missing)"; continue; }
   SRCS+=("$SRC"); STARTS+=("$START"); DURS+=("$DUR"); SPEEDS+=("$SPEED")
+  XTYPES+=("${XTYPE:-fade}")
   SCREEN+=("$(awk -v d="$DUR" -v s="$SPEED" 'BEGIN{printf "%.4f", d/s}')")
 done < "$SHOTS"
 N=${#SRCS[@]}
@@ -35,11 +38,26 @@ N=${#SRCS[@]}
 echo "planning $N shots (single pass)..."
 
 # --- build inputs + per-shot normalize/retime filters -----------------------
+# Each shot also gets a gentle Ken Burns push, alternating in/out by index, so
+# there's continuous subtle motion even within a held shot. Implemented with a
+# time-based scale+crop (cheaper & smoother than zoompan for fixed clips).
 inputs=(); fc=""
 for ((k=0;k<N;k++)); do
   inputs+=(-ss "${STARTS[$k]}" -t "${DURS[$k]}" -i "$SRC_DIR/${SRCS[$k]}.mp4")
-  fc+="[${k}:v]scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H},"
-  fc+="setpts=(PTS-STARTPTS)/${SPEEDS[$k]},fps=${FPS},format=yuv420p[c${k}];"
+  sdur="${SCREEN[$k]}"
+  if [ $((k % 2)) -eq 0 ]; then
+    # push IN: scale from 1.00 -> 1.08 over the shot
+    zexpr="1.0+0.08*t/${sdur}"
+  else
+    # pull OUT: scale from 1.08 -> 1.00
+    zexpr="1.08-0.08*t/${sdur}"
+  fi
+  # 1) cover-scale to 1920x1080  2) zoom-scale by >=1.0 factor over time
+  # 3) center-crop back to 1920x1080. Zoom factor never <1 so crop is always safe.
+  fc+="[${k}:v]setpts=(PTS-STARTPTS)/${SPEEDS[$k]},fps=${FPS},"
+  fc+="scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H},"
+  fc+="scale=w='ceil(${W}*(${zexpr})/2)*2':h='ceil(${H}*(${zexpr})/2)*2':eval=frame,"
+  fc+="crop=${W}:${H}:(iw-${W})/2:(ih-${H})/2,format=yuv420p[c${k}];"
 done
 
 # --- chain crossfades -------------------------------------------------------
@@ -51,8 +69,9 @@ else
     frac=$(awk -v k="$k" -v n="$N" 'BEGIN{print (k-1)/(n-1)}')
     fade=$(awk -v e="$XFADE_EARLY" -v l="$XFADE_LATE" -v f="$frac" 'BEGIN{printf "%.3f", e+(l-e)*f}')
     offset=$(awk -v a="$acc" -v f="$fade" 'BEGIN{printf "%.3f", a-f}')
+    xt="${XTYPES[$k]}"
     lbl="[x$k]"; [ "$k" -eq $((N-1)) ] && lbl="[v]"
-    fc+="${prev}[c${k}]xfade=transition=fade:duration=${fade}:offset=${offset}${lbl};"
+    fc+="${prev}[c${k}]xfade=transition=${xt}:duration=${fade}:offset=${offset}${lbl};"
     prev="$lbl"
     acc=$(awk -v a="$acc" -v sc="${SCREEN[$k]}" -v f="$fade" 'BEGIN{printf "%.4f", a+sc-f}')
   done
