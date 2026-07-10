@@ -1,20 +1,16 @@
 # Shot plan — SRC  START  DUR  SPEED   (see build-cut.sh header)
-# Arc: slow dreamy open (0.5x) -> lift (up to 0.85x). Blind auto-sample.
-# Clean 1080p sources: src-01 (181s), src-02 (92s), src-04 (1451s).
-# src-03 is 480x854 low-res portrait — omitted (would look blurry in landscape).
-# On-screen time = DUR / SPEED. Targeting ~75s total.
+# RE-WEIGHTED toward solo / close-up "him playing" shots (most hero-worthy).
+# Arc: slow dreamy open on the staircase solo -> lift with close-ups.
+# On-screen time = DUR / SPEED. src-03 (480x854) used briefly only.
 #
-# --- ACT 1: hush (slow, lingering) ---
-src-01   8     4.0   0.50
-src-04   120   4.0   0.52
-src-02   6     3.6   0.55
-# --- ACT 2: build ---
-src-04   360   3.5   0.62
-src-01   72    3.2   0.68
-src-02   44    3.0   0.72
-src-04   700   3.0   0.74
-# --- ACT 3: lift (near real-time, tighter) ---
-src-01   140   2.8   0.80
-src-04   1050  2.6   0.82
-src-02   66    2.4   0.84
-src-04   1300  2.4   0.85
+# --- ACT 1: hush — open on the staircase solo, long & slow ---
+src-01   163   7.0   0.52
+src-04   152   5.5   0.58
+# --- ACT 2: build — sax close-ups ---
+src-04   158   5.0   0.66
+src-01   135   4.5   0.72
+src-04   345   4.0   0.76
+# --- ACT 3: lift — energy, wider community shots, tighter cuts ---
+src-02   35    3.5   0.82
+src-03   14    3.0   0.85
+src-01   7     3.0   0.88

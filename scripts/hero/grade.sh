@@ -14,13 +14,21 @@ mkdir -p "$OUTDIR"
 
 [ -f "$MASTER" ] || { echo "ERROR: no master at $MASTER (run build-cut.sh first)" >&2; exit 1; }
 
-# Shared finishing: faint grain + gentle vignette. Prepended-to per grade.
-GRAIN="noise=alls=6:allf=t+u"
+# Shared WHITE-BALANCE fix (applied FIRST, before any look): the source venue
+# has a strong green ambient cast. Pull green out of mids/highlights and add a
+# touch of magenta+warmth to neutralize it, so grades start from neutral.
+WB="colorbalance=gm=-0.14:gh=-0.10:rm=0.05:rh=0.04:bh=-0.02,eq=saturation=0.97"
+
+# Shared finishing: very faint grain + gentle vignette. Prepended-to per grade.
+# Grain kept low (alls=3) — heavy grain balloons file size (hard to compress).
+GRAIN="noise=alls=3:allf=t"
 VIGNETTE="vignette=PI/5"
 
 # --- grade filter chains ----------------------------------------------------
 # BRASS  — warm shadows, golden highlights, crushed blacks, aged-brass identity.
-G_brass="curves=r='0/0.03 0.5/0.55 1/1':g='0/0.02 0.5/0.48 1/0.96':b='0/0.04 0.5/0.42 1/0.86',eq=contrast=1.12:saturation=1.05:gamma=0.96"
+# Warm the highlights (r up, b down), keep g neutral to avoid a green cast,
+# and cool/crush the shadows slightly. colorbalance does this cleanly.
+G_brass="colorbalance=rs=0.06:gs=-0.02:bs=-0.10:rm=0.06:gm=0.0:bm=-0.06:rh=0.10:gh=0.03:bh=-0.12,eq=contrast=1.12:saturation=1.06:gamma=0.97"
 # TEAL   — orange skin vs teal shadows, punchy blockbuster.
 G_teal="curves=b='0/0.06 0.5/0.5 1/0.92':r='0/0 0.5/0.53 1/1',eq=contrast=1.18:saturation=1.12"
 # MOODY  — desaturated, cool, crushed blacks, high contrast, film-noir.
@@ -34,12 +42,12 @@ encode () {
   local poster="$OUTDIR/hero-poster--$name.jpg"
   echo "grading: $name"
   ffmpeg -nostdin -v error -i "$MASTER" \
-    -vf "${grade},${GRAIN},${VIGNETTE},format=yuv420p" \
-    -an -c:v libx264 -preset slow -crf 24 -movflags +faststart \
-    -maxrate 4M -bufsize 8M "$out" -y
-  # poster: a frame ~1.5s in, same grade
+    -vf "${WB},${grade},${GRAIN},${VIGNETTE},format=yuv420p" \
+    -an -c:v libx264 -preset slow -crf 28 -movflags +faststart \
+    -maxrate 1500k -bufsize 3M "$out" -y
+  # poster: a frame ~1.5s in, same treatment
   ffmpeg -nostdin -v error -ss 1.5 -i "$MASTER" -frames:v 1 \
-    -vf "${grade},${VIGNETTE}" -q:v 3 "$poster" -y
+    -vf "${WB},${grade},${VIGNETTE}" -q:v 3 "$poster" -y
   printf '  %-8s %s  (%s)\n' "$name" "$(basename "$out")" "$(du -h "$out" | cut -f1)"
 }
 
