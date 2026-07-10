@@ -1,0 +1,154 @@
+/* ============================================================================
+   media-motion.css — Olamide Sax V3 · Task 8 media-interaction styles
+   ----------------------------------------------------------------------------
+   Pre-states + treatments for the Task-8 set-pieces. Everything that HIDES or
+   RE-POSITIONS content is gated behind html.js-anim-ready (added by reveal.js
+   only when GSAP is loaded AND motion is allowed). With JS off / GSAP failed /
+   reduced-motion, none of these rules apply → content is fully visible + laid
+   out normally. Transform / opacity only. No horizontal overflow at 375px.
+   ========================================================================== */
+
+/* ── 1 · Pinned Craft: stack the movements into one frame (desktop only) ──── */
+/* The class is added by JS ONLY when the pin is built (desktop, fine pointer).
+   So on mobile / reduced-motion the movements keep their normal stacked flow. */
+.js-anim-ready .craft__movements--pinned {
+  position: relative;
+}
+.js-anim-ready .craft__movements--pinned .craft-movement {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  /* Center the movement within the pinned viewport frame. */
+  align-content: center;
+  will-change: opacity, transform;
+}
+/* First movement establishes the wrap's height so the pin frame has size. */
+.js-anim-ready .craft__movements--pinned .craft-movement:first-child {
+  position: relative;
+}
+/* Inactive movements' clips dim; the active one is full-strength. */
+.js-anim-ready .craft__movements--pinned .craft-movement video {
+  transition: filter var(--dur-base, 0.4s) var(--ease-out, ease);
+}
+.js-anim-ready .craft__movements--pinned .craft-movement:not(.is-active) video {
+  filter: saturate(0.4) brightness(0.5) contrast(1);
+}
+
+/* ── 2 · YouTube embed (injected on activation) ───────────────────────────── */
+.video-embed {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+/* When a facade goes live, drop its scrim + cursor affordance. */
+.video-facade.is-live { cursor: default; }
+.video-facade.is-live::before { display: none; }
+.video-facade.is-live .frame-media { aspect-ratio: 16 / 9; }
+.video-card__facade.is-live .frame-media { aspect-ratio: 16 / 9; }
+
+/* ── 3 · Gallery still → motion ───────────────────────────────────────────── */
+/* Scroll-reveal pre-state (gated). Cells rise + fade; JS animates to rest. */
+.js-anim-ready .gallery-cell--pre {
+  opacity: 0;
+  transform: translateY(24px);
+  will-change: opacity, transform;
+}
+
+/* Hover treatment — "moving through a venue": subtle scale + warm-light lift.
+   Applies regardless of the gate (it is pure hover polish, not a content
+   hide), but only on hover-capable pointers. */
+@media (hover: hover) and (pointer: fine) {
+  .gallery-cell__media {
+    overflow: hidden;
+    transition: transform var(--dur-base, 0.4s) var(--ease-out, ease);
+  }
+  .gallery-cell__media > img {
+    transition: transform 0.6s var(--ease-out, ease),
+                filter 0.5s var(--ease-out, ease);
+    will-change: transform;
+  }
+  .gallery-cell:hover .gallery-cell__media > img {
+    transform: scale(1.05);
+    /* Warm-light shift: a whisper of brass warmth as the frame comes alive. */
+    filter: saturate(1.08) brightness(1.06);
+  }
+}
+
+/* Optional still → clip cross-fade. The clip video is stacked over the still
+   and fades in when JS marks the media .is-clip-live. */
+.gallery-cell__clip {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s var(--ease-out, ease);
+}
+.gallery-cell__media { position: relative; }
+.gallery-cell__media.is-clip-live .gallery-cell__clip { opacity: 1; }
+
+/* ── 4 · Timeline node unfold ─────────────────────────────────────────────── */
+/* Only the decorative MARK animates (blooms from the spine). The node body's
+   reveal is owned by reveal.js — we never hide readable text here. Gated. */
+.js-anim-ready .timeline-milestone--unfold .timeline-milestone__mark {
+  will-change: transform, opacity;
+}
+
+/* ── 5 · Section stage-bloom ──────────────────────────────────────────────── */
+/* A soft warm radial that fades up while a section is centred. Sits BEHIND
+   content, never intercepts pointer, never covers text (low opacity + blend). */
+.section-bloom {
+  position: absolute;
+  left: 50%;
+  top: 42%;
+  width: min(120vw, 1400px);
+  height: min(90vh, 900px);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  background: radial-gradient(
+    closest-side,
+    rgb(var(--brass-rgb, 184 134 59) / 0.09) 0%,
+    rgb(var(--brass-rgb, 184 134 59) / 0.04) 45%,
+    transparent 72%
+  );
+  mix-blend-mode: screen;
+}
+/* Keep the section a positioning context + content above the bloom. */
+main > section.section { position: relative; }
+main > section.section > *:not(.section-bloom) { position: relative; z-index: 1; }
+
+/* ── 6 · Featured media bloom pre-state ───────────────────────────────────── */
+.js-anim-ready .featured-perf__media .frame-media,
+.js-anim-ready .featured-video .video-facade,
+.js-anim-ready .live-wall__cell .frame-media {
+  will-change: opacity, transform;
+}
+
+/* ============================================================================
+   Reduced-motion backstop (belt + braces — JS already prevents the gate).
+   Force everything to its final, visible, static state.
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .js-anim-ready .craft__movements--pinned .craft-movement,
+  .js-anim-ready .gallery-cell--pre,
+  .js-anim-ready .timeline-milestone--unfold .timeline-milestone__mark,
+  .js-anim-ready .featured-perf__media .frame-media,
+  .js-anim-ready .featured-video .video-facade,
+  .js-anim-ready .live-wall__cell .frame-media {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    will-change: auto;
+  }
+  .js-anim-ready .craft__movements--pinned .craft-movement {
+    position: relative !important;
+    inset: auto !important;
+  }
+  .section-bloom { display: none !important; }
+  .gallery-cell__clip { display: none !important; }
+}

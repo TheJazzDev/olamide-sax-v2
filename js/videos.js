@@ -14,7 +14,7 @@
    ========================================================================== */
 
 import { $, $$, on } from "./utils.js";
-import { videos, VIDEO_CATEGORIES } from "./data.js";
+import { videos } from "./data.js";
 
 /** Build one facade card for a video record. NO iframe — poster + play mark.
     Until real YouTube ids land (youtubeId === "TODO"), the facade is a link to
@@ -109,9 +109,6 @@ export function initVideos() {
       target.focus();
     });
   });
-
-  // Reference VIDEO_CATEGORIES so tab labels/keys stay in sync if edited.
-  void VIDEO_CATEGORIES;
 
   setActive(active);
 }

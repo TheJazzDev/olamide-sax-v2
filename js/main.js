@@ -16,6 +16,7 @@ import { initCursor } from "./cursor.js";
 import { initGallery } from "./gallery.js";
 import { initVideos } from "./videos.js";
 import { initContact } from "./contact.js";
+import { initMediaMotion, initYouTubeFacades } from "./media-motion.js";
 
 function setFooterYear() {
   const yearEl = $("[data-year]");
@@ -59,12 +60,24 @@ function init() {
   initCursor();
 
   // Archive UI — each is page-guarded internally (no-ops if its markup is absent).
+  // These RENDER their grids, so they must run before media-motion binds to the
+  // freshly-rendered cells / facades.
   initGallery();
   initVideos();
   // Booking form — page-guarded (no-ops if the contact form is absent).
   initContact();
   // Ambient videos → poster-only under reduced motion (no-ops if none present).
+  // Runs BEFORE the pinned-Craft scene so, under reduced motion, the clips are
+  // already stripped and the pin never builds (engineLive gate).
   guardAmbientVideos();
+
+  // Task 8 — media interactions + scroll set-pieces.
+  // initYouTubeFacades is NOT motion-gated (the video must always be reachable);
+  // it binds only facades that carry a real id, leaving channel-links intact.
+  initYouTubeFacades();
+  // initMediaMotion is fully behind engineLive() (GSAP + motion). No-ops under
+  // reduced-motion / GSAP-absent → content stays in its final visible state.
+  initMediaMotion();
 }
 
 if (document.readyState === "loading") {
