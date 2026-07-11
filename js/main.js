@@ -20,9 +20,12 @@ import { initVideos } from "./videos.js";
 import { initContact } from "./contact.js";
 import { initMediaMotion, initYouTubeFacades } from "./media-motion.js";
 import { initHeroAudio } from "./heroAudio.js";
+import { initFooterReveal } from "./footerReveal.js";
+import { initAboutReveal } from "./aboutReveal.js";
 import { initCraft } from "./craft.js";
 import { initHeroIntro } from "./heroIntro.js";
-import { initReel } from "./reel.js";
+import { initCarousel } from "./carousel.js";
+import { initMarquee } from "./marquee.js";
 
 function setFooterYear() {
   const yearEl = $("[data-year]");
@@ -92,8 +95,14 @@ function init() {
   // The Craft horizontal scroll (canonical GSAP pinned-horizontal recipe).
   // Self-gates: no-ops under reduced-motion / GSAP-absent / mobile.
   initCraft();
-  // The Live Wall auto-drifting reel — self-gates (reduced-motion / GSAP-absent).
-  initReel();
+  // The Live Wall circular 3D carousel — self-gates (reduced-motion/GSAP-absent).
+  initCarousel();
+  // Stages & Recognition drifting credits marquee — self-gates (reduced-motion/GSAP-absent).
+  initMarquee();
+  // The Coda: footer entrance timeline — self-gates (reduced-motion/GSAP-absent).
+  initFooterReveal();
+  // About page motion pass — page-guarded (no-ops off /about.html).
+  initAboutReveal();
 }
 
 if (document.readyState === "loading") {

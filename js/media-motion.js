@@ -394,12 +394,10 @@ function buildSectionTransitions(gsap, ScrollTrigger) {
 /*  only. reveal.js already staggers the text; this adds the media flourish.     */
 /* ========================================================================== */
 function buildFeaturedBlooms(gsap, ScrollTrigger) {
-  const targets = $$(
-    ".stage-screen__perf .frame-media, " +
-      ".stage-screen__video .video-facade, " +
-      ".practice__media .frame-media, " +
-      ".live-wall__cell .frame-media"
-  );
+  // NOTE: .practice__media is intentionally NOT here — that section has its own
+  // left/right slide-in entrance (see .practice.is-in in home.css / reveal.js);
+  // a second opacity animation on its inner .frame-media would fight it.
+  const targets = $$(".live-wall__cell .frame-media");
   targets.forEach((el) => {
     gsap.set(el, { opacity: 0, scale: 1.04, transformOrigin: "50% 50%" });
     gsap.to(el, {

@@ -161,8 +161,7 @@ function buildScrollReveals(gsap, ScrollTrigger) {
   const SECTION_HOOKS = [
     "statement",
     "roots",
-    "practice",
-    "stage-screen",
+    "credits",
     "featured-gallery",
     "featured-press",
     "timeline-teaser",
@@ -207,6 +206,19 @@ function buildScrollReveals(gsap, ScrollTrigger) {
           toggleActions: "play none none none",
         },
       });
+    });
+  });
+
+  // Artistic Practice: image slides in from the left, text from the right. The
+  // pre-state + slide live in CSS (.js-anim-ready .practice__media/__text); here
+  // we just add .is-in when the section reaches the viewport. No reveal-item on
+  // its children (that would double up with the CSS transition).
+  $$("[data-animate='practice']").forEach((section) => {
+    ScrollTrigger.create({
+      trigger: section,
+      start: "top 78%",
+      once: true,
+      onEnter: () => section.classList.add("is-in"),
     });
   });
 }

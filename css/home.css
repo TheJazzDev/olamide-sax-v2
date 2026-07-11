@@ -37,6 +37,22 @@
   text-transform: uppercase;
   letter-spacing: var(--tracking-label);
   font-size: var(--step--1);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+/* Roman numerals removed — a short gold rule now leads the eyebrow so it still
+   has a designed anchor where the numeral used to sit. */
+.movement-index__name::before {
+  content: "";
+  width: clamp(1.5rem, 4vw, 2.5rem);
+  height: 1px;
+  background: var(--accent);
+  flex: 0 0 auto;
+}
+/* On the light Roots section the accent rule needs the warm ember, not bone. */
+.section--light .movement-index__name::before {
+  background: var(--ember);
 }
 
 /* ── Shared: media well ─────────────────────────────────────────────────── */
@@ -428,32 +444,76 @@
 .practice__link { margin-top: var(--space-lg); }
 .practice .movement-index { margin-bottom: var(--space-md); }
 
+/* Slide-in entrance: image from the left, text from the right. reveal.js adds
+   .is-in when the section scrolls into view; until then (and only once the anim
+   engine is live) they sit off to the sides, faded. Never hides content when JS
+   is off — the .js-anim-ready gate scopes the pre-state. */
+.js-anim-ready .practice__media,
+.js-anim-ready .practice__text {
+  opacity: 0;
+  transition:
+    opacity 0.9s var(--ease-out),
+    transform 0.9s var(--ease-out);
+  will-change: opacity, transform;
+}
+.js-anim-ready .practice__media { transform: translateX(-8%); }
+.js-anim-ready .practice__text  { transform: translateX(8%); }
+.js-anim-ready .practice.is-in .practice__media,
+.js-anim-ready .practice.is-in .practice__text {
+  opacity: 1;
+  transform: translateX(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .js-anim-ready .practice__media,
+  .js-anim-ready .practice__text {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 /* ============================================================================
-   VI · ON STAGE & ON SCREEN — merged performance still + video facade in an
-   editorial split. The stage still (portrait, offset DOWN) sits beside the
-   video (landscape, offset UP) so the pair reads as one composed spread, not
-   two stacked blocks.
+   STAGES & RECOGNITION — a drifting typographic marquee of real venues,
+   festivals and awards. marquee.js duplicates the track and drifts it; scroll
+   velocity nudges the speed. No image/video (kept out of the media sections).
    ========================================================================== */
 
-.stage-screen__grid {
-  margin-top: var(--space-xl);
-  display: grid;
-  gap: var(--space-xl);
-  align-items: start;
+.credits {
+  overflow: hidden;                 /* the marquee row bleeds full-width */
 }
-@media (min-width: 900px) {
-  .stage-screen__grid {
-    grid-template-columns: 0.82fr 1.18fr;
-    gap: var(--space-2xl);
-    align-items: center;
-  }
-  /* Editorial offset: nudge the tall still down, lift the video up. */
-  .stage-screen__perf  { transform: translateY(var(--space-lg)); }
-  .stage-screen__video { transform: translateY(calc(-1 * var(--space-md))); }
+.credits__title { margin-top: var(--space-md); }
+
+.credits__marquee {
+  margin-top: clamp(2rem, 5vh, 3.5rem);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
-.stage-screen__perf { margin: 0; }
-.stage-screen__perf .frame-media { aspect-ratio: 4 / 5; }
-.stage-screen__video .video-facade { display: block; }
+.credits__track {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  width: max-content;
+  white-space: nowrap;
+  /* JS off → still readable, gently wrapping instead of a frozen overflow row. */
+  flex-wrap: wrap;
+}
+.credits.is-live .credits__track { flex-wrap: nowrap; }
+
+.credits__item {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-size: clamp(1.6rem, 5vw, 3.4rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: color-mix(in oklab, var(--bone) 60%, var(--umber));
+  transition: color 0.4s var(--ease-out);
+}
+.credits__item--gold { color: var(--accent-lit); font-style: italic; }
+.credits__dot {
+  color: var(--accent);
+  font-size: clamp(0.8rem, 2vw, 1.2rem);
+  transform: translateY(-0.15em);
+}
 
 /* ============================================================================
    VI · FEATURED VIDEO — YouTube FACADE (still + play affordance). No live

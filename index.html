@@ -268,7 +268,6 @@
         <div class="statement__hold" aria-hidden="true"></div>
 
         <p class="movement-index">
-          <span class="movement-index__num">II</span>
           <span class="movement-index__name">The Statement</span>
         </p>
 
@@ -293,7 +292,6 @@
     <section class="section section--light roots" aria-labelledby="roots-year" data-animate="roots">
       <div class="container">
         <p class="movement-index" style="color: color-mix(in oklab, var(--ash) 55%, var(--ink));">
-          <span class="movement-index__num" style="color: var(--ember);">III</span>
           <span class="movement-index__name">The Roots</span>
         </p>
 
@@ -342,7 +340,6 @@
       <div class="craft-viewport" data-craft-viewport>
         <div class="craft__intro">
           <p class="movement-index">
-            <span class="movement-index__num">IV</span>
             <span class="movement-index__name">The Craft</span>
           </p>
           <h2 class="sec-head__title" id="craft-title">Three voices, one performer.</h2>
@@ -444,7 +441,6 @@
 
           <div class="practice__text">
             <p class="movement-index">
-              <span class="movement-index__num">V</span>
               <span class="movement-index__name">Artistic Practice</span>
             </p>
             <h2 class="sec-head__title" id="practice-title">More than a performance.</h2>
@@ -463,61 +459,33 @@
     </section>
 
     <!-- ====================================================================
-         VI · ON STAGE & ON SCREEN — merged Featured Performance + Video.
-         Editorial split: a cinematic performance still beside the video facade,
-         each with its own exhibition label. One "See all in Media" link.
-         The video-facade markup is preserved so media-motion.js still upgrades it.
+         STAGES & RECOGNITION — a moving band of real venues, festivals and
+         awards. Pure typography, no image/video (those live in Craft, Live Wall,
+         Media). marquee.js duplicates + drifts the row; reacts to scroll velocity.
+         PE: with JS off it's a static, wrapped list of the same names.
          ==================================================================== -->
-    <section class="section stage-screen" aria-labelledby="stage-screen-title" data-animate="stage-screen">
+    <section class="section credits" aria-labelledby="credits-title" data-animate="credits">
       <div class="container">
-        <div class="sec-head">
-          <div>
-            <p class="movement-index">
-              <span class="movement-index__num">VI</span>
-              <span class="movement-index__name">On Stage &amp; On Screen</span>
-            </p>
-            <h2 class="sec-head__title" id="stage-screen-title" style="margin-top: var(--space-md);">On stage. On screen.</h2>
-          </div>
-          <a class="link-underline sec-more" href="/media.html">See all in Media →</a>
-        </div>
+        <p class="movement-index">
+          <span class="movement-index__name">Stages &amp; Recognition</span>
+        </p>
+        <h2 class="sec-head__title credits__title" id="credits-title">Where the room has been.</h2>
+      </div>
 
-        <div class="stage-screen__grid">
-          <!-- The stage still (left, tall, offset down) -->
-          <figure class="stage-screen__perf">
-            <div class="frame-media">
-              <img src="assets/images/gallery/sbc-stage-01.jpg" width="1200" height="1500"
-                   alt="Olamide Sax leading live saxophone on the Stand & Be Counted stage during the record-breaking procession." loading="lazy" />
-            </div>
-            <figcaption class="exhibit-label">
-              <span class="exhibit-label__meta">Stand &amp; Be Counted Theatre · On stage</span>
-              <span class="exhibit-label__title">World Record Football Scarf Procession</span>
-            </figcaption>
-          </figure>
-
-          <!-- The screening (right, video facade) -->
-          <div class="stage-screen__video">
-            <!-- FACADE: specific YouTube ids are still pending (consent-wall
-                 blocked scraping), so this links to the channel. TODO(youtube):
-                 swap for the featured video id once Olamide supplies the link. -->
-            <a class="video-facade"
-               href="https://www.youtube.com/@Olamidesax" target="_blank" rel="noopener noreferrer"
-               aria-label="Watch on YouTube — Olamide Sax channel (specific featured video coming soon)">
-              <div class="frame-media frame-media--wide">
-                <img src="assets/images/gallery/festival-01.jpg" width="1920" height="1080"
-                     alt="Olamide Sax performing high-energy live saxophone at Sharrow Festival." loading="lazy" />
-              </div>
-              <span class="video-facade__play" aria-hidden="true">
-                <span class="video-facade__play-mark">
-                  <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
-                </span>
-              </span>
-              <span class="video-facade__label"><span>Live</span> · Watch on YouTube</span>
-            </a>
-            <p class="exhibit-label">
-              <span class="exhibit-label__meta">Sharrow Festival · On screen</span>
-              <span class="exhibit-label__title">A screening</span>
-            </p>
-          </div>
+      <div class="credits__marquee" data-marquee aria-label="Venues, festivals and recognition">
+        <div class="credits__track" data-marquee-track>
+          <span class="credits__item">Stand &amp; Be Counted Theatre</span>
+          <span class="credits__dot" aria-hidden="true">✳</span>
+          <span class="credits__item">Sharrow Festival</span>
+          <span class="credits__dot" aria-hidden="true">✳</span>
+          <span class="credits__item credits__item--gold">Eko Heritage Awards 2026 — Best Instrumentalist</span>
+          <span class="credits__dot" aria-hidden="true">✳</span>
+          <span class="credits__item">Sheffield Peace Gardens</span>
+          <span class="credits__dot" aria-hidden="true">✳</span>
+          <span class="credits__item">Eco Art Fashion Show</span>
+          <span class="credits__dot" aria-hidden="true">✳</span>
+          <span class="credits__item">World Record Scarf Procession</span>
+          <span class="credits__dot" aria-hidden="true">✳</span>
         </div>
       </div>
     </section>
@@ -530,7 +498,6 @@
         <div class="sec-head">
           <div>
             <p class="movement-index">
-              <span class="movement-index__num">VII</span>
               <span class="movement-index__name">The Live Wall</span>
             </p>
             <h2 class="sec-head__title" id="gallery-title" style="margin-top: var(--space-md);">Moments from the room.</h2>
@@ -619,7 +586,6 @@
     <section class="section featured-press" aria-labelledby="press-title" data-animate="featured-press">
       <div class="container">
         <p class="movement-index">
-          <span class="movement-index__num">VIII</span>
           <span class="movement-index__name">In Their Words</span>
         </p>
 
@@ -672,7 +638,6 @@
         <div class="sec-head">
           <div>
             <p class="movement-index">
-              <span class="movement-index__num">IX</span>
               <span class="movement-index__name">The Journey</span>
             </p>
             <h2 class="sec-head__title" id="timeline-title" style="margin-top: var(--space-md);">A career, composed.</h2>
@@ -713,7 +678,6 @@
           <div class="invitation__resolve" data-breath-resolve aria-hidden="true"></div>
 
           <p class="movement-index" style="justify-content: center;">
-            <span class="movement-index__num">X</span>
             <span class="movement-index__name">The Invitation</span>
           </p>
 
