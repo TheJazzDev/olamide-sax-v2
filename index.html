@@ -358,6 +358,7 @@
                 <source src="assets/videos/clip-hall.mp4" type="video/mp4" />
               </video>
               <span class="craft-panel__scrim" aria-hidden="true"></span>
+              <a class="craft-panel__cta" href="/media.html#v-04">Watch the full performance <span class="craft-panel__cta-arrow" aria-hidden="true">→</span></a>
             </div>
             <div class="craft-panel__text">
               <h3 class="craft-panel__word">Saxophone</h3>
@@ -376,6 +377,7 @@
                 <source src="assets/videos/clip-sbc.mp4" type="video/mp4" />
               </video>
               <span class="craft-panel__scrim" aria-hidden="true"></span>
+              <a class="craft-panel__cta" href="/media.html#v-01">Watch the full performance <span class="craft-panel__cta-arrow" aria-hidden="true">→</span></a>
             </div>
             <div class="craft-panel__text">
               <h3 class="craft-panel__word">Voice</h3>
@@ -394,6 +396,7 @@
                 <source src="assets/videos/clip-festival.mp4" type="video/mp4" />
               </video>
               <span class="craft-panel__scrim" aria-hidden="true"></span>
+              <a class="craft-panel__cta" href="/media.html#v-03">Watch the full performance <span class="craft-panel__cta-arrow" aria-hidden="true">→</span></a>
             </div>
             <div class="craft-panel__text">
               <h3 class="craft-panel__word">Participation</h3>
@@ -405,75 +408,117 @@
           </article>
 
         </div>
+
+        <!-- The DECK: kinetic counter-motion in the bottom letterbox band — a
+             colossal GHOST marquee that scrolls RIGHT on its own clock (pure
+             CSS loop, not scrub-driven) while the panels cover LEFT.
+             Desktop pinned mode only (.is-stacked). -->
+        <div class="craft__deck">
+          <div class="craft__ghost" aria-hidden="true">
+            <div class="craft__ghost-track">
+              <span class="craft__ghost-line">Saxophone&nbsp;·&nbsp;Voice&nbsp;·&nbsp;Participation&nbsp;·&nbsp;Saxophone&nbsp;·&nbsp;Voice&nbsp;·&nbsp;Participation&nbsp;·&nbsp;</span>
+              <span class="craft__ghost-line">Saxophone&nbsp;·&nbsp;Voice&nbsp;·&nbsp;Participation&nbsp;·&nbsp;Saxophone&nbsp;·&nbsp;Voice&nbsp;·&nbsp;Participation&nbsp;·&nbsp;</span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- ====================================================================
-         V · FEATURED PERFORMANCE — one cinematic gig, exhibition-label caption.
+         V · ARTISTIC PRACTICE — how the performance becomes shared work.
+         Text + participatory image, exhibition-label caption → practice page.
          ==================================================================== -->
-    <section class="section featured-perf" aria-labelledby="perf-title" data-animate="featured-perf">
+    <section class="section practice" aria-labelledby="practice-title" data-animate="practice">
       <div class="container">
-        <div class="sec-head">
-          <div>
+        <div class="practice__grid">
+          <div class="practice__media">
+            <figure class="frame-media frame-media--tall">
+              <img src="assets/images/gallery/workshop-01.jpg" width="1200" height="1600"
+                   alt="Olamide Sax facilitating a community drumming workshop — hands on the drums." loading="lazy" />
+            </figure>
+            <p class="exhibit-label">
+              <span class="exhibit-label__meta">Participatory · Facilitation</span>
+              <span class="exhibit-label__title">The room takes part</span>
+            </p>
+          </div>
+
+          <div class="practice__text">
             <p class="movement-index">
               <span class="movement-index__num">V</span>
-              <span class="movement-index__name">Featured Performance</span>
+              <span class="movement-index__name">Artistic Practice</span>
             </p>
-            <h2 class="sec-head__title" id="perf-title" style="margin-top: var(--space-md);">A stage remembered.</h2>
+            <h2 class="sec-head__title" id="practice-title">More than a performance.</h2>
+            <p class="practice__copy">
+              Beyond the stage, Olamide works as a <strong>participatory artist</strong> and
+              <strong>creative facilitator</strong> — building drumming circles, workshops and
+              celebrations where a crowd becomes a community. Music that connects people;
+              culture that builds belonging.
+            </p>
+            <p class="practice__link">
+              <a class="link-underline sec-more" href="/artistic-practice.html">Explore the practice →</a>
+            </p>
           </div>
-          <a class="link-underline sec-more" href="/media.html">See all performances →</a>
-        </div>
-
-        <div class="featured-perf__media">
-          <figure class="frame-media frame-media--wide">
-            <img src="assets/images/gallery/sbc-stage-01.jpg" width="1920" height="1080"
-                 alt="Olamide Sax leading live saxophone on the Stand & Be Counted stage during the record-breaking procession." loading="lazy" />
-          </figure>
-        </div>
-
-        <div class="featured-perf__foot">
-          <p class="exhibit-label" style="margin-top: 0;">
-            <span class="exhibit-label__meta">Stand &amp; Be Counted Theatre · Participatory</span>
-            <span class="exhibit-label__title">World Record Football Scarf Procession</span>
-          </p>
         </div>
       </div>
     </section>
 
     <!-- ====================================================================
-         VI · FEATURED VIDEO — YouTube FACADE (still + play affordance).
-         NO live iframe now. data-yt carries the id for Task 8 (facade → iframe).
+         VI · ON STAGE & ON SCREEN — merged Featured Performance + Video.
+         Editorial split: a cinematic performance still beside the video facade,
+         each with its own exhibition label. One "See all in Media" link.
+         The video-facade markup is preserved so media-motion.js still upgrades it.
          ==================================================================== -->
-    <section class="section featured-video" aria-labelledby="video-title" data-animate="featured-video">
+    <section class="section stage-screen" aria-labelledby="stage-screen-title" data-animate="stage-screen">
       <div class="container">
         <div class="sec-head">
           <div>
             <p class="movement-index">
               <span class="movement-index__num">VI</span>
-              <span class="movement-index__name">Featured Video</span>
+              <span class="movement-index__name">On Stage &amp; On Screen</span>
             </p>
-            <h2 class="sec-head__title" id="video-title" style="margin-top: var(--space-md);">A screening.</h2>
+            <h2 class="sec-head__title" id="stage-screen-title" style="margin-top: var(--space-md);">On stage. On screen.</h2>
           </div>
-          <a class="link-underline sec-more" href="/media.html">All videos →</a>
+          <a class="link-underline sec-more" href="/media.html">See all in Media →</a>
         </div>
 
-        <!-- FACADE: specific YouTube ids are still pending (consent-wall blocked
-             scraping), so this links to the channel. TODO(youtube): swap for the
-             featured video id + facade → iframe once Olamide supplies the link. -->
-        <a class="video-facade"
-           href="https://www.youtube.com/@Olamidesax" target="_blank" rel="noopener noreferrer"
-           aria-label="Watch on YouTube — Olamide Sax channel (specific featured video coming soon)">
-          <div class="frame-media frame-media--wide">
-            <img src="assets/images/gallery/festival-01.jpg" width="1920" height="1080"
-                 alt="Olamide Sax performing high-energy live saxophone at Sharrow Festival." loading="lazy" />
+        <div class="stage-screen__grid">
+          <!-- The stage still (left, tall, offset down) -->
+          <figure class="stage-screen__perf">
+            <div class="frame-media">
+              <img src="assets/images/gallery/sbc-stage-01.jpg" width="1200" height="1500"
+                   alt="Olamide Sax leading live saxophone on the Stand & Be Counted stage during the record-breaking procession." loading="lazy" />
+            </div>
+            <figcaption class="exhibit-label">
+              <span class="exhibit-label__meta">Stand &amp; Be Counted Theatre · On stage</span>
+              <span class="exhibit-label__title">World Record Football Scarf Procession</span>
+            </figcaption>
+          </figure>
+
+          <!-- The screening (right, video facade) -->
+          <div class="stage-screen__video">
+            <!-- FACADE: specific YouTube ids are still pending (consent-wall
+                 blocked scraping), so this links to the channel. TODO(youtube):
+                 swap for the featured video id once Olamide supplies the link. -->
+            <a class="video-facade"
+               href="https://www.youtube.com/@Olamidesax" target="_blank" rel="noopener noreferrer"
+               aria-label="Watch on YouTube — Olamide Sax channel (specific featured video coming soon)">
+              <div class="frame-media frame-media--wide">
+                <img src="assets/images/gallery/festival-01.jpg" width="1920" height="1080"
+                     alt="Olamide Sax performing high-energy live saxophone at Sharrow Festival." loading="lazy" />
+              </div>
+              <span class="video-facade__play" aria-hidden="true">
+                <span class="video-facade__play-mark">
+                  <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+                </span>
+              </span>
+              <span class="video-facade__label"><span>Live</span> · Watch on YouTube</span>
+            </a>
+            <p class="exhibit-label">
+              <span class="exhibit-label__meta">Sharrow Festival · On screen</span>
+              <span class="exhibit-label__title">A screening</span>
+            </p>
           </div>
-          <span class="video-facade__play" aria-hidden="true">
-            <span class="video-facade__play-mark">
-              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
-            </span>
-          </span>
-          <span class="video-facade__label"><span>Live</span> · Watch on YouTube</span>
-        </a>
+        </div>
       </div>
     </section>
 
@@ -690,6 +735,23 @@
   <!-- FOOTER (canonical partial — byte-identical to v2/partials/footer.html) -->
   <footer class="site-footer">
     <div class="container">
+      <p class="site-footer__coda" aria-hidden="true">
+        <span class="site-footer__coda-label">Coda</span>
+      </p>
+
+      <nav class="site-footer__explore" aria-label="Footer">
+        <ul>
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/artistic-practice.html">Artistic Practice</a></li>
+          <li><a href="/media.html">Media</a></li>
+          <li><a href="/gallery.html">Gallery</a></li>
+          <li><a href="/press.html">Press</a></li>
+          <li><a href="/timeline.html">Timeline</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
       <div class="site-footer__top">
         <div class="site-footer__brand stack-sm">
           <a class="site-nav__wordmark site-nav__wordmark--footer" href="/index.html">
@@ -700,19 +762,6 @@
           </p>
         </div>
 
-        <nav class="site-footer__links" aria-label="Footer">
-          <p class="label">Explore</p>
-          <ul class="stack-sm">
-            <li><a class="link-underline" href="/index.html">Home</a></li>
-            <li><a class="link-underline" href="/about.html">About</a></li>
-            <li><a class="link-underline" href="/artistic-practice.html">Artistic Practice</a></li>
-            <li><a class="link-underline" href="/media.html">Media</a></li>
-            <li><a class="link-underline" href="/gallery.html">Gallery</a></li>
-            <li><a class="link-underline" href="/press.html">Press</a></li>
-            <li><a class="link-underline" href="/timeline.html">Timeline</a></li>
-            <li><a class="link-underline" href="/contact.html">Contact</a></li>
-          </ul>
-        </nav>
 
         <div class="site-footer__contact">
           <p class="label">Contact</p>
@@ -793,6 +842,10 @@
         <p class="site-footer__made text-muted">A living archive, built one performance at a time.</p>
       </div>
     </div>
+
+    <!-- The sign-off: the site ends on the name, colossal, cropped by the
+         page edge like a poster — the final note of the coda. Decorative. -->
+    <div class="site-footer__signoff" aria-hidden="true">Olamide<span class="site-footer__signoff-accent">Sax</span></div>
   </footer>
 
   <!-- GSAP motion engine (self-hosted, Task 6). Loaded classic (non-module)

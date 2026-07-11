@@ -127,8 +127,9 @@ main > section.section { position: relative; overflow-x: clip; }
 main > section.section > *:not(.section-bloom):not(.hero__stage) { position: relative; z-index: 1; }
 
 /* ── 6 · Featured media bloom pre-state ───────────────────────────────────── */
-.js-anim-ready .featured-perf__media .frame-media,
-.js-anim-ready .featured-video .video-facade,
+.js-anim-ready .stage-screen__perf .frame-media,
+.js-anim-ready .stage-screen__video .video-facade,
+.js-anim-ready .practice__media .frame-media,
 .js-anim-ready .live-wall__cell .frame-media {
   will-change: opacity, transform;
 }
@@ -141,8 +142,9 @@ main > section.section > *:not(.section-bloom):not(.hero__stage) { position: rel
   .js-anim-ready .craft__movements--pinned .craft-movement,
   .js-anim-ready .gallery-cell--pre,
   .js-anim-ready .timeline-milestone--unfold .timeline-milestone__mark,
-  .js-anim-ready .featured-perf__media .frame-media,
-  .js-anim-ready .featured-video .video-facade,
+  .js-anim-ready .stage-screen__perf .frame-media,
+  .js-anim-ready .stage-screen__video .video-facade,
+  .js-anim-ready .practice__media .frame-media,
   .js-anim-ready .live-wall__cell .frame-media {
     opacity: 1 !important;
     transform: none !important;

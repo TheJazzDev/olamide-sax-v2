@@ -395,8 +395,9 @@ function buildSectionTransitions(gsap, ScrollTrigger) {
 /* ========================================================================== */
 function buildFeaturedBlooms(gsap, ScrollTrigger) {
   const targets = $$(
-    ".featured-perf__media .frame-media, " +
-      ".featured-video .video-facade, " +
+    ".stage-screen__perf .frame-media, " +
+      ".stage-screen__video .video-facade, " +
+      ".practice__media .frame-media, " +
       ".live-wall__cell .frame-media"
   );
   targets.forEach((el) => {

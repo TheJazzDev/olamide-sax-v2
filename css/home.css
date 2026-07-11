@@ -399,21 +399,61 @@
 }
 
 /* ============================================================================
-   V · FEATURED PERFORMANCE — one cinematic gig, exhibition-label caption.
+   V · ARTISTIC PRACTICE — participatory image + text, mirrors The Roots' grid
+   but image-left / text-right (offset the other way for rhythm on the page).
    ========================================================================== */
 
-.featured-perf__media .frame-media { aspect-ratio: 16 / 9; }
-@media (min-width: 1024px) {
-  .featured-perf__media .frame-media { aspect-ratio: 21 / 9; }
+.practice__grid {
+  display: grid;
+  gap: var(--space-xl);
+  align-items: center;
 }
-.featured-perf__foot {
+@media (min-width: 768px) {
+  .practice__grid {
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: var(--space-2xl);
+  }
+}
+.practice__media .frame-media { aspect-ratio: 3 / 4; }
+.practice__copy {
   margin-top: var(--space-lg);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: var(--space-md);
+  max-width: 52ch;
+  color: color-mix(in oklab, var(--bone) 82%, var(--umber));
+  line-height: var(--leading-loose);
 }
+.practice__copy strong {
+  color: var(--bone);
+  font-weight: var(--body-weight-strong);
+}
+.practice__link { margin-top: var(--space-lg); }
+.practice .movement-index { margin-bottom: var(--space-md); }
+
+/* ============================================================================
+   VI · ON STAGE & ON SCREEN — merged performance still + video facade in an
+   editorial split. The stage still (portrait, offset DOWN) sits beside the
+   video (landscape, offset UP) so the pair reads as one composed spread, not
+   two stacked blocks.
+   ========================================================================== */
+
+.stage-screen__grid {
+  margin-top: var(--space-xl);
+  display: grid;
+  gap: var(--space-xl);
+  align-items: start;
+}
+@media (min-width: 900px) {
+  .stage-screen__grid {
+    grid-template-columns: 0.82fr 1.18fr;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+  /* Editorial offset: nudge the tall still down, lift the video up. */
+  .stage-screen__perf  { transform: translateY(var(--space-lg)); }
+  .stage-screen__video { transform: translateY(calc(-1 * var(--space-md))); }
+}
+.stage-screen__perf { margin: 0; }
+.stage-screen__perf .frame-media { aspect-ratio: 4 / 5; }
+.stage-screen__video .video-facade { display: block; }
 
 /* ============================================================================
    VI · FEATURED VIDEO — YouTube FACADE (still + play affordance). No live
@@ -775,19 +815,17 @@
   z-index: var(--z-nav);
   display: inline-flex;
   align-items: center;
-  gap: 0.5em;
+  justify-content: center;
+  gap: 0.45em;
   min-width: 44px;
   min-height: 44px;
-  padding: 0.5rem 0.9rem;
+  padding: 0 0.85rem;
   border: 1px solid rgb(var(--bone-rgb) / 0.18);
   border-radius: 999px;
   background: rgb(var(--ink-rgb) / 0.55);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   color: var(--ash);
-  font-size: 0.7rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
   cursor: pointer;
   transition: color 0.25s ease, border-color 0.25s ease;
 }

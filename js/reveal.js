@@ -161,8 +161,8 @@ function buildScrollReveals(gsap, ScrollTrigger) {
   const SECTION_HOOKS = [
     "statement",
     "roots",
-    "featured-perf",
-    "featured-video",
+    "practice",
+    "stage-screen",
     "featured-gallery",
     "featured-press",
     "timeline-teaser",
