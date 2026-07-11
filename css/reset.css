@@ -24,10 +24,23 @@ html {
   scroll-behavior: auto;
 }
 
+/* Hide the page scrollbar entirely (scrolling still works — wheel, touch,
+   keys). Cinematic full-bleed: no chrome at the edge of the film. */
+html {
+  scrollbar-width: none;              /* Firefox */
+}
+html::-webkit-scrollbar {
+  display: none;                      /* Chrome / Safari / Edge */
+}
+
 body {
   min-height: 100vh;
   min-height: 100dvh;
-  overflow-x: hidden;                 /* no horizontal body scroll, ever */
+  /* `clip` (not `hidden`) prevents horizontal scroll WITHOUT turning <body> into
+     a scroll container — `overflow-x: hidden` forces overflow-y to `auto`, which
+     makes body the scroller and breaks ScrollTrigger pinning (the photo-wheel).
+     `clip` has no such side-effect, so the window stays the scroller. */
+  overflow-x: clip;                   /* no horizontal body scroll, ever */
   line-height: 1.5;
   background-color: var(--bg, #0B0A08);   /* warm ink, not pure black */
   color: var(--text, #F3EDE3);            /* warm bone, not pure white */

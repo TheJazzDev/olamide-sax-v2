@@ -13,7 +13,8 @@
 
 .featured-gallery {
   padding-block: clamp(4rem, 10vh, 8rem);
-  overflow: hidden;
+  /* No overflow clipping here — the wheel is centred and stays within the
+     viewport width, and clipping would break the sticky stage below. */
 }
 
 .carousel {
@@ -45,8 +46,11 @@
 /* ── Tilted photo-wheel (JS active) ─────────────────────────────────────── */
 .carousel.is-3d .carousel__stage {
   overflow: visible;
-  /* Tall enough for the wheel to tilt back with headroom above and below. */
-  height: clamp(30rem, 74vh, 52rem);
+  position: relative;
+  /* Tall enough for the wheel to tilt back with headroom above and below. As the
+     section scrolls through the viewport, carousel.js scrubs the ring a full 360°
+     (every back photo comes round to the front) — smooth, no snap/elastic. */
+  height: clamp(30rem, 82vh, 54rem);
   /* Moderate perspective — the wheel's depth comes from js-driven z + scale, so
      perspective just adds gentle foreshortening. */
   perspective: 1800px;
@@ -69,7 +73,7 @@
   top: 50%;
   left: 50%;
   /* Smaller than the old slabs so 15 photos read as a RING, not a stack.
-     JS drives the position/scale/opacity; this is just the base footprint. */
+     JS drives the position/scale/z fully; this is just the base footprint. */
   width: clamp(9rem, 15vw, 14rem);
   aspect-ratio: 3 / 4;
   margin: 0;
@@ -77,24 +81,77 @@
   border: 0;
   background: none;
   cursor: pointer;
-  will-change: transform, opacity;
-  /* JS sets transform (translate/scale/z) fully; no CSS transform here. */
+  will-change: transform;
+  /* JS sets the item transform (translate/scale/z) fully; hover effects live on
+     the child <img>/caption so they never fight the JS-driven 3D transform. */
 }
 .carousel.is-3d .carousel__item > img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   border: var(--border-width) solid var(--hairline);
   box-shadow: 0 24px 50px -18px rgb(var(--ink-rgb) / 0.75);
-  filter: saturate(0.94) contrast(1.03);
-  transition: filter 0.4s var(--ease-out), border-color 0.4s var(--ease-out);
+  /* All photos read equally bright so every one looks hoverable/clickable. */
+  filter: saturate(0.98) contrast(1.03);
+  transform: scale(1);
+  transform-origin: center bottom;
+  transition:
+    transform 0.35s var(--ease-out),
+    filter 0.35s var(--ease-out),
+    border-color 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
 }
 
-/* The front (active) photo gets the brass edge + full pop. */
+/* The front (active) photo gets the brass edge + a touch more pop. */
 .carousel.is-3d .carousel__item[data-active] > img {
   border-color: var(--hairline-brass);
-  filter: saturate(1.05) contrast(1.06) brightness(1.05);
+  filter: saturate(1.04) contrast(1.05) brightness(1.03);
 }
+
+/* Hover: lift the photo (scale its <img> up) so you can feel it's interactive,
+   and don't dim its neighbours. Suppressed while dragging. */
+.carousel.is-3d:not(.is-dragging) .carousel__item:hover > img {
+  transform: scale(1.08);
+  border-color: var(--hairline-brass);
+  box-shadow: 0 34px 70px -20px rgb(var(--ink-rgb) / 0.85);
+  filter: saturate(1.06) contrast(1.05) brightness(1.05);
+}
+
+/* Per-photo caption chip, shown bottom-right on hover. */
+.carousel__item-cap {
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.5rem;
+  max-width: 82%;
+  padding: 0.4em 0.7em;
+  background: rgb(var(--ink-rgb) / 0.72);
+  backdrop-filter: blur(6px);
+  color: var(--bone);
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  font-size: var(--step--2);
+  line-height: 1.3;
+  text-align: right;
+  border-radius: 0.35rem;
+  opacity: 0;
+  transform: translateY(0.4rem);
+  transition: opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out);
+  pointer-events: none;
+}
+.carousel__item-cap strong {
+  color: var(--accent-lit);
+  font-weight: inherit;
+}
+.carousel.is-3d:not(.is-dragging) .carousel__item:hover .carousel__item-cap {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Drag cursors: horizontal = grab/spin; vertical = tilt the wheel. */
+.carousel.is-3d.is-dragging--x .carousel__stage { cursor: grabbing; }
+.carousel.is-3d.is-dragging--y .carousel__stage { cursor: ns-resize; }
 
 /* Caption under the ring — reads the active photo's label. */
 .carousel__caption {
@@ -113,6 +170,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  /* No 3D spin — the fallback flat row is used (carousel.js skips is-3d). */
-  .carousel.is-3d .carousel__item:not([data-active]) > img { filter: none; }
+  /* carousel.js skips is-3d under reduced motion, so the flat horizontal-scroll
+     row (top of this file) is used instead — nothing to override here. */
 }
