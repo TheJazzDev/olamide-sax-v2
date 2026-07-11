@@ -32,7 +32,8 @@
   left: 0;
   right: 0;
   z-index: 5;
-  padding: clamp(1.5rem, 5vh, 3.5rem) clamp(1.5rem, 6vw, 6rem) 0;
+  /* Extra top padding so the heading clears the fixed MENU button. */
+  padding: clamp(4.5rem, 9vh, 7rem) clamp(1.5rem, 6vw, 6rem) 0;
   pointer-events: none;   /* never block the panels/scroll */
 }
 .craft__intro .sec-head__title {
@@ -112,19 +113,15 @@
   z-index: 2;
   max-width: 40rem;
 }
-.craft-panel__num {
-  font-family: var(--font-label);
-  font-size: var(--step--1);
-  letter-spacing: var(--tracking-label);
-  color: var(--accent-lit);
-}
+/* Number removed per request — kept as a no-op if any markup still has it. */
+.craft-panel__num { display: none; }
 .craft-panel__word {
   font-family: var(--font-display);
   font-weight: var(--display-weight);
   font-size: clamp(2.75rem, 8vw, 7rem);
   line-height: 0.95;
-  color: var(--text);
-  margin: 0.15em 0 0.35em;
+  color: var(--accent-lit);   /* GOLD, not white */
+  margin: 0 0 0.35em;
 }
 .craft-panel__copy {
   color: var(--bone);
