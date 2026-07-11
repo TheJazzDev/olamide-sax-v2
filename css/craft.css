@@ -37,7 +37,13 @@
 }
 .craft__intro .sec-head__title {
   margin-top: var(--space-sm);
-  max-width: 18ch;
+  max-width: none;
+  white-space: nowrap;          /* keep "Three voices, one performer." on ONE line */
+  font-size: clamp(1.5rem, 4.2vw, 3.25rem);
+}
+@media (max-width: 600px) {
+  /* On very narrow screens let it wrap rather than overflow. */
+  .craft__intro .sec-head__title { white-space: normal; }
 }
 
 /* Fallback (no GSAP): panels just stack vertically and scroll normally. */
