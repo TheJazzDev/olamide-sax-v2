@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="css/components.css" />
   <link rel="stylesheet" href="css/home.css" />
   <link rel="stylesheet" href="css/craft.css" />
-  <link rel="stylesheet" href="css/reel.css" />
+  <link rel="stylesheet" href="css/carousel.css" />
   <link rel="stylesheet" href="css/animations.css" />
   <link rel="stylesheet" href="css/motion.css" />
   <link rel="stylesheet" href="css/media-motion.css" />
@@ -494,52 +494,76 @@
         </div>
       </div>
 
-      <!-- Auto-drifting editorial reel — full-bleed. reel.js drives the drift
-           (+scroll velocity); track is duplicated for a seamless loop. Falls
-           back to a native horizontal-scroll strip if JS/GSAP is off. -->
-      <div class="reel" data-reel aria-label="Live performance photographs">
-        <div class="reel__track" data-reel-track>
-          <figure class="reel__item reel__item--tall">
-            <div class="reel__media"><img src="assets/images/gallery/sax-bw-01.jpg" alt="Olamide Sax mid-performance on saxophone." loading="lazy" /></div>
-            <figcaption class="reel__cap"><span>Portrait</span> In performance</figcaption>
-          </figure>
-          <figure class="reel__item reel__item--wide">
-            <div class="reel__media"><img src="assets/images/gallery/festival-close-01.jpg" alt="Close-up of Olamide Sax mid-solo at Sharrow Festival." loading="lazy" /></div>
-            <figcaption class="reel__cap"><span>Sharrow Festival</span> In full cry</figcaption>
-          </figure>
-          <figure class="reel__item reel__item--std">
-            <div class="reel__media"><img src="assets/images/gallery/sbc-stage-01.jpg" alt="Olamide Sax on the Stand &amp; Be Counted procession stage." loading="lazy" /></div>
-            <figcaption class="reel__cap"><span>Stand &amp; Be Counted</span> The procession</figcaption>
-          </figure>
-          <figure class="reel__item reel__item--tall">
-            <div class="reel__media"><img src="assets/images/gallery/sax-motion-01.jpg" alt="Olamide Sax in dynamic motion mid-set." loading="lazy" /></div>
-            <figcaption class="reel__cap"><span>Live</span> In motion</figcaption>
-          </figure>
-          <figure class="reel__item reel__item--wide">
-            <div class="reel__media"><img src="assets/images/gallery/sheffield-01.jpg" alt="Performing in Sheffield before civic dignitaries." loading="lazy" /></div>
-            <figcaption class="reel__cap"><span>Sheffield</span> Peace Gardens</figcaption>
-          </figure>
-          <figure class="reel__item reel__item--std">
-            <div class="reel__media"><img src="assets/images/gallery/circle-02.jpg" alt="Participants drumming together in a community workshop circle." loading="lazy" /></div>
-            <figcaption class="reel__cap"><span>Participatory</span> The circle</figcaption>
-          </figure>
-          <figure class="reel__item reel__item--tall">
-            <div class="reel__media"><img src="assets/images/gallery/sax-detail-01.jpg" alt="Close detail of the saxophone." loading="lazy" /></div>
-            <figcaption class="reel__cap"><span>Detail</span> The instrument</figcaption>
-          </figure>
-          <figure class="reel__item reel__item--wide">
-            <div class="reel__media"><img src="assets/images/gallery/fashion-01.jpg" alt="Live Afro-fusion saxophone at the Eco Art Fashion Show." loading="lazy" /></div>
-            <figcaption class="reel__cap"><span>Eco Art Fashion Show</span> On the runway</figcaption>
-          </figure>
-          <figure class="reel__item reel__item--std">
-            <div class="reel__media"><img src="assets/images/gallery/drums-stage-01.jpg" alt="Percussion on stage with collaborators." loading="lazy" /></div>
-            <figcaption class="reel__cap"><span>On stage</span> Percussion</figcaption>
-          </figure>
-          <figure class="reel__item reel__item--tall">
-            <div class="reel__media"><img src="assets/images/gallery/portrait-sbc-01.jpg" alt="Portrait against the Stand &amp; Be Counted backdrop." loading="lazy" /></div>
-            <figcaption class="reel__cap"><span>Portrait</span> Held against the blue</figcaption>
-          </figure>
+      <!-- Circular carousel — photos orbit a 3D ring; the front one faces you,
+           large. Drag or scroll to spin; click a photo to bring it to front.
+           carousel.js drives it. PE: a native horizontal-scroll strip if JS
+           /GSAP off (the .carousel__stage falls back to a flat scroll row). -->
+      <div class="carousel" data-carousel aria-label="Live performance photographs" aria-roledescription="carousel">
+        <div class="carousel__stage" data-carousel-stage>
+          <div class="carousel__ring" data-carousel-ring>
+            <button class="carousel__item" type="button" data-carousel-item
+              data-src="Portrait — In performance">
+              <img src="assets/images/gallery/sax-bw-01.jpg" alt="Olamide Sax mid-performance on saxophone." loading="lazy" />
+            </button>
+            <button class="carousel__item" type="button" data-carousel-item
+              data-src="Sharrow Festival — In full cry">
+              <img src="assets/images/gallery/festival-close-01.jpg" alt="Close-up of Olamide Sax mid-solo at Sharrow Festival." loading="lazy" />
+            </button>
+            <button class="carousel__item" type="button" data-carousel-item
+              data-src="Stand & Be Counted — The procession">
+              <img src="assets/images/gallery/sbc-stage-01.jpg" alt="Olamide Sax on the Stand &amp; Be Counted procession stage." loading="lazy" />
+            </button>
+            <button class="carousel__item" type="button" data-carousel-item
+              data-src="Live — In motion">
+              <img src="assets/images/gallery/sax-motion-01.jpg" alt="Olamide Sax in dynamic motion mid-set." loading="lazy" />
+            </button>
+            <button class="carousel__item" type="button" data-carousel-item
+              data-src="Sheffield — Peace Gardens">
+              <img src="assets/images/gallery/sheffield-01.jpg" alt="Performing in Sheffield before civic dignitaries." loading="lazy" />
+            </button>
+            <button class="carousel__item" type="button" data-carousel-item
+              data-src="Participatory — The circle">
+              <img src="assets/images/gallery/circle-02.jpg" alt="Participants drumming together in a community workshop circle." loading="lazy" />
+            </button>
+            <button class="carousel__item" type="button" data-carousel-item
+              data-src="Detail — The instrument">
+              <img src="assets/images/gallery/sax-detail-01.jpg" alt="Close detail of the saxophone." loading="lazy" />
+            </button>
+            <button class="carousel__item" type="button" data-carousel-item
+              data-src="Eco Art Fashion Show — On the runway">
+              <img src="assets/images/gallery/fashion-01.jpg" alt="Live Afro-fusion saxophone at the Eco Art Fashion Show." loading="lazy" />
+            </button>
+            <button class="carousel__item" type="button" data-carousel-item
+              data-src="On stage — Percussion">
+              <img src="assets/images/gallery/drums-stage-01.jpg" alt="Percussion on stage with collaborators." loading="lazy" />
+            </button>
+            <button class="carousel__item" type="button" data-carousel-item
+              data-src="Portrait — Held against the blue">
+              <img src="assets/images/gallery/portrait-sbc-01.jpg" alt="Portrait against the Stand &amp; Be Counted backdrop." loading="lazy" />
+            </button>
+            <button class="carousel__item" type="button" data-carousel-item
+              data-src="The Hall — Full flight">
+              <img src="assets/images/gallery/sax-hall-01.jpg" alt="Olamide Sax performing in a grand hall." loading="lazy" />
+            </button>
+            <button class="carousel__item" type="button" data-carousel-item
+              data-src="The Market — Playing the street">
+              <img src="assets/images/gallery/sax-market-01.jpg" alt="Playing saxophone in a bustling market." loading="lazy" />
+            </button>
+            <button class="carousel__item" type="button" data-carousel-item
+              data-src="Workshop — Hands on the drum">
+              <img src="assets/images/gallery/workshop-01.jpg" alt="Community workshop, hands on the drums." loading="lazy" />
+            </button>
+            <button class="carousel__item" type="button" data-carousel-item
+              data-src="Sharrow Festival — Into the crowd">
+              <img src="assets/images/gallery/festival-dance-01.jpg" alt="Dancing into the festival crowd." loading="lazy" />
+            </button>
+            <button class="carousel__item" type="button" data-carousel-item
+              data-src="Stand & Be Counted — Under the lights">
+              <img src="assets/images/gallery/sbc-stage-03.jpg" alt="On the Stand &amp; Be Counted stage under the lights." loading="lazy" />
+            </button>
+          </div>
         </div>
+        <p class="carousel__caption" data-carousel-caption aria-live="polite"></p>
       </div>
     </section>
 
@@ -693,7 +717,7 @@
         <div class="site-footer__contact">
           <p class="label">Contact</p>
           <ul class="stack-sm">
-            <li><a class="link-underline" href="mailto:Olaniyanolamidephillip@gmail.com">Olaniyanolamidephillip@gmail.com</a></li>
+            <li><a class="link-underline" href="mailto:olaniyanolamidephillip@gmail.com">olaniyanolamidephillip@gmail.com</a></li>
             <li class="text-muted">United Kingdom</li>
           </ul>
         </div>
