@@ -22,6 +22,7 @@ import { initMediaMotion, initYouTubeFacades } from "./media-motion.js";
 import { initHeroAudio } from "./heroAudio.js";
 import { initCraft } from "./craft.js";
 import { initHeroIntro } from "./heroIntro.js";
+import { initReel } from "./reel.js";
 
 function setFooterYear() {
   const yearEl = $("[data-year]");
@@ -91,6 +92,8 @@ function init() {
   // The Craft horizontal scroll (canonical GSAP pinned-horizontal recipe).
   // Self-gates: no-ops under reduced-motion / GSAP-absent / mobile.
   initCraft();
+  // The Live Wall auto-drifting reel — self-gates (reduced-motion / GSAP-absent).
+  initReel();
 }
 
 if (document.readyState === "loading") {

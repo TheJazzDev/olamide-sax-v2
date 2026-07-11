@@ -1,0 +1,99 @@
+/* ============================================================================
+   reel.css — Olamide Sax V3 · "The Live Wall" auto-drifting editorial reel
+   ----------------------------------------------------------------------------
+   A full-bleed horizontal strip of live photos at VARIED heights, vertically
+   staggered for editorial rhythm (Kononenko-style). reel.js drifts the track
+   continuously and adds speed/direction from scroll velocity; the track is
+   duplicated for a seamless loop.
+
+   PROGRESSIVE ENHANCEMENT: with JS/GSAP off, the reel is a native horizontal
+   scroll strip (overflow-x:auto) — all photos reachable, fully usable.
+   ========================================================================== */
+
+.featured-gallery {
+  padding-block: clamp(4rem, 10vh, 8rem);
+  overflow: hidden;              /* the drifting track must not cause page scroll */
+}
+
+.reel {
+  margin-top: clamp(2rem, 5vh, 3.5rem);
+  /* Fallback (no JS): native horizontal scroll. */
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+}
+.reel::-webkit-scrollbar { display: none; }
+
+/* When reel.js takes over, it drives the transform → clip the overflow. */
+.reel.is-live { overflow: hidden; }
+
+.reel__track {
+  display: flex;
+  align-items: center;           /* vertical centre; items stagger via margins */
+  gap: clamp(1rem, 2.5vw, 2.5rem);
+  width: max-content;
+  padding-inline: clamp(1.5rem, 6vw, 6rem);
+  will-change: transform;
+}
+
+/* ── A single reel item — varied sizes + a staggered vertical offset ─────── */
+.reel__item {
+  position: relative;
+  flex: 0 0 auto;
+  margin: 0;
+}
+.reel__media {
+  overflow: hidden;
+  background: var(--umber);
+  border: var(--border-width) solid var(--hairline);
+}
+.reel__media > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.98) contrast(1.03);
+  transition: transform 0.7s var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .reel__item:hover .reel__media > img { transform: scale(1.05); }
+}
+
+/* Varied sizes (editorial). Heights differ; the vertical stagger creates rhythm. */
+.reel__item--tall .reel__media { width: clamp(16rem, 26vw, 24rem); aspect-ratio: 3 / 4; }
+.reel__item--std  .reel__media { width: clamp(18rem, 30vw, 30rem); aspect-ratio: 4 / 3; }
+.reel__item--wide .reel__media { width: clamp(22rem, 38vw, 40rem); aspect-ratio: 16 / 10; }
+
+/* Stagger: nudge alternating items up / down off the centre line. */
+.reel__item:nth-child(3n + 1) { transform: translateY(-1.4rem); }
+.reel__item:nth-child(3n + 2) { transform: translateY(1.8rem); }
+.reel__item:nth-child(3n + 3) { transform: translateY(-0.6rem); }
+
+/* Hung caption under each frame. */
+.reel__cap {
+  margin-top: var(--space-sm);
+  font-size: var(--step--1);
+  color: var(--bone);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.reel__cap span {
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--accent-lit);      /* gold source label */
+}
+
+@media (max-width: 640px) {
+  /* Calmer on small screens: smaller frames, less stagger. */
+  .reel__item--tall .reel__media { width: 12rem; }
+  .reel__item--std  .reel__media { width: 15rem; }
+  .reel__item--wide .reel__media { width: 18rem; }
+  .reel__item { transform: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* No drift — native horizontal scroll, no auto-motion. */
+  .reel.is-live { overflow-x: auto; overflow-y: hidden; }
+}
