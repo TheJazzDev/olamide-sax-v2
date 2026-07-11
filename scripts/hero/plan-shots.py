@@ -161,7 +161,7 @@ def build_plan(moments, durations):
             dur = 3.2 + (5.0 - 3.2) * ((t - 0.5) / 0.5)
         dur = round(min(dur, MAX_SHOT_DUR), 1)
         # Slow-mo eases off through the film: dreamy open, lively finish.
-        speed = round(0.64 + (0.96 - 0.64) * t, 2)
+        speed = round(0.60 + (0.90 - 0.64) * t, 2)
         # Keep the shot inside the video (dur is SOURCE seconds).
         if start + dur > durations[src]:
             start = max(0.0, durations[src] - dur - 0.2)

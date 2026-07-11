@@ -39,7 +39,8 @@ hand-edit shots.txt or re-derive the recipe**. The user is non-technical.
   outside sections.
 - Ambient audio is ON BY DEFAULT as far as browsers allow (user's explicit
   wish): `js/heroAudio.js` tries autoplay, else starts on the visitor's first
-  tap/click/keypress anywhere; the `.sound-toggle` pill mutes (respected for
-  the rest of the visit). Plays at volume 0.4 and rate 0.95 (5% slow, pitch
-  preserved) to sit with the slow-motion film. True unprompted autoplay is
-  impossible (browser policy) — do not promise it.
+  tap/click/keypress anywhere; the `.sound-toggle` pill (speaker icon +
+  equalizer bars while playing) mutes. The choice PERSISTS across visits in
+  localStorage (`olamide-hero-sound` = "on" | "muted"). Volume/rate constants
+  live at the top of `js/heroAudio.js` (user tunes these themselves). True
+  unprompted autoplay is impossible (browser policy) — do not promise it.

@@ -794,13 +794,24 @@
 .sound-toggle:hover { color: var(--brass-light); border-color: rgb(var(--brass-rgb) / 0.5); }
 .sound-toggle[aria-pressed="true"] { color: var(--brass); border-color: rgb(var(--brass-rgb) / 0.6); }
 
-/* Three tiny "equalizer" bars — still when muted, breathing when playing. */
-.sound-toggle__bars {
+/* Speaker icon — waves while playing, slashed while muted. */
+.sound-toggle__icon {
   display: inline-flex;
+  align-items: center;
+}
+.sound-toggle__icon .sound-toggle__icon-on { display: none; }
+.sound-toggle__icon .sound-toggle__icon-off { display: block; }
+.sound-toggle[aria-pressed="true"] .sound-toggle__icon-on { display: block; }
+.sound-toggle[aria-pressed="true"] .sound-toggle__icon-off { display: none; }
+
+/* Three tiny "equalizer" bars — only shown (breathing) while playing. */
+.sound-toggle__bars {
+  display: none;
   align-items: flex-end;
   gap: 2px;
   height: 12px;
 }
+.sound-toggle[aria-pressed="true"] .sound-toggle__bars { display: inline-flex; }
 .sound-toggle__bars i {
   width: 2px;
   height: 4px;
