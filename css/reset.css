@@ -156,3 +156,20 @@ main {
     scroll-behavior: auto !important;
   }
 }
+
+/* Page-to-page transitions ------------------------------------------------- */
+/* Cross-document View Transitions: same-origin navigations cross-fade instead
+   of hard-cutting (Chrome/Safari; other browsers keep the instant swap).
+   Both the outgoing and incoming page carry this rule (shared stylesheet),
+   which is what the opt-in requires. */
+@view-transition {
+  navigation: auto;
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.3s;
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) { animation: none; }
+}

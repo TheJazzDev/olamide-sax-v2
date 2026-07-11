@@ -337,6 +337,7 @@ textarea.form-field__control {
 }
 
 .site-nav__wordmark--footer {
+  /* Modest — the giant sign-off below carries the brand statement. */
   font-size: var(--step-2);
 }
 
@@ -452,7 +453,9 @@ textarea.form-field__control {
   pointer-events: none;
 }
 
-/* The sliding panel itself. */
+/* The sliding panel itself — DEEP BRONZE (gold mixed well into black). A
+   distinct surface that still lives in the site's dark mood; text stays the
+   native bone/brass palette. */
 .menu-overlay__frame {
   position: absolute;
   top: 0;
@@ -460,15 +463,37 @@ textarea.form-field__control {
   height: 100%;
   height: 100dvh;
   width: 100%;
-  background: var(--bg);
+  background: var(--gold-deep);
+  border-left: 1px solid rgb(var(--brass-rgb) / 0.4);
+  color: var(--text);
   overflow-y: auto;
   transform: translateX(100%);
   transition: transform 0.42s var(--ease-out);
   box-shadow: -40px 0 80px -20px rgb(var(--ink-rgb) / 0.6);
 }
 @media (min-width: 768px) {
-  .menu-overlay__frame { width: 50vw; max-width: 620px; }
+  .menu-overlay__frame { width: min(42vw, 600px); }
 }
+
+/* ── Bronze-drawer theme ──────────────────────────────────────────────────── */
+/* Focus rings inside the panel: quiet bone hairline, not the boxed "alarm". */
+.menu-overlay__frame :focus-visible,
+.menu-overlay .nav-toggle--close:focus-visible {
+  outline: 1px solid rgb(var(--bone-rgb) / 0.55);
+  outline-offset: 3px;
+}
+.menu-overlay .nav-toggle--close {
+  background: transparent;
+  border-color: rgb(var(--bone-rgb) / 0.3);
+  color: var(--text);
+}
+.menu-overlay .nav-toggle--close:hover,
+.menu-overlay .nav-toggle--close:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent-lit);
+}
+/* The .label class carries its own muted grey — inherit the button color. */
+.menu-overlay .nav-toggle--close .nav-toggle__label { color: inherit; }
 
 .menu-overlay[data-open] {
   visibility: visible;
@@ -516,15 +541,22 @@ textarea.form-field__control {
 }
 
 .menu-overlay__item {
+  /* Positioning context for the stretched link — the WHOLE row is clickable
+     (the anchor's ::before covers the item). */
+  position: relative;
   display: flex;
   align-items: baseline;
   gap: var(--space-md);
   padding-block: var(--space-xs);
-  border-bottom: 1px solid var(--hairline-soft);
+  border-bottom: 1px solid rgb(var(--bone-rgb) / 0.14);
+  transition: background-color 0.25s ease;
+}
+.menu-overlay__item:hover {
+  background-color: rgb(var(--bone-rgb) / 0.05);
 }
 
 .menu-overlay__item:first-child {
-  border-top: 1px solid var(--hairline-soft);
+  border-top: 1px solid rgb(var(--bone-rgb) / 0.14);
 }
 
 @media (min-width: 640px) {
@@ -566,67 +598,54 @@ textarea.form-field__control {
   }
 }
 
-.menu-overlay__index {
-  font-size: var(--step--1);
-  color: var(--muted);
-  min-width: 2ch;
-}
-
-/* Active page: the current nav item, brass + drawn underline. */
+/* Active page: lit brass + a small checkmark after the name (no underline). */
 .menu-overlay__link[aria-current="page"] {
   color: var(--accent-lit);
 }
 .menu-overlay__link[aria-current="page"]::after {
-  transform: scaleX(1);
-}
-.menu-overlay__item:has(.menu-overlay__link[aria-current="page"]) .menu-overlay__index {
-  color: var(--accent);
+  content: "✓";
+  display: inline-block;
+  margin-left: 0.4em;
+  font-family: var(--font-body);
+  font-size: 0.5em;
+  font-weight: 600;
+  vertical-align: 0.5em;
 }
 
 .menu-overlay__link {
-  position: relative;
+  /* static, NOT relative — its ::before stretches to the positioned ITEM,
+     making the whole row the click target. */
+  position: static;
   display: inline-block;
   font-family: var(--font-display);
   font-weight: var(--display-weight);
-  /* Sized to fit the ~half-screen panel — the longest item ("Artistic
-     Practice") must not overflow. */
+  /* Sized to fit the side panel — the longest item ("Artistic Practice")
+     must not overflow. */
   font-size: clamp(1.6rem, 4.5vw, 2.75rem);
   line-height: 1.05;
   letter-spacing: var(--tracking-display);
-  color: var(--text);
+  color: rgb(var(--bone-rgb) / 0.85);
   text-decoration: none;
   padding-bottom: 0.08em;
   min-width: 0;
+  transition: color var(--dur-base) var(--ease-out);
 }
 
-.menu-overlay__link::after {
+/* Stretched link: covers the whole .menu-overlay__item row. */
+.menu-overlay__link::before {
   content: "";
   position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 2px;
-  background: var(--accent);
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform var(--dur-base) var(--ease-out),
-              letter-spacing var(--dur-base) var(--ease-out);
+  inset: 0;
 }
 
 .menu-overlay__link:hover,
 .menu-overlay__link:focus-visible {
-  letter-spacing: 0.01em;
   color: var(--accent-lit);
 }
 
-.menu-overlay__link:hover::after,
-.menu-overlay__link:focus-visible::after {
-  transform: scaleX(1);
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .menu-overlay__link,
-  .menu-overlay__link::after { transition: none; }
+  .menu-overlay__link { transition: none; }
+  .menu-overlay__item { transition: none; }
 }
 
 /* Aside: CTA, contact, socials ------------------------------------------------ */
@@ -636,6 +655,8 @@ textarea.form-field__control {
   flex-direction: column;
   align-items: flex-start;
   gap: var(--space-lg);
+  /* Pin to the bottom of the panel (body is a flex column that fills it). */
+  margin-top: auto;
 }
 
 @media (min-width: 1024px) {
@@ -659,8 +680,28 @@ textarea.form-field__control {
   word-break: break-word;
 }
 
+/* Socials: a quiet row of circular ICON buttons at the panel's foot. */
 .menu-overlay__socials {
-  gap: var(--space-md);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+.menu-overlay__social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgb(var(--bone-rgb) / 0.25);
+  border-radius: 999px;
+  color: rgb(var(--bone-rgb) / 0.75);
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+.menu-overlay__social svg { display: block; }
+.menu-overlay__social:hover,
+.menu-overlay__social:focus-visible {
+  color: var(--accent-lit);
+  border-color: rgb(var(--brass-rgb) / 0.6);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -680,14 +721,75 @@ textarea.form-field__control {
    9 · SITE FOOTER  (editorial colophon)
    ========================================================================== */
 
+/* DEEP-BRONZE footer — the CODA. The same surface as the menu drawer, so
+   the two bookend the ink site. Structured columns up top; the site signs
+   off on a colossal cropped wordmark — the final note. */
 .site-footer {
   position: relative;
-  border-top: var(--border-width) solid var(--hairline);
-  /* Reserve bottom space for the fixed film-frame corner labels
-     (UK / NIGERIA · EST. 2026) so the footer bottom-bar never collides
-     with them at end-of-scroll. */
-  padding-block: var(--space-2xl)
-    calc(var(--frame-inset) + var(--corner-pad) + 2.5rem);
+  overflow: hidden;                      /* crops the giant sign-off */
+  background: var(--gold-deep);
+  border-top: 1px solid rgb(var(--brass-rgb) / 0.4);
+  color: var(--text);
+  padding-block: var(--space-2xl) 0;     /* the sign-off IS the bottom edge */
+}
+
+/* "Coda" seam — the movement label the whole site uses, closing the set. */
+.site-footer__coda {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-2xl);
+}
+.site-footer__coda-label {
+  font-family: var(--font-label);
+  font-size: var(--step--1);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.site-footer__coda::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgb(var(--brass-rgb) / 0.55), rgb(var(--brass-rgb) / 0.05));
+}
+
+/* The sign-off — the name as the final note. Full-bleed, cropped by the
+   bottom edge, brass fading into the dark like a held note decaying. */
+.site-footer__signoff {
+  margin-top: var(--space-2xl);
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-size: clamp(4rem, 16.5vw, 17rem);
+  line-height: 0.8;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+  text-align: center;
+  transform: translateY(10%);
+  user-select: none;
+  pointer-events: none;
+  background: linear-gradient(180deg,
+    rgb(var(--bone-rgb) / 0.9) 0%,
+    var(--brass-light) 34%,
+    var(--brass) 62%,
+    rgb(var(--brass-rgb) / 0.12) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.site-footer__signoff-accent {
+  font-style: italic;
+}
+
+/* Section labels (EXPLORE / CONTACT / FOLLOW): small caps, but BRASS — they
+   structure the footer instead of whispering. */
+.site-footer .label {
+  color: var(--accent);
+}
+
+.site-footer :focus-visible {
+  outline: 1px solid rgb(var(--bone-rgb) / 0.55);
+  outline-offset: 3px;
 }
 
 .site-footer__top {
@@ -702,7 +804,7 @@ textarea.form-field__control {
 
 @media (min-width: 1024px) {
   .site-footer__top {
-    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    grid-template-columns: 1.6fr 1fr 1fr;
     gap: var(--space-xl);
   }
 }
@@ -710,24 +812,56 @@ textarea.form-field__control {
 .site-footer__brand { max-width: 32ch; }
 
 .site-footer__tagline {
-  font-size: var(--step--1);
+  font-size: var(--step-0);
   line-height: var(--leading-loose);
 }
 
-.site-footer__links ul,
 .site-footer__contact ul {
-  margin-top: var(--space-sm);
-  font-size: var(--step--1);
+  margin-top: var(--space-md);
 }
 
-.site-footer__links a,
-.site-footer__contact a {
-  color: var(--muted);
-  font-size: var(--step--1);
+/* ── The Explore RAIL: all pages in one horizontal editorial line, brass
+   dots between — reads like a set list on one breath. Wraps on mobile. ── */
+.site-footer__explore {
+  margin-bottom: var(--space-2xl);
+}
+.site-footer__explore ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: var(--space-md);
+  row-gap: var(--space-xs);
+}
+.site-footer__explore li {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-md);
+}
+.site-footer__explore li + li::before {
+  content: "·";
+  color: var(--accent);
+  font-size: var(--step-1);
+}
+.site-footer__explore a {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-size: clamp(1.3rem, 1.1rem + 1vw, 2rem);
+  line-height: 1.2;
+  color: rgb(var(--bone-rgb) / 0.8);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+.site-footer__explore a:hover,
+.site-footer__explore a:focus-visible {
+  color: var(--accent-lit);
 }
 
-.site-footer__links a:hover,
-.site-footer__links a:focus-visible,
+.site-footer__contact a,
+.site-footer__contact li {
+  color: rgb(var(--bone-rgb) / 0.75);
+  font-size: var(--step-0);
+}
+
 .site-footer__contact a:hover,
 .site-footer__contact a:focus-visible {
   color: var(--accent-lit);
@@ -735,7 +869,7 @@ textarea.form-field__control {
 
 .site-footer__rule {
   border: none;
-  border-top: 1px solid var(--hairline-soft);
+  border-top: 1px solid rgb(var(--bone-rgb) / 0.15);
   margin-block: var(--space-xl);
 }
 

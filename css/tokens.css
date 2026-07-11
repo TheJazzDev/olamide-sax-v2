@@ -30,6 +30,9 @@
   --bg:            var(--ink);      /* dominant background            */
   --bg-raised:     var(--umber);    /* raised surface                 */
   --bg-invert:     var(--bone);     /* light "movement" interludes    */
+  /* Deep-bronze "gold" surface (brass mixed well into black) — the menu
+     drawer + footer share it. Dark enough for bone text, still clearly gold. */
+  --gold-deep: linear-gradient(168deg, #5C4520 0%, #4A3719 48%, #33260F 100%);
   --text:          var(--bone);     /* primary text                   */
   --text-invert:   var(--ink);      /* text on light interludes       */
   --muted:         var(--ash);      /* secondary / captions           */

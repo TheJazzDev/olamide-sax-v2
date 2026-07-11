@@ -19,12 +19,13 @@ Music**. Afro-fusion practice rooted in Yoruba percussion, spanning gospel, Afri
 contemporary, and repertoire performance.
 
 **Primary audiences**
+
 1. **Bookers / event organisers** (weddings, corporate, church, civic, cultural) — need to
    feel his calibre fast and reach a booking path.
 2. **Press / cultural programmers** — need credibility, coverage, and a media contact.
 3. **Fans / general public** — want to watch, listen, and follow.
 
-**The site's single job:** make a visitor *feel* they've entered the world of a serious
+**The site's single job:** make a visitor _feel_ they've entered the world of a serious
 performing artist — then convert that feeling into a booking or a follow.
 
 ---
@@ -39,7 +40,7 @@ warmth, ceremony) with a bold, contemporary, kinetic digital aesthetic — **Afr
 Rhythm**. It is loud where it should celebrate, and quiet where it should let his artistry
 breathe.
 
-This is not a portfolio template with his content poured in. It is a designed *experience*
+This is not a portfolio template with his content poured in. It is a designed _experience_
 with a narrative spine: **Roots → Practice → Stage → Recognition → Booking.**
 
 ---
@@ -92,16 +93,16 @@ break the grid, and beat-synced micro-motion on the hero.
 
 CSS custom properties; dark-first (the stage is dark).
 
-| Token | Hex | Role |
-|---|---|---|
-| `--indigo` | `#12101F` | Primary ground (stage) |
-| `--indigo-deep` | `#0A0912` | Deepest black-navy for contrast |
-| `--gold` | `#C9A227` | Signature accent / brass through-line |
-| `--gold-light` | `#E8D48B` | Pale gold highlight |
-| `--terra` | `#D2552E` | Heritage warmth / energy accent |
-| `--teal` | `#2EC4B6` | Cool electric accent (the "futurist" edge) |
-| `--cream` | `#F3EDE1` | Primary text on dark |
-| `--dim` | `#8C8578` | Muted text / captions |
+| Token           | Hex       | Role                                       |
+| --------------- | --------- | ------------------------------------------ |
+| `--indigo`      | `#12101F` | Primary ground (stage)                     |
+| `--indigo-deep` | `#0A0912` | Deepest black-navy for contrast            |
+| `--gold`        | `#C9A227` | Signature accent / brass through-line      |
+| `--gold-light`  | `#E8D48B` | Pale gold highlight                        |
+| `--terra`       | `#D2552E` | Heritage warmth / energy accent            |
+| `--teal`        | `#2EC4B6` | Cool electric accent (the "futurist" edge) |
+| `--cream`       | `#F3EDE1` | Primary text on dark                       |
+| `--dim`         | `#8C8578` | Muted text / captions                      |
 
 - **Boldness spent in one place:** gold is the constant through-line; terracotta and teal
   are used sparingly as punctuation (a chip, a rule, a caption mark), never evenly spread.
@@ -133,6 +134,7 @@ GSAP + free plugins (ScrollTrigger, ScrollSmoother where licensed-free alternati
 Observer, plus a split-text approach using free tooling).
 
 Prepared/premium interactions:
+
 - **Cinematic page load** — staged reveal of the hero (grain settle, letters rise, gold sweep).
 - **Scroll-driven storytelling** — sections reveal in sequence as narrative beats.
 - **Split-text reveals** — headline letters/lines animate in.
@@ -170,20 +172,20 @@ Each section has a single narrative purpose; no section exists just to hold cont
 
 Seven pages (mirrors current IA; reimagined):
 
-- **Home** *(Afro-Futurist)* — cinematic hero · one-line identity + CTA · marquee genre strip ·
+- **Home** _(Afro-Futurist)_ — cinematic hero · one-line identity + CTA · marquee genre strip ·
   "The Live World" horizontal gallery · Roots teaser · career-highlight feature (Mayor of
   Doncaster) · booking CTA.
-- **About** *(Midnight Brass / cinematic)* — biography as numbered "movements" (Origin · Stage ·
+- **About** _(Midnight Brass / cinematic)_ — biography as numbered "movements" (Origin · Stage ·
   Honour · Present) with split-text and spotlight; portrait as museum print; identity statement.
 - **Artistic Practice** — genre world: African Contemporary (primary), Gospel & Instrumental
   Worship, Repertoire; "The Sound" list; performance contexts (church/cultural/civic/private).
 - **Performances** — featured highlight (distinguished leaders) · career highlights grid ·
   Lammy Wonder Music + services · testimonial.
-- **Media** *(Afro-Futurist gallery)* — tabs: Videos · Audio · Photos, with video categories
+- **Media** _(Afro-Futurist gallery)_ — tabs: Videos · Audio · Photos, with video categories
   (Saxophone/Vocal/Keyboard). Content-driven from an editable `data.js` (static).
-- **Press** *(Quiet Virtuoso)* — featured coverage (real articles), notable mentions, artist
+- **Press** _(Quiet Virtuoso)_ — featured coverage (real articles), notable mentions, artist
   quote, media-enquiry CTA.
-- **Contact** *(Quiet Virtuoso)* — details · social links · booking form (UI + mailto/endpoint
+- **Contact** _(Quiet Virtuoso)_ — details · social links · booking form (UI + mailto/endpoint
   hook) · "available for" services.
 
 Shared: cinematic **nav** (with mobile full-screen menu) and **footer**.
@@ -193,9 +195,10 @@ Shared: cinematic **nav** (with mobile full-screen menu) and **footer**.
 ## 12. Content Inventory (audited — real, verbatim where possible)
 
 **Identity/branding**
+
 - Name: Olamide Sax (Olaniyan Olamide Phillips). Roles: Vocalist · Saxophonist · Keyboardist.
 - Band: Lammy Wonder Music (Founder & Lead Artist). Location: United Kingdom.
-- Email: Olaniyanolamidephillip@gmail.com
+- Email: olaniyanolamidephillip@gmail.com
 
 **Bio / heritage** — began 2010 in Yoruba percussion (cord/omele, djembe, omele bàtá, talking
 drum); evolved into Afro-fusion (sax, vocals, keyboard, live improvisation); 10+ years experience.
@@ -207,11 +210,12 @@ with **darts** in partnership with **Maya Productions**; Stand & Be Counted (SBC
 Sheffield (before the Lord Mayor).
 
 **Press (real, with URLs)**
-- *New Telegraph* — "Olamide Sax Delivers Afro-Fusion Performance At Black And Minority Ethnic
+
+- _New Telegraph_ — "Olamide Sax Delivers Afro-Fusion Performance At Black And Minority Ethnic
   United Doncaster Event" — https://newtelegraphng.com/olamide-sax-delivers-afro-fusion-performance-at-black-and-minority-ethnic-united-doncaster-event/
-- *The Nation* — "Olamide Sax Thrills Guests at Open Mic" (Utopia Theatre, 1 March 2026) —
+- _The Nation_ — "Olamide Sax Thrills Guests at Open Mic" (Utopia Theatre, 1 March 2026) —
   https://thenationonlineng.net/olamide-sax-thrills-guests-at-open-mic/
-- *New Telegraph* — "Olamide Sax Commands Spotlight Stage in Sheffield, Delivers Stirring
+- _New Telegraph_ — "Olamide Sax Commands Spotlight Stage in Sheffield, Delivers Stirring
   Performance Before Lord Mayor" — https://newtelegraphng.com/olamide-sax-ignites-the-stage-with-stirring-performance-in-sheffield/
 
 **Music** — Audiomack releases referenced: "Gospel Medley", "Vibes Groove Mixtape".
@@ -225,6 +229,7 @@ Sheffield (before the Lord Mayor).
 ## 13. Missing Assets → Placeholder Strategy
 
 Handle gracefully; never remove a section:
+
 - Real video/audio/photo DB content isn't in the repo (was admin-populated at runtime). The
   Media page renders from an editable `data.js` seeded with **known real items** (Audiomack
   releases) + clearly-`TODO`-marked placeholder cards styled to match the design.
@@ -241,9 +246,9 @@ Handle gracefully; never remove a section:
 - **Structure:** self-contained static site in a new top-level folder (proposed: `web/`),
   leaving the existing Next.js app fully intact for reference. No build step required to view.
 - **CSS:** modular — `reset · variables · typography · layout · components · animations ·
-  responsive`. All colour/type/spacing/radius/shadow/motion as CSS custom properties.
+responsive`. All colour/type/spacing/radius/shadow/motion as CSS custom properties.
 - **JS:** ES modules — `main · nav · smooth-scroll · reveal(GSAP) · gallery · tabs · cursor ·
-  data · utils`. Feature-isolated; no monolith files.
+data · utils`. Feature-isolated; no monolith files.
 - **GSAP:** loaded as a self-hosted/local dependency (not required at view-time for base
   content — content is real HTML, so the site is accessible/SEO-friendly without JS).
 - **Assets:** local images optimised; icons as inline SVG (Lucide set extracted); fonts inlined.
@@ -264,7 +269,7 @@ Handle gracefully; never remove a section:
 ## 16. Success Criteria
 
 - Could sit credibly in a modern design gallery (award-worthy craft).
-- Visitor *feels* the artist's world, not just reads facts.
+- Visitor _feels_ the artist's world, not just reads facts.
 - Real content throughout; placeholders on-brand and clearly marked.
 - Smooth (60fps) motion; fully responsive; accessible; reduced-motion honoured.
 - Clear booking/contact conversion path.

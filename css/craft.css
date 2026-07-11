@@ -153,3 +153,90 @@
   .craft.is-stacked .craft-track { position: static; }
   .craft.is-stacked .craft-panel { position: relative; }
 }
+
+/* ============================================================================
+   THE DECK — a colossal GHOST MARQUEE in the bottom letterbox band. It runs
+   RIGHT on its own clock (pure CSS, no scrub) while the panels cover LEFT —
+   two opposing currents. Only exists in the pinned desktop cover-scroll.
+   ========================================================================== */
+.craft__deck { display: none; }
+
+.craft.is-stacked .craft__deck {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 6;                       /* above the panels, like the intro */
+  display: block;
+}
+
+.craft__ghost {
+  overflow: hidden;
+  pointer-events: none;
+  padding-bottom: clamp(0.75rem, 2vh, 1.5rem);
+}
+/* Two identical halves; sliding the track from -50% to 0 loops seamlessly,
+   moving RIGHTWARD forever. */
+.craft__ghost-track {
+  display: flex;
+  width: max-content;
+  animation: craft-ghost-right 60s linear infinite;
+  will-change: transform;
+}
+@keyframes craft-ghost-right {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+.craft__ghost-line {
+  flex-shrink: 0;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-size: clamp(3.5rem, 11vh, 7.5rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgb(var(--bone-rgb) / 0.22);
+}
+@supports not (-webkit-text-stroke: 1px black) {
+  .craft__ghost-line { color: rgb(var(--bone-rgb) / 0.08); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .craft__ghost-track { animation: none; }
+}
+
+/* ── Per-panel CTA — on the video itself (bottom-right of the letterboxed
+   strip), each linking to ITS full performance on the Media page. A real
+   sentence so nobody clicks it blind. ─────────────────────────────────── */
+.craft-panel__cta {
+  position: absolute;
+  right: clamp(1rem, 2.5vw, 2rem);
+  bottom: clamp(1rem, 2.5vh, 1.75rem);
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  white-space: nowrap;
+  min-height: 44px;
+  padding: 0.55rem 1.1rem;
+  border: 1px solid rgb(var(--brass-rgb) / 0.5);
+  border-radius: 999px;
+  font-family: var(--font-label);
+  font-size: var(--step--1);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--bone);
+  background: rgb(var(--ink-rgb) / 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: border-color 0.25s ease, color 0.25s ease, background-color 0.25s ease;
+}
+.craft-panel__cta:hover,
+.craft-panel__cta:focus-visible {
+  border-color: var(--accent-lit);
+  color: var(--accent-lit);
+  background: rgb(var(--ink-rgb) / 0.75);
+}
+.craft-panel__cta-arrow { transition: transform 0.25s ease; }
+.craft-panel__cta:hover .craft-panel__cta-arrow { transform: translateX(4px); }

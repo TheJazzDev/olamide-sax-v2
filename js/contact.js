@@ -18,17 +18,17 @@
    fetch() block will submit the JSON payload. Left inert by design (Task 5).
    ========================================================================== */
 
-import { $, on } from "./utils.js";
+import { $, on } from './utils.js';
 
 /* The single booking address (matches the mailto: links across the site). */
-const BOOKING_EMAIL = "Olaniyanolamidephillip@gmail.com";
+const BOOKING_EMAIL = 'olaniyanolamidephillip@gmail.com';
 
 /* Human labels for the enquiry-type <select> values (used in the subject). */
 const SUBJECT_LABELS = {
-  booking: "Booking enquiry",
-  collaboration: "Collaboration enquiry",
-  media: "Media / Press enquiry",
-  other: "General enquiry",
+  booking: 'Booking enquiry',
+  collaboration: 'Collaboration enquiry',
+  media: 'Media / Press enquiry',
+  other: 'General enquiry',
 };
 
 /* --------------------------------------------------------------------------
@@ -40,19 +40,19 @@ const FORM_ENDPOINT = null; // e.g. "https://formspree.io/f/XXXX"
 /** Build the mailto: href from the collected field values. */
 export function buildMailto(fields) {
   const subjectLabel = SUBJECT_LABELS[fields.subject] || SUBJECT_LABELS.other;
-  const subject = `${subjectLabel} — ${fields.name || "Website enquiry"}`;
+  const subject = `${subjectLabel} — ${fields.name || 'Website enquiry'}`;
 
   const bodyLines = [
     `Name: ${fields.name}`,
     `Email: ${fields.email}`,
     `Enquiry type: ${subjectLabel}`,
-    "",
-    "Message:",
+    '',
+    'Message:',
     fields.message,
-    "",
-    "— Sent from olamidesax.com booking form",
+    '',
+    '— Sent from olamidesax.com booking form',
   ];
-  const body = bodyLines.join("\n");
+  const body = bodyLines.join('\n');
 
   return (
     `mailto:${BOOKING_EMAIL}` +
@@ -65,23 +65,23 @@ export function buildMailto(fields) {
 function readFields(form) {
   const get = (name) => {
     const el = form.elements.namedItem(name);
-    return el ? el.value.trim() : "";
+    return el ? el.value.trim() : '';
   };
   return {
-    name: get("name"),
-    email: get("email"),
-    subject: get("subject") || "booking",
-    message: get("message"),
+    name: get('name'),
+    email: get('email'),
+    subject: get('subject') || 'booking',
+    message: get('message'),
   };
 }
 
 /* Minimal, accessible validation — returns "" when valid, else a message. */
 function validate(fields) {
-  if (!fields.name) return "Please add your name.";
+  if (!fields.name) return 'Please add your name.';
   if (!fields.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email))
-    return "Please add a valid email address.";
-  if (!fields.message) return "Please add a short message.";
-  return "";
+    return 'Please add a valid email address.';
+  if (!fields.message) return 'Please add a short message.';
+  return '';
 }
 
 /* --------------------------------------------------------------------------
@@ -98,16 +98,16 @@ function validate(fields) {
 // }
 
 export function initContact() {
-  const form = $("[data-booking-form]");
+  const form = $('[data-booking-form]');
   if (!form) return; // page-guard
 
-  const status = $("[data-booking-status]");
+  const status = $('[data-booking-status]');
 
   const setStatus = (msg) => {
-    if (status) status.textContent = msg || "";
+    if (status) status.textContent = msg || '';
   };
 
-  on(form, "submit", (event) => {
+  on(form, 'submit', (event) => {
     event.preventDefault();
 
     const fields = readFields(form);
@@ -116,10 +116,10 @@ export function initContact() {
       setStatus(error);
       // Move focus to the first empty required control for keyboard users.
       const firstInvalid =
-        (!fields.name && form.elements.namedItem("name")) ||
+        (!fields.name && form.elements.namedItem('name')) ||
         (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email) &&
-          form.elements.namedItem("email")) ||
-        (!fields.message && form.elements.namedItem("message"));
+          form.elements.namedItem('email')) ||
+        (!fields.message && form.elements.namedItem('message'));
       if (firstInvalid && firstInvalid.focus) firstInvalid.focus();
       return;
     }
@@ -127,7 +127,7 @@ export function initContact() {
     // Default (no backend): compose mailto: and hand off to the email client.
     if (!FORM_ENDPOINT) {
       const href = buildMailto(fields);
-      setStatus("Opening your email app with the message ready to send…");
+      setStatus('Opening your email app with the message ready to send…');
       window.location.href = href;
       return;
     }

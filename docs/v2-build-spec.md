@@ -35,7 +35,7 @@
 
 - **Identity:** Olamide Sax (Olaniyan Olamide Phillips); Vocalist · Saxophonist · Keyboardist;
   UK-based, Nigerian-born; Founder & Lead Artist, Lammy Wonder Music; email
-  Olaniyanolamidephillip@gmail.com; United Kingdom.
+  olaniyanolamidephillip@gmail.com; United Kingdom.
 - **Bio/heritage:** 10+ yrs; began percussionist; 2010 Yoruba percussion (cord/omele, djembe,
   omele bàtá, talking drum) → Afro-fusion (sax/vocals/keyboard/live improvisation).
 - **Events:** ÀTÙPÀ at CAST (opening sax; role "Adigun"); ArtBomb (with The Skintone UK); Black
@@ -57,6 +57,7 @@
 ## Signature: The Breath Line (the defining component)
 
 A single brass SVG/canvas path, driven by GSAP + scroll position/velocity (NO audio/mic):
+
 - **Birth:** draws on load, assembles into a saxophone silhouette, dissolves into the spine.
 - **Journey:** persistent scroll-spine — progress indicator, section connector, timeline, transition
   guide, nav locator. Flows on slow scroll, settles/sustains on pause, peaks at milestones.
@@ -66,6 +67,7 @@ A single brass SVG/canvas path, driven by GSAP + scroll position/velocity (NO au
 ## Information Architecture (fresh IA)
 
 Flat pages at `v2/` root:
+
 - `index.html` — curated homepage (Featured Performance/Video/Gallery/Press + Explore Archive).
 - `media.html` — archive hub → Performances (by year) · Gallery · Videos · Press tabs/sections.
 - `gallery.html` — Photos · Behind the Scenes · Events (scalable grid / venue-walk).
@@ -96,32 +98,28 @@ v2/
 ## Build Phases → Tasks (subagent-driven, review-gated)
 
 **Phase A — Foundation (screens + system)**
+
 1. Scaffold + tokens (V2 palette) + typography + reset + layout grid + the film-frame + base CSS;
    self-host fonts + GSAP; placeholder assets. Temp preview page.
 2. Nav + footer partials + shared components (buttons, links, labels, forms, cards) + nav JS.
 
-**Phase B — Pages (semantic HTML screens, static first)**
-3. Homepage (curated) — all featured sections + hero shell for the Breath Line + Explore Archive.
-   **[CHECKPOINT]**
-4. Media + Gallery + Videos archives (scalable, data-driven) + Press (editorial). 
-5. Timeline + About + Artistic Practice + Contact. **[CHECKPOINT — all pages exist static]**
+**Phase B — Pages (semantic HTML screens, static first)** 3. Homepage (curated) — all featured sections + hero shell for the Breath Line + Explore Archive.
+**[CHECKPOINT]** 4. Media + Gallery + Videos archives (scalable, data-driven) + Press (editorial). 5. Timeline + About + Artistic Practice + Contact. **[CHECKPOINT — all pages exist static]**
 
-**Phase C — GSAP engine (the experience)**
-6. Motion foundation: smooth scroll, kinetic-typography reveals, cursor, progressive-enhancement +
-   reduced-motion plumbing (the `.js-anim-ready` gate).
-7. **The Breath Line** — birth (assembly) → journey (scroll-spine, velocity, peaks, nav locator) →
-   resolution (wordmark). The signature. **[CHECKPOINT]**
-8. Media interactions + immersive transitions + pinned Craft movements + timeline-node unfolds +
-   still→clip / YouTube-facade blooms.
+**Phase C — GSAP engine (the experience)** 6. Motion foundation: smooth scroll, kinetic-typography reveals, cursor, progressive-enhancement +
+reduced-motion plumbing (the `.js-anim-ready` gate). 7. **The Breath Line** — birth (assembly) → journey (scroll-spine, velocity, peaks, nav locator) →
+resolution (wordmark). The signature. **[CHECKPOINT]** 8. Media interactions + immersive transitions + pinned Craft movements + timeline-node unfolds +
+still→clip / YouTube-facade blooms.
 
-**Phase D — Polish**
-9. A11y pass, performance (lazy/facade), responsive sweep, meta/favicons, README. Final review.
+**Phase D — Polish** 9. A11y pass, performance (lazy/facade), responsive sweep, meta/favicons, README. Final review.
 
 ## Out of scope
+
 No backend/DB/admin. No real media (placeholders until Olamide supplies). No framework. Real
 content population is a later, separate pass (drop into `data.js` + marked slots).
 
 ## Verification
+
 Static site, no test runner — each task verifies with concrete browser checks (render + behavior),
 reduced-motion + JS-off/GSAP-fail visibility, no-horizontal-scroll at 375px, and honest screenshots
 at checkpoints. Same review-gate discipline as the V1 build.

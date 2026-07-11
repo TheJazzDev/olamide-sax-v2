@@ -484,3 +484,15 @@
    sits flush to the head — the head already carries the top rhythm. */
 .archive-section.section--flush-top { padding-top: 0; }
 .archive-section__head { margin-bottom: var(--space-lg); }
+
+/* Deep-linked card (arrived via /media.html#v-xx from the home Craft panels):
+   a brief brass pulse so the visitor sees WHICH performance they were sent to. */
+.video-card.is-linked {
+  outline: 1px solid rgb(var(--brass-rgb) / 0.7);
+  outline-offset: 4px;
+  animation: card-linked-pulse 2.6s ease-out;
+}
+@keyframes card-linked-pulse {
+  0%   { outline-color: rgb(var(--brass-rgb) / 0.9); }
+  100% { outline-color: rgb(var(--brass-rgb) / 0); }
+}

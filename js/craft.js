@@ -44,6 +44,10 @@ export function initCraft() {
   // No trailing hold — release promptly once the last panel lands.
   const total = START_HOLD + covers;
 
+  // (The DECK's ghost marquee runs on its own clock — pure CSS animation in
+  //  craft.css — deliberately NOT tied to this scrub, so it keeps drifting
+  //  right even while the visitor pauses mid-section.)
+
   const tl = gsap.timeline({
     defaults: { ease: "power2.inOut" },
     scrollTrigger: {

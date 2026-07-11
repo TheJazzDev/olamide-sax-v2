@@ -41,12 +41,11 @@ export function initHeroAudio() {
 
   const setPressed = (playing) => {
     button.setAttribute("aria-pressed", String(playing));
+    // Icon-only control — the accessible name carries the state for AT.
     button.setAttribute(
       "aria-label",
       playing ? "Mute ambient sound" : "Play ambient sound"
     );
-    const label = $(".sound-toggle__label", button);
-    if (label) label.textContent = playing ? "Mute" : "Sound";
   };
 
   // Muting is a choice we must respect across visits (localStorage) — after

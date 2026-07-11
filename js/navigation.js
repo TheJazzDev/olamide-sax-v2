@@ -112,9 +112,14 @@ export function initNavigation() {
   cleanups.push(on(toggle, "click", toggleOpen));
   if (closeBtn) cleanups.push(on(closeBtn, "click", close));
 
-  // Close when any link inside the overlay is activated.
+  // Close when any link inside the overlay is activated, or when the click
+  // lands on the backdrop (the overlay itself — everywhere outside the panel).
   cleanups.push(
     on(overlay, "click", (event) => {
+      if (event.target === overlay) {
+        close();
+        return;
+      }
       const link = event.target.closest("a[href]");
       if (link) close();
     })

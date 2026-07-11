@@ -49,13 +49,28 @@ function cardMarkup(video) {
       </div>`;
 
   return `
-    <article class="video-card" data-category="${video.category}" data-id="${video.id}">
+    <article class="video-card" id="${video.id}" data-category="${video.category}" data-id="${video.id}">
       ${facade}
       <div class="video-card__foot">
         <h3 class="video-card__title">${video.title}</h3>
         <p class="video-card__meta">${video.meta} · ${video.date}</p>
       </div>
     </article>`;
+}
+
+/* Deep links (e.g. /media.html#v-03 from the home Craft panels): once the
+   grid has rendered, scroll the addressed card into view and pulse it so
+   the visitor sees WHICH performance they were sent to. */
+function scrollToHashCard(grid) {
+  const id = decodeURIComponent(window.location.hash.slice(1));
+  if (!id) return;
+  const card = id && grid.querySelector(`[data-id="${CSS.escape(id)}"]`);
+  if (!card) return;
+  requestAnimationFrame(() => {
+    card.scrollIntoView({ behavior: "smooth", block: "center" });
+    card.classList.add("is-linked");
+    setTimeout(() => card.classList.remove("is-linked"), 2600);
+  });
 }
 
 export function initVideos() {
@@ -111,4 +126,7 @@ export function initVideos() {
   });
 
   setActive(active);
+
+  // Honour deep links from the home Craft panels — AFTER the first render.
+  scrollToHashCard(grid);
 }

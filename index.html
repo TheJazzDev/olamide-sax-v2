@@ -11,6 +11,11 @@
   <link rel="apple-touch-icon" href="/assets/icons/favicon.svg" />
   <meta name="theme-color" content="#0B0A08" />
 
+  <!-- Paint the ink IMMEDIATELY (before stylesheets arrive) — kills the white
+       flash between page loads. color-scheme keeps native UI (scrollbars,
+       form controls) dark from the first frame too. -->
+  <style>html { background-color: #0B0A08; color-scheme: dark; }</style>
+
   <!-- Open Graph / social cards -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Olamide Sax" />
@@ -115,35 +120,27 @@
       <div class="menu-overlay__body">
         <ol class="menu-overlay__links" data-menu-links>
           <li class="menu-overlay__item">
-            <span class="menu-overlay__index numeral">01</span>
             <a class="menu-overlay__link" href="/index.html">Home</a>
           </li>
           <li class="menu-overlay__item">
-            <span class="menu-overlay__index numeral">02</span>
             <a class="menu-overlay__link" href="/about.html">About</a>
           </li>
           <li class="menu-overlay__item">
-            <span class="menu-overlay__index numeral">03</span>
             <a class="menu-overlay__link" href="/artistic-practice.html">Artistic&nbsp;Practice</a>
           </li>
           <li class="menu-overlay__item">
-            <span class="menu-overlay__index numeral">04</span>
             <a class="menu-overlay__link" href="/media.html">Media</a>
           </li>
           <li class="menu-overlay__item">
-            <span class="menu-overlay__index numeral">05</span>
             <a class="menu-overlay__link" href="/gallery.html">Gallery</a>
           </li>
           <li class="menu-overlay__item">
-            <span class="menu-overlay__index numeral">06</span>
             <a class="menu-overlay__link" href="/press.html">Press</a>
           </li>
           <li class="menu-overlay__item">
-            <span class="menu-overlay__index numeral">07</span>
             <a class="menu-overlay__link" href="/timeline.html">Timeline</a>
           </li>
           <li class="menu-overlay__item">
-            <span class="menu-overlay__index numeral">08</span>
             <a class="menu-overlay__link" href="/contact.html">Contact</a>
           </li>
         </ol>
@@ -700,7 +697,7 @@
   <footer class="site-footer">
     <div class="container">
       <p class="site-footer__coda" aria-hidden="true">
-        <span class="site-footer__coda-label">Coda</span>
+        <span class="site-footer__coda-label">Outro</span>
       </p>
 
       <nav class="site-footer__explore" aria-label="Footer">
