@@ -162,38 +162,31 @@
 .carousel.is-3d.is-dragging--y .carousel__stage { cursor: ns-resize; }
 
 /* ── Discovery hint ─────────────────────────────────────────────────────── */
+/* A quiet single line BELOW the wheel — no pill, no box, never over the photos.
+   Fades in shortly after the section appears, and out on first interaction. */
 .carousel__hint {
-  position: absolute;
-  left: 50%;
-  bottom: clamp(0.5rem, 2vh, 1.5rem);
-  transform: translateX(-50%);
-  z-index: 2000;
-  margin: 0;
-  padding: 0.55em 1.1em;
+  margin: clamp(0.75rem, 2vh, 1.5rem) auto 0;
+  text-align: center;
   white-space: nowrap;
-  background: rgb(var(--ink-rgb) / 0.55);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgb(var(--bone-rgb) / 0.14);
-  border-radius: 2rem;
   font-family: var(--font-label);
   text-transform: uppercase;
-  letter-spacing: var(--tracking-label);
-  font-size: clamp(0.58rem, 1.1vw, 0.7rem);
-  color: color-mix(in oklab, var(--bone) 78%, var(--umber));
+  letter-spacing: 0.22em;
+  font-size: clamp(0.56rem, 1vw, 0.66rem);
+  color: color-mix(in oklab, var(--bone) 50%, var(--umber));
   pointer-events: none;
   opacity: 0;
-  animation: carousel-hint-in 0.6s var(--ease-out) 0.9s forwards;
-  transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
+  animation: carousel-hint-in 0.7s var(--ease-out) 1s forwards;
+  transition: opacity 0.5s var(--ease-out);
 }
-.carousel__hint span { color: var(--accent-lit); }
+.carousel__hint span { color: color-mix(in oklab, var(--accent-lit) 85%, var(--bone)); }
+.carousel__hint i { margin: 0 0.5em; color: var(--accent); font-style: normal; }
 @keyframes carousel-hint-in {
-  from { opacity: 0; transform: translateX(-50%) translateY(0.6rem); }
-  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 /* Dismissed after the first interaction. */
 .carousel.hint-gone .carousel__hint {
   opacity: 0;
-  transform: translateX(-50%) translateY(0.6rem);
   animation: none;
 }
 @media (prefers-reduced-motion: reduce) {

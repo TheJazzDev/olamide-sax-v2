@@ -56,15 +56,17 @@ export function initCarousel() {
   // Discovery hint — tells the user the ring is interactive. Fades out on the
   // first drag or click (see dismissHint below). Injected so the fallback markup
   // stays clean.
-  let hintEl = stage.querySelector("[data-carousel-hint]");
+  let hintEl = root.querySelector("[data-carousel-hint]");
   if (!hintEl) {
     hintEl = document.createElement("p");
     hintEl.className = "carousel__hint";
     hintEl.setAttribute("data-carousel-hint", "");
     hintEl.setAttribute("aria-hidden", "true");
     hintEl.innerHTML =
-      `<span>Drag</span> to spin &nbsp;·&nbsp; <span>Click</span> a photo to bring it forward`;
-    stage.appendChild(hintEl);
+      `<span>Drag</span> to spin <i aria-hidden="true">·</i> <span>Click</span> to bring forward`;
+    // Placed BELOW the wheel (in .carousel, after the stage) so it never overlaps
+    // the photos — a quiet cue, not a bar across the ring.
+    root.appendChild(hintEl);
   }
   let hintDismissed = false;
   function dismissHint() {
