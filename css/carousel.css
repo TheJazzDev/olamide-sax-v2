@@ -92,12 +92,10 @@
   object-fit: cover;
   border: var(--border-width) solid var(--hairline);
   box-shadow: 0 24px 50px -18px rgb(var(--ink-rgb) / 0.75);
-  /* All photos read equally bright so every one looks hoverable/clickable. */
+  /* All photos read equally bright so every one looks equally interactive. No
+     hover treatment — hover fought the drag, and the whole ring is draggable. */
   filter: saturate(0.98) contrast(1.03);
-  transform: scale(1);
-  transform-origin: center bottom;
   transition:
-    transform 0.35s var(--ease-out),
     filter 0.35s var(--ease-out),
     border-color 0.35s var(--ease-out),
     box-shadow 0.35s var(--ease-out);
@@ -106,45 +104,52 @@
 /* The front (active) photo gets the brass edge + a touch more pop. */
 .carousel.is-3d .carousel__item[data-active] > img {
   border-color: var(--hairline-brass);
+  box-shadow: 0 30px 64px -18px rgb(var(--ink-rgb) / 0.85);
   filter: saturate(1.04) contrast(1.05) brightness(1.03);
 }
 
-/* Hover: lift the photo (scale its <img> up) so you can feel it's interactive,
-   and don't dim its neighbours. Suppressed while dragging. */
-.carousel.is-3d:not(.is-dragging) .carousel__item:hover > img {
-  transform: scale(1.08);
-  border-color: var(--hairline-brass);
-  box-shadow: 0 34px 70px -20px rgb(var(--ink-rgb) / 0.85);
-  filter: saturate(1.06) contrast(1.05) brightness(1.05);
-}
-
-/* Per-photo caption chip, shown bottom-right on hover. */
+/* Per-photo caption, pinned to the BASE of the image. Shown ONLY on the front
+   (active) photo — no hover. Small, quiet, gradient-anchored so it reads over
+   any photo. */
 .carousel__item-cap {
   position: absolute;
-  right: 0.5rem;
-  bottom: 0.5rem;
-  max-width: 82%;
-  padding: 0.4em 0.7em;
-  background: rgb(var(--ink-rgb) / 0.72);
-  backdrop-filter: blur(6px);
-  color: var(--bone);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 2.6em 0.85em 0.7em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15em;
+  text-align: left;
+  /* A soft dark gradient from the base so the text is legible over any photo. */
+  background: linear-gradient(
+    to top,
+    rgb(var(--ink-rgb) / 0.88) 0%,
+    rgb(var(--ink-rgb) / 0.55) 45%,
+    transparent 100%
+  );
+  opacity: 0;
+  transform: translateY(0.4rem);
+  transition: opacity 0.35s var(--ease-out), transform 0.35s var(--ease-out);
+  pointer-events: none;
+}
+.carousel__item-cap .cap-src {
   font-family: var(--font-label);
   text-transform: uppercase;
   letter-spacing: var(--tracking-label);
-  font-size: var(--step--2);
-  line-height: 1.3;
-  text-align: right;
-  border-radius: 0.35rem;
-  opacity: 0;
-  transform: translateY(0.4rem);
-  transition: opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out);
-  pointer-events: none;
-}
-.carousel__item-cap strong {
+  font-size: clamp(0.6rem, 1.2vw, 0.72rem);
   color: var(--accent-lit);
-  font-weight: inherit;
 }
-.carousel.is-3d:not(.is-dragging) .carousel__item:hover .carousel__item-cap {
+.carousel__item-cap .cap-moment {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: var(--display-weight);
+  font-size: clamp(0.85rem, 1.6vw, 1.05rem);
+  line-height: 1.1;
+  color: var(--bone);
+}
+/* Reveal only on the front photo. */
+.carousel.is-3d .carousel__item[data-active] .carousel__item-cap {
   opacity: 1;
   transform: translateY(0);
 }
@@ -153,21 +158,49 @@
 .carousel.is-3d.is-dragging--x .carousel__stage { cursor: grabbing; }
 .carousel.is-3d.is-dragging--y .carousel__stage { cursor: ns-resize; }
 
-/* Caption under the ring — reads the active photo's label. */
-.carousel__caption {
-  margin-top: clamp(1rem, 3vh, 2rem);
-  text-align: center;
-  min-height: 1.5em;
-  color: var(--bone);
+/* ── Discovery hint ─────────────────────────────────────────────────────── */
+.carousel__hint {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(0.5rem, 2vh, 1.5rem);
+  transform: translateX(-50%);
+  z-index: 2000;
+  margin: 0;
+  padding: 0.55em 1.1em;
+  white-space: nowrap;
+  background: rgb(var(--ink-rgb) / 0.55);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgb(var(--bone-rgb) / 0.14);
+  border-radius: 2rem;
   font-family: var(--font-label);
   text-transform: uppercase;
   letter-spacing: var(--tracking-label);
-  font-size: var(--step--1);
+  font-size: clamp(0.58rem, 1.1vw, 0.7rem);
+  color: color-mix(in oklab, var(--bone) 78%, var(--umber));
+  pointer-events: none;
+  opacity: 0;
+  animation: carousel-hint-in 0.6s var(--ease-out) 0.9s forwards;
+  transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
 }
-.carousel__caption strong {
-  color: var(--accent-lit);    /* gold source label */
-  font-weight: inherit;
+.carousel__hint span { color: var(--accent-lit); }
+@keyframes carousel-hint-in {
+  from { opacity: 0; transform: translateX(-50%) translateY(0.6rem); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
+/* Dismissed after the first interaction. */
+.carousel.hint-gone .carousel__hint {
+  opacity: 0;
+  transform: translateX(-50%) translateY(0.6rem);
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .carousel__hint { animation: none; opacity: 1; }
+}
+
+/* Under-ring caption element retired — the caption now lives on the front photo
+   itself (see .carousel__item-cap). Hidden in the 3D mode so it leaves no gap.
+   (Kept in the DOM for the no-JS flat fallback, which still uses it.) */
+.carousel.is-3d .carousel__caption { display: none; }
 
 @media (prefers-reduced-motion: reduce) {
   /* carousel.js skips is-3d under reduced motion, so the flat horizontal-scroll

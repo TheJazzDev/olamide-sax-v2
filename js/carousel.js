@@ -26,8 +26,10 @@
    Entrance: on scroll-in the photos fly in from scattered off-screen positions
    and assemble into the wheel (one-shot).
 
-   Hover styling (scale-up + bottom-right caption) lives in carousel.css; JS only
-   feeds each photo's caption text into a [data-hover-cap] node.
+   Caption: each photo carries a small caption pinned to the base of the image;
+   CSS reveals it only on the FRONT (active) photo — no hover (hover fought the
+   drag). A one-time hint ("Drag to spin · Click to bring forward") sits at the
+   base of the ring and fades on the first interaction.
 
    PROGRESSIVE ENHANCEMENT: no GSAP / reduced-motion → do nothing; the CSS shows
    a plain horizontal-scroll row of the photos (fully usable).
@@ -50,6 +52,26 @@ export function initCarousel() {
   if (n < 3) return;
 
   root.classList.add("is-3d");
+
+  // Discovery hint — tells the user the ring is interactive. Fades out on the
+  // first drag or click (see dismissHint below). Injected so the fallback markup
+  // stays clean.
+  let hintEl = stage.querySelector("[data-carousel-hint]");
+  if (!hintEl) {
+    hintEl = document.createElement("p");
+    hintEl.className = "carousel__hint";
+    hintEl.setAttribute("data-carousel-hint", "");
+    hintEl.setAttribute("aria-hidden", "true");
+    hintEl.innerHTML =
+      `<span>Drag</span> to spin &nbsp;·&nbsp; <span>Click</span> a photo to bring it forward`;
+    stage.appendChild(hintEl);
+  }
+  let hintDismissed = false;
+  function dismissHint() {
+    if (hintDismissed) return;
+    hintDismissed = true;
+    root.classList.add("hint-gone");
+  }
 
   const step = 360 / n;                       // degrees between photos around rim
   const DEG = Math.PI / 180;
@@ -137,15 +159,16 @@ export function initCarousel() {
       if (i === active) item.setAttribute("data-active", "");
       else item.removeAttribute("data-active");
     });
-    if (captionEl) captionEl.innerHTML = captionHTML(items[active]);
+    // The caption now lives on the front photo itself (base of the image), so the
+    // separate under-ring caption element is no longer used.
   }
 
   function captionHTML(item) {
     const label = item.getAttribute("data-src") || "";
     const [source, moment] = label.split(" — ");
     return moment
-      ? `<strong>${source}</strong> &nbsp; ${moment}`
-      : `<strong>${source}</strong>`;
+      ? `<span class="cap-src">${source}</span><span class="cap-moment">${moment}</span>`
+      : `<span class="cap-src">${source}</span>`;
   }
 
   // Click a photo → ease it to the front by nudging clickRot along the shortest
@@ -164,13 +187,15 @@ export function initCarousel() {
     });
   }
 
-  // Feed each photo its own hover caption (shown bottom-right on hover via CSS).
+  // Give each photo its own caption node, pinned to the base of the image. CSS
+  // reveals it only on the FRONT (active) photo — no hover (hover fought the
+  // drag, and the front photo is what the user is focused on anyway).
   items.forEach((item) => {
-    let cap = item.querySelector("[data-hover-cap]");
+    let cap = item.querySelector("[data-item-cap]");
     if (!cap) {
       cap = document.createElement("span");
       cap.className = "carousel__item-cap";
-      cap.setAttribute("data-hover-cap", "");
+      cap.setAttribute("data-item-cap", "");
       item.appendChild(cap);
     }
     cap.innerHTML = captionHTML(item);
@@ -254,7 +279,7 @@ export function initCarousel() {
   stage.addEventListener("click", (e) => {
     if (root.classList.contains("was-dragging")) return;
     const i = itemAtPoint(e.clientX, e.clientY);
-    if (i !== -1) bringToFront(i);
+    if (i !== -1) { dismissHint(); bringToFront(i); }
   });
 
   // ── Drag: horizontal = spin (grab the photo), vertical = tilt the wheel ─────
@@ -272,6 +297,7 @@ export function initCarousel() {
     startDragRot = dragRot; startTilt = tilt;
     lastMoveX = e.clientX; lastMoveT = e.timeStamp || performance.now();
     velRot = 0;
+    dismissHint();                 // any interaction clears the hint
     // A fresh grab cancels any in-flight momentum glide.
     gsap.killTweensOf(dragProxy);
   });
