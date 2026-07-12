@@ -295,6 +295,7 @@
 @media (min-width: 1400px) { .gallery-grid { column-count: 5; } }
 
 .gallery-cell {
+  position: relative;        /* positioning context for the caption overlay */
   min-width: 0;
   margin: 0 0 6px;          /* the vertical gap between stacked cells */
   break-inside: avoid;       /* never split a frame across two columns */
@@ -313,10 +314,38 @@
   height: auto;
 }
 
-/* Caption tucked under each frame, quiet. */
+/* Caption sits ON the photo — a small, semi-transparent box pinned to the base
+   of the frame, so the text belongs to the picture instead of floating in the
+   gaps. A soft gradient keeps it legible over any image. */
 .gallery-cell__caption {
-  margin-top: var(--space-2xs);
-  padding-inline: 2px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  padding: 1.6em 0.7rem 0.55rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
+  background: linear-gradient(
+    to top,
+    rgb(var(--ink-rgb) / 0.82) 0%,
+    rgb(var(--ink-rgb) / 0.5) 55%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+.gallery-cell__caption .exhibit-label__meta {
+  font-size: clamp(0.5rem, 0.85vw, 0.6rem);
+  letter-spacing: 0.14em;
+  line-height: 1.2;
+  color: var(--accent-lit);
+}
+.gallery-cell__caption .exhibit-label__title {
+  font-size: clamp(0.8rem, 1.15vw, 0.95rem);
+  line-height: 1.15;
+  color: var(--bone);
+  max-width: none;
 }
 
 /* Empty state (defensive — a filtered category with no items). */
