@@ -535,3 +535,59 @@
   0%   { outline-color: rgb(var(--brass-rgb) / 0.9); }
   100% { outline-color: rgb(var(--brass-rgb) / 0); }
 }
+
+/* ── Gallery click-to-enlarge lightbox (Flip) ────────────────────────────────
+   The clicked cell is lifted out of the wall and Flip-morphed into a centred
+   stage over a dimmed backdrop. A ghost placeholder holds the wall's layout. */
+.gallery-cell { cursor: zoom-in; }
+.gallery-cell--ghost { visibility: hidden; }
+
+.gallery-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 4000;
+  display: none;
+  place-items: center;
+}
+.gallery-lightbox.is-open { display: grid; }
+.gallery-lightbox__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;                       /* explicitly below the figure (z-index:1) */
+  background: rgb(var(--ink-rgb) / 0.9);
+  opacity: 0;
+}
+/* Blur is a nice-to-have; keep it off the critical path so it can't dim the
+   enlarged photo on renderers where backdrop-filter composites oddly. */
+@supports (backdrop-filter: blur(1px)) {
+  .gallery-lightbox__backdrop { backdrop-filter: blur(5px); }
+}
+/* The enlarged frame: centred, capped to the viewport, above the backdrop. */
+.gallery-lightbox__figure {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  width: min(88vw, 60rem);
+  max-height: 88vh;
+  cursor: zoom-out;
+}
+.gallery-lightbox__figure .gallery-cell__media { height: 100%; }
+.gallery-lightbox__figure .gallery-cell__media > img {
+  width: 100%;
+  height: auto;
+  max-height: 88vh;
+  object-fit: contain;
+  /* Full brightness in the lightbox — override the wall's warm-shadow grade so
+     the enlarged photo reads bright and clear. */
+  filter: saturate(1.02) contrast(1.03) brightness(1);
+}
+/* Bigger, readable caption in the lightbox. */
+.gallery-lightbox__figure .gallery-cell__caption {
+  padding: 2.4em 1.2rem 1rem;
+}
+.gallery-lightbox__figure .gallery-cell__caption .exhibit-label__meta { font-size: 0.72rem; }
+.gallery-lightbox__figure .gallery-cell__caption .exhibit-label__title { font-size: 1.4rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-cell { cursor: default; }
+}

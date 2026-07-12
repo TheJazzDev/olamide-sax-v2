@@ -22,10 +22,12 @@ import { initMediaMotion, initYouTubeFacades } from "./media-motion.js";
 import { initHeroAudio } from "./heroAudio.js";
 import { initFooterReveal } from "./footerReveal.js";
 import { initAboutReveal } from "./aboutReveal.js";
+import { initRootsReveal } from "./rootsReveal.js";
 import { initCraft } from "./craft.js";
 import { initHeroIntro } from "./heroIntro.js";
 import { initCarousel } from "./carousel.js";
 import { initMarquee } from "./marquee.js";
+import { initGalleryMotion } from "./galleryMotion.js";
 
 function setFooterYear() {
   const yearEl = $("[data-year]");
@@ -99,10 +101,15 @@ function init() {
   initCarousel();
   // Stages & Recognition drifting credits marquee — self-gates (reduced-motion/GSAP-absent).
   initMarquee();
+  // Gallery wall motion — skew-on-scroll + Flip click-to-enlarge. Page-guarded
+  // (no-ops without [data-gallery]); self-gates on reduced-motion / GSAP-absent.
+  initGalleryMotion();
   // The Coda: footer entrance timeline — self-gates (reduced-motion/GSAP-absent).
   initFooterReveal();
   // About page motion pass — page-guarded (no-ops off /about.html).
   initAboutReveal();
+  // "The Roots" light interlude — digit roll-in + photo develop/parallax.
+  initRootsReveal();
 }
 
 if (document.readyState === "loading") {
