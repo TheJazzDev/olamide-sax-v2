@@ -35,7 +35,11 @@ export function initCraft() {
   // Stack order: first panel on the bottom, last on top. Panels after the
   // first START off-screen to the right, then slide in to cover.
   panels.forEach((p, i) => {
-    gsap.set(p, { zIndex: i, xPercent: i === 0 ? 0 : 100 });
+    gsap.set(p, {
+      zIndex: i,
+      xPercent: i === 0 ? 0 : 100,
+      transformOrigin: "50% 50%",   // zoom from the centre when covered
+    });
   });
 
   const covers = panels.length - 1; // number of slide-in transitions
@@ -67,9 +71,14 @@ export function initCraft() {
 
   panels.slice(1).forEach((panel, idx) => {
     const prev = panels[idx]; // the panel being covered
+    // The incoming panel slides in from the right to cover.
     tl.to(panel, { xPercent: 0, duration: 1 }, ">");
-    // Gently push the covered panel back (parallax depth) as it's covered.
-    tl.to(prev, { xPercent: -12, scale: 0.96, duration: 1 }, "<");
+    // The outgoing panel ZOOMS IN (scales up) and fades as the new one covers it
+    // — as if it's pushed forward, into the screen, and swallowed. Because the
+    // whole timeline is scrubbed, scrolling back up reverses it exactly: the
+    // covering panel slides back out to the right and this one zooms back down
+    // to its full, settled frame.
+    tl.to(prev, { scale: 1.18, opacity: 0.15, duration: 1 }, "<");
   });
 
   return () => tl.scrollTrigger && tl.scrollTrigger.kill();
