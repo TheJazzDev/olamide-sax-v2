@@ -281,33 +281,43 @@
    cells without per-cell rules. Every cell is a .frame-media (video-first).
    ========================================================================== */
 
+/* ── Dense masonry wall (CSS columns) ───────────────────────────────────────
+   True masonry: cells flow top-to-bottom within columns and keep their NATIVE
+   aspect ratios, packing tightly with a small gap — an editorial gallery wall,
+   not a gappy CMS grid. Column count steps up with width. */
 .gallery-grid {
   margin-top: var(--space-xl);
-  display: grid;
-  gap: var(--space-md);
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+  column-count: 2;
+  column-gap: 6px;
 }
-@media (min-width: 768px) {
-  .gallery-grid {
-    gap: var(--space-lg);
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
-  }
+@media (min-width: 600px)  { .gallery-grid { column-count: 3; column-gap: 8px; } }
+@media (min-width: 1000px) { .gallery-grid { column-count: 4; column-gap: 8px; } }
+@media (min-width: 1400px) { .gallery-grid { column-count: 5; } }
+
+.gallery-cell {
+  min-width: 0;
+  margin: 0 0 6px;          /* the vertical gap between stacked cells */
+  break-inside: avoid;       /* never split a frame across two columns */
+  -webkit-column-break-inside: avoid;
+}
+@media (min-width: 600px) { .gallery-cell { margin-bottom: 8px; } }
+
+/* Native aspect ratio — no forced ratios, so the varied shapes give the wall
+   its rhythm on their own. */
+.gallery-cell__media {
+  aspect-ratio: auto;
+}
+.gallery-cell__media > img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
-.gallery-cell { min-width: 0; margin: 0; }
-.gallery-cell__media { aspect-ratio: 4 / 5; }
-/* A quiet editorial rhythm: every 5th cell runs taller (portrait accent),
-   every 7th runs wide — a mosaic feel that survives any item count. */
-.gallery-cell:nth-child(5n + 1) .gallery-cell__media { aspect-ratio: 3 / 4; }
-.gallery-cell:nth-child(7n + 3) .gallery-cell__media { aspect-ratio: 1 / 1; }
-
-@media (min-width: 768px) {
-  /* Let occasional cells span two columns for a curated-abundance mosaic. */
-  .gallery-cell:nth-child(7n + 1) { grid-column: span 2; }
-  .gallery-cell:nth-child(7n + 1) .gallery-cell__media { aspect-ratio: 16 / 10; }
+/* Caption tucked under each frame, quiet. */
+.gallery-cell__caption {
+  margin-top: var(--space-2xs);
+  padding-inline: 2px;
 }
-
-.gallery-cell__caption { margin-top: var(--space-sm); }
 
 /* Empty state (defensive — a filtered category with no items). */
 .archive-empty {
