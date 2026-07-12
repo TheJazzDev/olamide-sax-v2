@@ -73,12 +73,12 @@ export function initCraft() {
     const prev = panels[idx]; // the panel being covered
     // The incoming panel slides in from the right to cover.
     tl.to(panel, { xPercent: 0, duration: 1 }, ">");
-    // The outgoing panel ZOOMS IN (scales up) and fades as the new one covers it
-    // — as if it's pushed forward, into the screen, and swallowed. Because the
-    // whole timeline is scrubbed, scrolling back up reverses it exactly: the
-    // covering panel slides back out to the right and this one zooms back down
-    // to its full, settled frame.
-    tl.to(prev, { scale: 1.18, opacity: 0.15, duration: 1 }, "<");
+    // The outgoing panel ZOOMS OUT (scales down) and fades as the new one covers
+    // it — as if it recedes back into depth and is swallowed. Because the whole
+    // timeline is scrubbed, scrolling back up reverses it exactly: the covering
+    // panel slides back out to the right and this one zooms back up to its full,
+    // settled frame.
+    tl.to(prev, { scale: 0.82, opacity: 0.15, duration: 1 }, "<");
   });
 
   return () => tl.scrollTrigger && tl.scrollTrigger.kill();

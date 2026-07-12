@@ -208,6 +208,9 @@
 /* ── Per-panel CTA — on the video itself (bottom-right of the letterboxed
    strip), each linking to ITS full performance on the Media page. A real
    sentence so nobody clicks it blind. ─────────────────────────────────── */
+/* Compact, solid-reading CTA — matches the site's button register (sharp edge,
+   brass, no big pill). Smaller than before so it sits as a neat control in the
+   corner rather than a vague tag. */
 .craft-panel__cta {
   position: absolute;
   right: clamp(1rem, 2.5vw, 2rem);
@@ -215,28 +218,28 @@
   z-index: 3;
   display: inline-flex;
   align-items: center;
-  gap: 0.6em;
+  gap: 0.5em;
   white-space: nowrap;
-  min-height: 44px;
-  padding: 0.55rem 1.1rem;
-  border: 1px solid rgb(var(--brass-rgb) / 0.5);
-  border-radius: 999px;
+  padding: 0.4rem 0.85rem;
+  border: 1px solid var(--accent);
+  border-radius: 2px;
   font-family: var(--font-label);
-  font-size: var(--step--1);
+  font-weight: var(--body-weight-strong);
+  font-size: clamp(0.6rem, 1vw, 0.72rem);
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   text-decoration: none;
-  color: var(--bone);
-  background: rgb(var(--ink-rgb) / 0.55);
+  color: var(--accent-lit);
+  background: rgb(var(--ink-rgb) / 0.62);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   transition: border-color 0.25s ease, color 0.25s ease, background-color 0.25s ease;
 }
 .craft-panel__cta:hover,
 .craft-panel__cta:focus-visible {
-  border-color: var(--accent-lit);
-  color: var(--accent-lit);
-  background: rgb(var(--ink-rgb) / 0.75);
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--ink);          /* brass fill on hover → clearly a button */
 }
 .craft-panel__cta-arrow { transition: transform 0.25s ease; }
-.craft-panel__cta:hover .craft-panel__cta-arrow { transform: translateX(4px); }
+.craft-panel__cta:hover .craft-panel__cta-arrow { transform: translateX(3px); }
