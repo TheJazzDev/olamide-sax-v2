@@ -66,6 +66,11 @@
   inset: 0;
   /* The wheel's centre = middle of the stage. JS places items relative to here. */
   transform-style: preserve-3d;
+  /* The STAGE owns all pointer input (drag + click), resolved by coordinates in
+     carousel.js. The ring and photos are pointer-transparent so a front photo can
+     never intercept a drag — this is what makes dragging work from ANYWHERE on
+     the wheel, front photos included. */
+  pointer-events: none;
 }
 
 .carousel.is-3d .carousel__item {
@@ -80,10 +85,8 @@
   padding: 0;
   border: 0;
   background: none;
-  cursor: pointer;
   will-change: transform;
-  /* JS sets the item transform (translate/scale/z) fully; hover effects live on
-     the child <img>/caption so they never fight the JS-driven 3D transform. */
+  pointer-events: none;   /* input handled on the stage by coordinate hit-testing */
 }
 .carousel.is-3d .carousel__item > img {
   display: block;

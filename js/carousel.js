@@ -298,6 +298,10 @@ export function initCarousel() {
     lastMoveX = e.clientX; lastMoveT = e.timeStamp || performance.now();
     velRot = 0;
     dismissHint();                 // any interaction clears the hint
+    // Capture the pointer to the stage immediately so EVERY subsequent move
+    // routes here — even if the cursor is over a (pointer-transparent) photo or
+    // leaves the stage box mid-drag. This is what makes drag work from anywhere.
+    try { stage.setPointerCapture(e.pointerId); } catch (_) {}
     // A fresh grab cancels any in-flight momentum glide.
     gsap.killTweensOf(dragProxy);
   });
@@ -311,7 +315,6 @@ export function initCarousel() {
       axis = Math.abs(dx) >= Math.abs(dy) ? "x" : "y";
       root.classList.add("is-dragging");
       root.classList.add(axis === "x" ? "is-dragging--x" : "is-dragging--y");
-      stage.setPointerCapture(e.pointerId);
     }
     if (!dragging) return;
     if (axis === "x") {
