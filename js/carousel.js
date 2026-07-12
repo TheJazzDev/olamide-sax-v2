@@ -258,14 +258,22 @@ export function initCarousel() {
   });
 
   // ── Drag: horizontal = spin (grab the photo), vertical = tilt the wheel ─────
+  const DRAG_SENSITIVITY = 0.22;   // deg of ring rotation per px dragged
   const DRAG_THRESHOLD = 6;
   let pressing = false, dragging = false, axis = null;
   let startX = 0, startY = 0, startDragRot = 0, startTilt = 1, moved = 0;
+  // Velocity tracking + proxy for the release momentum ("elastic" glide).
+  let lastMoveX = 0, lastMoveT = 0, velRot = 0;   // velRot: deg/ms of dragRot
+  const dragProxy = { v: 0 };                     // gsap tweens this on release
 
   stage.addEventListener("pointerdown", (e) => {
     pressing = true; dragging = false; axis = null; moved = 0;
     startX = e.clientX; startY = e.clientY;
     startDragRot = dragRot; startTilt = tilt;
+    lastMoveX = e.clientX; lastMoveT = e.timeStamp || performance.now();
+    velRot = 0;
+    // A fresh grab cancels any in-flight momentum glide.
+    gsap.killTweensOf(dragProxy);
   });
   stage.addEventListener("pointermove", (e) => {
     if (!pressing) return;
@@ -284,7 +292,17 @@ export function initCarousel() {
       // Positive dx (drag right) should carry the front photo to the right, i.e.
       // rotate the ring negatively. Sensitivity tuned so the grabbed photo roughly
       // tracks the pointer.
-      dragRot = startDragRot - dx * 0.22;
+      dragRot = startDragRot - dx * DRAG_SENSITIVITY;
+      // Track instantaneous rotational velocity for the release glide.
+      const now = e.timeStamp || performance.now();
+      const dt = now - lastMoveT;
+      if (dt > 0) {
+        const stepVel = -(e.clientX - lastMoveX) * DRAG_SENSITIVITY / dt; // deg/ms
+        // Smooth so a jittery last frame doesn't dominate the throw.
+        velRot = velRot * 0.6 + stepVel * 0.4;
+        lastMoveX = e.clientX;
+        lastMoveT = now;
+      }
     } else {
       // Drag up → flatten (bird's-eye, tilt >1); drag down → upright (tilt <1).
       tilt = Math.min(1.7, Math.max(0.55, startTilt - dy * 0.0016));
@@ -292,15 +310,38 @@ export function initCarousel() {
     }
     render();
   });
+
+  // Momentum glide: on release, keep the ring spinning in the drag direction and
+  // ease it to rest — the "elastic" feel so it doesn't stop dead. We tween the
+  // dragProxy from the current dragRot to a projected target (distance ∝
+  // velocity), feeding dragRot on each frame.
+  function flingMomentum() {
+    // Ignore tiny flicks (they'd just add jitter); let those settle where they are.
+    if (Math.abs(velRot) < 0.02) return;
+    // Project a throw distance from the release velocity. Clamp so a hard flick
+    // can't spin forever. ~180 scales deg/ms → a natural glide of a few turns max.
+    let throwDeg = velRot * 180;
+    const MAX = 900;                      // at most ~2.5 turns of coast
+    throwDeg = Math.max(-MAX, Math.min(MAX, throwDeg));
+    dragProxy.v = dragRot;
+    gsap.to(dragProxy, {
+      v: dragRot + throwDeg,
+      duration: 1.1,
+      ease: "power2.out",               // decelerating coast
+      onUpdate: () => { dragRot = dragProxy.v; render(); },
+    });
+  }
+
   const endPress = () => {
     if (!pressing) return;
     pressing = false;
     if (dragging) {
       dragging = false;
       root.classList.remove("is-dragging", "is-dragging--x", "is-dragging--y");
-      // Suppress the click that trails a drag. No snap — leave it where it is.
+      // Suppress the click that trails a drag.
       root.classList.add("was-dragging");
       setTimeout(() => root.classList.remove("was-dragging"), 0);
+      if (axis === "x") flingMomentum();   // let the throw coast to a rest
     }
   };
   stage.addEventListener("pointerup", endPress);
