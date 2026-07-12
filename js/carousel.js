@@ -53,10 +53,10 @@ export function initCarousel() {
 
   root.classList.add("is-3d");
 
-  // Discovery hint — tells the user the ring is interactive. Fades out on the
-  // first drag or click (see dismissHint below). Injected so the fallback markup
-  // stays clean.
-  let hintEl = root.querySelector("[data-carousel-hint]");
+  // Discovery hint — a quiet cue in the bottom-LEFT corner of the wheel. It fades
+  // on the first drag/click OR once the section has scrolled ~30% out of view
+  // (see the ScrollTrigger below), so it never lingers over the photos.
+  let hintEl = stage.querySelector("[data-carousel-hint]");
   if (!hintEl) {
     hintEl = document.createElement("p");
     hintEl.className = "carousel__hint";
@@ -64,9 +64,7 @@ export function initCarousel() {
     hintEl.setAttribute("aria-hidden", "true");
     hintEl.innerHTML =
       `<span>Drag</span> to spin <i aria-hidden="true">·</i> <span>Click</span> to bring forward`;
-    // Placed BELOW the wheel (in .carousel, after the stage) so it never overlaps
-    // the photos — a quiet cue, not a bar across the ring.
-    root.appendChild(hintEl);
+    stage.appendChild(hintEl);
   }
   let hintDismissed = false;
   function dismissHint() {
@@ -263,6 +261,21 @@ export function initCarousel() {
     });
     const r = root.getBoundingClientRect();
     if (r.top < window.innerHeight * 0.82) assemble();
+
+    // Hide the hint once the section has scrolled ~30% out of view (either
+    // direction), so it never sits on the photos as you scroll away. It also
+    // comes back if you scroll back into the section (unless already dismissed
+    // by an interaction). Range: top of section 30% off the top edge (scrolling
+    // down) ↔ bottom of section 30% up from the bottom edge (scrolling up).
+    ScrollTrigger.create({
+      trigger: root,
+      start: "top -30%",       // 30% of the section scrolled past the top
+      end: "bottom 30%",       // 30% before the bottom re-enters from below
+      onToggle: (self) => {
+        if (hintDismissed) return;         // an interaction already killed it
+        root.classList.toggle("hint-out", !self.isActive);
+      },
+    });
   } else {
     assemble();
   }
