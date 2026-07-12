@@ -175,32 +175,43 @@ function buildGalleryMotion(gsap, ScrollTrigger) {
   const grid = $("[data-gallery]");
   if (!grid) return;
 
-  // Reveal a set of cells with a phrased stagger.
+  // Reveal ONE cell: wipe the image clip open (bottom → top) while it settles
+  // from a slight push-up + scale, and fade its caption in. Smooth + cinematic,
+  // not a plain fade. Each cell reveals on its OWN scroll position (no batched
+  // line) so the masonry cascades organically.
+  function revealCell(cell) {
+    if (cell.dataset.revealed) return;
+    cell.dataset.revealed = "1";
+    const img = cell.querySelector(".gallery-cell__media > img");
+    const cap = cell.querySelector(".gallery-cell__caption");
+    const tl = gsap.timeline();
+    if (img) {
+      tl.to(img, {
+        clipPath: "inset(0 0 0% 0)",
+        y: "0%",
+        scale: 1,
+        duration: 1.05,
+        ease: "power3.out",
+      }, 0);
+    }
+    if (cap) {
+      tl.to(cap, { opacity: 1, duration: 0.6, ease: "power2.out" }, 0.35);
+    }
+    cell.classList.remove("gallery-cell--pre");
+  }
+
   function reveal(cells) {
-    if (!cells.length) return;
-    gsap.to(cells, {
-      opacity: 1,
-      y: 0,
-      duration: 0.7,
-      ease: "power3.out",
-      stagger: 0.07,
-      overwrite: true,
-    });
+    cells.forEach(revealCell);
   }
 
   // Reveal every armed-but-still-hidden cell currently in / above the viewport.
-  // This is the correctness backstop: batch.onEnter only fires when an element
-  // CROSSES the start line from below, so cells already visible at arm time
-  // (initial paint before layout settled, filter re-render while scrolled, page
-  // loaded mid-scroll) would otherwise stay hidden. We call this after arming,
-  // after ScrollTrigger.refresh, and on window load.
+  // Backstop for cells already on screen at arm time (initial paint before layout
+  // settled, filter re-render while scrolled, page loaded mid-scroll).
   function revealVisible() {
     const vh = window.innerHeight || 0;
-    const pending = $$(".gallery-cell--pre", grid).filter((c) => {
-      if (gsap.getProperty(c, "opacity") >= 0.99) return false;
-      return c.getBoundingClientRect().top < vh * 0.92;
+    $$(".gallery-cell--pre", grid).forEach((c) => {
+      if (c.getBoundingClientRect().top < vh * 0.9) revealCell(c);
     });
-    reveal(pending);
   }
 
   function armCells() {
@@ -211,14 +222,16 @@ function buildGalleryMotion(gsap, ScrollTrigger) {
 
     cells.forEach((c) => {
       c.dataset.motionArmed = "1";
-      c.classList.add("gallery-cell--pre"); // gated pre-state (opacity:0, y)
+      c.classList.add("gallery-cell--pre"); // gated pre-state (image clipped)
       wireCellClip(c);
-    });
-
-    // Batch so a row phrases in together as it scrolls up into view.
-    ScrollTrigger.batch(cells, {
-      start: "top 92%",
-      onEnter: (batch) => reveal(batch),
+      // Each cell reveals when its own top crosses ~88% down the viewport, so the
+      // wall flows in as a natural cascade instead of a jerky batched row.
+      ScrollTrigger.create({
+        trigger: c,
+        start: "top 88%",
+        once: true,
+        onEnter: () => revealCell(c),
+      });
     });
 
     // …and reveal any that are already visible right now.

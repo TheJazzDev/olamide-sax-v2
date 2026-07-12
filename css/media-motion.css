@@ -48,11 +48,17 @@
 .video-card__facade.is-live .frame-media { aspect-ratio: 16 / 9; }
 
 /* ── 3 · Gallery still → motion ───────────────────────────────────────────── */
-/* Scroll-reveal pre-state (gated). Cells rise + fade; JS animates to rest. */
-.js-anim-ready .gallery-cell--pre {
+/* Scroll-reveal pre-state (gated). The IMAGE is clipped away from the bottom and
+   pushed up + scaled a touch; JS wipes the clip open and settles it — a smooth
+   cinematic reveal rather than a plain fade. Applied to the img (not the cell)
+   so it never fights the CSS-columns layout or the wall's skew transform. */
+.js-anim-ready .gallery-cell--pre .gallery-cell__media > img {
+  clip-path: inset(0 0 100% 0);   /* fully clipped from the bottom */
+  transform: translateY(6%) scale(1.06);
+  will-change: clip-path, transform, opacity;
+}
+.js-anim-ready .gallery-cell--pre .gallery-cell__caption {
   opacity: 0;
-  transform: translateY(24px);
-  will-change: opacity, transform;
 }
 
 /* Hover treatment — "moving through a venue": subtle scale + warm-light lift.
@@ -145,6 +151,12 @@ main > section.section > *:not(.section-bloom):not(.hero__stage) { position: rel
     filter: none !important;
     will-change: auto;
   }
+  /* The gallery reveal pre-state now lives on the inner image — reset it too. */
+  .js-anim-ready .gallery-cell--pre .gallery-cell__media > img {
+    clip-path: none !important;
+    transform: none !important;
+  }
+  .js-anim-ready .gallery-cell--pre .gallery-cell__caption { opacity: 1 !important; }
   .js-anim-ready .craft__movements--pinned .craft-movement {
     position: relative !important;
     inset: auto !important;
