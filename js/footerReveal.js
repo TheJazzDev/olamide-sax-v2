@@ -69,12 +69,20 @@ export function initFooterReveal() {
   if (rule) tl.from(rule, { scaleX: 0, transformOrigin: "left center", duration: 0.6 }, 0.85);
   if (bottom) tl.from(bottom, { opacity: 0, duration: 0.45 }, 0.95);
   if (signoff) {
-    // CSS rests the sign-off at translateY(10%) (the poster crop). Rise from
-    // fully below the edge up into that same resting crop.
+    /* The sign-off rises from below the page edge into its resting position.
+
+       That resting position differs by breakpoint, and the JS must agree with
+       the CSS or it silently wins the argument: an inline transform beats any
+       stylesheet rule, so animating to the desktop crop on a phone overrides
+       the mobile CSS and re-introduces the very clipping it was written to
+       avoid. On desktop the name rests CROPPED by the bottom edge (the poster
+       effect, translateY(10%)); on mobile it rests fully ON the edge (0), so
+       its descenders are not sliced. */
+    const cropped = window.matchMedia("(min-width: 640px)").matches;
     tl.fromTo(
       signoff,
       { yPercent: 100 },
-      { yPercent: 10, duration: 1.0, ease: "power4.out" },
+      { yPercent: cropped ? 10 : 0, duration: 1.0, ease: "power4.out" },
       0.75
     );
   }

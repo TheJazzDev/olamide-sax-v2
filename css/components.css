@@ -943,15 +943,22 @@ textarea.form-field__control {
   .site-footer__rule { margin-block: var(--space-lg); }
 
   /* The sign-off rests ON the bottom edge rather than being sliced by it.
-     line-height 0.8 (the desktop value) leaves the descenders hanging below the
-     element's own box, which .site-footer's overflow:hidden then clips — so on
-     mobile the box has to actually contain the type: full line-height, no
-     translate, and padding to seat it. */
+     line-height 0.8 (the desktop value) leaves the descenders hanging outside
+     the element's own box, which .site-footer's overflow:hidden then clips.
+     So on mobile the box actually contains the type: a real line-height, and
+     padding to seat it.
+
+     NB the resting TRANSFORM is owned by js/footerReveal.js, not by this rule —
+     it animates the sign-off in, and an inline transform beats any stylesheet
+     declaration. It reads the same 640px breakpoint and rests at 0 here (vs the
+     desktop poster-crop). Change one, change the other. */
   .site-footer__signoff {
     margin-top: var(--space-xl);
     font-size: clamp(2.75rem, 15vw, 4.5rem);
-    transform: none;
     line-height: 1.12;
     padding-bottom: var(--space-md);
+    /* the static resting position (no-JS / reduced-motion). footerReveal.js sets
+       the same 0 for the animated path — see the note above. */
+    transform: none;
   }
 }
