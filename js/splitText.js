@@ -62,6 +62,62 @@ export function splitToWords(el) {
 }
 
 /**
+ * Split each of an element's existing line spans into per-CHARACTER spans, so
+ * the letters can be revealed one after another.
+ *
+ * The hero name is set in a connected script (Great Vibes), so the characters
+ * must stay on the normal text flow — no inline-block per letter, which would
+ * break the joins between letterforms. We therefore animate opacity/filter
+ * only (never layout), and the letters keep kerning exactly as the browser set
+ * them.
+ *
+ * A11y: the real text stays readable — we label the container and hide only the
+ * generated spans from the a11y tree.
+ *
+ * @param {HTMLElement} el         the container (e.g. the <h1>)
+ * @param {string} childSelector   the line spans inside it
+ * @returns {{ chars: HTMLElement[], lines: HTMLElement[], revert: () => void }}
+ */
+export function splitByChars(el, childSelector) {
+  const lines = Array.from(el.querySelectorAll(childSelector));
+  const original = lines.map((l) => l.textContent);
+
+  if (!el.hasAttribute("aria-label")) {
+    el.setAttribute("aria-label", el.textContent.replace(/\s+/g, " ").trim());
+  }
+
+  const chars = [];
+  lines.forEach((line) => {
+    const text = line.textContent;
+    line.textContent = "";
+    line.setAttribute("aria-hidden", "true");
+    for (const ch of text) {
+      if (ch === " ") {
+        line.appendChild(document.createTextNode(" "));
+        continue;
+      }
+      const s = document.createElement("span");
+      s.className = "split-char";
+      s.textContent = ch;
+      line.appendChild(s);
+      chars.push(s);
+    }
+  });
+
+  return {
+    chars,
+    lines,
+    revert() {
+      lines.forEach((l, i) => {
+        l.textContent = original[i];
+        l.removeAttribute("aria-hidden");
+      });
+      el.removeAttribute("aria-label");
+    },
+  };
+}
+
+/**
  * For elements built from existing line spans (e.g. the hero title with
  * .hero__title-line children) — reveal each existing line as a unit without
  * destroying markup. Keeps the real text intact; just tags the lines.

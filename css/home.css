@@ -164,10 +164,10 @@
 
 /* The soloist — huge, LIGHT Fraunces, now full-width so it can dominate. */
 .hero__title {
-  /* The SIGNATURE: Great Vibes script (drawn on letter-by-letter by
-     heroIntro.js). Scripts run visually smaller than serifs — hence the
-     larger clamp — and want no negative tracking. The floor is sized so the
-     longest word ("Olamide") fits within a ~360px phone without clipping. */
+  /* The SIGNATURE: Great Vibes script, revealed letter-by-letter by heroIntro.js.
+     Scripts run visually smaller than serifs — hence the larger clamp — and want
+     no negative tracking. The floor is sized so the longest word ("Olamide")
+     fits within a ~360px phone without clipping. */
   font-family: var(--font-script);
   font-size: clamp(3rem, 15vw, 15rem);
   line-height: 0.95;
@@ -197,24 +197,12 @@
 }
 .hero-intro-ready .hero__title-line { will-change: transform; }
 
-/* THE SIGNATURE — the written name (js/signature/). Only ever inserted by JS, so
-   the plain Great Vibes <h1> is what renders with JS off or under reduced
-   motion. The SVG carries its own aspect ratio; the stage is just the block it
-   fills. The pen lives inside the same SVG and cannot escape it. */
-.hero__signature {
-  display: block;
-  width: 100%;
-  /* one baseline for both words, so it is far wider than it is tall — cap it so
-     it cannot dwarf the column on very wide screens */
-  max-width: min(100%, 64rem);
-  color: var(--text);
-}
-.hero__signature svg {
-  display: block;
-  width: 100%;
-  height: auto;
-  overflow: visible;
-}
+/* Per-character reveal (splitText.js → splitByChars). Great Vibes is a CONNECTED
+   script, so the letters must stay in the normal text flow — no inline-block,
+   no per-letter offsets, or the joins between letterforms break. We animate
+   opacity + blur only, and the browser's own kerning is preserved exactly. */
+.split-char { will-change: opacity, filter; }
+
 
 .hero__meta {
   margin-top: var(--space-lg);
