@@ -211,3 +211,12 @@
   /* carousel.js skips is-3d under reduced motion, so the flat horizontal-scroll
      row (top of this file) is used instead — nothing to override here. */
 }
+
+/* ── Mobile: a tighter, shorter ring so it doesn't sprawl off a tall phone ──── */
+@media (max-width: 767px) {
+  .carousel.is-3d .carousel__stage { height: clamp(24rem, 62vh, 34rem); perspective: 1100px; }
+  .carousel.is-3d .carousel__item { width: clamp(6.5rem, 34vw, 9rem); }
+  /* Front-photo caption a touch smaller so it fits the smaller frame. */
+  .carousel__item-cap .cap-moment { font-size: clamp(0.75rem, 3.4vw, 0.95rem); }
+  .carousel.is-3d .carousel__hint { left: clamp(0.75rem, 3vw, 1.25rem); bottom: clamp(0.75rem, 2.5vh, 1.5rem); }
+}

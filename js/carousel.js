@@ -90,15 +90,18 @@ export function initCarousel() {
   }
 
   // Wheel dimensions, sized to the stage. `tilt` scales the vertical spread and
-  // depth: a flatter wheel spreads more vertically and recedes less.
+  // depth: a flatter wheel spreads more vertically and recedes less. On a narrow
+  // phone the ring is pulled IN (tighter spread) so it doesn't sprawl off the top
+  // and bottom of the screen.
+  const isPhone = window.matchMedia("(max-width: 767px)").matches;
   function dims() {
     const w = stage.clientWidth || window.innerWidth;
     const h = stage.clientHeight || 480;
     return {
-      rx: w * 0.43,               // horizontal spread of the rim (px from centre)
-      ry: h * 0.30 * tilt,        // vertical spread (grows as the wheel flattens)
-      rz: w * 0.30 / tilt,        // depth (shrinks as the wheel flattens)
-      cy: -h * 0.06,              // nudge the whole wheel up for headroom
+      rx: w * (isPhone ? 0.34 : 0.43),          // horizontal spread from centre
+      ry: h * (isPhone ? 0.22 : 0.30) * tilt,   // vertical spread
+      rz: w * (isPhone ? 0.40 : 0.30) / tilt,   // depth
+      cy: -h * 0.05,                            // headroom nudge up
     };
   }
   let D = dims();
