@@ -52,10 +52,22 @@ export function initCraft() {
       scale: 1,
       rotationY: 0,
       clipPath: "none",
+      filter: "none",
       transformOrigin: "50% 50%",
       transformPerspective: 1200,
     });
   });
+
+  // A full-bleed white FLASH overlay for the cut moment (editing-style).
+  let flash = viewport.querySelector("[data-craft-flash]");
+  if (!flash) {
+    flash = document.createElement("div");
+    flash.className = "craft-flash";
+    flash.setAttribute("data-craft-flash", "");
+    flash.setAttribute("aria-hidden", "true");
+    viewport.appendChild(flash);
+  }
+  gsap.set(flash, { opacity: 0 });
 
   const covers = panels.length - 1;   // number of cuts
   const START_HOLD = 0.35;
@@ -63,9 +75,9 @@ export function initCraft() {
   const total = START_HOLD + covers + END_HOLD;
 
   // ── Choose the cut styles for this load ─────────────────────────────────────
-  // Shuffle the four styles; take one per cut. With ≤4 cuts all are distinct;
+  // Shuffle the styles; take one per cut. With ≤count cuts all are distinct;
   // for more cuts we reshuffle and only forbid the same style twice in a row.
-  const STYLES = ["wipe", "slide", "flip", "punch"];
+  const STYLES = ["wipe", "slide", "flip", "punch", "glitch"];
   function shuffle(a) {
     const r = a.slice();
     for (let i = r.length - 1; i > 0; i--) {
@@ -102,67 +114,89 @@ export function initCraft() {
   // Opening hold on panel 1.
   tl.to({}, { duration: START_HOLD });
 
-  // ── Cut builders. Each fills a 1-unit window at absolute position `at`,
-  //    choreographing BOTH the outgoing (prev) and incoming (panel). ──────────
+  // ── Cut builders. Each fills a 1-unit window at absolute position `at`. The
+  //    active motion is SNAPPY (compressed into ~D of the window with a lead-in
+  //    hold), like a real editing transition, plus an effect (flash / blur /
+  //    RGB glitch). Everything is scrubbed, so it reverses on scroll-up. ───────
+  const D = 0.5;               // transition duration inside the 1-unit window (snappy)
+  const LEAD = 0.28;           // brief hold before the cut fires
+
   function cut(style, prev, panel, at) {
     const media = panel.querySelector(".craft-panel__media");
     const text = panel.querySelector(".craft-panel__text");
-    // Incoming media always settles from a gentle push-in; the label rises.
-    const settleMedia = () => {
-      if (media) tl.fromTo(media, { scale: 1.14 }, { scale: 1, duration: 1, ease: "power2.out" }, at);
+    const t0 = at + LEAD;      // the cut fires here
+
+    const settleMedia = (from = 1.22) => {
+      if (media) tl.fromTo(media, { scale: from }, { scale: 1, duration: D + 0.25, ease: "power3.out" }, t0);
     };
-    const riseText = (offset = 0.25) => {
-      if (text) tl.fromTo(text, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" }, at + offset);
+    const riseText = () => {
+      if (text) tl.fromTo(text, { y: 55, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, t0 + D * 0.4);
+    };
+    const hidePrevAtEnd = () => tl.set(prev, { opacity: 0 }, t0 + D + 0.001);
+    // A quick white flash punched at the cut instant — bright at mid-cut, gone.
+    const punchFlash = (peak = 0.55) => {
+      tl.to(flash, { opacity: peak, duration: D * 0.35, ease: "power2.in" }, t0 + D * 0.15);
+      tl.to(flash, { opacity: 0, duration: D * 0.5, ease: "power2.out" }, t0 + D * 0.5);
+    };
+    // Motion blur on a moving panel: ramp blur up then back to 0 (via CSS filter).
+    const motionBlur = (target, px) => {
+      tl.fromTo(target, { filter: "blur(0px)" }, { filter: `blur(${px}px)`, duration: D * 0.5, ease: "power2.in" }, t0);
+      tl.to(target, { filter: "blur(0px)", duration: D * 0.5, ease: "power2.out" }, t0 + D * 0.5);
     };
 
     if (style === "wipe") {
-      // A clip-path shape reveals the incoming; rotate through iris/slit/blade.
+      // Fast clip-path reveal — iris bloom or a directional edge sweep. One
+      // growing region, so no split of the previous video.
       const shapes = [
-        ["circle(0% at 72% 42%)", "circle(150% at 72% 42%)"],           // iris
-        ["inset(49.9% 0% 49.9% 0%)", "inset(0% 0% 0% 0%)"],             // letterbox slit
-        ["polygon(0 0,0 0,0 100%,0 100%)", "polygon(0 0,100% 0,100% 100%,0 100%)"], // left→right wipe
+        ["circle(0% at 50% 50%)", "circle(150% at 50% 50%)"],
+        ["circle(0% at 78% 40%)", "circle(150% at 78% 40%)"],
+        ["inset(0% 100% 0% 0%)", "inset(0% 0% 0% 0%)"],
+        ["inset(0% 0% 0% 100%)", "inset(0% 0% 0% 0%)"],
+        ["polygon(0 0,0 0,-40% 100%,-40% 100%)", "polygon(0 0,140% 0,100% 100%,0 100%)"],
       ];
       const [from, to] = shapes[Math.floor(Math.random() * shapes.length)];
-      gsap.set(panel, { opacity: 1, clipPath: from });
-      tl.to(panel, { clipPath: to, duration: 1, ease: "power2.inOut" }, at);
-      // Outgoing simply holds then is hidden once covered.
-      tl.to(prev, { scale: 1.04, duration: 1, ease: "power1.inOut" }, at);
-      tl.set(prev, { opacity: 0 }, at + 0.98);
-      settleMedia();
-      riseText();
+      gsap.set(panel, { opacity: 1, scale: 1, clipPath: from });
+      tl.to(panel, { clipPath: to, duration: D, ease: "power4.inOut" }, t0);
+      tl.to(prev, { scale: 1.08, duration: D, ease: "power2.in" }, t0);
+      hidePrevAtEnd(); settleMedia(1.16); riseText();
     } else if (style === "slide") {
-      // Incoming slides in from the right and covers; outgoing recedes left.
-      gsap.set(panel, { opacity: 1, xPercent: 100 });
-      tl.to(panel, { xPercent: 0, duration: 1, ease: "power3.inOut" }, at);
-      tl.to(prev, { xPercent: -14, scale: 0.92, opacity: 0.4, duration: 1, ease: "power2.inOut" }, at);
-      tl.set(prev, { opacity: 0 }, at + 0.98);
-      settleMedia();
-      riseText(0.3);
+      // Hard filmstrip advance with a MOTION-BLUR streak on both panels.
+      gsap.set(panel, { opacity: 1, xPercent: 110, scale: 1 });
+      tl.to(panel, { xPercent: 0, duration: D, ease: "power4.inOut" }, t0);
+      tl.to(prev, { xPercent: -70, scale: 0.82, opacity: 0.3, duration: D, ease: "power4.inOut" }, t0);
+      motionBlur(panel, 14); motionBlur(prev, 14);
+      hidePrevAtEnd(); settleMedia(1.12); riseText();
     } else if (style === "flip") {
-      // The stack turns in 3D: outgoing tilts away, incoming rotates in.
-      gsap.set(panel, { opacity: 1, rotationY: -100, transformOrigin: "50% 50%" });
-      tl.to(prev, { rotationY: 100, opacity: 0, duration: 1, ease: "power2.inOut" }, at);
-      tl.fromTo(
-        panel,
-        { rotationY: -100 },
-        { rotationY: 0, duration: 1, ease: "power2.inOut" },
-        at
-      );
-      settleMedia();
-      riseText(0.35);
+      // Fast full 3D card turn with a flash at the edge-on midpoint.
+      gsap.set(panel, { opacity: 1, rotationY: -130, scale: 0.9, transformOrigin: "50% 50%" });
+      tl.to(prev, { rotationY: 130, opacity: 0, scale: 0.88, duration: D, ease: "power3.inOut" }, t0);
+      tl.fromTo(panel, { rotationY: -130, scale: 0.9 }, { rotationY: 0, scale: 1, duration: D, ease: "power3.inOut" }, t0);
+      punchFlash(0.35);
+      settleMedia(1.18); riseText();
+    } else if (style === "punch") {
+      // Dive-into-the-frame: incoming explodes from a point + ZOOM-BLUR; the
+      // outgoing rushes past the viewer. A white flash at the impact.
+      gsap.set(panel, { opacity: 0, scale: 0.04, transformOrigin: "50% 50%" });
+      tl.to(prev, { scale: 2.4, opacity: 0, duration: D, ease: "power3.in" }, t0);
+      tl.fromTo(panel, { scale: 0.04, opacity: 0 }, { scale: 1, opacity: 1, duration: D, ease: "power4.out" }, t0);
+      motionBlur(panel, 18);
+      punchFlash(0.7);
+      if (media) tl.fromTo(media, { scale: 1.4 }, { scale: 1, duration: D + 0.25, ease: "power3.out" }, t0);
+      riseText();
     } else {
-      // PUNCH — incoming zooms out from the centre of the outgoing to fill frame.
-      gsap.set(panel, { opacity: 0, scale: 0.2, transformOrigin: "50% 50%" });
-      tl.to(prev, { scale: 1.5, opacity: 0, duration: 1, ease: "power2.in" }, at);
-      tl.fromTo(
-        panel,
-        { scale: 0.2, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 1, ease: "power3.out" },
-        at
+      // GLITCH — a hard cut with an RGB-split jitter: the incoming snaps in while
+      // its channels tear apart and re-register, over a couple of jumpy flashes.
+      gsap.set(panel, { opacity: 1, scale: 1, x: 0, filter: "none" });
+      // Jump-cut the outgoing away almost immediately.
+      tl.to(prev, { opacity: 0, duration: D * 0.2, ease: "steps(2)" }, t0 + D * 0.15);
+      // The incoming jitters horizontally + drop-shadow RGB fringe, then locks.
+      tl.fromTo(panel,
+        { x: -18, filter: "drop-shadow(10px 0 0 rgba(255,0,80,0.7)) drop-shadow(-10px 0 0 rgba(0,200,255,0.7))" },
+        { x: 0, filter: "drop-shadow(0 0 0 rgba(255,0,80,0)) drop-shadow(0 0 0 rgba(0,200,255,0))", duration: D, ease: "steps(6)" },
+        t0
       );
-      // media push-in a touch stronger for the dive feel
-      if (media) tl.fromTo(media, { scale: 1.2 }, { scale: 1, duration: 1, ease: "power2.out" }, at);
-      riseText(0.3);
+      punchFlash(0.4);
+      settleMedia(1.1); riseText();
     }
   }
 

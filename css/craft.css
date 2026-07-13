@@ -251,3 +251,14 @@
 }
 .craft-panel__cta-arrow { transition: transform 0.25s ease; }
 .craft-panel__cta:hover .craft-panel__cta-arrow { transform: translateX(3px); }
+
+/* ── Editing-style FLASH overlay (craft.js drives its opacity per cut) ──────── */
+.craft.is-stacked .craft-flash {
+  position: absolute;
+  inset: 0;
+  z-index: 4;                 /* above the panels, below the intro/deck (5/6) */
+  background: #fff;
+  opacity: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;     /* reads as a light flash, not a white wash */
+}
