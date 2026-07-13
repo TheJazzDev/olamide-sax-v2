@@ -70,8 +70,8 @@ export function initCraft() {
   gsap.set(flash, { opacity: 0 });
 
   const covers = panels.length - 1;   // number of cuts
-  const START_HOLD = 0.18;            // shorter lead-in before the first cut
-  const END_HOLD = 0.15;
+  const START_HOLD = 0.1;             // brief dwell on the first video
+  const END_HOLD = 0.1;               // brief dwell on the last video
   const total = START_HOLD + covers + END_HOLD;
 
   // ── Choose the cut styles for this load ─────────────────────────────────────
@@ -121,8 +121,12 @@ export function initCraft() {
   //    active motion is SNAPPY (compressed into ~D of the window with a lead-in
   //    hold), like a real editing transition, plus an effect (flash / blur /
   //    RGB glitch). Everything is scrubbed, so it reverses on scroll-up. ───────
-  const D = 0.55;              // transition duration inside the 1-unit window
-  const LEAD = 0.12;           // short hold before the cut fires (less dead-zone)
+  // Balance of each 1-unit cut window: LEAD (dwell on the video) → D (transition)
+  // → the remainder (short dwell after). The transition now OWNS most of the
+  // window, with only a small dwell on each video before/after — so scrolling
+  // spends more time IN the transition and less parked on a static frame.
+  const D = 0.82;              // transition duration (most of the window)
+  const LEAD = 0.08;           // tiny dwell before the cut fires
 
   function cut(style, prev, panel, at) {
     const media = panel.querySelector(".craft-panel__media");
