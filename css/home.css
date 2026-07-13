@@ -430,67 +430,11 @@
 }
 .section--light .exhibit-label { color: color-mix(in oklab, var(--ash) 60%, var(--ink)); }
 
-/* ============================================================================
-   IV · THE CRAFT — three movements: Saxophone · Voice · Keys.
-   Full-bleed-ish image + one Fraunces word + one line of copy. Composed
-   STATICALLY so Task 8 can pin/cross-fade them (data-craft-movement hooks).
-   NO cards.
-   ========================================================================== */
+/* (The Craft's OWN layout lives in craft.css — the old .craft-movement grid
+   that used to sit here was replaced by the panel-based cover-scroll and has
+   been removed.) */
 
 .craft__intro { margin-bottom: var(--space-2xl); }
-
-.craft__movements {
-  display: grid;
-  gap: var(--space-2xl);
-}
-@media (min-width: 768px) {
-  .craft__movements { gap: var(--space-3xl); }
-}
-
-.craft-movement {
-  position: relative;
-  display: grid;
-  gap: var(--space-lg);
-  align-items: center;
-}
-@media (min-width: 768px) {
-  .craft-movement {
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-2xl);
-  }
-  /* Alternate the image side for rhythm. */
-  .craft-movement:nth-child(even) .craft-movement__media { order: 2; }
-}
-
-.craft-movement__media .frame-media { aspect-ratio: 4 / 5; }
-@media (min-width: 768px) {
-  .craft-movement__media .frame-media { aspect-ratio: 3 / 4; }
-}
-
-.craft-movement__word {
-  font-family: var(--font-display);
-  font-weight: var(--display-weight);
-  font-size: var(--step-6);
-  line-height: 1;
-  letter-spacing: -0.02em;
-  color: var(--text);
-  margin: 0;
-}
-.craft-movement__num {
-  font-family: var(--font-body);
-  font-variant-numeric: tabular-nums;
-  font-size: var(--step--1);
-  letter-spacing: var(--tracking-eyebrow);
-  color: var(--accent);
-  display: block;
-  margin-bottom: var(--space-sm);
-}
-.craft-movement__copy {
-  margin-top: var(--space-md);
-  color: var(--muted);
-  max-width: 42ch;
-  line-height: var(--leading-loose);
-}
 
 /* ============================================================================
    V · ARTISTIC PRACTICE — participatory image + text, mirrors The Roots' grid
@@ -991,8 +935,7 @@
   );
 }
 
-/* Craft movement video-first well — video fills the ratio-locked frame-media. */
-.craft-movement__media .frame-media > video,
+/* Video-first well — a video fills the ratio-locked frame-media. */
 .frame-media > video {
   display: block;
   width: 100%;

@@ -226,22 +226,8 @@ function buildScrollReveals(gsap, ScrollTrigger) {
   });
 }
 
-/* ── Craft movements + timeline nodes: soft cinematic rise ────────────────── */
+/* ── Timeline nodes: soft cinematic rise ──────────────────────────────────── */
 function buildCraftAndNodes(gsap, ScrollTrigger) {
-  $$("[data-craft-movement]").forEach((el) => {
-    gsap.to(el, {
-      opacity: 1,
-      y: 0,
-      duration: 1,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: el,
-        start: "top 80%",
-        toggleActions: "play none none none",
-      },
-    });
-  });
-
   const nodes = $$("[data-timeline-node]");
   if (nodes.length) {
     // Group so consecutive nodes phrase in, rather than each firing alone.

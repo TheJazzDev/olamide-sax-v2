@@ -34,17 +34,6 @@ function engineLive() {
   );
 }
 
-/** Pin-safe viewport: only pin on a genuine desktop (fine pointer + wide).
-    On touch / narrow screens we must NOT pin (scroll-jacking risk), so the
-    Craft section falls back to the stacked reveal from reveal.js. */
-function canPin() {
-  if (typeof window === "undefined" || !("matchMedia" in window)) return false;
-  const wide = window.matchMedia("(min-width: 1024px)").matches;
-  const fine = window.matchMedia("(pointer: fine)").matches;
-  const noHover = window.matchMedia("(hover: none)").matches;
-  return wide && fine && !noHover;
-}
-
 /* ========================================================================== */
 /*  ENTRY — motion set-pieces                                                   */
 /* ========================================================================== */
@@ -55,8 +44,7 @@ export function initMediaMotion() {
   const ScrollTrigger = window.ScrollTrigger;
   gsap.registerPlugin(ScrollTrigger);
 
-  // Craft now handled by the dedicated horizontal-scroll module (craft.js).
-  // buildPinnedCraft(gsap, ScrollTrigger);  // SET ASIDE — replaced by craft.js
+  // (Craft is handled by its own module, craft.js — not here.)
   buildGalleryMotion(gsap, ScrollTrigger);
   buildTimelineUnfold(gsap, ScrollTrigger);
   buildSectionTransitions(gsap, ScrollTrigger);
@@ -66,101 +54,6 @@ export function initMediaMotion() {
   const refresh = () => ScrollTrigger.refresh();
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(refresh);
   window.addEventListener("load", refresh, { once: true });
-}
-
-/* ========================================================================== */
-/*  1 · PINNED CRAFT MOVEMENTS (index)                                          */
-/*  Pin the Craft section and cross-fade Saxophone → Voice → Keys as the user   */
-/*  scrolls. The ACTIVE movement's clip plays + comes forward; the others dim   */
-/*  + pause. On non-desktop we skip the pin entirely (reveal.js already staged  */
-/*  a stacked reveal), so there is no scroll trap on mobile.                     */
-/* ========================================================================== */
-function buildPinnedCraft(gsap, ScrollTrigger) {
-  const section = $(".craft");
-  const movements = $$("[data-craft-movement]");
-  if (!section || movements.length < 2) return;
-
-  // Non-desktop: no pin. reveal.js's buildCraftAndNodes reveals the stacked
-  // movements normally. Bail so we never scroll-jack a phone/tablet.
-  if (!canPin()) return;
-
-  const movementsWrap = $(".craft__movements", section) || section;
-
-  // reveal.js (which ran first) created a soft scroll-reveal ScrollTrigger for
-  // each [data-craft-movement]. The pin scene now OWNS these elements' opacity,
-  // so kill those triggers to avoid two timelines fighting over opacity.
-  ScrollTrigger.getAll().forEach((st) => {
-    const t = st.trigger || st.vars && st.vars.trigger;
-    if (t && t.matches && t.matches("[data-craft-movement]")) st.kill();
-  });
-
-  // The pinned scene stacks the movements on top of one another. We tag a class
-  // so media-motion.css (gated) can absolutely-position them into one frame;
-  // without the class (JS off / reduced motion) they stay in normal flow.
-  movementsWrap.classList.add("craft__movements--pinned");
-
-  const videos = movements.map((m) => $("video", m));
-  const count = movements.length;
-  let current = 0;
-
-  // One clip plays at a time (the active one). Others pause (perf). Under
-  // reduced motion we never reach here (engineLive gate), so play() is safe.
-  function setActiveClip(activeIndex) {
-    videos.forEach((v, i) => {
-      if (!v) return;
-      if (i === activeIndex) {
-        const p = v.play();
-        if (p && p.catch) p.catch(() => {});
-      } else {
-        try {
-          v.pause();
-        } catch (_) {}
-      }
-    });
-  }
-
-  // Initial state: first movement on stage, rest hidden. We OWN opacity here
-  // (reveal.js's craft triggers were killed above).
-  gsap.set(movements, { opacity: 0, yPercent: 0 });
-  gsap.set(movements[0], { opacity: 1 });
-  movements[0].classList.add("is-active");
-  setActiveClip(0);
-
-  // Direct progress-driven cross-fade. The pin runs for `count` viewport-heights.
-  // We map scroll progress → a continuous "stage position" in [0 .. count-1].
-  // Each movement's opacity is a triangular window around its own index, so
-  // consecutive movements cross-fade cleanly with a short dwell at each stop.
-  // This is mathematically exact for the active-index tracking (no timeline
-  // position guesswork), which keeps clip play/pause perfectly in sync.
-  ScrollTrigger.create({
-    trigger: section,
-    start: "top top",
-    end: () => "+=" + window.innerHeight * count,
-    pin: true,
-    pinSpacing: true,
-    scrub: 0.5,
-    anticipatePin: 1,
-    invalidateOnRefresh: true,
-    onUpdate: (self) => {
-      // Bias so each movement gets a full-strength dwell before the next.
-      const pos = self.progress * (count - 1); // 0 .. count-1
-      movements.forEach((m, i) => {
-        // Triangular falloff: full opacity at i, fading to ~0.1 one step away.
-        const d = Math.abs(pos - i);
-        const o = d >= 1 ? 0.1 : 1 - 0.9 * d;
-        m.style.opacity = String(o);
-        const y = d >= 1 ? 4 : 4 * d; // slight lift as it settles onto stage
-        m.style.transform = "translateY(" + y + "%)";
-      });
-      // Active index = nearest movement to the current stage position.
-      const idx = Math.max(0, Math.min(count - 1, Math.round(pos)));
-      if (idx !== current) {
-        current = idx;
-        setActiveClip(idx);
-        movements.forEach((m, i) => m.classList.toggle("is-active", i === idx));
-      }
-    },
-  });
 }
 
 /* ========================================================================== */

@@ -48,8 +48,7 @@
   will-change: opacity, transform;
 }
 
-/* Craft movements, timeline nodes, featured blocks: soft cinematic rise. */
-.js-anim-ready [data-craft-movement],
+/* Timeline nodes, featured blocks: soft cinematic rise. */
 .js-anim-ready [data-timeline-node] {
   opacity: 0;
   transform: translateY(32px);
@@ -130,7 +129,6 @@
   .js-anim-ready [data-animate="fade"],
   .js-anim-ready .reveal-item,
   .js-anim-ready .split-word,
-  .js-anim-ready [data-craft-movement],
   .js-anim-ready [data-timeline-node] {
     opacity: 1 !important;
     transform: none !important;

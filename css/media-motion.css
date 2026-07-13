@@ -8,33 +8,7 @@
    out normally. Transform / opacity only. No horizontal overflow at 375px.
    ========================================================================== */
 
-/* ── 1 · Pinned Craft: stack the movements into one frame (desktop only) ──── */
-/* The class is added by JS ONLY when the pin is built (desktop, fine pointer).
-   So on mobile / reduced-motion the movements keep their normal stacked flow. */
-.js-anim-ready .craft__movements--pinned {
-  position: relative;
-}
-.js-anim-ready .craft__movements--pinned .craft-movement {
-  position: absolute;
-  inset: 0;
-  margin: 0;
-  /* Center the movement within the pinned viewport frame. */
-  align-content: center;
-  will-change: opacity, transform;
-}
-/* First movement establishes the wrap's height so the pin frame has size. */
-.js-anim-ready .craft__movements--pinned .craft-movement:first-child {
-  position: relative;
-}
-/* Inactive movements' clips dim; the active one is full-strength. */
-.js-anim-ready .craft__movements--pinned .craft-movement video {
-  transition: filter var(--dur-base, 0.4s) var(--ease-out, ease);
-}
-.js-anim-ready .craft__movements--pinned .craft-movement:not(.is-active) video {
-  filter: saturate(0.4) brightness(0.5) contrast(1);
-}
-
-/* ── 2 · YouTube embed (injected on activation) ───────────────────────────── */
+/* ── YouTube embed (injected on activation) ───────────────────────────────── */
 .video-embed {
   display: block;
   width: 100%;
@@ -142,7 +116,6 @@ main > section.section > *:not(.section-bloom):not(.hero__stage) { position: rel
    Force everything to its final, visible, static state.
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
-  .js-anim-ready .craft__movements--pinned .craft-movement,
   .js-anim-ready .gallery-cell--pre,
   .js-anim-ready .timeline-milestone--unfold .timeline-milestone__mark,
   .js-anim-ready .live-wall__cell .frame-media {
@@ -157,10 +130,6 @@ main > section.section > *:not(.section-bloom):not(.hero__stage) { position: rel
     transform: none !important;
   }
   .js-anim-ready .gallery-cell--pre .gallery-cell__caption { opacity: 1 !important; }
-  .js-anim-ready .craft__movements--pinned .craft-movement {
-    position: relative !important;
-    inset: auto !important;
-  }
   .section-bloom { display: none !important; }
   .gallery-cell__clip { display: none !important; }
 }

@@ -899,19 +899,59 @@ textarea.form-field__control {
   font-size: var(--step--1);
 }
 
-/* ── Mobile footer: tighten the desktop rhythm so it doesn't sprawl ──────────
-   Smaller explore links, calmer gaps, and a signoff that fills the width
-   without a big empty band above it. */
+/* ── Mobile footer ──────────────────────────────────────────────────────────
+   The desktop footer is built around a horizontal "set list" rail of links and
+   a colossal sign-off cropped by the page edge. Neither survives a phone:
+
+   - The rail is a wrapping flex row with a "·" separator on each li::before.
+     When it wraps, those dots orphan to the START of the next line ("· Media",
+     "· Contact"), which reads as broken text. On mobile we drop the rail idea
+     entirely and set the links as a proper two-column index — no separators to
+     strand, and every target is a comfortable tap size.
+   - The sign-off is sized in vw and pushed down by translateY, which on a
+     narrow screen slices the letters mid-descender and leaves a dead band of
+     background beneath. On mobile it sits ON the bottom edge, uncropped. */
 @media (max-width: 639px) {
   .site-footer { padding-top: var(--space-xl); }
   .site-footer__coda { margin-bottom: var(--space-lg); }
-  .site-footer__explore { margin-bottom: var(--space-lg); }
-  .site-footer__explore a { font-size: clamp(1.15rem, 5.5vw, 1.5rem); }
-  .site-footer__explore ul { column-gap: var(--space-sm); row-gap: var(--space-2xs); }
-  .site-footer__top { gap: var(--space-lg); }
+
+  /* the rail becomes an index */
+  .site-footer__explore { margin-bottom: var(--space-xl); }
+  .site-footer__explore ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: var(--space-md);
+    row-gap: var(--space-xs);
+  }
+  .site-footer__explore li { display: block; }
+  .site-footer__explore li + li::before { content: none; }  /* no orphaned dots */
+  .site-footer__explore a {
+    display: block;
+    padding-block: var(--space-2xs);     /* a comfortable tap target */
+    font-size: clamp(1.05rem, 4.6vw, 1.35rem);
+  }
+
+  .site-footer__top { gap: var(--space-xl); }
+
+  /* the email is the longest string in the footer — never let it push the page */
+  .site-footer__contact a {
+    display: inline-block;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
   .site-footer__rule { margin-block: var(--space-lg); }
+
+  /* The sign-off rests ON the bottom edge rather than being sliced by it.
+     line-height 0.8 (the desktop value) leaves the descenders hanging below the
+     element's own box, which .site-footer's overflow:hidden then clips — so on
+     mobile the box has to actually contain the type: full line-height, no
+     translate, and padding to seat it. */
   .site-footer__signoff {
-    margin-top: var(--space-lg);
-    font-size: clamp(3.5rem, 19vw, 6rem);
+    margin-top: var(--space-xl);
+    font-size: clamp(2.75rem, 15vw, 4.5rem);
+    transform: none;
+    line-height: 1.12;
+    padding-bottom: var(--space-md);
   }
 }
