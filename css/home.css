@@ -179,9 +179,10 @@
 }
 /* Each word stays whole on its own line — never a mid-word break. */
 .hero__title-line { display: block; white-space: nowrap; }
-/* Script ascenders/descenders carry a lot of air, so the two lines want pulling
-   together — but not so far that "Sax" collides with "Olamide"'s descenders. */
-.hero__title-line + .hero__title-line { margin-top: -0.14em; }
+/* The two words each get their own line, with real air between them — a script
+   this large needs the breathing room, and the second word reads as a deliberate
+   second beat rather than a wrap. */
+.hero__title-line + .hero__title-line { margin-top: 0.06em; }
 .hero__title-line--accent { color: var(--text); }
 
 /* Mask-wipe: heroIntro.js wraps each line in .hero__mask (overflow clip) so the

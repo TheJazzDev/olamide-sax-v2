@@ -30,9 +30,13 @@
 import { prefersReducedMotion } from "./utils.js";
 import { splitByChars } from "./splitText.js";
 
-/* Seconds per character. A name is typed with a little ceremony, not hammered
-   out — but slow enough to read as typing, not as a fade. */
-const PER_CHAR = 0.085;
+/* Seconds per character. Unhurried — a name is signed, not hammered out. Slow
+   enough that the eye can follow each letter arriving. */
+const PER_CHAR = 0.16;
+
+/* An extra beat before the second word begins, so "Sax" lands as its own
+   deliberate line rather than running straight on from "Olamide". */
+const WORD_GAP = 0.55;
 
 export function initHeroIntro() {
   const gsap = window.gsap;
@@ -81,7 +85,17 @@ export function initHeroIntro() {
          and the caret hops along to whichever letter was typed last. */
   const TYPE_AT = 0.7;
 
+  let at = TYPE_AT;
+  let prevLine = chars[0].parentElement;
+
   chars.forEach((ch, i) => {
+    // crossing onto the second word: the hand pauses before starting it
+    const line = ch.parentElement;
+    if (line !== prevLine) {
+      at += WORD_GAP;
+      prevLine = line;
+    }
+
     tl.set(
       ch,
       {
@@ -92,12 +106,12 @@ export function initHeroIntro() {
           ch.classList.add("is-caret");
         },
       },
-      TYPE_AT + i * PER_CHAR
+      at
     );
+    at += PER_CHAR;
   });
 
-  const typedFor = chars.length * PER_CHAR;
-  const nameEnds = TYPE_AT + typedFor;
+  const nameEnds = at;
 
   // The caret lingers a beat after the last letter, then goes.
   tl.call(
