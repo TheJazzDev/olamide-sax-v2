@@ -540,7 +540,9 @@
    The clicked cell is lifted out of the wall and Flip-morphed into a centred
    stage over a dimmed backdrop. A ghost placeholder holds the wall's layout. */
 .gallery-cell { cursor: zoom-in; }
-.gallery-cell--ghost { visibility: hidden; }
+/* The original cell stays in the wall (keeps its column slot) but goes invisible
+   while its clone is enlarged — so nothing reflows/shifts. */
+.gallery-cell--lifted { visibility: hidden; }
 
 .gallery-lightbox {
   position: fixed;

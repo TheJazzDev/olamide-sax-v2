@@ -25,13 +25,29 @@ export function initGalleryMotion() {
   if (!grid) return;
   if (!gsap || prefersReducedMotion()) return;
 
-  // ── 1 · Skew-on-scroll ──────────────────────────────────────────────────────
-  // Drive a small skewY on the grid from scroll velocity. Prefer Lenis' velocity
-  // (already smoothed); fall back to a hand-rolled delta. Clamp tight so it reads
-  // as a lean, never a wobble.
+  // ── 1 · Skew-on-scroll (per image) ──────────────────────────────────────────
+  // Each photo leans on its OWN skew from scroll velocity (not the whole wall as
+  // a block), with a slight per-cell variation so they don't move in lockstep —
+  // giving the wall a lively, physical feel. Clamped tight so it reads as a lean,
+  // never a wobble. Cells re-arm after a filter re-render.
   const MAX_SKEW = 3;              // degrees — subtle, editorial
-  const setSkew = gsap.quickTo(grid, "skewY", { duration: 0.5, ease: "power3.out" });
   let velocity = 0;
+  let skewers = [];               // { setSkew, factor } per cell
+
+  function armSkew() {
+    skewers = $$cells().map((cell, i) => {
+      cell.style.willChange = "transform";
+      // Alternate lean direction + vary magnitude a touch per cell.
+      const factor = (i % 2 === 0 ? 1 : -1) * (0.8 + ((i * 37) % 5) * 0.1);
+      return {
+        setSkew: gsap.quickTo(cell, "skewY", { duration: 0.5, ease: "power3.out" }),
+        factor,
+      };
+    });
+  }
+  function $$cells() {
+    return Array.prototype.slice.call(grid.querySelectorAll(".gallery-cell"));
+  }
 
   const lenis = window.__lenis || null;
   if (lenis) {
@@ -46,13 +62,17 @@ export function initGalleryMotion() {
   }
 
   gsap.ticker.add(() => {
-    // Map velocity → skew, clamped; decay toward 0 so it settles upright.
-    const target = Math.max(-MAX_SKEW, Math.min(MAX_SKEW, velocity * 0.35));
-    setSkew(target);
+    // Map velocity → skew, clamped; decay toward 0 so each photo settles upright.
+    const base = Math.max(-MAX_SKEW, Math.min(MAX_SKEW, velocity * 0.35));
+    for (let i = 0; i < skewers.length; i++) {
+      skewers[i].setSkew(base * skewers[i].factor);
+    }
     velocity *= 0.9;
   });
-  // A stable transform origin so the skew pivots from the centre of the wall.
-  gsap.set(grid, { transformOrigin: "50% 50%", force3D: true });
+
+  armSkew();
+  // Re-arm the per-cell skewers after gallery.js re-renders on filter change.
+  new MutationObserver(() => armSkew()).observe(grid, { childList: true });
 
   // ── 2 · Click-to-enlarge (Flip) ────────────────────────────────────────────
   // Build a lightbox layer once. The clicked cell's media is Flip-morphed into a
@@ -68,48 +88,46 @@ export function initGalleryMotion() {
   }
   const backdrop = lightbox.querySelector("[data-lb-backdrop]");
 
-  let openCell = null;   // the cell currently enlarged
-  let placeholder = null; // keeps the wall's layout while a cell is lifted out
-  let isMorphing = false; // true during our own open/close DOM moves
+  let openCell = null;   // the cell currently enlarged (hidden in place)
+
+  // We NEVER remove the original cell from the grid — in a CSS multi-column
+  // layout, removing one item re-balances every column (the "layout shift"). So
+  // we CLONE the cell into the lightbox and Flip the clone from the original's
+  // on-screen rect to a centred, large one. The original just fades in place;
+  // on close the clone Flips back to it exactly, then is discarded. The grid DOM
+  // is untouched throughout → no reflow, no shift.
+  let clone = null;
 
   function open(cell) {
     if (openCell) return;
     openCell = cell;
-    isMorphing = true;
-    // Clear the flag after the moves + a frame so the observer ignores them.
-    requestAnimationFrame(() => requestAnimationFrame(() => { isMorphing = false; }));
+
+    // Clone into the lightbox; the clone lands in its CSS-defined centred layout.
+    clone = cell.cloneNode(true);
+    clone.classList.add("gallery-lightbox__figure");
+    clone.removeAttribute("data-id");
+    lightbox.appendChild(clone);
+    lightbox.classList.add("is-open");
+    lightbox.setAttribute("aria-hidden", "false");
+    cell.classList.add("gallery-cell--lifted"); // hide the original quietly
 
     if (!Flip) {
-      // Fallback: simple centred clone (no Flip morph).
-      lightbox.classList.add("is-open");
-      lightbox.setAttribute("aria-hidden", "false");
-      const clone = cell.cloneNode(true);
-      clone.classList.add("gallery-lightbox__figure", "is-clone");
-      lightbox.appendChild(clone);
+      gsap.set(backdrop, { opacity: 1 });
       return;
     }
 
-    // Record the cell's current position, then move it into the lightbox and
-    // Flip from its old rect to the new (centred, large) one.
-    const state = Flip.getState(cell, { props: "borderRadius" });
-
-    // Leave a placeholder so the masonry doesn't reflow/collapse.
-    placeholder = document.createElement("div");
-    placeholder.style.height = cell.getBoundingClientRect().height + "px";
-    placeholder.className = "gallery-cell gallery-cell--ghost";
-    cell.parentNode.insertBefore(placeholder, cell);
-
-    lightbox.classList.add("is-open");
-    lightbox.setAttribute("aria-hidden", "false");
-    cell.classList.add("gallery-lightbox__figure");
-    lightbox.appendChild(cell);
-
+    // The clone rests in its centred (large) CSS layout. Fit it ONTO the original
+    // cell's small on-screen rect, capture THAT as the start, clear the fit so the
+    // clone snaps to its large layout, then Flip from small → large. One clean
+    // Flip; the grid DOM is never touched, so the wall never reflows.
+    Flip.fit(clone, cell, { scale: false });
+    const state = Flip.getState(clone);
+    gsap.set(clone, { clearProps: "transform,width,height,top,left" });
     Flip.from(state, {
-      duration: 0.6,
+      duration: 0.55,
       ease: "power3.inOut",
       absolute: true,
       scale: false,
-      onComplete: () => ScrollTrigger && window.ScrollTrigger && window.ScrollTrigger.refresh(),
     });
     gsap.to(backdrop, { opacity: 1, duration: 0.4, ease: "power2.out" });
   }
@@ -117,63 +135,49 @@ export function initGalleryMotion() {
   function close() {
     if (!openCell) return;
     const cell = openCell;
-    isMorphing = true;
-    requestAnimationFrame(() => requestAnimationFrame(() => { isMorphing = false; }));
 
-    if (!Flip) {
+    const finish = () => {
       lightbox.classList.remove("is-open");
       lightbox.setAttribute("aria-hidden", "true");
-      const clone = lightbox.querySelector(".is-clone");
-      if (clone) clone.remove();
+      cell.classList.remove("gallery-cell--lifted");
+      if (clone) { clone.remove(); clone = null; }
       openCell = null;
+    };
+
+    if (!Flip || !clone) {
+      gsap.to(backdrop, { opacity: 0, duration: 0.3, ease: "power2.in", onComplete: finish });
       return;
     }
 
-    const state = Flip.getState(cell, { props: "borderRadius" });
-    // Put the cell back where the placeholder is holding its spot.
-    if (placeholder && placeholder.parentNode) {
-      placeholder.parentNode.insertBefore(cell, placeholder);
-      placeholder.remove();
-      placeholder = null;
-    }
-    cell.classList.remove("gallery-lightbox__figure");
-
+    // Capture the clone's current (large) state, fit it onto the original cell's
+    // on-screen rect, then Flip from large → small back to exactly where the
+    // photo lives in the wall. The original never moved, so nothing shifts.
+    const state = Flip.getState(clone);
+    Flip.fit(clone, cell, { scale: false });
     Flip.from(state, {
-      duration: 0.55,
+      duration: 0.5,
       ease: "power3.inOut",
       absolute: true,
       scale: false,
-      onComplete: () => {
-        lightbox.classList.remove("is-open");
-        lightbox.setAttribute("aria-hidden", "true");
-        window.ScrollTrigger && window.ScrollTrigger.refresh();
-      },
+      onComplete: finish,
     });
-    gsap.to(backdrop, { opacity: 0, duration: 0.35, ease: "power2.in" });
-    openCell = null;
+    gsap.to(backdrop, { opacity: 0, duration: 0.4, ease: "power2.in" });
   }
 
-  // Delegate clicks: a click on a cell (not while enlarged) opens it; a click on
-  // the enlarged cell or the backdrop closes it.
+  // Delegate clicks: a click on a cell opens it; a click on the lightbox
+  // (backdrop or the enlarged clone) or Esc closes it.
   grid.addEventListener("click", (e) => {
     const cell = e.target.closest(".gallery-cell");
-    if (cell && !cell.classList.contains("gallery-cell--ghost")) open(cell);
+    if (cell) open(cell);
   });
   lightbox.addEventListener("click", () => close());
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") close();
   });
 
-  // If gallery.js re-renders the grid (filter change) while a cell is enlarged,
-  // close it — the enlarged node would otherwise be orphaned. We must NOT react
-  // to our OWN open/close DOM moves, so we skip while a transition is mid-flight
-  // (isMorphing) and while a cell is open due to our lift-out.
-  const mo = new MutationObserver((records) => {
-    if (isMorphing) return;
-    // Only a real re-render (gallery.js replaces innerHTML → many removed nodes)
-    // should trigger a close, not our single lift-out/return of one cell.
-    const bulk = records.some((r) => r.removedNodes.length > 2 || r.addedNodes.length > 2);
-    if (bulk && openCell) close();
-  });
+  // The grid DOM is NEVER touched by open/close (we clone), so any childList
+  // change on the grid is a real re-render (gallery.js filter). Close if a cell
+  // is enlarged — its original would otherwise be replaced out from under us.
+  const mo = new MutationObserver(() => { if (openCell) close(); });
   mo.observe(grid, { childList: true });
 }
