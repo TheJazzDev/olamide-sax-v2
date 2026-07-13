@@ -216,7 +216,10 @@ function buildScrollReveals(gsap, ScrollTrigger) {
   $$("[data-animate='practice']").forEach((section) => {
     ScrollTrigger.create({
       trigger: section,
-      start: "top 78%",
+      // The section opens with a tall padding block — "top 78%" fired while
+      // only that empty padding was on screen (the reveal was done before the
+      // content arrived). 55% waits until the content itself is in view.
+      start: "top 55%",
       once: true,
       onEnter: () => section.classList.add("is-in"),
     });

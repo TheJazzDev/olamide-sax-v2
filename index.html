@@ -30,6 +30,7 @@
 
   <!-- Preload the two display faces used above the fold. -->
   <link rel="preload" href="assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/great-vibes.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/fonts/archivo-400.woff2" as="font" type="font/woff2" crossorigin />
 
   <!-- CSS cascade order: reset → tokens → typography → layout → frame → components → home → animations → responsive -->
@@ -326,6 +327,43 @@
     </section>
 
     <!-- ====================================================================
+         V · ARTISTIC PRACTICE — how the performance becomes shared work.
+         Text + participatory image, exhibition-label caption → practice page.
+         ==================================================================== -->
+    <section class="section practice" aria-labelledby="practice-title" data-animate="practice">
+      <div class="container">
+        <div class="practice__grid">
+          <div class="practice__media">
+            <figure class="frame-media frame-media--tall">
+              <img src="assets/images/gallery/workshop-01.jpg" width="1200" height="1600"
+                   alt="Olamide Sax facilitating a community drumming workshop — hands on the drums." loading="lazy" />
+            </figure>
+            <p class="exhibit-label">
+              <span class="exhibit-label__meta">Participatory · Facilitation</span>
+              <span class="exhibit-label__title">The room takes part</span>
+            </p>
+          </div>
+
+          <div class="practice__text">
+            <p class="movement-index">
+              <span class="movement-index__name">Artistic Practice</span>
+            </p>
+            <h2 class="sec-head__title" id="practice-title">More than a performance.</h2>
+            <p class="practice__copy">
+              Beyond the stage, Olamide works as a <strong>participatory artist</strong> and
+              <strong>creative facilitator</strong> — building drumming circles, workshops and
+              celebrations where a crowd becomes a community. Music that connects people;
+              culture that builds belonging.
+            </p>
+            <p class="practice__link">
+              <a class="link-underline sec-more" href="/artistic-practice.html">Explore the practice →</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
          IV · THE CRAFT — three movements: Saxophone · Voice · Keys.
          Full-bleed-ish image + one Fraunces word + one line of copy. Composed
          STATICALLY; each is a data-craft-movement hook for pin/cross-fade (Task 8).
@@ -418,42 +456,6 @@
       </div>
     </section>
 
-    <!-- ====================================================================
-         V · ARTISTIC PRACTICE — how the performance becomes shared work.
-         Text + participatory image, exhibition-label caption → practice page.
-         ==================================================================== -->
-    <section class="section practice" aria-labelledby="practice-title" data-animate="practice">
-      <div class="container">
-        <div class="practice__grid">
-          <div class="practice__media">
-            <figure class="frame-media frame-media--tall">
-              <img src="assets/images/gallery/workshop-01.jpg" width="1200" height="1600"
-                   alt="Olamide Sax facilitating a community drumming workshop — hands on the drums." loading="lazy" />
-            </figure>
-            <p class="exhibit-label">
-              <span class="exhibit-label__meta">Participatory · Facilitation</span>
-              <span class="exhibit-label__title">The room takes part</span>
-            </p>
-          </div>
-
-          <div class="practice__text">
-            <p class="movement-index">
-              <span class="movement-index__name">Artistic Practice</span>
-            </p>
-            <h2 class="sec-head__title" id="practice-title">More than a performance.</h2>
-            <p class="practice__copy">
-              Beyond the stage, Olamide works as a <strong>participatory artist</strong> and
-              <strong>creative facilitator</strong> — building drumming circles, workshops and
-              celebrations where a crowd becomes a community. Music that connects people;
-              culture that builds belonging.
-            </p>
-            <p class="practice__link">
-              <a class="link-underline sec-more" href="/artistic-practice.html">Explore the practice →</a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <!-- ====================================================================
          STAGES & RECOGNITION — a moving band of real venues, festivals and
@@ -467,10 +469,32 @@
           <span class="movement-index__name">Stages &amp; Recognition</span>
         </p>
         <h2 class="sec-head__title credits__title" id="credits-title">Where the room has been.</h2>
+
+        <!-- The honours ledger — the section's substance: two numbers and THE
+             award, set like entries in a programme. Staggered in by reveal.js
+             via the existing data-animate="fade" hook. -->
+        <div class="credits__ledger">
+          <div class="credits__stat" data-animate="fade">
+            <span class="credits__stat-num">10+</span>
+            <span class="credits__stat-label">Years of live performance</span>
+          </div>
+          <div class="credits__stat" data-animate="fade">
+            <span class="credits__stat-num">3</span>
+            <span class="credits__stat-label">Voices — saxophone, vocals, keys</span>
+          </div>
+          <div class="credits__stat credits__stat--award" data-animate="fade">
+            <span class="credits__stat-num">2026</span>
+            <span class="credits__stat-label">Eko Heritage Awards — Best Instrumentalist of the Year</span>
+          </div>
+        </div>
       </div>
 
+      <!-- Two counter-drifting credit bands: venues drift LEFT, collaborators
+           drift RIGHT (data-marquee-dir) — both nudged by scroll velocity.
+           Wrapped in a raised TICKER BAND so the drift reads as an object. -->
+      <div class="credits__band">
       <div class="credits__marquee" data-marquee aria-label="Venues, festivals and recognition">
-        <div class="credits__track" data-marquee-track>
+        <div class="credits__track" data-marquee-track data-marquee-dir="1">
           <span class="credits__item">Stand &amp; Be Counted Theatre</span>
           <span class="credits__dot" aria-hidden="true">✳</span>
           <span class="credits__item">Sharrow Festival</span>
@@ -485,6 +509,25 @@
           <span class="credits__dot" aria-hidden="true">✳</span>
         </div>
       </div>
+      <div class="credits__marquee credits__marquee--roles" data-marquee aria-label="Collaborators and productions">
+        <div class="credits__track credits__track--roles" data-marquee-track data-marquee-dir="-1">
+          <span class="credits__item">darts &amp; Maya Productions</span>
+          <span class="credits__dot" aria-hidden="true">✳</span>
+          <span class="credits__item">ArtBomb UK</span>
+          <span class="credits__dot" aria-hidden="true">✳</span>
+          <span class="credits__item">ÀTÙPÀ at CAST — as Adigun</span>
+          <span class="credits__dot" aria-hidden="true">✳</span>
+          <span class="credits__item">BME United Doncaster</span>
+          <span class="credits__dot" aria-hidden="true">✳</span>
+          <span class="credits__item">Utopia Theatre</span>
+          <span class="credits__dot" aria-hidden="true">✳</span>
+          <span class="credits__item">Sound Café Afrobeat Ensemble</span>
+          <span class="credits__dot" aria-hidden="true">✳</span>
+          <span class="credits__item">Before the Lord Mayor of Sheffield</span>
+          <span class="credits__dot" aria-hidden="true">✳</span>
+        </div>
+      </div>
+      </div><!-- /credits__band -->
     </section>
 
     <!-- ====================================================================

@@ -82,6 +82,7 @@
      ======================================================================== */
   --font-display: "Fraunces", "Fraunces Fallback", Georgia, "Times New Roman", serif;
   --font-body:    "Archivo",  "Archivo Fallback", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-script:  "Great Vibes", cursive; /* the signature (hero name) */
   --font-label:   var(--font-body);     /* uppercase, wide-tracked */
   /* Editorial-italic uses --font-display + font-style:italic (Fraunces italic). */
 

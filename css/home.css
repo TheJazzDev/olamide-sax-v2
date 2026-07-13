@@ -179,9 +179,9 @@
 }
 /* Each word stays whole on its own line — never a mid-word break. */
 .hero__title-line { display: block; white-space: nowrap; }
-/* Script ascenders/descenders carry a lot of air — pull the two lines of the
-   signature closer together. */
-.hero__title-line + .hero__title-line { margin-top: -0.32em; }
+/* Script ascenders/descenders carry a lot of air, so the two lines want pulling
+   together — but not so far that "Sax" collides with "Olamide"'s descenders. */
+.hero__title-line + .hero__title-line { margin-top: -0.14em; }
 .hero__title-line--accent { color: var(--text); }
 
 /* Mask-wipe: heroIntro.js wraps each line in .hero__mask (overflow clip) so the
@@ -197,11 +197,36 @@
 }
 .hero-intro-ready .hero__title-line { will-change: transform; }
 
-/* Per-character reveal (splitText.js → splitByChars). Great Vibes is a CONNECTED
-   script, so the letters must stay in the normal text flow — no inline-block,
-   no per-letter offsets, or the joins between letterforms break. We animate
-   opacity + blur only, and the browser's own kerning is preserved exactly. */
-.split-char { will-change: opacity, filter; }
+/* TYPEWRITER (splitText.js → splitByChars + heroIntro.js).
+
+   Great Vibes is a CONNECTED script, so the letters must stay in the normal
+   text flow — no inline-block, no per-letter offsets, and crucially nothing
+   inserted or removed as it types, or the joins between letterforms break and
+   the line reflows. Every character is present from the start and merely flips
+   visibility, so the layout is set once and never moves. */
+.split-char { visibility: inherit; }
+
+/* The caret trails the LAST TYPED CHARACTER — it hangs off that char, not off
+   the line box, so it sits exactly at the typing position with nothing to
+   measure. (On the line box it would park at the end of the full line, ahead of
+   the text, which gives the game away instantly.) */
+.split-char.is-caret::after {
+  content: "";
+  display: inline-block;
+  width: 0.035em;
+  height: 0.56em;
+  margin-left: 0.06em;
+  vertical-align: baseline;
+  background: var(--accent);
+  animation: hero-caret 1s steps(1, end) infinite;
+}
+@keyframes hero-caret {
+  0%, 49%   { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .split-char.is-caret::after { animation: none; opacity: 0; }
+}
 
 
 .hero__meta {

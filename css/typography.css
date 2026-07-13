@@ -23,6 +23,16 @@
   font-display: swap;
 }
 
+/* Great Vibes — the SIGNATURE script (hero name only; drawn on by
+   heroIntro.js). Single weight. OFL-licensed, self-hosted latin subset. */
+@font-face {
+  font-family: "Great Vibes";
+  src: url("../assets/fonts/great-vibes.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 @font-face {
   font-family: "Archivo";
   src: url("../assets/fonts/archivo-400.woff2") format("woff2");
