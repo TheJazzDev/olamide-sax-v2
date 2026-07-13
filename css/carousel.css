@@ -1,15 +1,4 @@
-/* ============================================================================
-   carousel.css — Olamide Sax V3 · "The Live Wall" tilted photo-wheel
-   ----------------------------------------------------------------------------
-   A big ring of photos seen at an angle — a wheel lying tilted back into the
-   screen. Every photo is billboarded (faces the viewer), so the WHOLE ring is
-   visible at once: front photos large & low, back photos small, high & dim.
-   carousel.js positions each photo (x/y/z/scale/opacity) around the rim and
-   spins the wheel; on scroll-in the photos fly in and assemble.
-
-   PROGRESSIVE ENHANCEMENT: with JS/GSAP off, .carousel is NOT is-3d, so it
-   falls back to a plain horizontal-scroll row (all photos reachable).
-   ========================================================================== */
+/* carousel.css — Olamide Sax V3 · "The Live Wall" tilted photo-wheel */
 
 .featured-gallery {
   padding-block: clamp(4rem, 10vh, 8rem);

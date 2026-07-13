@@ -1,18 +1,4 @@
-/* ============================================================================
-   home.css — Olamide Sax V2 · the curated homepage (Task 3)
-   Section-specific composition for index.html ONLY. Consumes tokens +
-   typography + layout + components. Loaded LAST-but-one, after components.css
-   and before responsive.css so the page can still tune down at breakpoints.
-
-   Register: cinematic editorial-luxury. Whitespace does the work. One serif
-   moment per viewport; ~1 brass element per viewport. Sharp edges, hairlines,
-   NO rounded cards, NO heavy shadows. Static only — inert data-* hooks left
-   for Tasks 6–8 (Breath Line, kinetic type, Craft pins, media blooms).
-
-   Media frames all share .frame-media: a hairline-bordered, ratio-locked,
-   warm-toned image well that fills gracefully whether the real asset is a
-   placeholder or hero-grade photography.
-   ========================================================================== */
+/* home.css — Olamide Sax V2 · the curated homepage */
 
 /* ── Shared: hung section index (Roman numeral + name) ──────────────────── */
 /* Each movement is labelled like a track on a set list. Kept quiet — it is
@@ -120,11 +106,7 @@
   pointer-events: none;
 }
 
-/* ============================================================================
-   I · HERO  — Birth / The Name
-   A HERO SHELL that reserves the stage for the Breath-Line saxophone assembly
-   (Task 7). The wordmark is the soloist; the portrait is held in shadow.
-   ========================================================================== */
+/* I · HERO  — Birth / The Name */
 
 .hero {
   position: relative;
@@ -319,9 +301,7 @@
   .hero__portrait { justify-self: end; max-width: 18rem; }
 }
 
-/* ============================================================================
-   II · THE STATEMENT  — a held hush, then ONE oversized Fraunces line.
-   ========================================================================== */
+/* II · THE STATEMENT  — a held hush, then ONE oversized Fraunces line. */
 
 .statement__hold { min-height: 22vh; }
 
@@ -349,10 +329,7 @@
 }
 .statement__body strong { color: var(--text); font-weight: var(--body-weight-strong); }
 
-/* ============================================================================
-   III · THE ROOTS  — LIGHT interlude (Bone ground, Ink text). The rhythm shift.
-   Oversized "2010 —" hangs in the margin; a heritage image; link → About.
-   ========================================================================== */
+/* III · THE ROOTS  — LIGHT interlude (Bone ground, Ink text). The rhythm shift. */
 
 .roots { position: relative; overflow: clip; }
 
@@ -453,10 +430,7 @@
 
 .craft__intro { margin-bottom: var(--space-2xl); }
 
-/* ============================================================================
-   V · ARTISTIC PRACTICE — participatory image + text, mirrors The Roots' grid
-   but image-left / text-right (offset the other way for rhythm on the page).
-   ========================================================================== */
+/* V · ARTISTIC PRACTICE — participatory image + text, mirrors The Roots' grid */
 
 .practice__grid {
   display: grid;
@@ -510,11 +484,7 @@
   }
 }
 
-/* ============================================================================
-   STAGES & RECOGNITION — a drifting typographic marquee of real venues,
-   festivals and awards. marquee.js duplicates the track and drifts it; scroll
-   velocity nudges the speed. No image/video (kept out of the media sections).
-   ========================================================================== */
+/* STAGES & RECOGNITION — a drifting typographic marquee of real venues, */
 
 .credits {
   overflow: hidden;                 /* the marquee row bleeds full-width */
@@ -620,10 +590,7 @@
   color: rgb(var(--brass-rgb) / 0.55);
 }
 
-/* ============================================================================
-   VI · FEATURED VIDEO — YouTube FACADE (still + play affordance). No live
-   iframe now (Task 8 wires facade → iframe). data-yt hook carried.
-   ========================================================================== */
+/* VI · FEATURED VIDEO — YouTube FACADE (still + play affordance). No live */
 
 .video-facade {
   position: relative;
@@ -691,9 +658,7 @@
 }
 .video-facade__label span { color: var(--accent); }
 
-/* ============================================================================
-   VII · FEATURED GALLERY — Live Wall taste. A few stills; enter the gallery.
-   ========================================================================== */
+/* VII · FEATURED GALLERY — Live Wall taste. A few stills; enter the gallery. */
 
 .live-wall {
   display: grid;
@@ -721,10 +686,7 @@
   .live-wall__cell:nth-child(4) .frame-media { aspect-ratio: 16 / 10; }
 }
 
-/* ============================================================================
-   VIII · FEATURED PRESS — ONE large Fraunces-italic pull-quote + 3 real
-   press sources as tracked labels.
-   ========================================================================== */
+/* VIII · FEATURED PRESS — ONE large Fraunces-italic pull-quote + 3 real */
 
 .press__quote {
   font-family: var(--font-display);
@@ -782,11 +744,7 @@
   .press__source-read { justify-self: start; margin-top: var(--space-2xs); }
 }
 
-/* ============================================================================
-   IX · TIMELINE TEASER — a few milestone nodes hinting career-as-composition.
-   data-timeline-teaser hook carried. Nodes sit on a hairline the future
-   Breath Line can inhabit.
-   ========================================================================== */
+/* IX · TIMELINE TEASER — a few milestone nodes hinting career-as-composition. */
 
 .timeline-teaser__track {
   margin-top: var(--space-2xl);
@@ -842,11 +800,7 @@
   max-width: 26ch;
 }
 
-/* ============================================================================
-   X · THE INVITATION / RESOLUTION — quiet, confident title card. Reserves
-   data-breath-resolve where the Breath Line resolves into the wordmark
-   (Task 7). One brass CTA → contact.
-   ========================================================================== */
+/* X · THE INVITATION / RESOLUTION — quiet, confident title card. Reserves */
 
 .invitation {
   position: relative;
@@ -862,7 +816,7 @@
   gap: var(--space-lg);
 }
 
-/* Reserved stage where the Breath Line resolves into the wordmark (Task 7). */
+/* Reserved stage where the Breath Line resolves into the wordmark. */
 .invitation__resolve {
   position: relative;
   width: 100%;
@@ -917,14 +871,7 @@
   .video-facade__label { left: var(--space-sm); bottom: var(--space-sm); }
 }
 
-/* ============================================================================
-   AMBIENT VIDEO LAYERS — real content pass.
-   Home hero holds a muted, low-opacity looping video BEHIND the title as an
-   ambient cinematic layer. Craft movements are video-first: a muted loop that
-   fills the media well over its poster. All videos degrade to poster-only
-   under prefers-reduced-motion (a tiny guard in main.js pauses + shows poster;
-   here we also keep the media well non-scrolling and width-safe).
-   ========================================================================== */
+/* AMBIENT VIDEO LAYERS — real content pass. */
 
 /* Hero ambient video — fills the reserved stage, held far back and low. */
 .hero__video {

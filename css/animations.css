@@ -1,8 +1,4 @@
-/* ============================================================================
-   animations.css — Olamide Sax V2 · CSS keyframes only (NO JS motion here)
-   Film grain · stage-warm bloom · film-frame draw. All neutralised under
-   prefers-reduced-motion. Kinetic type / scroll motion belong to GSAP (later).
-   ========================================================================== */
+/* animations.css — Olamide Sax V2 · CSS keyframes only (NO JS motion here) */
 
 /* ── Film grain ─────────────────────────────────────────────────────────── */
 /* A fixed grain veil. Attach .grain to a decorative overlay element. The
@@ -91,10 +87,7 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ============================================================================
-   Reduced-motion neutralisation. Content is fully present statically;
-   we simply stop every keyframe here.
-   ========================================================================== */
+/* Reduced-motion neutralisation. Content is fully present statically; */
 @media (prefers-reduced-motion: reduce) {
   .grain        { animation: none; }
   .stage-bloom  { animation: none; opacity: var(--glow-opacity-rest); }

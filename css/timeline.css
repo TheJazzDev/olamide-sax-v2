@@ -1,15 +1,4 @@
-/* ============================================================================
-   timeline.css — Olamide Sax V2 · THE TIMELINE (Task 5)
-   The signature page for the Breath Line's "timeline" role. Career milestones
-   unfold as nodes along a single central vertical line. Built STATIC here —
-   a hairline brass line + dated nodes phrased like movements. Task 7 drives
-   the line via data-breath-timeline / data-timeline / data-timeline-node.
-
-   Register unchanged: cinematic editorial-luxury. Hairlines not cards, sharp
-   edges, ~1 brass moment per viewport, whitespace does the work. Loaded AFTER
-   home.css (reuses .archive-head / .movement-index / .frame-media), before
-   responsive.css so it can still tune down at breakpoints.
-   ========================================================================== */
+/* timeline.css — Olamide Sax V2 · THE TIMELINE */
 
 /* ── The composition well — holds the line + the run of nodes ───────────── */
 
@@ -19,7 +8,7 @@
 }
 
 /* The Breath Line's static bed: a hairline brass rule running the full height
-   of the node run. Left-hung on mobile, centred from md up. Task 7 replaces
+   of the node run. Left-hung on mobile, centred from md up. replaces
    the still fill with the animated brass path inside .timeline__line. */
 .timeline__line {
   position: absolute;
@@ -210,5 +199,5 @@
 }
 .timeline-coda__cta { margin-top: var(--space-lg); }
 
-/* ── Reduced motion: the still line + markers ARE the design (Task 7 no-op).
+/* ── Reduced motion: the still line + markers ARE the design no-op).
    Nothing kinetic here — the static line is intentional and needs no override. */

@@ -1,20 +1,6 @@
-/* ============================================================================
-   archive.css — Olamide Sax V2 · the living-archive pages (Task 4)
-   Section composition for media.html · gallery.html · press.html. Consumes
-   tokens + typography + layout + components + reuses home.css's shared
-   .frame-media / .exhibit-label / .movement-index / .sec-head / .video-facade.
+/* archive.css — Olamide Sax V2 · the living-archive pages */
 
-   Register: cinematic editorial-luxury, unchanged. Hairlines not cards, sharp
-   edges, ~1 brass element per viewport, whitespace does the work. Scalable —
-   the same slot reads curated at a dozen and elegant at a hundred. Static
-   only; inert data-* hooks left for later. Loaded AFTER home.css, before
-   responsive.css (so it can still tune down at breakpoints).
-   ========================================================================== */
-
-/* ============================================================================
-   0 · ARCHIVE PAGE HEAD  (shared intro for every archive page)
-   A quiet editorial masthead: eyebrow, one serif <h1>, a lead line.
-   ========================================================================== */
+/* 0 · ARCHIVE PAGE HEAD  (shared intro for every archive page) */
 
 .archive-head {
   padding-top: calc(var(--section-y) * 0.9);
@@ -39,10 +25,7 @@
   max-width: 52ch;
 }
 
-/* ============================================================================
-   1 · ARCHIVE HUB (media.html) — entry points to the four archives.
-   A short editorial index of doorways: Performances · Gallery · Videos · Press.
-   ========================================================================== */
+/* 1 · ARCHIVE HUB (media.html) — entry points to the four archives. */
 
 .hub-index {
   margin-top: var(--space-2xl);
@@ -105,10 +88,7 @@
   .hub-entry, .hub-entry__go { transition: none; }
 }
 
-/* ============================================================================
-   2 · PERFORMANCES BY YEAR (media.html) — a grouped editorial ledger.
-   Each year is a header hung beside its events; events are hairline rows.
-   ========================================================================== */
+/* 2 · PERFORMANCES BY YEAR (media.html) — a grouped editorial ledger. */
 
 .perf-year { border-top: 1px solid var(--hairline); }
 .perf-year + .perf-year { margin-top: var(--space-xl); }
@@ -184,11 +164,7 @@
   max-width: 56ch;
 }
 
-/* ============================================================================
-   3 · VIDEO ARCHIVE (media.html) — light category tabs + facade cards.
-   Reuses .video-facade (home.css) for each card's poster/play/label; adds
-   the card foot (title + meta) and the tablist chrome + the grid.
-   ========================================================================== */
+/* 3 · VIDEO ARCHIVE (media.html) — light category tabs + facade cards. */
 
 /* Tabs / chips — shared shell used by both video tabs and gallery filter chips.
    Underline-only, no pills, sharp. The active item wears a brass underline. */
@@ -275,11 +251,7 @@
   color: var(--muted);
 }
 
-/* ============================================================================
-   4 · GALLERY (gallery.html) — scalable editorial mosaic.
-   auto-fill grid so the layout stays elegant from a dozen to a hundred
-   cells without per-cell rules. Every cell is a .frame-media (video-first).
-   ========================================================================== */
+/* 4 · GALLERY (gallery.html) — scalable editorial mosaic. */
 
 /* ── Dense masonry wall (CSS columns) ───────────────────────────────────────
    True masonry: cells flow top-to-bottom within columns and keep their NATIVE
@@ -380,11 +352,7 @@
   color: var(--muted);
 }
 
-/* ============================================================================
-   5 · PRESS LEDGER (press.html) — editorial rows, NO cards.
-   Hairline-ruled <article> rows: brass source label, serif title, excerpt,
-   date, draw-underline "Read Article". Feature tier reads slightly larger.
-   ========================================================================== */
+/* 5 · PRESS LEDGER (press.html) — editorial rows, NO cards. */
 
 .press-ledger {
   margin-top: var(--space-2xl);
@@ -513,10 +481,7 @@
   .press-mention { grid-template-columns: 1fr; gap: var(--space-2xs); }
 }
 
-/* ============================================================================
-   6 · SHARED — a modest section rhythm for archive sections (tighter than the
-   homepage's cinematic spacing, since archives carry more content per screen).
-   ========================================================================== */
+/* 6 · SHARED — a modest section rhythm for archive sections (tighter than the */
 
 .archive-section { padding-block: clamp(64px, 9vh, 132px); }
 /* When an archive section follows the masthead directly (grid/ledger), it

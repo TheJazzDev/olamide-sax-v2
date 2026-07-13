@@ -1,12 +1,4 @@
-/* ============================================================================
-   media-motion.css — Olamide Sax V3 · Task 8 media-interaction styles
-   ----------------------------------------------------------------------------
-   Pre-states + treatments for the Task-8 set-pieces. Everything that HIDES or
-   RE-POSITIONS content is gated behind html.js-anim-ready (added by reveal.js
-   only when GSAP is loaded AND motion is allowed). With JS off / GSAP failed /
-   reduced-motion, none of these rules apply → content is fully visible + laid
-   out normally. Transform / opacity only. No horizontal overflow at 375px.
-   ========================================================================== */
+/* media-motion.css — Olamide Sax V3 · media-interaction styles */
 
 /* ── YouTube embed (injected on activation) ───────────────────────────────── */
 .video-embed {
@@ -111,10 +103,7 @@ main > section.section > *:not(.section-bloom):not(.hero__stage) { position: rel
   will-change: opacity, transform;
 }
 
-/* ============================================================================
-   Reduced-motion backstop (belt + braces — JS already prevents the gate).
-   Force everything to its final, visible, static state.
-   ========================================================================== */
+/* Reduced-motion backstop (belt + braces — JS already prevents the gate). */
 @media (prefers-reduced-motion: reduce) {
   .js-anim-ready .gallery-cell--pre,
   .js-anim-ready .timeline-milestone--unfold .timeline-milestone__mark,

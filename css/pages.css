@@ -1,17 +1,6 @@
-/* ============================================================================
-   pages.css — Olamide Sax V2 · About · Artistic Practice · Contact (Task 5)
-   Section composition for the three static content pages. Reuses tokens +
-   typography + layout + components + home.css shared parts (.frame-media,
-   .exhibit-label, .movement-index, .sec-head, .archive-head). Register
-   unchanged: editorial-luxury, hairlines not cards, underline-only form
-   fields, ~1 brass moment per viewport, whitespace does the work. Loaded
-   AFTER home.css, before responsive.css.
-   ========================================================================== */
+/* pages.css — Olamide Sax V2 · About · Artistic Practice · Contact */
 
-/* ============================================================================
-   ABOUT — biography as MOVEMENTS (Origin · Craft · Stage · Present)
-   Museum-print portrait; Fraunces italic for movement titles + a pull-quote.
-   ========================================================================== */
+/* ABOUT — biography as MOVEMENTS (Origin · Craft · Stage · Present) */
 
 .about-head__portrait {
   margin-top: var(--space-2xl);
@@ -103,9 +92,7 @@
 .movement__body strong { color: var(--text); font-weight: var(--body-weight-strong); }
 .movement__terms { font-style: italic; font-family: var(--font-display); }
 
-/* ============================================================================
-   ARTISTIC PRACTICE — genres, "The Sound", repertoire, contexts.
-   ========================================================================== */
+/* ARTISTIC PRACTICE — genres, "The Sound", repertoire, contexts. */
 
 /* Lead intro after the masthead. */
 .practice-intro__text {
@@ -197,9 +184,7 @@
   max-width: 56ch;
 }
 
-/* ============================================================================
-   CONTACT — booking. Details · form (underline-only) · availability · socials.
-   ========================================================================== */
+/* CONTACT — booking. Details · form (underline-only) · availability · socials. */
 
 .contact-grid { display: grid; gap: var(--space-3xl); }
 @media (min-width: 900px) {

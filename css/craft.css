@@ -1,15 +1,4 @@
-/* ============================================================================
-   craft.css — Olamide Sax V3 · "The Craft" — stacked "cover" horizontal scroll
-   ----------------------------------------------------------------------------
-   Three panels stacked in the SAME spot; GSAP pins the section and slides each
-   subsequent panel OVER the previous one as you scroll (craft.js). Each panel
-   is a cinematic LETTERBOX: bold black bars top + bottom, the video in a
-   centred strip (~60% height) — which also keeps the clip sharper (it renders
-   closer to its native size instead of upscaling to full screen).
-
-   PROGRESSIVE ENHANCEMENT: with JS/GSAP off, the panels fall back to a simple
-   vertical stack (all visible, readable) — no pin, fully usable.
-   ========================================================================== */
+/* craft.css — Olamide Sax V3 · "The Craft" — stacked "cover" horizontal scroll */
 
 .craft {
   position: relative;
@@ -176,11 +165,7 @@
   .craft.is-stacked .craft-panel { position: relative; }
 }
 
-/* ============================================================================
-   THE DECK — a colossal GHOST MARQUEE in the bottom letterbox band. It runs
-   RIGHT on its own clock (pure CSS, no scrub) while the panels cover LEFT —
-   two opposing currents. Only exists in the pinned desktop cover-scroll.
-   ========================================================================== */
+/* THE DECK — a colossal GHOST MARQUEE in the bottom letterbox band. It runs */
 .craft__deck { display: none; }
 
 .craft.is-stacked .craft__deck {

@@ -1,17 +1,4 @@
-/* ============================================================================
-   motion.css — Olamide Sax V2 · GSAP motion pre-states (PROGRESSIVE ENHANCEMENT)
-   ----------------------------------------------------------------------------
-   THE CONTRACT: every "start hidden / start shifted" pre-state below is gated
-   behind `html.js-anim-ready`. That class is added by js/reveal.js ONLY after
-   BOTH checks pass: (1) GSAP actually loaded, (2) motion is allowed (no
-   prefers-reduced-motion). If GSAP is absent, or reduced-motion is on, or JS is
-   off entirely → the class is NEVER added → none of these rules apply → all
-   content renders in its final, fully-visible state. Nothing here may hide
-   content unconditionally.
-
-   Only opacity / transform are used (60fps). Kinetic-type split spans and the
-   cursor also live here. Everything is a no-op without the gate class.
-   ========================================================================== */
+/* motion.css — Olamide Sax V2 · GSAP motion pre-states (PROGRESSIVE ENHANCEMENT) */
 
 /* ── Reveal pre-states (only while the engine is live) ───────────────────── */
 /* These set the "before" of a GSAP-driven reveal. reveal.js animates them to
@@ -120,11 +107,7 @@
   cursor: none;
 }
 
-/* ============================================================================
-   Hard reduced-motion backstop. Even if some class survived, force everything
-   to its final, visible, static state and disable the custom cursor. matchMedia
-   in JS already prevents the gate from being added, but this is belt+braces.
-   ========================================================================== */
+/* Hard reduced-motion backstop. Even if some class survived, force everything */
 @media (prefers-reduced-motion: reduce) {
   .js-anim-ready [data-animate="fade"],
   .js-anim-ready .reveal-item,

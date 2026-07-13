@@ -1,17 +1,6 @@
-/* ============================================================================
-   components.css — Olamide Sax V2 · shared components
-   Nav, full-screen menu overlay, footer colophon, buttons, draw-underline
-   links, labels, cards, forms, icons. LUXURY register: hairline borders,
-   sharp edges, brass draw-underlines, generous spacing, restraint. No
-   rounded pills, no drop-shadow cards. Depends on tokens.css + typography.css.
-   Loaded AFTER frame.css, BEFORE animations.css (see page <head> order).
-   ========================================================================== */
+/* components.css — Olamide Sax V2 · shared components */
 
-/* ============================================================================
-   1 · DRAW-UNDERLINE LINK  (base treatment, deferred from typography.css)
-   A brass underline that draws in from the left on hover/focus. The base
-   utility any inline text link can wear; nav/footer links extend it.
-   ========================================================================== */
+/* 1 · DRAW-UNDERLINE LINK  (base treatment, deferred from typography.css) */
 
 .link-underline {
   position: relative;
@@ -48,10 +37,7 @@
   .link-underline::after { transition: none; }
 }
 
-/* ============================================================================
-   2 · BUTTONS
-   Sharp edges, hairline or brass-fill. No pill radius, no drop-shadow.
-   ========================================================================== */
+/* 2 · BUTTONS */
 
 .btn {
   position: relative;
@@ -117,16 +103,11 @@
   .btn { transition: none; }
 }
 
-/* ============================================================================
-   3 · LABELS / EYEBROWS (component context — base type lives in typography.css)
-   ========================================================================== */
+/* 3 · LABELS / EYEBROWS (component context — base type lives in typography.css) */
 
 .label--on-dark { color: var(--muted); }
 
-/* ============================================================================
-   4 · CARD
-   Hairline border, sharp corners, no shadow. Content-first.
-   ========================================================================== */
+/* 4 · CARD */
 
 .card {
   position: relative;
@@ -159,9 +140,7 @@
   .card { transition: none; }
 }
 
-/* ============================================================================
-   5 · FORM FIELDS  (underline-only — no boxed inputs)
-   ========================================================================== */
+/* 5 · FORM FIELDS  (underline-only — no boxed inputs) */
 
 .form-field {
   display: flex;
@@ -217,9 +196,7 @@ textarea.form-field__control {
   .form-field__control { transition: none; }
 }
 
-/* ============================================================================
-   6 · ICONS
-   ========================================================================== */
+/* 6 · ICONS */
 
 .icon {
   width: 1.1rem;
@@ -257,16 +234,7 @@ textarea.form-field__control {
   .icon-link { transition: none; }
 }
 
-/* ============================================================================
-   7 · SITE NAV  (collapsed — Menu trigger only; frame carries the wordmark)
-   Fixed, positioned INSIDE the film-frame's inset so it never collides with
-   the frame's corner metadata. The frame's top-left corner already reads
-   "OLAMIDE SAX" (see frame.css), so the nav's own wordmark link is present
-   for a11y/keyboard (a real, focusable Home link — visible on :focus so
-   keyboard users see where focus is) but stays visually-hidden at rest to
-   avoid double-printing the brand name on top of the frame corner. The Menu
-   trigger sits clear of the frame's top-right corner (offset below it).
-   ========================================================================== */
+/* 7 · SITE NAV  (collapsed — Menu trigger only; frame carries the wordmark) */
 
 .site-nav {
   position: fixed;
@@ -422,12 +390,7 @@ textarea.form-field__control {
   .nav-toggle__bar { transition: none; }
 }
 
-/* ============================================================================
-   8 · MENU OVERLAY  (full-screen, editorial)
-   Hidden by default; JS toggles the data-open attribute (NOT a class — see
-   navigation.js contract). Large Fraunces serif links, contact line, socials
-   as tracked labels. Body scroll lock handled in JS.
-   ========================================================================== */
+/* 8 · MENU OVERLAY  (full-screen, editorial) */
 
 /* Right-side sliding panel — HALF-screen on desktop, full on mobile.
    The overlay element itself is a full-viewport layer holding a backdrop
@@ -724,9 +687,7 @@ textarea.form-field__control {
   padding-right: var(--sbw, 0px);
 }
 
-/* ============================================================================
-   9 · SITE FOOTER  (editorial colophon)
-   ========================================================================== */
+/* 9 · SITE FOOTER  (editorial colophon) */
 
 /* DEEP-BRONZE footer — the CODA. The same surface as the menu drawer, so
    the two bookend the ink site. Structured columns up top; the site signs
