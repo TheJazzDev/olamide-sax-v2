@@ -70,8 +70,8 @@ export function initCraft() {
   gsap.set(flash, { opacity: 0 });
 
   const covers = panels.length - 1;   // number of cuts
-  const START_HOLD = 0.35;
-  const END_HOLD = 0.2;
+  const START_HOLD = 0.18;            // shorter lead-in before the first cut
+  const END_HOLD = 0.15;
   const total = START_HOLD + covers + END_HOLD;
 
   // ── Choose the cut styles for this load ─────────────────────────────────────
@@ -103,9 +103,12 @@ export function initCraft() {
     scrollTrigger: {
       trigger: viewport,
       pin: true,
-      scrub: 1,
+      // Tighter scrub → the transition tracks the scroll closely (less lag before
+      // the next video responds) while staying smooth.
+      scrub: 0.4,
       start: "top top",
-      end: () => "+=" + window.innerHeight * (total * 0.9),
+      // Shorter scroll distance per cut → you reach the next video sooner.
+      end: () => "+=" + window.innerHeight * (total * 0.6),
       invalidateOnRefresh: true,
       anticipatePin: 1,
     },
@@ -118,8 +121,8 @@ export function initCraft() {
   //    active motion is SNAPPY (compressed into ~D of the window with a lead-in
   //    hold), like a real editing transition, plus an effect (flash / blur /
   //    RGB glitch). Everything is scrubbed, so it reverses on scroll-up. ───────
-  const D = 0.5;               // transition duration inside the 1-unit window (snappy)
-  const LEAD = 0.28;           // brief hold before the cut fires
+  const D = 0.55;              // transition duration inside the 1-unit window
+  const LEAD = 0.12;           // short hold before the cut fires (less dead-zone)
 
   function cut(style, prev, panel, at) {
     const media = panel.querySelector(".craft-panel__media");
