@@ -55,17 +55,25 @@
 }
 
 /* When GSAP takes over: stack every panel in the same absolute spot so they
-   can slide over each other. Added by craft.js only when the cover is built. */
+   can slide / wipe / flip / punch over each other. Added by craft.js only when
+   the cover is built. */
 .craft.is-stacked .craft-viewport { overflow: hidden; }
 .craft.is-stacked .craft-track {
   position: absolute;
   inset: 0;
   display: block;
   gap: 0;
+  /* Depth for the 3D FLIP cut (craft.js rotates panels on Y). */
+  perspective: 1600px;
+  transform-style: preserve-3d;
 }
 .craft.is-stacked .craft-panel {
   position: absolute;
   inset: 0;
+  /* Hide the reverse face so a mid-flip panel doesn't show its back. */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform, opacity, clip-path;
 }
 
 /* ── A single cinematic letterbox panel ─────────────────────────────────── */

@@ -1,13 +1,23 @@
 /* ============================================================================
-   craft.js — Olamide Sax V3 · "The Craft" stacked "cover" scroll
+   craft.js — Olamide Sax V3 · "The Craft" pinned scroll with cinematic cuts
    ----------------------------------------------------------------------------
-   Panels are stacked in the same spot; as the user scrolls, each subsequent
-   panel slides OVER the previous one (xPercent 100 → 0). Pinned + scrubbed via
-   ScrollTrigger, driven by Lenis (smoothScroll.js) so it's smooth + in sync.
+   Three video panels stacked in the same spot; the section pins and scroll
+   scrubs through a CUT between each pair. There are FOUR different cut styles;
+   on every page load they're SHUFFLED and assigned so no two adjacent cuts are
+   the same (and, when there are ≤4 cuts, all are distinct) — so the sequence
+   feels fresh each visit and never repeats back-to-back:
 
-   Pacing: a HOLD at the start (linger on panel 1) and at the end (linger on the
-   last) before the pin releases — so it doesn't snap away the instant the last
-   panel arrives.
+     WIPE   — the incoming scene is revealed by a clip-path shape (iris bloom /
+              letterbox slit / diagonal blade — itself rotated per use).
+     SLIDE  — the incoming panel slides in from the side and covers; the
+              outgoing recedes with depth.
+     FLIP   — the stack turns in 3D: the outgoing tilts away as the incoming
+              rotates in, like turning a giant card.
+     PUNCH  — the incoming zooms out from the centre of the outgoing and punches
+              through to fill the frame (dive-into-the-frame cut).
+
+   Pinned + scrubbed, so scrolling back replays each cut in reverse. Every
+   outgoing panel ends fully hidden — nothing lingers beneath.
 
    PROGRESSIVE ENHANCEMENT: no GSAP / reduced-motion / mobile → skip entirely;
    the CSS shows the panels as a readable vertical stack.
@@ -32,25 +42,49 @@ export function initCraft() {
   gsap.registerPlugin(ScrollTrigger);
   section.classList.add("is-stacked");
 
-  // Stack order: first panel on the bottom, last on top. Panels after the
-  // first START off-screen to the right, then slide in to cover.
+  // Reset every panel to a hidden, neutral state (panel 0 visible).
   panels.forEach((p, i) => {
     gsap.set(p, {
       zIndex: i,
-      xPercent: i === 0 ? 0 : 100,
-      transformOrigin: "50% 50%",   // zoom from the centre when covered
+      xPercent: 0,
+      yPercent: 0,
+      opacity: i === 0 ? 1 : 0,
+      scale: 1,
+      rotationY: 0,
+      clipPath: "none",
+      transformOrigin: "50% 50%",
+      transformPerspective: 1200,
     });
   });
 
-  const covers = panels.length - 1; // number of slide-in transitions
-  const START_HOLD = 0.35;           // brief linger on panel 1 before covering
-  // Total timeline length in "units": a short opening hold + one per cover.
-  // No trailing hold — release promptly once the last panel lands.
-  const total = START_HOLD + covers;
+  const covers = panels.length - 1;   // number of cuts
+  const START_HOLD = 0.35;
+  const END_HOLD = 0.2;
+  const total = START_HOLD + covers + END_HOLD;
 
-  // (The DECK's ghost marquee runs on its own clock — pure CSS animation in
-  //  craft.css — deliberately NOT tied to this scrub, so it keeps drifting
-  //  right even while the visitor pauses mid-section.)
+  // ── Choose the cut styles for this load ─────────────────────────────────────
+  // Shuffle the four styles; take one per cut. With ≤4 cuts all are distinct;
+  // for more cuts we reshuffle and only forbid the same style twice in a row.
+  const STYLES = ["wipe", "slide", "flip", "punch"];
+  function shuffle(a) {
+    const r = a.slice();
+    for (let i = r.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [r[i], r[j]] = [r[j], r[i]];
+    }
+    return r;
+  }
+  const sequence = [];
+  let bag = shuffle(STYLES);
+  for (let c = 0; c < covers; c++) {
+    if (!bag.length) bag = shuffle(STYLES);
+    let pick = bag.shift();
+    // Never repeat the previous cut's style back-to-back.
+    if (sequence.length && pick === sequence[sequence.length - 1]) {
+      if (bag.length) { bag.push(pick); pick = bag.shift(); }
+    }
+    sequence.push(pick);
+  }
 
   const tl = gsap.timeline({
     defaults: { ease: "power2.inOut" },
@@ -59,27 +93,87 @@ export function initCraft() {
       pin: true,
       scrub: 1,
       start: "top top",
-      // ~0.85 screen-height of scroll per unit → snappy, not over-long.
-      end: () => "+=" + window.innerHeight * (total * 0.85),
+      end: () => "+=" + window.innerHeight * (total * 0.9),
       invalidateOnRefresh: true,
       anticipatePin: 1,
     },
   });
 
-  // Brief opening hold (linger on panel 1 before the first cover).
+  // Opening hold on panel 1.
   tl.to({}, { duration: START_HOLD });
 
+  // ── Cut builders. Each fills a 1-unit window at absolute position `at`,
+  //    choreographing BOTH the outgoing (prev) and incoming (panel). ──────────
+  function cut(style, prev, panel, at) {
+    const media = panel.querySelector(".craft-panel__media");
+    const text = panel.querySelector(".craft-panel__text");
+    // Incoming media always settles from a gentle push-in; the label rises.
+    const settleMedia = () => {
+      if (media) tl.fromTo(media, { scale: 1.14 }, { scale: 1, duration: 1, ease: "power2.out" }, at);
+    };
+    const riseText = (offset = 0.25) => {
+      if (text) tl.fromTo(text, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" }, at + offset);
+    };
+
+    if (style === "wipe") {
+      // A clip-path shape reveals the incoming; rotate through iris/slit/blade.
+      const shapes = [
+        ["circle(0% at 72% 42%)", "circle(150% at 72% 42%)"],           // iris
+        ["inset(49.9% 0% 49.9% 0%)", "inset(0% 0% 0% 0%)"],             // letterbox slit
+        ["polygon(0 0,0 0,0 100%,0 100%)", "polygon(0 0,100% 0,100% 100%,0 100%)"], // left→right wipe
+      ];
+      const [from, to] = shapes[Math.floor(Math.random() * shapes.length)];
+      gsap.set(panel, { opacity: 1, clipPath: from });
+      tl.to(panel, { clipPath: to, duration: 1, ease: "power2.inOut" }, at);
+      // Outgoing simply holds then is hidden once covered.
+      tl.to(prev, { scale: 1.04, duration: 1, ease: "power1.inOut" }, at);
+      tl.set(prev, { opacity: 0 }, at + 0.98);
+      settleMedia();
+      riseText();
+    } else if (style === "slide") {
+      // Incoming slides in from the right and covers; outgoing recedes left.
+      gsap.set(panel, { opacity: 1, xPercent: 100 });
+      tl.to(panel, { xPercent: 0, duration: 1, ease: "power3.inOut" }, at);
+      tl.to(prev, { xPercent: -14, scale: 0.92, opacity: 0.4, duration: 1, ease: "power2.inOut" }, at);
+      tl.set(prev, { opacity: 0 }, at + 0.98);
+      settleMedia();
+      riseText(0.3);
+    } else if (style === "flip") {
+      // The stack turns in 3D: outgoing tilts away, incoming rotates in.
+      gsap.set(panel, { opacity: 1, rotationY: -100, transformOrigin: "50% 50%" });
+      tl.to(prev, { rotationY: 100, opacity: 0, duration: 1, ease: "power2.inOut" }, at);
+      tl.fromTo(
+        panel,
+        { rotationY: -100 },
+        { rotationY: 0, duration: 1, ease: "power2.inOut" },
+        at
+      );
+      settleMedia();
+      riseText(0.35);
+    } else {
+      // PUNCH — incoming zooms out from the centre of the outgoing to fill frame.
+      gsap.set(panel, { opacity: 0, scale: 0.2, transformOrigin: "50% 50%" });
+      tl.to(prev, { scale: 1.5, opacity: 0, duration: 1, ease: "power2.in" }, at);
+      tl.fromTo(
+        panel,
+        { scale: 0.2, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 1, ease: "power3.out" },
+        at
+      );
+      // media push-in a touch stronger for the dive feel
+      if (media) tl.fromTo(media, { scale: 1.2 }, { scale: 1, duration: 1, ease: "power2.out" }, at);
+      riseText(0.3);
+    }
+  }
+
+  let at = START_HOLD;
   panels.slice(1).forEach((panel, idx) => {
-    const prev = panels[idx]; // the panel being covered
-    // The incoming panel slides in from the right to cover.
-    tl.to(panel, { xPercent: 0, duration: 1 }, ">");
-    // The outgoing panel ZOOMS OUT (scales down) and fades as the new one covers
-    // it — as if it recedes back into depth and is swallowed. Because the whole
-    // timeline is scrubbed, scrolling back up reverses it exactly: the covering
-    // panel slides back out to the right and this one zooms back up to its full,
-    // settled frame.
-    tl.to(prev, { scale: 0.82, opacity: 0.15, duration: 1 }, "<");
+    cut(sequence[idx], panels[idx], panel, at);
+    at += 1;
   });
+
+  // Beat on the last panel before the pin releases.
+  tl.to({}, { duration: END_HOLD }, at);
 
   return () => tl.scrollTrigger && tl.scrollTrigger.kill();
 }
