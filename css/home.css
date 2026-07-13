@@ -164,26 +164,39 @@
 
 /* The soloist — huge, LIGHT Fraunces, now full-width so it can dominate. */
 .hero__title {
-  /* The SIGNATURE: Great Vibes script, revealed letter-by-letter by heroIntro.js.
-     Scripts run visually smaller than serifs — hence the larger clamp — and want
-     no negative tracking. The floor is sized so the longest word ("Olamide")
-     fits within a ~360px phone without clipping. */
-  font-family: var(--font-script);
-  font-size: clamp(3rem, 15vw, 15rem);
-  line-height: 0.95;
-  font-weight: 400;
-  letter-spacing: 0;
+  /* The soloist, set in FRAUNCES — the site's own display serif.
+
+     It used to be Great Vibes (a connected script), which is beautiful at rest
+     but fights the typewriter reveal: in a joined script the strokes are drawn
+     BETWEEN letters, so revealing one letter at a time means showing half-formed
+     connections reaching for neighbours that have not arrived yet. Fraunces'
+     letterforms stand alone, so each one landing is a complete event — the
+     effect and the type finally pull in the same direction, and the hero now
+     speaks with the same voice as the rest of the site.
+
+     Huge and LIGHT, with the tracking pulled in: at this size a display serif
+     needs negative letter-spacing or it reads as loose. */
+  font-family: var(--font-display);
+  font-size: clamp(3.25rem, 13vw, 13rem);
+  line-height: 0.92;
+  font-weight: var(--display-weight);
+  letter-spacing: -0.025em;
   color: var(--text);
   margin: 0;
   hyphens: none;
 }
 /* Each word stays whole on its own line — never a mid-word break. */
 .hero__title-line { display: block; white-space: nowrap; }
-/* The two words each get their own line, with real air between them — a script
-   this large needs the breathing room, and the second word reads as a deliberate
-   second beat rather than a wrap. */
-.hero__title-line + .hero__title-line { margin-top: 0.06em; }
-.hero__title-line--accent { color: var(--text); }
+/* The two words each get their own line. Fraunces sits on a normal baseline (no
+   script descenders swinging below), so the lines can close up to a tight,
+   deliberate stack — "Sax" reads as a second beat, not a wrap. */
+.hero__title-line + .hero__title-line { margin-top: -0.04em; }
+/* "Sax" in the editorial italic — the same accent move the footer sign-off
+   makes. It gives the two-word stack a hierarchy instead of two flat lines. */
+.hero__title-line--accent {
+  color: var(--text);
+  font-style: italic;
+}
 
 /* Mask-wipe: heroIntro.js wraps each line in .hero__mask (overflow clip) so the
    line rising from yPercent 115→0 reads as emerging from behind an edge.
@@ -200,12 +213,16 @@
 
 /* TYPEWRITER (splitText.js → splitByChars + heroIntro.js).
 
-   Great Vibes is a CONNECTED script, so the letters must stay in the normal
-   text flow — no inline-block, no per-letter offsets, and crucially nothing
-   inserted or removed as it types, or the joins between letterforms break and
-   the line reflows. Every character is present from the start and merely flips
-   visibility, so the layout is set once and never moves. */
-.split-char { visibility: inherit; }
+   inline-block is what lets each letter be TRANSFORMED as it lands (it rises and
+   settles). That was impossible under the old connected script — taking a letter
+   out of the text flow there tore its joins to its neighbours apart — but
+   Fraunces' letterforms stand alone, so it is free. Every character is present
+   from the start and merely becomes visible, so the line is laid out once, at
+   load, and never reflows as it types. */
+.split-char {
+  display: inline-block;
+  will-change: transform, opacity;
+}
 
 /* The caret trails the LAST TYPED CHARACTER — it hangs off that char, not off
    the line box, so it sits exactly at the typing position with nothing to

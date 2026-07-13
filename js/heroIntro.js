@@ -10,12 +10,9 @@
 
    TYPEWRITER, done so the layout never moves
    ------------------------------------------
-   Every character is in the DOM from the start and simply switches from
-   invisible to visible in sequence. Nothing is inserted or removed as it types,
-   so the line never reflows and the browser's kerning is set once and never
-   disturbed — which matters here because the name is set in Great Vibes, a
-   CONNECTED script: pulling letters out of flow (or appending them one at a
-   time) would break the joins between letterforms.
+   Every character is in the DOM from the start and merely becomes visible in
+   sequence. Nothing is inserted or removed as it types, so the line never
+   reflows and the kerning is set once, at load, and never disturbed.
 
    The caret is a CSS pseudo-element hanging off the LAST TYPED CHARACTER, so it
    sits exactly at the typing position with nothing to measure. (Hung off the
@@ -72,7 +69,7 @@ export function initHeroIntro() {
 
   // Hidden, but still occupying their space — the line is laid out exactly as
   // it will finally read, so nothing shifts as the letters arrive.
-  gsap.set(chars, { visibility: "hidden", opacity: 0 });
+  gsap.set(chars, { visibility: "hidden", opacity: 0, yPercent: 22 });
   if (video) gsap.set(video, { opacity: 0, scale: 1.08 });
   if (eyebrow) gsap.set(eyebrow, { opacity: 0, y: 20 });
   if (meta) gsap.set(meta, { opacity: 0, y: 18 });
@@ -111,12 +108,13 @@ export function initHeroIntro() {
 
     tl.fromTo(
       ch,
-      { opacity: 0 },
+      { opacity: 0, yPercent: 22 },
       {
         opacity: 1,
+        yPercent: 0,
         visibility: "visible",
         duration: CHAR_FADE,
-        ease: "power2.out",
+        ease: "power3.out",
         onStart: () => {
           // the caret always trails the character being typed
           if (i > 0) chars[i - 1].classList.remove("is-caret");
