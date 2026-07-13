@@ -549,7 +549,8 @@ textarea.form-field__control {
   gap: var(--space-md);
   padding-block: var(--space-xs);
   border-bottom: 1px solid rgb(var(--bone-rgb) / 0.14);
-  transition: background-color 0.25s ease;
+  /* (transition lives in the staggered-entrance block below — transitions
+     are not additive, so it must be declared ONCE with all properties.) */
 }
 .menu-overlay__item:hover {
   background-color: rgb(var(--bone-rgb) / 0.05);
@@ -564,24 +565,30 @@ textarea.form-field__control {
 }
 
 /* Staggered entrance — each item rises + fades in after the panel slides in.
-   Items rest hidden; [data-open] plays them in sequence. */
+   Items rest hidden; [data-open] plays them in sequence.
+   IMPORTANT: transitions are NOT additive — this one declaration must carry
+   BOTH the entrance (opacity/transform, staggered via --stagger) AND the
+   hover tint (background-color, NO delay), or hover snaps with no easing. */
 .menu-overlay__item {
   opacity: 0;
   transform: translateX(2.5rem);
-  transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
+  transition:
+    opacity 0.5s var(--ease-out) var(--stagger, 0s),
+    transform 0.5s var(--ease-out) var(--stagger, 0s),
+    background-color 0.3s var(--ease-out) 0s;
 }
 .menu-overlay[data-open] .menu-overlay__item {
   opacity: 1;
   transform: none;
 }
-.menu-overlay[data-open] .menu-overlay__item:nth-child(1) { transition-delay: 0.18s; }
-.menu-overlay[data-open] .menu-overlay__item:nth-child(2) { transition-delay: 0.24s; }
-.menu-overlay[data-open] .menu-overlay__item:nth-child(3) { transition-delay: 0.30s; }
-.menu-overlay[data-open] .menu-overlay__item:nth-child(4) { transition-delay: 0.36s; }
-.menu-overlay[data-open] .menu-overlay__item:nth-child(5) { transition-delay: 0.42s; }
-.menu-overlay[data-open] .menu-overlay__item:nth-child(6) { transition-delay: 0.48s; }
-.menu-overlay[data-open] .menu-overlay__item:nth-child(7) { transition-delay: 0.54s; }
-.menu-overlay[data-open] .menu-overlay__item:nth-child(8) { transition-delay: 0.60s; }
+.menu-overlay[data-open] .menu-overlay__item:nth-child(1) { --stagger: 0.18s; }
+.menu-overlay[data-open] .menu-overlay__item:nth-child(2) { --stagger: 0.24s; }
+.menu-overlay[data-open] .menu-overlay__item:nth-child(3) { --stagger: 0.30s; }
+.menu-overlay[data-open] .menu-overlay__item:nth-child(4) { --stagger: 0.36s; }
+.menu-overlay[data-open] .menu-overlay__item:nth-child(5) { --stagger: 0.42s; }
+.menu-overlay[data-open] .menu-overlay__item:nth-child(6) { --stagger: 0.48s; }
+.menu-overlay[data-open] .menu-overlay__item:nth-child(7) { --stagger: 0.54s; }
+.menu-overlay[data-open] .menu-overlay__item:nth-child(8) { --stagger: 0.60s; }
 /* The aside (socials) fades in after the links. */
 .menu-overlay__aside {
   opacity: 0;
@@ -628,7 +635,7 @@ textarea.form-field__control {
   text-decoration: none;
   padding-bottom: 0.08em;
   min-width: 0;
-  transition: color var(--dur-base) var(--ease-out);
+  transition: color 0.3s var(--ease-out);
 }
 
 /* Stretched link: covers the whole .menu-overlay__item row. */
@@ -890,4 +897,21 @@ textarea.form-field__control {
 .site-footer__colophon,
 .site-footer__made {
   font-size: var(--step--1);
+}
+
+/* ── Mobile footer: tighten the desktop rhythm so it doesn't sprawl ──────────
+   Smaller explore links, calmer gaps, and a signoff that fills the width
+   without a big empty band above it. */
+@media (max-width: 639px) {
+  .site-footer { padding-top: var(--space-xl); }
+  .site-footer__coda { margin-bottom: var(--space-lg); }
+  .site-footer__explore { margin-bottom: var(--space-lg); }
+  .site-footer__explore a { font-size: clamp(1.15rem, 5.5vw, 1.5rem); }
+  .site-footer__explore ul { column-gap: var(--space-sm); row-gap: var(--space-2xs); }
+  .site-footer__top { gap: var(--space-lg); }
+  .site-footer__rule { margin-block: var(--space-lg); }
+  .site-footer__signoff {
+    margin-top: var(--space-lg);
+    font-size: clamp(3.5rem, 19vw, 6rem);
+  }
 }
