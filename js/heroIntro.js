@@ -30,13 +30,23 @@
 import { prefersReducedMotion } from "./utils.js";
 import { splitByChars } from "./splitText.js";
 
-/* Seconds per character. Unhurried — a name is signed, not hammered out. Slow
-   enough that the eye can follow each letter arriving. */
-const PER_CHAR = 0.16;
+/* Seconds between characters. Unhurried — a name is signed, not hammered out. */
+const PER_CHAR = 0.26;
+
+/* How long each individual letter takes to arrive. Giving a letter a real (if
+   brief) fade is what makes this read as SMOOTH rather than as a stutter: a bare
+   visibility flip pops, and a run of pops is a strobe, not a typewriter. It
+   overlaps the next letter's start, which is exactly what a hand does. */
+const CHAR_FADE = 0.34;
 
 /* An extra beat before the second word begins, so "Sax" lands as its own
    deliberate line rather than running straight on from "Olamide". */
-const WORD_GAP = 0.55;
+const WORD_GAP = 0.75;
+
+/* Real typing is not a metronome. A little variance in the gap between letters —
+   deterministic, seeded off the index, so it is identical on every load — keeps
+   the rhythm human without ever looking like a glitch. */
+const jitter = (i) => 1 + Math.sin(i * 2.399) * 0.18;
 
 export function initHeroIntro() {
   const gsap = window.gsap;
@@ -62,7 +72,7 @@ export function initHeroIntro() {
 
   // Hidden, but still occupying their space — the line is laid out exactly as
   // it will finally read, so nothing shifts as the letters arrive.
-  gsap.set(chars, { visibility: "hidden" });
+  gsap.set(chars, { visibility: "hidden", opacity: 0 });
   if (video) gsap.set(video, { opacity: 0, scale: 1.08 });
   if (eyebrow) gsap.set(eyebrow, { opacity: 0, y: 20 });
   if (meta) gsap.set(meta, { opacity: 0, y: 18 });
@@ -81,8 +91,11 @@ export function initHeroIntro() {
   }
 
   /* 3 · THE NAME IS TYPED.
-         Each character simply becomes visible, in order, one PER_CHAR apart,
-         and the caret hops along to whichever letter was typed last. */
+         Each letter EASES in rather than snapping on. That is the whole
+         difference between a typewriter and a strobe: a bare visibility flip is
+         a hard edge, and ten hard edges in a row read as a stutter. A short fade
+         (CHAR_FADE), overlapping the next letter's start, smooths the run
+         without costing it any of its rhythm. */
   const TYPE_AT = 0.7;
 
   let at = TYPE_AT;
@@ -96,19 +109,24 @@ export function initHeroIntro() {
       prevLine = line;
     }
 
-    tl.set(
+    tl.fromTo(
       ch,
+      { opacity: 0 },
       {
+        opacity: 1,
         visibility: "visible",
-        onComplete: () => {
-          // the caret always trails the character just typed
+        duration: CHAR_FADE,
+        ease: "power2.out",
+        onStart: () => {
+          // the caret always trails the character being typed
           if (i > 0) chars[i - 1].classList.remove("is-caret");
           ch.classList.add("is-caret");
         },
       },
       at
     );
-    at += PER_CHAR;
+
+    at += PER_CHAR * jitter(i);
   });
 
   const nameEnds = at;
