@@ -36,8 +36,10 @@ export function initCraft() {
     : [...document.querySelectorAll("[data-craft-panel]")];
   if (!section || !viewport || panels.length < 2) return;
 
+  // Runs on mobile too now (pinned cuts, tuned for touch below). Only bail
+  // when motion is off or GSAP/ScrollTrigger is unavailable.
+  if (!gsap || !ScrollTrigger || prefersReducedMotion()) return;
   const isMobile = window.matchMedia("(max-width: 767px)").matches;
-  if (!gsap || !ScrollTrigger || prefersReducedMotion() || isMobile) return;
 
   gsap.registerPlugin(ScrollTrigger);
   section.classList.add("is-stacked");

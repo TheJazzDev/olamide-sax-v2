@@ -148,12 +148,26 @@
   pointer-events: none;
 }
 
-/* ── Mobile / touch: no pin — a clean vertical stack ────────────────────── */
+/* ── Mobile / touch ─────────────────────────────────────────────────────────
+   JS OFF (no .is-stacked): a clean vertical stack fallback.
+   JS ON (.is-stacked): the SAME pinned cuts as desktop, but with a taller video
+   strip so the letterbox bars aren't huge on a phone. */
 @media (max-width: 767px) {
-  .craft-viewport { height: auto; }
-  .craft-panel { height: 72svh; }
-  .craft-panel__media { height: 46svh; }
-  .craft-panel__text { bottom: calc(13svh + var(--space-md)); }
+  .craft:not(.is-stacked) .craft-viewport { height: auto; }
+  .craft:not(.is-stacked) .craft-panel { height: 72svh; }
+  .craft:not(.is-stacked) .craft-panel__media { height: 46svh; }
+  .craft:not(.is-stacked) .craft-panel__text { bottom: calc(13svh + var(--space-md)); }
+
+  /* Pinned mode on mobile: a bigger video strip (bars are proportionally huge
+     on a narrow tall screen), and the label lifted to sit just above the strip. */
+  .craft.is-stacked .craft-panel__media { height: 52svh; }
+  .craft.is-stacked .craft-panel__text {
+    left: clamp(1rem, 5vw, 1.5rem);
+    bottom: calc(24svh + var(--space-md));
+    max-width: 82vw;
+  }
+  .craft.is-stacked .craft-panel__word { font-size: clamp(2.25rem, 12vw, 3.5rem); }
+  .craft.is-stacked .craft-panel__copy { font-size: var(--step--1); max-width: 30ch; }
 }
 
 @media (prefers-reduced-motion: reduce) {
