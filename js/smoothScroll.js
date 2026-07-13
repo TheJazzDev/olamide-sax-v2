@@ -1,25 +1,7 @@
-/* ============================================================================
-   smoothScroll.js — Olamide Sax V3 · Lenis smooth-scroll (GSAP-synced)
-   ----------------------------------------------------------------------------
-   Replaces the hand-rolled wheel-lerp (which only smoothed wheel input and
-   fought ScrollTrigger) with Lenis — the smooth-scroll library used by
-   Awwwards-grade sites. Lenis eases the NATIVE scroll position (no transform
-   wrapper), so position:fixed / sticky / anchors all keep working, and it
-   gives real momentum on wheel, keyboard, drag and touch.
-
-   Integration (the standard, battle-tested pattern):
-     • Lenis is driven by GSAP's ticker (one rAF loop for the whole site).
-     • ScrollTrigger.update() runs on every Lenis scroll, so reveals + pins
-       stay perfectly locked to scroll position (this is the "in sync" fix).
-     • gsap.ticker.lagSmoothing(0) so heavy frames don't cause a jump.
-
-   Disabled under prefers-reduced-motion (native scroll is used instead).
-   Exposes the instance as `window.__lenis` so other modules (anchor links,
-   horizontal Craft) can drive it.
-
-   Requires: assets/vendor/lenis.min.js loaded before main.js (window.Lenis),
-   plus gsap + ScrollTrigger (window.gsap / window.ScrollTrigger).
-   ========================================================================== */
+/* smoothScroll.js — Lenis smooth-scroll, driven by GSAP's ticker and synced to
+   ScrollTrigger.update() on every scroll (keeps reveals/pins locked). Eases the
+   native scroll position so fixed/sticky/anchors keep working. Exposes the
+   instance as window.__lenis. Disabled under reduced-motion (native scroll). */
 
 import { prefersReducedMotion } from "./utils.js";
 

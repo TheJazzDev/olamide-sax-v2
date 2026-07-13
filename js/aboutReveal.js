@@ -1,19 +1,6 @@
-/* ============================================================================
-   aboutReveal.js — Olamide Sax V3 · the About page's motion pass
-   ----------------------------------------------------------------------------
-   · Masthead (on load): eyebrow slides in, the NAME rises out of a mask
-     (same language as the home hero), lead fades up, and the portrait
-     "develops" — a rising wipe while the print settles from a slight zoom.
-   · Portrait keeps a gentle parallax drift while scrolling past (the image
-     is pre-scaled so it can move inside its overflow-hidden frame).
-   · Pull-quote: the words BRIGHTEN one by one as you scroll — read aloud.
-   · Movements: each biography beat staggers in (head from the left, then
-     the paragraphs rise).
-   · Invitation: a quiet centered rise.
-
-   Page-guarded (no-ops off the About page), reduced-motion + GSAP-absent
-   safe: initial hidden states are set by GSAP only — CSS never hides text.
-   ========================================================================== */
+/* aboutReveal.js — About page motion: masthead load sequence, portrait develop +
+   parallax, pull-quote word-brighten, staggered biography beats, invitation rise.
+   Page-guarded; reduced-motion/GSAP-absent safe (hidden states set by GSAP only). */
 
 import { $, $$, prefersReducedMotion } from "./utils.js";
 

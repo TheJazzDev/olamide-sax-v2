@@ -1,26 +1,7 @@
-/* ============================================================================
-   reveal.js — Olamide Sax V2 · GSAP + ScrollTrigger reveals + kinetic type
-   ----------------------------------------------------------------------------
-   The heart of the motion foundation. Exports initReveals().
-
-   PROGRESSIVE ENHANCEMENT GATE (the a11y contract):
-   Nothing here runs — and the CSS pre-state gate `.js-anim-ready` is NEVER
-   added — unless BOTH are true:
-     (1) window.gsap + ScrollTrigger actually loaded, and
-     (2) motion is allowed (no prefers-reduced-motion).
-   If either fails, we return early and every [data-animate] element renders in
-   its final, fully-visible state (motion.css only hides things UNDER the gate).
-
-   What it does when live:
-   - Adds html.js-anim-ready (arms the CSS pre-states).
-   - Cinematic page-LOAD sequence on each page's hero (staged, on first paint).
-   - [data-animate="fade"] → soft fade+rise on scroll, staggering siblings.
-   - Kinetic "breathing" split-text on hero titles / [data-animate="split"] /
-     [data-animate="hero-title"] / [data-animate="kinetic-line"] with a
-     phrased (non-uniform) stagger. Real text stays in the a11y tree.
-   - One subtle scroll-velocity "breathing" headline per view (bounded, slow).
-   - Craft movements, timeline nodes, featured sections reveal softly.
-   ========================================================================== */
+/* reveal.js — GSAP + ScrollTrigger reveals + kinetic split-text. Exports
+   initReveals(). Gated behind engineLive(): if GSAP is absent or reduced-motion
+   is set, it returns early and nothing adds .js-anim-ready, so every element
+   renders in its final visible state (motion.css only hides things under the gate). */
 
 import { $, $$, prefersReducedMotion } from "./utils.js";
 import { splitToWords, splitByExistingLines } from "./splitText.js";

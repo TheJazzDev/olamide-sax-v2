@@ -1,22 +1,8 @@
-/* ============================================================================
-   contact.js — Olamide Sax V2 · booking form (UI logic only, NO backend)
-   The booking form is progressive-enhancement over a plain mailto: intent.
-   On submit we compose a correct mailto: (subject + body built from the
-   fields, each value encodeURIComponent-escaped) and hand off to the user's
-   email client. No network request is made.
-
-   Contract: exports `initContact()`. Page-guarded — no-ops if the booking
-   form (`[data-booking-form]`) is absent, so main.js can call it on every page.
-
-   Markup it expects (built statically in contact.html):
-     [data-booking-form]    — the <form>
-       #bf-name  #bf-email  #bf-subject (select)  #bf-message
-     [data-booking-status]  — a role="status" aria-live line for feedback
-
-   FUTURE ENDPOINT: to POST to a real backend instead of (or as well as)
-   opening mailto:, set FORM_ENDPOINT below to your URL and the commented
-   fetch() block will submit the JSON payload. Left inert by design (Task 5).
-   ========================================================================== */
+/* contact.js — booking form, no backend. On submit, composes a mailto: from the
+   fields and hands off to the email client. Exports initContact(); page-guarded
+   on [data-booking-form]. To POST to a real backend, set FORM_ENDPOINT below.
+   Expects: [data-booking-form] with #bf-name/#bf-email/#bf-subject/#bf-message,
+   and [data-booking-status] (role=status) for feedback. */
 
 import { $, on } from './utils.js';
 

@@ -1,20 +1,7 @@
-/* ============================================================================
-   galleryMotion.js — Olamide Sax V3 · gallery wall motion
-   ----------------------------------------------------------------------------
-   Two effects on the masonry gallery wall:
-     1. SKEW-ON-SCROLL — the whole wall leans slightly with scroll velocity
-        (subtle, ≤3°), easing back to upright when scrolling stops. The signature
-        "living wall" feel.
-     2. CLICK-TO-ENLARGE — clicking a frame expands it to a centred lightbox via
-        GSAP Flip (real FLIP transition, not a cut); clicking the backdrop or the
-        frame again returns it to its exact spot in the wall.
-
-   Self-gates: no GSAP / reduced-motion / touch-coarse → does nothing (the wall
-   stays a clean, clickable masonry grid). Requires Flip for the enlarge; if Flip
-   is absent, skew still runs and clicks open a plain centred overlay.
-
-   Contract: exports initGalleryMotion(). Page-guarded (no-ops without [data-gallery]).
-   ========================================================================== */
+/* galleryMotion.js — masonry wall motion: per-image skew-on-scroll (≤3°, velocity
+   driven) + click-to-enlarge via GSAP Flip (clone morphs to a centred lightbox;
+   the original stays in the grid so nothing reflows). Exports initGalleryMotion();
+   page-guarded, self-gates on reduced-motion/no-GSAP. Flip optional. */
 
 import { prefersReducedMotion } from "./utils.js";
 

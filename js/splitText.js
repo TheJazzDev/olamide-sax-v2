@@ -1,20 +1,8 @@
-/* ============================================================================
-   splitText.js — Olamide Sax V2 · tiny, a11y-safe text splitter
-   ----------------------------------------------------------------------------
-   GSAP SplitText is a PAID plugin — this is our own small replacement. It
-   splits an element's text into per-word spans grouped into per-line masks,
-   for a phrased "breathing" reveal.
-
-   ACCESSIBILITY CONTRACT:
-   - The original, readable, selectable text is preserved for assistive tech:
-     we set aria-label on the target to the original text and add a
-     visually-hidden copy, then mark the generated visual spans aria-hidden.
-   - If the target has child element markup (e.g. hero title lines with their
-     own spans), we bail out of word-splitting and instead treat each existing
-     line span as a reveal unit — never destroying meaningful markup.
-
-   Returns { words, lines, revert } so callers can animate and (if needed) undo.
-   ========================================================================== */
+/* splitText.js — small a11y-safe text splitter (own replacement for GSAP's paid
+   SplitText). Splits text into per-word spans in per-line masks. Preserves the
+   readable text for AT (aria-label + visually-hidden copy; generated spans are
+   aria-hidden). If the target already has child markup, it bails out of word-
+   splitting and treats each existing line span as a unit. Returns {words,lines,revert}. */
 
 /**
  * Split a heading/paragraph into aria-hidden word spans for kinetic reveal.

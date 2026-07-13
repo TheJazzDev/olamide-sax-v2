@@ -1,39 +1,6 @@
-/* ============================================================================
-   carousel.js — Olamide Sax V3 · "The Live Wall" tilted photo-wheel
-   ----------------------------------------------------------------------------
-   A big ring of photographs seen at an angle — a wheel lying tilted back into
-   the screen. Every photo sits around the whole rim and is BILLBOARDED (always
-   facing the viewer), so all of them are visible at once. Depth is expressed by
-   SCALE and position only (near photos are larger and lower, far photos smaller
-   and higher) — every photo stays at full brightness so the user can tell they
-   are all hoverable / clickable.
-
-   This is deliberately NOT a vertical cylinder/drum: a drum only ever shows the
-   front ~3 photos face-on. A tilted, billboarded wheel shows the whole ring.
-
-   Motion:
-     • SCROLL drives the ring. The section pins and scroll progress scrubs the
-       ring through a full 360°, so every photo — including the ones that start
-       at the back — comes round to the front. No snap, no elastic bounce; the
-       ring settles exactly where the scroll leaves it.
-     • DRAG left/right adds a rotation offset on top of the scroll position, so
-       the photo under the cursor moves the way you drag it (you're grabbing the
-       ring, not a fixed axis).
-     • DRAG up/down tilts the wheel — flatter (looking down onto the ring) or
-       more upright (head-on). A cinematic change of viewing angle.
-     • CLICK a photo to bring it smoothly to the front.
-
-   Entrance: on scroll-in the photos fly in from scattered off-screen positions
-   and assemble into the wheel (one-shot).
-
-   Caption: each photo carries a small caption pinned to the base of the image;
-   CSS reveals it only on the FRONT (active) photo — no hover (hover fought the
-   drag). A one-time hint ("Drag to spin · Click to bring forward") sits at the
-   base of the ring and fades on the first interaction.
-
-   PROGRESSIVE ENHANCEMENT: no GSAP / reduced-motion → do nothing; the CSS shows
-   a plain horizontal-scroll row of the photos (fully usable).
-   ========================================================================== */
+/* carousel.js — "The Live Wall" tilted photo-wheel: a billboarded ring of photos
+   scrubbed 360° by scroll, spun by horizontal drag, tilted by vertical drag,
+   click-to-front. Reduced-motion/no-GSAP → CSS falls back to a scroll row. */
 
 import { prefersReducedMotion } from "./utils.js";
 

@@ -1,28 +1,8 @@
-/* ============================================================================
-   heroIntro.js — Olamide Sax V3 · cinematic hero entrance (home only)
-   ----------------------------------------------------------------------------
-   The arrival:
-     1. the ambient video fades up from black,
-     2. the award eyebrow rises in,
-     3. the NAME is TYPED — character by character, with a blinking caret
-        trailing the last letter,
-     4. the roles + Enter cue settle in.
-
-   TYPEWRITER, done so the layout never moves
-   ------------------------------------------
-   Every character is in the DOM from the start and merely becomes visible in
-   sequence. Nothing is inserted or removed as it types, so the line never
-   reflows and the kerning is set once, at load, and never disturbed.
-
-   The caret is a CSS pseudo-element hanging off the LAST TYPED CHARACTER, so it
-   sits exactly at the typing position with nothing to measure. (Hung off the
-   line box instead, it would park at the end of the full line — ahead of the
-   text — which gives the game away immediately.)
-
-   The real text stays readable for assistive tech (splitByChars labels the
-   container and hides only the generated spans). With no JS, no GSAP, or under
-   reduced-motion, the plain <h1> renders untouched.
-   ========================================================================== */
+/* heroIntro.js — cinematic hero entrance (home only): video fade-up, eyebrow
+   rise, NAME typed char-by-char with a trailing caret, then meta + Enter cue.
+   All chars are in the DOM from the start (visibility only) so the line never
+   reflows. The caret hangs off the LAST TYPED CHAR (not the line box, which
+   would park it ahead of the text). No GSAP / reduced-motion → plain <h1>. */
 
 import { prefersReducedMotion } from "./utils.js";
 import { splitByChars } from "./splitText.js";

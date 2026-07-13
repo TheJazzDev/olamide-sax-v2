@@ -1,25 +1,11 @@
-/* ============================================================================
-   data.js — Olamide Sax V2 · the living-archive data model (ES module)
-   Single source of truth for the scalable archive pages (Media / Gallery /
-   Videos / Press). This is the REAL-CONTENT pass: photos, clips, press and
-   performances are populated from processed assets and the content manifest.
-
-   Contract (consumed by gallery.js / videos.js and the archive pages):
-     photos[]        — { id, category, src, alt, caption, meta, video?, tag?, featured?, placeholder }
-     videos[]        — { id, category, youtubeId, channelUrl, title, thumb, alt, meta, date, placeholder }
-     clips[]         — { id, src, poster, alt, label }  (local silent loop clips)
-     press[]         — { id, source, title, url, excerpt, date, tier }
-     performances[]  — { year, events: [{ id, title, venue, role?, date, note? }] }
-
-   Categories are stable string enums so filter chips / tabs can key off them:
-     PHOTO CATEGORIES : "PHOTOS" | "BTS" | "EVENTS"
-     VIDEO CATEGORIES : "LIVE"   | "INTERVIEW" | "MUSIC"
-
-   NOTE: `photos[].video` stays null here — the gallery cells remain image-only
-   for this pass. The three local silent loops live in `clips` and are wired
-   directly into the Home hero + Craft movements (video-first, poster fallback,
-   reduced-motion → poster only).
-   ========================================================================== */
+/* data.js — single source of truth for the archive pages (Media/Gallery/Videos/
+   Press), consumed by gallery.js / videos.js. Shapes:
+     photos[]       — { id, category, src, alt, caption, meta, video?, tag?, featured?, placeholder }
+     videos[]       — { id, category, youtubeId, channelUrl, title, thumb, alt, meta, date, placeholder }
+     clips[]        — { id, src, poster, alt, label }
+     press[]        — { id, source, title, url, excerpt, date, tier }
+     performances[] — { year, events: [{ id, title, venue, role?, date, note? }] }
+   Categories: photos "PHOTOS"|"BTS"|"EVENTS", videos "LIVE"|"INTERVIEW"|"MUSIC". */
 
 /* Real gallery images live under assets/images/gallery/. */
 const GALLERY = "assets/images/gallery/";

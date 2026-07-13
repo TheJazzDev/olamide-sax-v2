@@ -1,27 +1,6 @@
-/* ============================================================================
-   craft.js — Olamide Sax V3 · "The Craft" pinned scroll with cinematic cuts
-   ----------------------------------------------------------------------------
-   Three video panels stacked in the same spot; the section pins and scroll
-   scrubs through a CUT between each pair. There are FOUR different cut styles;
-   on every page load they're SHUFFLED and assigned so no two adjacent cuts are
-   the same (and, when there are ≤4 cuts, all are distinct) — so the sequence
-   feels fresh each visit and never repeats back-to-back:
-
-     WIPE   — the incoming scene is revealed by a clip-path shape (iris bloom /
-              letterbox slit / diagonal blade — itself rotated per use).
-     SLIDE  — the incoming panel slides in from the side and covers; the
-              outgoing recedes with depth.
-     FLIP   — the stack turns in 3D: the outgoing tilts away as the incoming
-              rotates in, like turning a giant card.
-     PUNCH  — the incoming zooms out from the centre of the outgoing and punches
-              through to fill the frame (dive-into-the-frame cut).
-
-   Pinned + scrubbed, so scrolling back replays each cut in reverse. Every
-   outgoing panel ends fully hidden — nothing lingers beneath.
-
-   PROGRESSIVE ENHANCEMENT: no GSAP / reduced-motion / mobile → skip entirely;
-   the CSS shows the panels as a readable vertical stack.
-   ========================================================================== */
+/* craft.js — "The Craft": stacked video panels, pinned + scrubbed. Each cut
+   between panels uses one of 5 styles (wipe/slide/flip/punch/glitch), shuffled
+   per load so no two adjacent cuts match. Reduced-motion/no-GSAP → CSS stack. */
 
 import { prefersReducedMotion } from "./utils.js";
 
