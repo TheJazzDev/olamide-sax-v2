@@ -164,16 +164,24 @@
 
 /* The soloist — huge, LIGHT Fraunces, now full-width so it can dominate. */
 .hero__title {
-  font-size: clamp(3.5rem, 14vw, 13rem);
-  line-height: 0.9;
-  font-weight: var(--display-weight);
-  letter-spacing: -0.03em;
+  /* The SIGNATURE: Great Vibes script (drawn on letter-by-letter by
+     heroIntro.js). Scripts run visually smaller than serifs — hence the
+     larger clamp — and want no negative tracking. The floor is sized so the
+     longest word ("Olamide") fits within a ~360px phone without clipping. */
+  font-family: var(--font-script);
+  font-size: clamp(3rem, 15vw, 15rem);
+  line-height: 0.95;
+  font-weight: 400;
+  letter-spacing: 0;
   color: var(--text);
   margin: 0;
   hyphens: none;
 }
 /* Each word stays whole on its own line — never a mid-word break. */
 .hero__title-line { display: block; white-space: nowrap; }
+/* Script ascenders/descenders carry a lot of air — pull the two lines of the
+   signature closer together. */
+.hero__title-line + .hero__title-line { margin-top: -0.32em; }
 .hero__title-line--accent { color: var(--text); }
 
 /* Mask-wipe: heroIntro.js wraps each line in .hero__mask (overflow clip) so the
@@ -296,7 +304,30 @@
    Oversized "2010 —" hangs in the margin; a heritage image; link → About.
    ========================================================================== */
 
-.roots { overflow: clip; }
+.roots { position: relative; overflow: clip; }
+
+/* Ghost watermark — a colossal outlined italic "Roots" filling the light
+   field's empty bottom-left. Ink at a whisper; behind the content (the
+   section's children carry z-index: 1 via media-motion.css). */
+.roots::after {
+  content: "Roots";
+  position: absolute;
+  left: clamp(-1rem, -0.5vw, 0rem);
+  bottom: -0.18em;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: var(--display-weight);
+  font-size: clamp(7rem, 20vw, 18rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgb(var(--ink-rgb) / 0.12);
+  pointer-events: none;
+  user-select: none;
+}
+@supports not (-webkit-text-stroke: 1px black) {
+  .roots::after { color: rgb(var(--ink-rgb) / 0.05); }
+}
 
 .roots__grid {
   display: grid;
@@ -346,6 +377,20 @@
 .roots__media .frame-media {
   border-color: rgb(var(--ink-rgb) / 0.18);
   background: color-mix(in oklab, var(--bone) 88%, var(--umber));
+}
+
+/* The drawn-photo SVG (rootsReveal.js swaps the <img> for this): fills the
+   frame with a little vertical slack so the parallax drift never shows an
+   edge. The <image> inside covers via preserveAspectRatio slice. */
+.roots__media .frame-media .roots__draw {
+  position: absolute;
+  left: 0;
+  top: -3.5%;
+  width: 100%;
+  height: 107%;
+  display: block;
+  /* Same warm grade every .frame-media image wears (see .frame-media > img). */
+  filter: saturate(0.92) contrast(1.02) brightness(0.94);
 }
 .roots__media .frame-media > img {
   filter: saturate(0.95) contrast(1.02) brightness(1);
@@ -482,8 +527,20 @@
 }
 .credits__title { margin-top: var(--space-md); }
 
-.credits__marquee {
+/* The TICKER BAND — a raised umber strip framing both drifting rows, so the
+   credits read as a physical object (tape running across the page), not
+   loose text. Hairlines top + bottom; full-bleed within the section. */
+.credits__band {
   margin-top: clamp(2rem, 5vh, 3.5rem);
+  padding-block: clamp(1.25rem, 3vh, 2rem);
+  background: linear-gradient(180deg,
+    color-mix(in oklab, var(--bg-raised) 92%, var(--bone)) 0%,
+    var(--bg-raised) 100%);
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.credits__marquee {
   overflow: hidden;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
           mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
@@ -513,6 +570,60 @@
   color: var(--accent);
   font-size: clamp(0.8rem, 2vw, 1.2rem);
   transform: translateY(-0.15em);
+}
+
+/* ── The honours LEDGER — the section's substance. Three entries set like a
+   programme: hairline-topped, huge serif numerals, small-caps captions; the
+   award entry carries the brass. ─────────────────────────────────────────── */
+.credits__ledger {
+  margin-top: clamp(2rem, 5vh, 3.5rem);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+@media (min-width: 768px) {
+  .credits__ledger {
+    grid-template-columns: 1fr 1fr 1.4fr;
+    gap: var(--space-xl);
+  }
+}
+.credits__stat {
+  border-top: 1px solid var(--hairline);
+  padding-top: var(--space-md);
+}
+.credits__stat-num {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-size: clamp(2.4rem, 2rem + 3vw, 4.5rem);
+  line-height: 1;
+  color: var(--text);
+}
+.credits__stat-label {
+  display: block;
+  margin-top: var(--space-xs);
+  font-family: var(--font-label);
+  font-size: var(--step--1);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--muted);
+  max-width: 34ch;
+}
+.credits__stat--award { border-top-color: rgb(var(--brass-rgb) / 0.55); }
+.credits__stat--award .credits__stat-num { color: var(--accent-lit); font-style: italic; }
+.credits__stat--award .credits__stat-label { color: var(--accent); }
+
+/* ── Second band: collaborators / productions — smaller, quieter, drifting
+   the OTHER way (counter-current to the venues band above it). ───────────── */
+.credits__marquee--roles { margin-top: clamp(0.75rem, 2vh, 1.5rem); }
+.credits__track--roles .credits__item {
+  font-size: clamp(1.1rem, 3vw, 2rem);
+  font-style: italic;
+  color: color-mix(in oklab, var(--bone) 42%, var(--umber));
+}
+.credits__track--roles .credits__dot {
+  font-size: clamp(0.6rem, 1.4vw, 0.9rem);
+  color: rgb(var(--brass-rgb) / 0.55);
 }
 
 /* ============================================================================
