@@ -2,7 +2,7 @@
    scrubbed 360° by scroll, spun by horizontal drag, tilted by vertical drag,
    click-to-front. Reduced-motion/no-GSAP → CSS falls back to a scroll row. */
 
-import { prefersReducedMotion } from "./utils.js";
+import { prefersReducedMotion, isMobile } from "./utils.js";
 
 export function initCarousel() {
   const gsap = window.gsap;
@@ -17,6 +17,16 @@ export function initCarousel() {
   const items = Array.from(ring.querySelectorAll("[data-carousel-item]"));
   const n = items.length;
   if (n < 3) return;
+
+  // ── MOBILE: no ring ─────────────────────────────────────────────────────────
+  // The tilted 3D wheel clumps the photos together on a phone and re-renders the
+  // whole ring every scroll frame (heavy). On mobile we drop it entirely and
+  // show a clean scrollable photo column (CSS .is-flat), each image revealing on
+  // scroll — no per-frame work, no 3D.
+  if (isMobile()) {
+    initCarouselFlat(gsap, ScrollTrigger, root, items, prefersReducedMotion);
+    return;
+  }
 
   root.classList.add("is-3d");
 
@@ -354,4 +364,39 @@ export function initCarousel() {
     if (ScrollTrigger) ScrollTrigger.refresh();
     render();
   }, { passive: true });
+}
+
+/* Flat mobile Live Wall: a clean scrollable column of the same photos, each
+   captioned and revealing gently on scroll. No 3D, no per-frame render loop. */
+function initCarouselFlat(gsap, ScrollTrigger, root, items) {
+  root.classList.add("is-flat");
+
+  // Same caption content the 3D path builds, pinned under each image.
+  items.forEach((item) => {
+    const label = item.getAttribute("data-src") || "";
+    const [source, moment] = label.split(" — ");
+    let cap = item.querySelector("[data-item-cap]");
+    if (!cap) {
+      cap = document.createElement("span");
+      cap.className = "carousel__item-cap";
+      cap.setAttribute("data-item-cap", "");
+      item.appendChild(cap);
+    }
+    cap.innerHTML = moment
+      ? `<span class="cap-src">${source}</span><span class="cap-moment">${moment}</span>`
+      : `<span class="cap-src">${source}</span>`;
+  });
+
+  // A light reveal per card — one ScrollTrigger.batch, no per-frame ticker.
+  gsap.set(items, { opacity: 0, y: 24 });
+  if (ScrollTrigger) {
+    ScrollTrigger.batch(items, {
+      start: "top 88%",
+      once: true,
+      onEnter: (batch) =>
+        gsap.to(batch, { opacity: 1, y: 0, duration: 0.6, stagger: 0.08, ease: "power2.out" }),
+    });
+  } else {
+    gsap.to(items, { opacity: 1, y: 0, duration: 0.5, stagger: 0.06 });
+  }
 }

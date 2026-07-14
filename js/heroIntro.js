@@ -1,5 +1,5 @@
 /* heroIntro.js — cinematic hero entrance (home only): video fade-up, eyebrow
-   rise, NAME typed char-by-char with a trailing caret, then meta + Enter cue.
+   rise, NAME typed char-by-char with a trailing caret, then meta.
    All chars are in the DOM from the start (visibility only) so the line never
    reflows. The caret hangs off the LAST TYPED CHAR (not the line box, which
    would park it ahead of the text). No GSAP / reduced-motion → plain <h1>. */
@@ -35,7 +35,6 @@ export function initHeroIntro() {
   const video = hero.querySelector(".hero__video");
   const eyebrow = hero.querySelector(".hero__eyebrow");
   const meta = hero.querySelector(".hero__meta");
-  const cue = hero.querySelector(".hero__cue");
 
   document.documentElement.classList.add("hero-intro-ready");
 
@@ -49,7 +48,6 @@ export function initHeroIntro() {
   if (video) gsap.set(video, { opacity: 0, scale: 1.08 });
   if (eyebrow) gsap.set(eyebrow, { opacity: 0, y: 20 });
   if (meta) gsap.set(meta, { opacity: 0, y: 18 });
-  if (cue) gsap.set(cue, { opacity: 0, y: 12 });
 
   const tl = gsap.timeline({ delay: 0.15 });
 
@@ -106,12 +104,9 @@ export function initHeroIntro() {
     nameEnds + 0.9
   );
 
-  // 4 · Roles + Enter cue settle in once the name has landed.
+  // 4 · Roles settle in once the name has landed.
   if (meta) {
     tl.to(meta, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, nameEnds + 0.15);
-  }
-  if (cue) {
-    tl.to(cue, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, nameEnds + 0.35);
   }
 
   return () => {

@@ -121,6 +121,17 @@
   pointer-events: none;
 }
 
+/* Mobile perf: a position:fixed full-viewport video forces the browser to
+   re-composite the whole page on every scroll frame — the single biggest
+   cause of the scroll jank on phones. Pin it to the hero instead so it simply
+   scrolls away with the section (cheap), and stop promoting layers we no
+   longer animate on mobile. */
+@media (max-width: 767px) {
+  .hero__stage {
+    position: absolute;
+  }
+}
+
 .hero__inner {
   position: relative;
   z-index: var(--z-content);
@@ -138,7 +149,7 @@
 .hero__title {
   /* The soloist, set in FRAUNCES — the site's own display serif. */
   font-family: var(--font-display);
-  font-size: clamp(3rem, 12vw, 12rem);
+  font-size: clamp(3.75rem, 13vw, 12rem);
   line-height: 0.92;
   font-weight: var(--display-weight);
   letter-spacing: -0.025em;
@@ -201,6 +212,8 @@
   max-width: 40ch;
 }
 
+/* Hero "— ENTER" scroll cue — set aside per request (markup removed from
+   index.html, animation removed from heroIntro.js). Kept for recovery.
 .hero__cue {
   margin-top: var(--space-2xl);
   display: inline-flex;
@@ -223,6 +236,7 @@
 }
 .hero__cue:hover .hero__cue-line,
 .hero__cue:focus-visible .hero__cue-line { transform: scaleX(1.35); }
+*/
 
 .hero__portrait {
   position: relative;
@@ -889,6 +903,16 @@
 }
 .sound-toggle:hover { color: var(--brass-light); border-color: rgb(var(--brass-rgb) / 0.5); }
 .sound-toggle[aria-pressed="true"] { color: var(--brass); border-color: rgb(var(--brass-rgb) / 0.6); }
+
+/* Mobile perf: a fixed backdrop-blur re-samples the page under it every scroll
+   frame. Drop it on phones and use a more opaque ground so the pill stays legible. */
+@media (max-width: 767px) {
+  .sound-toggle {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgb(var(--ink-rgb) / 0.82);
+  }
+}
 
 /* Speaker icon — waves while playing, slashed while muted. */
 .sound-toggle__icon {

@@ -3,11 +3,18 @@
    native scroll position so fixed/sticky/anchors keep working. Exposes the
    instance as window.__lenis. Disabled under reduced-motion (native scroll). */
 
-import { prefersReducedMotion } from "./utils.js";
+import { prefersReducedMotion, isMobile } from "./utils.js";
 
 export function initSmoothScroll() {
   // No smooth-scroll when the user asked for reduced motion — native scroll.
   if (prefersReducedMotion()) return;
+
+  // MOBILE: skip Lenis entirely. With syncTouch off it barely eases touch scroll
+  // anyway, but it keeps a scroll-handling + RAF pipeline running on top of the
+  // browser's own momentum scrolling — which is exactly the kind of overhead that
+  // makes phones feel laggy. Native scroll is smoother here; ScrollTrigger works
+  // fine on native scroll (its default), so reveals/pins are unaffected.
+  if (isMobile()) return;
 
   const Lenis = window.Lenis;
   const gsap = window.gsap;

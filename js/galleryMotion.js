@@ -3,7 +3,7 @@
    the original stays in the grid so nothing reflows). Exports initGalleryMotion();
    page-guarded, self-gates on reduced-motion/no-GSAP. Flip optional. */
 
-import { prefersReducedMotion } from "./utils.js";
+import { prefersReducedMotion, isMobile } from "./utils.js";
 
 export function initGalleryMotion() {
   const gsap = window.gsap;
@@ -17,49 +17,55 @@ export function initGalleryMotion() {
   // a block), with a slight per-cell variation so they don't move in lockstep —
   // giving the wall a lively, physical feel. Clamped tight so it reads as a lean,
   // never a wobble. Cells re-arm after a filter re-render.
-  const MAX_SKEW = 3;              // degrees — subtle, editorial
-  let velocity = 0;
-  let skewers = [];               // { setSkew, factor } per cell
+  //
+  // MOBILE: skipped. This runs a per-frame ticker that skews every cell on every
+  // frame — a real drain on phones for an effect that barely reads at that size.
+  // Click-to-enlarge (below) still works.
+  if (!isMobile()) {
+    const MAX_SKEW = 3;              // degrees — subtle, editorial
+    let velocity = 0;
+    let skewers = [];               // { setSkew, factor } per cell
 
-  function armSkew() {
-    skewers = $$cells().map((cell, i) => {
-      cell.style.willChange = "transform";
-      // Alternate lean direction + vary magnitude a touch per cell.
-      const factor = (i % 2 === 0 ? 1 : -1) * (0.8 + ((i * 37) % 5) * 0.1);
-      return {
-        setSkew: gsap.quickTo(cell, "skewY", { duration: 0.5, ease: "power3.out" }),
-        factor,
-      };
-    });
-  }
-  function $$cells() {
-    return Array.prototype.slice.call(grid.querySelectorAll(".gallery-cell"));
-  }
+    const $$cells = () =>
+      Array.prototype.slice.call(grid.querySelectorAll(".gallery-cell"));
 
-  const lenis = window.__lenis || null;
-  if (lenis) {
-    lenis.on("scroll", ({ velocity: v }) => { velocity = v; });
-  } else {
-    let lastY = window.scrollY;
-    window.addEventListener("scroll", () => {
-      const y = window.scrollY;
-      velocity = (y - lastY) * 0.6;
-      lastY = y;
-    }, { passive: true });
-  }
+    const armSkew = () => {
+      skewers = $$cells().map((cell, i) => {
+        cell.style.willChange = "transform";
+        // Alternate lean direction + vary magnitude a touch per cell.
+        const factor = (i % 2 === 0 ? 1 : -1) * (0.8 + ((i * 37) % 5) * 0.1);
+        return {
+          setSkew: gsap.quickTo(cell, "skewY", { duration: 0.5, ease: "power3.out" }),
+          factor,
+        };
+      });
+    };
 
-  gsap.ticker.add(() => {
-    // Map velocity → skew, clamped; decay toward 0 so each photo settles upright.
-    const base = Math.max(-MAX_SKEW, Math.min(MAX_SKEW, velocity * 0.35));
-    for (let i = 0; i < skewers.length; i++) {
-      skewers[i].setSkew(base * skewers[i].factor);
+    const lenis = window.__lenis || null;
+    if (lenis) {
+      lenis.on("scroll", ({ velocity: v }) => { velocity = v; });
+    } else {
+      let lastY = window.scrollY;
+      window.addEventListener("scroll", () => {
+        const y = window.scrollY;
+        velocity = (y - lastY) * 0.6;
+        lastY = y;
+      }, { passive: true });
     }
-    velocity *= 0.9;
-  });
 
-  armSkew();
-  // Re-arm the per-cell skewers after gallery.js re-renders on filter change.
-  new MutationObserver(() => armSkew()).observe(grid, { childList: true });
+    gsap.ticker.add(() => {
+      // Map velocity → skew, clamped; decay toward 0 so each photo settles upright.
+      const base = Math.max(-MAX_SKEW, Math.min(MAX_SKEW, velocity * 0.35));
+      for (let i = 0; i < skewers.length; i++) {
+        skewers[i].setSkew(base * skewers[i].factor);
+      }
+      velocity *= 0.9;
+    });
+
+    armSkew();
+    // Re-arm the per-cell skewers after gallery.js re-renders on filter change.
+    new MutationObserver(() => armSkew()).observe(grid, { childList: true });
+  }
 
   // ── 2 · Click-to-enlarge (Flip) ──────────────────────────────────────────── Build a lightbox layer once.
   let lightbox = document.querySelector("[data-gallery-lightbox]");

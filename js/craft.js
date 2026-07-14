@@ -2,7 +2,7 @@
    between panels uses one of 5 styles (wipe/slide/flip/punch/glitch), shuffled
    per load so no two adjacent cuts match. Reduced-motion/no-GSAP → CSS stack. */
 
-import { prefersReducedMotion } from "./utils.js";
+import { prefersReducedMotion, isMobile } from "./utils.js";
 
 export function initCraft() {
   const gsap = window.gsap;
@@ -15,12 +15,21 @@ export function initCraft() {
     : [...document.querySelectorAll("[data-craft-panel]")];
   if (!section || !viewport || panels.length < 2) return;
 
-  // Runs on mobile too now (pinned cuts, tuned for touch below).
   if (!gsap || !ScrollTrigger || prefersReducedMotion()) return;
-  const isMobile = window.matchMedia("(max-width: 767px)").matches;
 
   gsap.registerPlugin(ScrollTrigger);
   section.classList.add("is-stacked");
+
+  // ── MOBILE: a light, cheap version ─────────────────────────────────────────
+  // The desktop cuts animate CSS filter blur, drop-shadow RGB-splits and 3D
+  // flips on full-screen video every scroll frame — that is what makes the
+  // pinned scrub feel jumpy on phones. On mobile we keep the pin+scrub but
+  // swap in opacity-only crossfades (GPU-trivial), so it tracks the scroll
+  // smoothly. No blur, no drop-shadow, no 3D.
+  if (isMobile()) {
+    initCraftMobile(gsap, panels, viewport);
+    return;
+  }
 
   // Reset every panel to a hidden, neutral state (panel 0 visible).
   panels.forEach((p, i) => {
@@ -181,6 +190,64 @@ export function initCraft() {
   });
 
   // Beat on the last panel before the pin releases.
+  tl.to({}, { duration: END_HOLD }, at);
+
+  return () => tl.scrollTrigger && tl.scrollTrigger.kill();
+}
+
+/* Lightweight mobile Craft: pinned + scrubbed, but each cut is a plain
+   opacity crossfade with a small settle-scale on the incoming media. No
+   filter/blur/drop-shadow/3D, so the GPU is never asked to re-rasterise a
+   full-screen video mid-scroll — the scrub stays smooth. */
+function initCraftMobile(gsap, panels, viewport) {
+  panels.forEach((p, i) => {
+    gsap.set(p, {
+      zIndex: i,
+      opacity: i === 0 ? 1 : 0,
+      xPercent: 0,
+      yPercent: 0,
+      scale: 1,
+      rotationY: 0,
+      clipPath: "none",
+      filter: "none",
+    });
+  });
+
+  const covers = panels.length - 1;
+  const START_HOLD = 0.15;
+  const END_HOLD = 0.15;
+  const total = START_HOLD + covers + END_HOLD;
+
+  const tl = gsap.timeline({
+    defaults: { ease: "power1.inOut" },
+    scrollTrigger: {
+      trigger: viewport,
+      pin: true,
+      scrub: 0.5,
+      start: "top top",
+      end: () => "+=" + window.innerHeight * (total * 0.7),
+      invalidateOnRefresh: true,
+      anticipatePin: 1,
+    },
+  });
+
+  tl.to({}, { duration: START_HOLD });
+
+  const D = 0.7;
+  let at = START_HOLD;
+  panels.slice(1).forEach((panel, idx) => {
+    const prev = panels[idx];
+    const media = panel.querySelector(".craft-panel__media");
+    const text = panel.querySelector(".craft-panel__text");
+
+    gsap.set(panel, { opacity: 0, scale: 1 });
+    tl.to(panel, { opacity: 1, duration: D }, at);
+    tl.to(prev, { opacity: 0, duration: D }, at);
+    if (media) tl.fromTo(media, { scale: 1.08 }, { scale: 1, duration: D + 0.15, ease: "power2.out" }, at);
+    if (text) tl.fromTo(text, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "power2.out" }, at + D * 0.4);
+    at += 1;
+  });
+
   tl.to({}, { duration: END_HOLD }, at);
 
   return () => tl.scrollTrigger && tl.scrollTrigger.kill();

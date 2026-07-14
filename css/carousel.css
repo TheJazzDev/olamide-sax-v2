@@ -187,11 +187,51 @@
   /* carousel.js skips is-3d under reduced motion, so the flat horizontal-scroll row (top of. */
 }
 
-/* ── Mobile: a tighter, shorter ring so it doesn't sprawl off a tall phone ──── */
-@media (max-width: 767px) {
-  .carousel.is-3d .carousel__stage { height: clamp(24rem, 62vh, 34rem); perspective: 1100px; }
-  .carousel.is-3d .carousel__item { width: clamp(6.5rem, 34vw, 9rem); }
-  /* Front-photo caption a touch smaller so it fits the smaller frame. */
-  .carousel__item-cap .cap-moment { font-size: clamp(0.75rem, 3.4vw, 0.95rem); }
-  .carousel.is-3d .carousel__hint { left: clamp(0.75rem, 3vw, 1.25rem); bottom: clamp(0.75rem, 2.5vh, 1.5rem); }
+/* ── Mobile: FLAT photo column (the 3D ring clumps + is heavy on phones) ─────
+   carousel.js adds .is-flat on mobile and skips all the ring machinery. The
+   photos flow as a simple captioned column that scrolls with the page. */
+.carousel.is-flat .carousel__stage {
+  overflow: visible;
+  height: auto;
+  perspective: none;
+  cursor: default;
+  touch-action: auto;
 }
+.carousel.is-flat .carousel__ring {
+  position: static;
+  inset: auto;
+  transform-style: flat;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  padding-inline: clamp(1rem, 5vw, 2rem);
+  pointer-events: auto;
+}
+.carousel.is-flat .carousel__item {
+  position: relative;
+  top: auto;
+  left: auto;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  will-change: auto;
+  pointer-events: none;   /* purely presentational on mobile */
+}
+.carousel.is-flat .carousel__item > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: var(--border-width) solid var(--hairline);
+  box-shadow: 0 16px 34px -16px rgb(var(--ink-rgb) / 0.7);
+}
+/* Caption always visible on the flat cards (no active/front concept here). */
+.carousel.is-flat .carousel__item-cap {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+.carousel.is-flat .carousel__caption { display: none; }

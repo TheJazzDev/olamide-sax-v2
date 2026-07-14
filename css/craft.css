@@ -235,6 +235,14 @@
   border-color: var(--accent);
   color: var(--ink);          /* brass fill on hover → clearly a button */
 }
+/* Mobile perf: drop the blur, keep it legible with a more opaque ground. */
+@media (max-width: 767px) {
+  .craft-panel__cta {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgb(var(--ink-rgb) / 0.85);
+  }
+}
 .craft-panel__cta-arrow { transition: transform 0.25s ease; }
 .craft-panel__cta:hover .craft-panel__cta-arrow { transform: translateX(3px); }
 

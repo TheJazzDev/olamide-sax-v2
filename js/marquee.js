@@ -13,7 +13,7 @@
    leaves the credits as static, wrapping lists of the same names.
    ========================================================================== */
 
-import { prefersReducedMotion } from "./utils.js";
+import { prefersReducedMotion, isMobile } from "./utils.js";
 
 export function initMarquee() {
   const gsap = window.gsap;
@@ -25,22 +25,27 @@ export function initMarquee() {
   const section = tracks[0].closest(".credits");
   if (section) section.classList.add("is-live");
 
-  // One shared scroll-velocity signal for every band.
+  // One shared scroll-velocity signal for every band. On mobile we keep the
+  // idle drift (a cheap transform) but DON'T couple it to scroll — that means no
+  // per-scroll-event work and no speed spikes competing with the scroll itself.
+  const mobile = isMobile();
   let velocity = 0;
   const lenis = window.__lenis || null;
   let lastScrollY = window.scrollY;
-  if (lenis) {
-    lenis.on("scroll", ({ velocity: v }) => { velocity = v * 3.0; });
-  } else {
-    window.addEventListener(
-      "scroll",
-      () => {
-        const y = window.scrollY;
-        velocity = (y - lastScrollY) * 1.5;
-        lastScrollY = y;
-      },
-      { passive: true }
-    );
+  if (!mobile) {
+    if (lenis) {
+      lenis.on("scroll", ({ velocity: v }) => { velocity = v * 3.0; });
+    } else {
+      window.addEventListener(
+        "scroll",
+        () => {
+          const y = window.scrollY;
+          velocity = (y - lastScrollY) * 1.5;
+          lastScrollY = y;
+        },
+        { passive: true }
+      );
+    }
   }
 
   const bands = tracks.map((track) => {
