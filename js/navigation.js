@@ -9,7 +9,7 @@
    throw.
    ========================================================================== */
 
-import { $, $$, on } from "./utils.js";
+import { $, $$, on, prefersReducedMotion } from "./utils.js";
 
 const FOCUSABLE_SELECTOR = [
   "a[href]",
@@ -99,7 +99,9 @@ export function initNavigation() {
   cleanups.push(on(toggle, "click", toggleOpen));
   if (closeBtn) cleanups.push(on(closeBtn, "click", close));
 
-  // Close when any link inside the overlay is activated, or when the click lands on the.
+  // Click on the backdrop → just close. Click a nav link → close the menu FIRST,
+  // then navigate after the close animation reads, so the page never swaps out
+  // mid-open (which looked like the menu "not closing").
   cleanups.push(
     on(overlay, "click", (event) => {
       if (event.target === overlay) {
@@ -107,7 +109,27 @@ export function initNavigation() {
         return;
       }
       const link = event.target.closest("a[href]");
-      if (link) close();
+      if (!link) return;
+
+      // Let new-tab / modified / external clicks behave normally.
+      const url = new URL(link.href, window.location.href);
+      const external = url.origin !== window.location.origin;
+      const modified =
+        event.metaKey || event.ctrlKey || event.shiftKey || event.altKey ||
+        link.target === "_blank";
+      if (external || modified) return;
+
+      // Same-page anchor (#id) → close and let it scroll, no navigation.
+      if (url.pathname === window.location.pathname && url.hash) {
+        close();
+        return;
+      }
+
+      event.preventDefault();
+      close();
+      const go = () => { window.location.href = link.href; };
+      if (prefersReducedMotion()) go();
+      else setTimeout(go, 300);   // ~ the panel's close slide
     })
   );
 

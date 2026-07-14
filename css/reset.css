@@ -150,15 +150,42 @@ main {
 }
 
 /* Page-to-page transitions ------------------------------------------------- */
-/* Cross-document View Transitions: same-origin navigations cross-fade instead of hard-cutting (Chrome/Safari; */
+/* Cross-document View Transitions: same-origin navigations cross-fade. */
 @view-transition {
   navigation: auto;
 }
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation-duration: 0.3s;
+  animation-duration: 0.35s;
+  animation-timing-function: ease;
 }
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-old(root),
   ::view-transition-new(root) { animation: none; }
+}
+
+/* Intro veil — an ink layer present from the first paint that covers the blank
+   period before content renders, then fades out (JS adds .is-ready on load).
+   Excluded from the view-transition snapshot so it doesn't double up on nav. */
+.page-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg, #0B0A08);
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+  view-transition-name: none;
+}
+html.is-ready .page-veil {
+  opacity: 0;
+}
+/* Once faded, stop it intercepting anything (belt-and-braces with pointer-events). */
+html.is-ready .page-veil {
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0s linear 0.5s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-veil { transition: none; }
+  html.is-ready .page-veil { transition: none; }
 }

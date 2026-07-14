@@ -50,6 +50,28 @@
 </head>
 
 <body>
+  <!-- Intro veil: covers the blank first-paint gap, fades once ready. -->
+  <div class="page-veil" aria-hidden="true"></div>
+  <script>
+    // Reveal as soon as the page is parsed + a frame has painted, so content
+    // fades in cleanly instead of flashing. Also fires on bfcache restore.
+    (function () {
+      var reveal = function () {
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            document.documentElement.classList.add("is-ready");
+          });
+        });
+      };
+      if (document.readyState === "loading")
+        document.addEventListener("DOMContentLoaded", reveal, { once: true });
+      else reveal();
+      // If arriving via back/forward cache, ensure the veil is not stuck.
+      window.addEventListener("pageshow", function (e) {
+        if (e.persisted) document.documentElement.classList.add("is-ready");
+      });
+    })();
+  </script>
   <!-- SET ASIDE (frame removed on request — uncomment to restore)
   <!-- THE FILM-FRAME (signature device). Decorative to AT. ==>
   <div class="frame" aria-hidden="true">
