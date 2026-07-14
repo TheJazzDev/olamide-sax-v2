@@ -14,7 +14,6 @@
 
    The border itself is drawn on .frame::before (single inset box). The four
    corners are positioned relative to the same inset. A slim edge lane is
-   reserved on the LEFT for the future Breath Line (Task 7) — see .frame__spine.
    ========================================================================== */
 
 .frame {
@@ -93,7 +92,6 @@
   bottom: var(--frame-inset);
   left:   calc(var(--frame-inset) + var(--corner-pad, 14px));
   width:  var(--breath-lane);
-  /* transparent placeholder — no visual yet. */
   pointer-events: none;
 }
 

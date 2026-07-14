@@ -105,5 +105,4 @@
 .row--top     { align-items: flex-start; }
 
 /* ── Content offset from the reserved Breath-Line edge lane ──────────────── */
-/* Content sits clear of the left spine where the line will run (Task 7).    */
 .spine-clear { padding-left: var(--breath-lane); }

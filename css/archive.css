@@ -1,4 +1,4 @@
-/* archive.css — Olamide Sax V2 · the living-archive pages */
+/* archive.css — the living-archive pages */
 
 /* 0 · ARCHIVE PAGE HEAD  (shared intro for every archive page) */
 
@@ -481,7 +481,7 @@
 .archive-section.section--flush-top { padding-top: 0; }
 .archive-section__head { margin-bottom: var(--space-lg); }
 
-/* Deep-linked card (arrived via /media.html#v-xx from the home Craft panels): a brief brass. */
+/* Deep-linked card — arrived via /media.html#v-xx from the home Craft panels. */
 .video-card.is-linked {
   outline: 1px solid rgb(var(--brass-rgb) / 0.7);
   outline-offset: 4px;

@@ -1,4 +1,4 @@
-/* carousel.css — Olamide Sax V3 · "The Live Wall" tilted photo-wheel */
+/* carousel.css — "The Live Wall" tilted photo-wheel */
 
 .featured-gallery {
   padding-block: clamp(4rem, 10vh, 8rem);
@@ -143,7 +143,7 @@
 .carousel.is-3d.is-dragging--y .carousel__stage { cursor: ns-resize; }
 
 /* ── Discovery hint ─────────────────────────────────────────────────────── */
-/* A quiet cue in the bottom-LEFT corner of the wheel — no pill, no box. */
+/* A quiet cue in the bottom-left corner of the wheel. */
 .carousel.is-3d .carousel__hint {
   position: absolute;
   left: clamp(1rem, 4vw, 2.5rem);
@@ -181,7 +181,6 @@
   .carousel.hint-out .carousel__hint { opacity: 0; }
 }
 
-/* Under-ring caption element retired — the caption now lives on the front photo itself (see .carousel__item-cap). */
 .carousel.is-3d .carousel__caption { display: none; }
 
 @media (prefers-reduced-motion: reduce) {

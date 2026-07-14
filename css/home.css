@@ -1,4 +1,4 @@
-/* home.css — Olamide Sax V2 · the curated homepage */
+/* home.css — the curated homepage */
 
 /* ── Shared: hung section index (Roman numeral + name) ──────────────────── */
 /* Each movement is labelled like a track on a set list. */
@@ -26,7 +26,6 @@
   align-items: center;
   gap: var(--space-sm);
 }
-/* Roman numerals removed — a short gold rule now leads the eyebrow so it still has a designed anchor where the numeral used to sit. */
 .movement-index__name::before {
   content: "";
   width: clamp(1.5rem, 4vw, 2.5rem);
@@ -87,7 +86,6 @@
   max-width: 40ch;
 }
 
-/* Marked-placeholder ribbon (dev affordance; quiet, corner of a media well). */
 .is-placeholder::after {
   content: "Placeholder";
   position: absolute;
@@ -132,7 +130,6 @@
   align-items: center;
 }
 
-/* Single column now (the portrait is gone; */
 .hero__lead { min-width: 0; }
 
 .hero__eyebrow { margin-bottom: var(--space-md); }
@@ -153,9 +150,6 @@
 .hero__title-line { display: block; white-space: nowrap; }
 /* The two words each get their own line. */
 .hero__title-line + .hero__title-line { margin-top: -0.04em; }
-/* "Sax" takes no accent treatment of its own — both words share the one voice
-   set on .hero__title. (This rule used to force an italic here, which quietly
-   beat the title's own font-style.) */
 .hero__title-line--accent { color: var(--text); }
 
 /* Mask-wipe: heroIntro.js wraps each line in .hero__mask (overflow clip) so the
@@ -198,7 +192,6 @@
   .split-char.is-caret::after { animation: none; opacity: 0; }
 }
 
-
 .hero__meta {
   margin-top: var(--space-lg);
   color: var(--muted);
@@ -208,7 +201,6 @@
   max-width: 40ch;
 }
 
-/* Whisper CTA — a scroll cue, not a button. */
 .hero__cue {
   margin-top: var(--space-2xl);
   display: inline-flex;
@@ -232,7 +224,6 @@
 .hero__cue:hover .hero__cue-line,
 .hero__cue:focus-visible .hero__cue-line { transform: scaleX(1.35); }
 
-/* Portrait held in shadow — half-lit, warm-graded. */
 .hero__portrait {
   position: relative;
   justify-self: end;
@@ -390,8 +381,6 @@
   filter: saturate(0.95) contrast(1.02) brightness(1);
 }
 .section--light .exhibit-label { color: color-mix(in oklab, var(--ash) 60%, var(--ink)); }
-
-/* (The Craft's OWN layout lives in craft.css — the old .craft-movement grid that used to. */
 
 .craft__intro { margin-bottom: var(--space-2xl); }
 
@@ -833,7 +822,6 @@
 
 /* AMBIENT VIDEO LAYERS — real content pass. */
 
-/* Hero ambient video — fills the reserved stage, held far back and low. */
 .hero__video {
   position: absolute;
   inset: 0;

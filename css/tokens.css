@@ -177,8 +177,6 @@
   --frame-color:      var(--hairline);            /* Ash hairline           */
   --frame-width:      var(--border-width);
   --frame-meta-size:  var(--step--1);             /* corner metadata type   */
-  /* Slim edge lane reserved for the future Breath Line (Task 7).
-     Documented hook — the line will live inside this lane, left edge. */
   --breath-lane:      clamp(20px, 3vw, 34px);
 
   /* ==========================================================================

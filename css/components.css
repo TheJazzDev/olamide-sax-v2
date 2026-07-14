@@ -1,6 +1,6 @@
-/* components.css — Olamide Sax V2 · shared components */
+/* components.css — shared components */
 
-/* 1 · DRAW-UNDERLINE LINK  (base treatment, deferred from typography.css) */
+/* 1 · DRAW-UNDERLINE LINK */
 
 .link-underline {
   position: relative;
@@ -140,7 +140,7 @@
   .card { transition: none; }
 }
 
-/* 5 · FORM FIELDS  (underline-only — no boxed inputs) */
+/* 5 · FORM FIELDS — underline-only, no boxed inputs */
 
 .form-field {
   display: flex;
@@ -284,7 +284,6 @@ textarea.form-field__control {
 
 .site-nav__wordmark-accent { color: var(--accent); }
 
-/* Overlay + footer wordmarks are genuinely visible brand marks (no frame corner competing. */
 .site-nav__wordmark--overlay,
 .site-nav__wordmark--footer {
   position: static;
