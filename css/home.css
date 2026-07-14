@@ -195,16 +195,11 @@
 
 /* TYPEWRITER (splitText.js → splitByChars + heroIntro.js).
 
-   inline-block is what lets each letter be TRANSFORMED as it lands (it rises and
-   settles). That was impossible under the old connected script — taking a letter
-   out of the text flow there tore its joins to its neighbours apart — but
-   Fraunces' letterforms stand alone, so it is free. Every character is present
-   from the start and merely becomes visible, so the line is laid out once, at
-   load, and never reflows as it types. */
-.split-char {
-  display: inline-block;
-  will-change: transform, opacity;
-}
+   The letters do not move — they simply appear, each easing on over a short
+   fade. Every character is present in the DOM from the start and merely becomes
+   visible, so the line is laid out once, at load, and never reflows as it types.
+   Nothing is transformed, so the characters can stay on the normal text flow. */
+.split-char { will-change: opacity; }
 
 /* The caret trails the LAST TYPED CHARACTER — it hangs off that char, not off
    the line box, so it sits exactly at the typing position with nothing to

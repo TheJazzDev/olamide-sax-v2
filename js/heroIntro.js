@@ -10,11 +10,11 @@ import { splitByChars } from "./splitText.js";
 /* Seconds between characters. Unhurried — a name is signed, not hammered out. */
 const PER_CHAR = 0.26;
 
-/* How long each individual letter takes to arrive. Giving a letter a real (if
-   brief) fade is what makes this read as SMOOTH rather than as a stutter: a bare
-   visibility flip pops, and a run of pops is a strobe, not a typewriter. It
-   overlaps the next letter's start, which is exactly what a hand does. */
-const CHAR_FADE = 0.34;
+/* How long each letter takes to arrive. The letter does not move — it simply
+   eases on. That short fade is what makes the run read as SMOOTH rather than as
+   a stutter: a bare visibility flip pops, and a row of pops is a strobe. It
+   overlaps the next letter's start, so the typing flows. */
+const CHAR_FADE = 0.3;
 
 /* An extra beat before the second word begins, so "Sax" lands as its own
    deliberate line rather than running straight on from "Olamide". */
@@ -49,7 +49,7 @@ export function initHeroIntro() {
 
   // Hidden, but still occupying their space — the line is laid out exactly as
   // it will finally read, so nothing shifts as the letters arrive.
-  gsap.set(chars, { visibility: "hidden", opacity: 0, yPercent: 22 });
+  gsap.set(chars, { visibility: "hidden", opacity: 0 });
   if (video) gsap.set(video, { opacity: 0, scale: 1.08 });
   if (eyebrow) gsap.set(eyebrow, { opacity: 0, y: 20 });
   if (meta) gsap.set(meta, { opacity: 0, y: 18 });
@@ -88,13 +88,12 @@ export function initHeroIntro() {
 
     tl.fromTo(
       ch,
-      { opacity: 0, yPercent: 22 },
+      { opacity: 0 },
       {
         opacity: 1,
-        yPercent: 0,
         visibility: "visible",
         duration: CHAR_FADE,
-        ease: "power3.out",
+        ease: "power2.out",
         onStart: () => {
           // the caret always trails the character being typed
           if (i > 0) chars[i - 1].classList.remove("is-caret");
