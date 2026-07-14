@@ -135,20 +135,77 @@
 
 /* ── Mobile / touch ───────────────────────────────────────────────────────── */
 @media (max-width: 767px) {
-  .craft:not(.is-stacked) .craft-viewport { height: auto; }
-  .craft:not(.is-stacked) .craft-panel { height: 72svh; }
-  .craft:not(.is-stacked) .craft-panel__media { height: 46svh; }
-  .craft:not(.is-stacked) .craft-panel__text { bottom: calc(13svh + var(--space-md)); }
+  /* Fallback (no JS / reduced motion): panels stack and scroll normally. */
+  .craft:not(.is-stacked):not(.is-swipe) .craft-viewport { height: auto; }
+  .craft:not(.is-stacked):not(.is-swipe) .craft-panel { height: 72svh; }
+  .craft:not(.is-stacked):not(.is-swipe) .craft-panel__media { height: 46svh; }
+  .craft:not(.is-stacked):not(.is-swipe) .craft-panel__text { bottom: calc(13svh + var(--space-md)); }
+}
 
-  /* Pinned mode on mobile: a bigger video strip (bars are proportionally huge on a narrow. */
-  .craft.is-stacked .craft-panel__media { height: 52svh; }
-  .craft.is-stacked .craft-panel__text {
-    left: clamp(1rem, 5vw, 1.5rem);
-    bottom: calc(24svh + var(--space-md));
-    max-width: 82vw;
+/* ── Mobile SWIPE mode (craft.js adds .is-swipe on phones) ────────────────────
+   No pin, no scrub. The heading sits above a native horizontal scroll-snap
+   row of the three videos — swipe left/right to move between them, the page
+   scrolls past the section normally. The browser owns the swipe, so it's
+   smooth with zero per-frame JS. */
+@media (max-width: 767px) {
+  .craft.is-swipe .craft-viewport { height: auto; }
+
+  /* Heading flows above the row (it was absolutely overlaid in pinned mode). */
+  .craft.is-swipe .craft__intro {
+    position: static;
+    padding: clamp(4.5rem, 9vh, 7rem) clamp(1.25rem, 5vw, 2rem) 0;
   }
-  .craft.is-stacked .craft-panel__word { font-size: clamp(2.25rem, 12vw, 3.5rem); }
-  .craft.is-stacked .craft-panel__copy { font-size: var(--step--1); max-width: 30ch; }
+
+  /* The row: full-width slides, scroll-snap, swipe horizontally. */
+  .craft.is-swipe .craft-track {
+    flex-direction: row;
+    gap: 0;
+    margin-top: var(--space-lg);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    /* room so the last slide can snap to the left edge */
+    scroll-padding-inline: 0;
+    touch-action: pan-x pan-y;         /* allow both — the row swipes, page scrolls */
+    overscroll-behavior-x: contain;    /* horizontal swipe doesn't bleed to the page */
+  }
+  .craft.is-swipe .craft-track::-webkit-scrollbar { display: none; }
+
+  .craft.is-swipe .craft-panel {
+    flex: 0 0 100%;
+    width: 100%;
+    height: auto;
+    /* stack video over label (base rule is a centring flex row) */
+    display: block;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+  .craft.is-swipe .craft-panel__media { width: 100%; height: 58svh; }
+
+  /* Label back in flow under the strip so long copy never overlaps the video. */
+  .craft.is-swipe .craft-panel__text {
+    position: static;
+    left: auto;
+    bottom: auto;
+    padding: var(--space-md) clamp(1.25rem, 5vw, 2rem) 0;
+    max-width: none;
+  }
+  .craft.is-swipe .craft-panel__word { font-size: clamp(2.25rem, 11vw, 3.5rem); }
+  .craft.is-swipe .craft-panel__copy { font-size: var(--step--1); max-width: 34ch; }
+
+  /* A quiet "swipe" affordance under the heading. */
+  .craft.is-swipe .craft__intro::after {
+    content: "Swipe →";
+    display: block;
+    margin-top: var(--space-sm);
+    font-family: var(--font-label);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.62rem;
+    color: color-mix(in oklab, var(--accent-lit) 80%, var(--bone));
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
