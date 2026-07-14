@@ -2,8 +2,9 @@
    HTML → html-minifier-terser · CSS → lightningcss · JS module → bun bundle+minify.
    Vendor JS + assets are copied as-is (vendor is already minified). */
 
-import { rmSync, mkdirSync, cpSync, readdirSync, statSync, readFileSync, writeFileSync } from "node:fs";
-import { join, dirname, extname } from "node:path";
+import { rmSync, mkdirSync, cpSync, readdirSync, statSync, readFileSync, writeFileSync, renameSync } from "node:fs";
+import { join, dirname, extname, basename } from "node:path";
+import { createHash } from "node:crypto";
 import { minify as minifyHtml } from "html-minifier-terser";
 import { transform as lightning } from "lightningcss";
 
@@ -19,7 +20,7 @@ mkdirSync(OUT, { recursive: true });
 // versions. Raw video sources are excluded via .vercelignore + git, and we skip
 // build files here too.
 const SKIP_TOP = new Set([
-  "dist", "node_modules", ".git", ".vscode", ".idea",
+  "dist", "node_modules", ".git", ".vscode", ".idea", ".superpowers",
   "build.js", "package.json", "bun.lockb", "bun.lock",
   "vercel.json", ".vercelignore", ".gitignore",
 ]);
@@ -83,6 +84,47 @@ for (const name of readdirSync(jsOut)) {
   if (statSync(p).isFile() && extname(p) === ".js") rmSync(p);
 }
 console.log("✓ bundled + minified JS → js/main.js");
+
+// ── 4.5 · content-hash css/js filenames, then rewrite HTML refs ─────────────
+// The HTML references assets by plain name (css/home.css, js/main.js). Vercel
+// serves /css/* and /js/* with `immutable, max-age=1yr`, so browsers (mobile
+// especially) never refetch a changed file that kept the same name — the deploy
+// looks like it "didn't update". Fix: rename each file to include a hash of its
+// CONTENTS (home.<hash>.css) so every change gets a NEW url, and rewrite every
+// HTML reference to match. Unchanged files keep their hash → still cached.
+const hashMap = new Map(); // "css/home.css" → "css/home.a1b2c3d4.css"
+
+function hashFile(absPath, relDir) {
+  const buf = readFileSync(absPath);
+  const hash = createHash("sha256").update(buf).digest("hex").slice(0, 8);
+  const ext = extname(absPath);
+  const stem = basename(absPath, ext);
+  const newBase = `${stem}.${hash}${ext}`;
+  renameSync(absPath, join(dirname(absPath), newBase));
+  hashMap.set(`${relDir}/${stem}${ext}`, `${relDir}/${newBase}`);
+}
+
+// Hash all CSS (dist/css/*) and the bundled + vendor JS (dist/js/**).
+walk(join(OUT, "css"), ".css", (file) => hashFile(file, "css"));
+walk(join(OUT, "js"), ".js", (file) => {
+  // preserve the js/vendor/ subpath in the ref key
+  const rel = file.slice(join(OUT).length + 1).split("/").slice(0, -1).join("/");
+  hashFile(file, rel);
+});
+console.log(`✓ content-hashed ${hashMap.size} css/js files`);
+
+// Rewrite the references across every HTML file. Longest keys first so
+// "js/vendor/x.js" is replaced before a shorter accidental substring could be.
+const refKeys = [...hashMap.keys()].sort((a, b) => b.length - a.length);
+for (const name of readdirSync(OUT).filter((n) => extname(n) === ".html")) {
+  const file = join(OUT, name);
+  let html = readFileSync(file, "utf8");
+  for (const key of refKeys) {
+    html = html.split(key).join(hashMap.get(key));
+  }
+  writeFileSync(file, html);
+}
+console.log("✓ rewrote hashed refs in HTML");
 
 // ── 5 · minify HTML in place (in dist) ──────────────────────────────────────
 let htmlCount = 0;

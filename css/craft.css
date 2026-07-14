@@ -195,17 +195,34 @@
   .craft.is-swipe .craft-panel__word { font-size: clamp(2.25rem, 11vw, 3.5rem); }
   .craft.is-swipe .craft-panel__copy { font-size: var(--step--1); max-width: 34ch; }
 
-  /* A quiet "swipe" affordance under the heading. */
+  /* Swipe affordance under the heading — a label with a nudging arrow, so it
+     reads as an invitation to swipe rather than a static caption. */
   .craft.is-swipe .craft__intro::after {
-    content: "Swipe →";
-    display: block;
+    content: "Swipe \2192";
+    display: inline-block;
     margin-top: var(--space-sm);
     font-family: var(--font-label);
     text-transform: uppercase;
     letter-spacing: 0.2em;
     font-size: 0.62rem;
-    color: color-mix(in oklab, var(--accent-lit) 80%, var(--bone));
+    color: color-mix(in oklab, var(--accent-lit) 82%, var(--bone));
+    animation: craft-swipe-nudge 1.6s ease-in-out infinite;
   }
+  @keyframes craft-swipe-nudge {
+    0%, 100% { transform: translateX(0); opacity: 0.65; }
+    50%      { transform: translateX(0.4rem); opacity: 1; }
+  }
+
+  /* Let the NEXT slide peek — the strongest 'there's more →' cue. Each slide is
+     a touch under full width and the row is padded so slide 2's edge shows. */
+  .craft.is-swipe .craft-track { scroll-padding-left: clamp(1.25rem, 5vw, 2rem); }
+  .craft.is-swipe .craft-panel { flex-basis: 88%; }
+  .craft.is-swipe .craft-panel:first-child { margin-left: clamp(1.25rem, 5vw, 2rem); }
+  .craft.is-swipe .craft-panel:last-child { margin-right: clamp(1.25rem, 5vw, 2rem); }
+}
+
+@media (max-width: 767px) and (prefers-reduced-motion: reduce) {
+  .craft.is-swipe .craft__intro::after { animation: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
