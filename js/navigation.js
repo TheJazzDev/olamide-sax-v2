@@ -20,14 +20,7 @@ const FOCUSABLE_SELECTOR = [
   '[tabindex]:not([tabindex="-1"])',
 ].join(",");
 
-/**
- * An element is really visible/focusable if it has at least one client rect.
- * IMPORTANT: do NOT use `el.offsetParent` to test this — offsetParent is
- * null for elements inside a `position: fixed` ancestor on WebKit/Safari,
- * which silently breaks focus traps built on position:fixed overlays (this
- * overlay is exactly that case). getClientRects().length is the reliable
- * cross-browser visibility check here.
- */
+/* * An element is really visible/focusable if it has at least one client rect. */
 function isVisible(el) {
   return el.getClientRects().length > 0;
 }
@@ -36,11 +29,7 @@ function getFocusable(container) {
   return $$(FOCUSABLE_SELECTOR, container).filter(isVisible);
 }
 
-/**
- * Set aria-current="page" on the menu link that matches the current URL, so
- * the active page is highlighted (styled in components.css). Normalises
- * "/", "/index.html" and trailing slashes to the same page.
- */
+/* * Set aria-current="page" on the menu link that matches the current URL, so the active. */
 function markCurrentPage(overlay) {
   const norm = (p) => {
     p = p.replace(/\/index\.html$/, "/").replace(/\.html$/, "");
@@ -74,8 +63,7 @@ export function initNavigation() {
     isOpen = true;
     lastFocused = document.activeElement;
 
-    // Compensate for the scrollbar width BEFORE locking scroll, so hiding the
-    // scrollbar doesn't shift the page (the "jump" on menu open).
+    // Compensate for the scrollbar width BEFORE locking scroll, so hiding the scrollbar doesn't.
     const sbw = window.innerWidth - document.documentElement.clientWidth;
     if (sbw > 0) document.body.style.setProperty("--sbw", sbw + "px");
 
@@ -83,8 +71,7 @@ export function initNavigation() {
     toggle.setAttribute("aria-expanded", "true");
     document.body.classList.add("has-menu-open");
 
-    // Move focus into the overlay — prefer the close button, then the first
-    // focusable element (e.g. the first menu link).
+    // Move focus into the overlay — prefer the close button, then the first focusable element (e.g.
     const focusables = getFocusable(overlay);
     const target = closeBtn && isVisible(closeBtn) ? closeBtn : focusables[0];
     if (target) target.focus();
@@ -112,8 +99,7 @@ export function initNavigation() {
   cleanups.push(on(toggle, "click", toggleOpen));
   if (closeBtn) cleanups.push(on(closeBtn, "click", close));
 
-  // Close when any link inside the overlay is activated, or when the click
-  // lands on the backdrop (the overlay itself — everywhere outside the panel).
+  // Close when any link inside the overlay is activated, or when the click lands on the.
   cleanups.push(
     on(overlay, "click", (event) => {
       if (event.target === overlay) {

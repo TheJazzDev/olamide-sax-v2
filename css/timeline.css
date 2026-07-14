@@ -7,9 +7,7 @@
   margin-top: var(--space-2xl);
 }
 
-/* The Breath Line's static bed: a hairline brass rule running the full height
-   of the node run. Left-hung on mobile, centred from md up. replaces
-   the still fill with the animated brass path inside .timeline__line. */
+/* The Breath Line's static bed: a hairline brass rule running the full height of the node run. */
 .timeline__line {
   position: absolute;
   top: 0;
@@ -26,8 +24,7 @@
   );
   pointer-events: none;
 }
-/* A faint brass halo, kept as a slim 3px-wide bed directly beside the line
-   (NO blur — a blurred full-height element inflates into a huge ellipse). */
+/* A faint brass halo, kept as a slim 3px-wide bed directly beside the line (NO blur — a. */
 .timeline__line::before {
   content: "";
   position: absolute;
@@ -199,5 +196,4 @@
 }
 .timeline-coda__cta { margin-top: var(--space-lg); }
 
-/* ── Reduced motion: the still line + markers ARE the design no-op).
-   Nothing kinetic here — the static line is intentional and needs no override. */
+/* ── Reduced motion: the still line + markers ARE the design no-op). */

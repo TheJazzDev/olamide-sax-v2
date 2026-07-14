@@ -1,9 +1,7 @@
 /* motion.css — Olamide Sax V2 · GSAP motion pre-states (PROGRESSIVE ENHANCEMENT) */
 
 /* ── Reveal pre-states (only while the engine is live) ───────────────────── */
-/* These set the "before" of a GSAP-driven reveal. reveal.js animates them to
-   opacity:1 / transform:none. The `will-change` is scoped to the pre-state so
-   we are not permanently promoting layers. */
+/* These set the "before" of a GSAP-driven reveal. */
 
 .js-anim-ready [data-animate="fade"] {
   opacity: 0;
@@ -20,9 +18,7 @@
   will-change: opacity, transform;
 }
 
-/* Split-text words/lines: hidden + lifted before the phrased stagger runs.
-   The readable text stays in the a11y tree (aria-label on the heading / a
-   visually-hidden copy); these generated spans are aria-hidden. */
+/* Split-text words/lines: hidden + lifted before the phrased stagger runs. */
 .js-anim-ready .split-line {
   display: block;
   overflow: hidden; /* mask for the rising words */

@@ -179,7 +179,7 @@
    Nothing is transformed, so the characters can stay on the normal text flow. */
 .split-char { will-change: opacity; }
 
-/* The caret trails the LAST TYPED CHARACTER — it hangs off that char, not off the line box, … */
+/* The caret trails the LAST TYPED CHARACTER — it hangs off that char, not off the line box. */
 .split-char.is-caret::after {
   content: "";
   display: inline-block;
@@ -391,7 +391,7 @@
 }
 .section--light .exhibit-label { color: color-mix(in oklab, var(--ash) 60%, var(--ink)); }
 
-/* (The Craft's OWN layout lives in craft.css — the old .craft-movement grid that used to … */
+/* (The Craft's OWN layout lives in craft.css — the old .craft-movement grid that used to. */
 
 .craft__intro { margin-bottom: var(--space-2xl); }
 
@@ -456,7 +456,7 @@
 }
 .credits__title { margin-top: var(--space-md); }
 
-/* The TICKER BAND — a raised umber strip framing both drifting rows, so the credits read as … */
+/* The TICKER BAND — a raised umber strip framing both drifting rows, so the credits read as. */
 .credits__band {
   margin-top: clamp(2rem, 5vh, 3.5rem);
   padding-block: clamp(1.25rem, 3vh, 2rem);
@@ -538,7 +538,7 @@
 .credits__stat--award .credits__stat-num { color: var(--accent-lit); font-style: italic; }
 .credits__stat--award .credits__stat-label { color: var(--accent); }
 
-/* ── Second band: collaborators / productions — smaller, quieter, drifting the OTHER way … */
+/* ── Second band: collaborators / productions — smaller, quieter, drifting the OTHER way. */
 .credits__marquee--roles { margin-top: clamp(0.75rem, 2vh, 1.5rem); }
 .credits__track--roles .credits__item {
   font-size: clamp(1.1rem, 3vw, 2rem);

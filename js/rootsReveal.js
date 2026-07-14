@@ -30,8 +30,7 @@ export function initRootsReveal() {
   const img = media && media.querySelector("img");
   const caption = section.querySelector(".roots__media .exhibit-label");
 
-  // Split "2010 —" into per-character masked spans so each can roll up
-  // independently (spaces stay as plain text nodes).
+  // Split "2010 —" into per-character masked spans so each can roll up independently (spaces stay as plain text nodes).
   const digits = [];
   if (year) {
     const text = year.textContent;
@@ -70,11 +69,7 @@ export function initRootsReveal() {
   if (copy) tl.from(copy, { opacity: 0, y: 26, duration: 0.7 }, 0.45);
   if (link) tl.from(link, { opacity: 0, y: 16, duration: 0.5 }, 0.65);
 
-  // ── The photo is DRAWN like an artist works, in three acts:
-  //    1 · GUIDE — a hand-inked outline traces around the frame,
-  //    2 · SKETCH — a grayscale underdrawing hatches in (thin diagonals),
-  //    3 · PAINT — thick diagonal brush passes bring up the full colour,
-  //        and the guide line fades away, its job done. ──
+  // The photo "develops" in as it scrolls into view.
   const art = img && media ? buildDrawnImage(media, img) : null;
   if (art) {
     const prep = (path, i, alt) => {
@@ -88,15 +83,15 @@ export function initRootsReveal() {
     art.hatch.forEach((p, i) => prep(p, i, true));
     art.paint.forEach((p, i) => prep(p, i, true));
 
-    // 1 · the guide traces around the frame…
+    // 1 · the guide traces around the frame.
     tl.to(art.border, { strokeDashoffset: 0, duration: 0.55, ease: "power2.inOut" }, 0.1);
-    // 2 · …the sketch hatches in fast…
+    // 2 · …the sketch hatches in fast.
     tl.to(
       art.hatch,
       { strokeDashoffset: 0, duration: 0.45, ease: "power1.inOut", stagger: 0.035 },
       0.4
     );
-    // 3 · …the paint sweeps over it…
+    // 3 · …the paint sweeps over it.
     tl.to(
       art.paint,
       { strokeDashoffset: 0, duration: 0.8, ease: "power2.inOut", stagger: 0.08 },
@@ -107,8 +102,7 @@ export function initRootsReveal() {
   }
   if (caption) tl.from(caption, { opacity: 0, duration: 0.5 }, art ? 2.0 : 0.6);
 
-  // Ongoing parallax while the photo passes through the viewport (the drawn
-  // SVG replaces the img, so it drifts as one piece).
+  // Ongoing parallax while the photo passes through the viewport (the drawn SVG replaces the img, so it drifts as one piece).
   const drift = media && media.querySelector(".roots__draw");
   if (drift) {
     gsap.fromTo(
@@ -128,12 +122,7 @@ export function initRootsReveal() {
   }
 }
 
-/* Replace the plain <img> with an inline SVG staging an artist's process:
-   a grayscale SKETCH layer masked by thin diagonal hatch strokes, a full-
-   colour PAINT layer masked by thick diagonal brush passes, and an inked
-   GUIDE outline around the frame. All three stroke sets are returned to be
-   dash-drawn by the timeline. Built only when motion is allowed, so no-JS /
-   reduced-motion visitors keep the untouched <img>. */
+/* Replace the plain <img> with an inline SVG staging an artist's process: a grayscale. */
 function buildDrawnImage(media, img) {
   const NS = "http://www.w3.org/2000/svg";
   const W = 1200;
@@ -150,8 +139,7 @@ function buildDrawnImage(media, img) {
   const defs = document.createElementNS(NS, "defs");
   svg.appendChild(defs);
 
-  /* Build a mask of parallel wavy strokes, rotated to a hand angle. The rows
-     overshoot the frame generously so full coverage survives the rotation. */
+  /* Build a mask of parallel wavy strokes, rotated to a hand angle. */
   const makeStrokeMask = (id, angle, spacing, width) => {
     const mask = document.createElementNS(NS, "mask");
     mask.setAttribute("id", id);

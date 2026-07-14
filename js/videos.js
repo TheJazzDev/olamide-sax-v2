@@ -16,9 +16,7 @@
 import { $, $$, on } from "./utils.js";
 import { videos } from "./data.js";
 
-/** Build one facade card for a video record. NO iframe — poster + play mark.
-    Until real YouTube ids land (youtubeId === "TODO"), the facade is a link to
-    the channel; when an id is present, it becomes a facade → iframe trigger. */
+/* * Build one facade card for a video record. */
 function cardMarkup(video) {
   const placeholderClass = video.placeholder ? " is-placeholder" : "";
   const pending = !video.youtubeId || video.youtubeId === "TODO";
@@ -35,8 +33,7 @@ function cardMarkup(video) {
         </span>
         <span class="video-facade__label"><span>${video.meta}</span></span>`;
 
-  // TODO(youtube): when video.youtubeId is a real id, this branch becomes the
-  // facade → iframe trigger (Task 8). Until then it opens the channel.
+  // TODO(youtube): when video.youtubeId is a real id, this branch becomes the facade → iframe trigger (Task 8).
   const facade = pending
     ? `<a class="video-card__facade video-facade${placeholderClass}"
            href="${channel}" target="_blank" rel="noopener noreferrer"
@@ -58,9 +55,7 @@ function cardMarkup(video) {
     </article>`;
 }
 
-/* Deep links (e.g. /media.html#v-03 from the home Craft panels): once the
-   grid has rendered, scroll the addressed card into view and pulse it so
-   the visitor sees WHICH performance they were sent to. */
+/* Deep links (e.g. */
 function scrollToHashCard(grid) {
   const id = decodeURIComponent(window.location.hash.slice(1));
   if (!id) return;

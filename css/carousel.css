@@ -2,8 +2,7 @@
 
 .featured-gallery {
   padding-block: clamp(4rem, 10vh, 8rem);
-  /* No overflow clipping here — the wheel is centred and stays within the
-     viewport width, and clipping would break the sticky stage below. */
+  /* No overflow clipping here — the wheel is centred and stays within the viewport width, and. */
 }
 
 .carousel {
@@ -36,12 +35,9 @@
 .carousel.is-3d .carousel__stage {
   overflow: visible;
   position: relative;
-  /* Tall enough for the wheel to tilt back with headroom above and below. As the
-     section scrolls through the viewport, carousel.js scrubs the ring a full 360°
-     (every back photo comes round to the front) — smooth, no snap/elastic. */
+  /* Tall enough for the wheel to tilt back with headroom above and below. */
   height: clamp(30rem, 82vh, 54rem);
-  /* Moderate perspective — the wheel's depth comes from js-driven z + scale, so
-     perspective just adds gentle foreshortening. */
+  /* Moderate perspective — the wheel's depth comes from js-driven z + scale, so perspective just adds gentle foreshortening. */
   perspective: 1800px;
   perspective-origin: 50% 38%;
   position: relative;
@@ -66,8 +62,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  /* Smaller than the old slabs so 15 photos read as a RING, not a stack.
-     JS drives the position/scale/z fully; this is just the base footprint. */
+  /* Smaller than the old slabs so 15 photos read as a RING, not a stack. */
   width: clamp(9rem, 15vw, 14rem);
   aspect-ratio: 3 / 4;
   margin: 0;
@@ -84,8 +79,7 @@
   object-fit: cover;
   border: var(--border-width) solid var(--hairline);
   box-shadow: 0 24px 50px -18px rgb(var(--ink-rgb) / 0.75);
-  /* All photos read equally bright so every one looks equally interactive. No
-     hover treatment — hover fought the drag, and the whole ring is draggable. */
+  /* All photos read equally bright so every one looks equally interactive. */
   filter: saturate(0.98) contrast(1.03);
   transition:
     filter 0.35s var(--ease-out),
@@ -100,9 +94,7 @@
   filter: saturate(1.04) contrast(1.05) brightness(1.03);
 }
 
-/* Per-photo caption, pinned to the BASE of the image. Shown ONLY on the front
-   (active) photo — no hover. Small, quiet, gradient-anchored so it reads over
-   any photo. */
+/* Per-photo caption, pinned to the BASE of the image. */
 .carousel__item-cap {
   position: absolute;
   left: 0;
@@ -151,9 +143,7 @@
 .carousel.is-3d.is-dragging--y .carousel__stage { cursor: ns-resize; }
 
 /* ── Discovery hint ─────────────────────────────────────────────────────── */
-/* A quiet cue in the bottom-LEFT corner of the wheel — no pill, no box. Fades in
-   shortly after the section appears; fades out on the first interaction
-   (.hint-gone) OR once the section is ~30% scrolled out of view (.hint-out). */
+/* A quiet cue in the bottom-LEFT corner of the wheel — no pill, no box. */
 .carousel.is-3d .carousel__hint {
   position: absolute;
   left: clamp(1rem, 4vw, 2.5rem);
@@ -191,14 +181,11 @@
   .carousel.hint-out .carousel__hint { opacity: 0; }
 }
 
-/* Under-ring caption element retired — the caption now lives on the front photo
-   itself (see .carousel__item-cap). Hidden in the 3D mode so it leaves no gap.
-   (Kept in the DOM for the no-JS flat fallback, which still uses it.) */
+/* Under-ring caption element retired — the caption now lives on the front photo itself (see .carousel__item-cap). */
 .carousel.is-3d .carousel__caption { display: none; }
 
 @media (prefers-reduced-motion: reduce) {
-  /* carousel.js skips is-3d under reduced motion, so the flat horizontal-scroll
-     row (top of this file) is used instead — nothing to override here. */
+  /* carousel.js skips is-3d under reduced motion, so the flat horizontal-scroll row (top of. */
 }
 
 /* ── Mobile: a tighter, shorter ring so it doesn't sprawl off a tall phone ──── */

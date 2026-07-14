@@ -15,8 +15,7 @@ export function initCraft() {
     : [...document.querySelectorAll("[data-craft-panel]")];
   if (!section || !viewport || panels.length < 2) return;
 
-  // Runs on mobile too now (pinned cuts, tuned for touch below). Only bail
-  // when motion is off or GSAP/ScrollTrigger is unavailable.
+  // Runs on mobile too now (pinned cuts, tuned for touch below).
   if (!gsap || !ScrollTrigger || prefersReducedMotion()) return;
   const isMobile = window.matchMedia("(max-width: 767px)").matches;
 
@@ -55,9 +54,7 @@ export function initCraft() {
   const END_HOLD = 0.1;               // brief dwell on the last video
   const total = START_HOLD + covers + END_HOLD;
 
-  // ── Choose the cut styles for this load ─────────────────────────────────────
-  // Shuffle the styles; take one per cut. With ≤count cuts all are distinct;
-  // for more cuts we reshuffle and only forbid the same style twice in a row.
+  // ── Choose the cut styles for this load ───────────────────────────────────── Shuffle the styles;
   const STYLES = ["wipe", "slide", "flip", "punch", "glitch"];
   function shuffle(a) {
     const r = a.slice();
@@ -84,8 +81,7 @@ export function initCraft() {
     scrollTrigger: {
       trigger: viewport,
       pin: true,
-      // Tighter scrub → the transition tracks the scroll closely (less lag before
-      // the next video responds) while staying smooth.
+      // Tighter scrub → the transition tracks the scroll closely (less lag before the next video responds) while staying smooth.
       scrub: 0.4,
       start: "top top",
       // Shorter scroll distance per cut → you reach the next video sooner.
@@ -98,14 +94,7 @@ export function initCraft() {
   // Opening hold on panel 1.
   tl.to({}, { duration: START_HOLD });
 
-  // ── Cut builders. Each fills a 1-unit window at absolute position `at`. The
-  //    active motion is SNAPPY (compressed into ~D of the window with a lead-in
-  //    hold), like a real editing transition, plus an effect (flash / blur /
-  //    RGB glitch). Everything is scrubbed, so it reverses on scroll-up. ───────
-  // Balance of each 1-unit cut window: LEAD (dwell on the video) → D (transition)
-  // → the remainder (short dwell after). The transition now OWNS most of the
-  // window, with only a small dwell on each video before/after — so scrolling
-  // spends more time IN the transition and less parked on a static frame.
+  // ── Cut builders.
   const D = 0.82;              // transition duration (most of the window)
   const LEAD = 0.08;           // tiny dwell before the cut fires
 
@@ -133,8 +122,7 @@ export function initCraft() {
     };
 
     if (style === "wipe") {
-      // Fast clip-path reveal — iris bloom or a directional edge sweep. One
-      // growing region, so no split of the previous video.
+      // Fast clip-path reveal — iris bloom or a directional edge sweep.
       const shapes = [
         ["circle(0% at 50% 50%)", "circle(150% at 50% 50%)"],
         ["circle(0% at 78% 40%)", "circle(150% at 78% 40%)"],
@@ -162,8 +150,7 @@ export function initCraft() {
       punchFlash(0.35);
       settleMedia(1.18); riseText();
     } else if (style === "punch") {
-      // Dive-into-the-frame: incoming explodes from a point + ZOOM-BLUR; the
-      // outgoing rushes past the viewer. A white flash at the impact.
+      // Dive-into-the-frame: incoming explodes from a point + ZOOM-BLUR;
       gsap.set(panel, { opacity: 0, scale: 0.04, transformOrigin: "50% 50%" });
       tl.to(prev, { scale: 2.4, opacity: 0, duration: D, ease: "power3.in" }, t0);
       tl.fromTo(panel, { scale: 0.04, opacity: 0 }, { scale: 1, opacity: 1, duration: D, ease: "power4.out" }, t0);
@@ -172,8 +159,7 @@ export function initCraft() {
       if (media) tl.fromTo(media, { scale: 1.4 }, { scale: 1, duration: D + 0.25, ease: "power3.out" }, t0);
       riseText();
     } else {
-      // GLITCH — a hard cut with an RGB-split jitter: the incoming snaps in while
-      // its channels tear apart and re-register, over a couple of jumpy flashes.
+      // GLITCH — a hard cut with an RGB-split jitter: the incoming snaps in while its channels.
       gsap.set(panel, { opacity: 1, scale: 1, x: 0, filter: "none" });
       // Jump-cut the outgoing away almost immediately.
       tl.to(prev, { opacity: 0, duration: D * 0.2, ease: "steps(2)" }, t0 + D * 0.15);

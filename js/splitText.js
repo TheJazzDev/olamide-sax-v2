@@ -4,11 +4,7 @@
    aria-hidden). If the target already has child markup, it bails out of word-
    splitting and treats each existing line span as a unit. Returns {words,lines,revert}. */
 
-/**
- * Split a heading/paragraph into aria-hidden word spans for kinetic reveal.
- * @param {HTMLElement} el
- * @returns {{ words: HTMLElement[], lines: HTMLElement[], revert: () => void }}
- */
+/* * Split a heading/paragraph into aria-hidden word spans for kinetic reveal. */
 export function splitToWords(el) {
   const original = el.textContent.replace(/\s+/g, " ").trim();
 
@@ -20,8 +16,7 @@ export function splitToWords(el) {
   const words = original.split(" ").filter(Boolean);
   const wordEls = [];
 
-  // Build a single line-mask containing all words. Callers can group visually
-  // via CSS; for our purposes one mask with word-level stagger reads musical.
+  // Build a single line-mask containing all words.
   el.textContent = "";
 
   const line = document.createElement("span");
@@ -105,14 +100,7 @@ export function splitByChars(el, childSelector) {
   };
 }
 
-/**
- * For elements built from existing line spans (e.g. the hero title with
- * .hero__title-line children) — reveal each existing line as a unit without
- * destroying markup. Keeps the real text intact; just tags the lines.
- * @param {HTMLElement} el
- * @param {string} childSelector
- * @returns {{ words: HTMLElement[], lines: HTMLElement[], revert: () => void }}
- */
+/* * For elements built from existing line spans (e.g. */
 export function splitByExistingLines(el, childSelector) {
   const lines = Array.from(el.querySelectorAll(childSelector));
   lines.forEach((l) => l.classList.add("split-word"));

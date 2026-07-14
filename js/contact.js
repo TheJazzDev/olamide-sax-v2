@@ -17,11 +17,7 @@ const SUBJECT_LABELS = {
   other: 'General enquiry',
 };
 
-/* --------------------------------------------------------------------------
-   FUTURE ENDPOINT HOOK — leave null to keep the pure mailto: behaviour.
-   When a backend exists, set this to the POST URL; see submitToEndpoint().
-   -------------------------------------------------------------------------- */
-const FORM_ENDPOINT = null; // e.g. "https://formspree.io/f/XXXX"
+const FORM_ENDPOINT = null; // set to a URL to POST instead of mailto:
 
 /** Build the mailto: href from the collected field values. */
 export function buildMailto(fields) {
@@ -70,19 +66,6 @@ function validate(fields) {
   return '';
 }
 
-/* --------------------------------------------------------------------------
-   OPTIONAL backend submit — inert unless FORM_ENDPOINT is set. Kept here,
-   clearly commented, so wiring a real endpoint later is a one-line change.
-   -------------------------------------------------------------------------- */
-// async function submitToEndpoint(fields) {
-//   const res = await fetch(FORM_ENDPOINT, {
-//     method: "POST",
-//     headers: { "Content-Type": "application/json", Accept: "application/json" },
-//     body: JSON.stringify(fields),
-//   });
-//   if (!res.ok) throw new Error(`Booking submit failed: ${res.status}`);
-// }
-
 export function initContact() {
   const form = $('[data-booking-form]');
   if (!form) return; // page-guard
@@ -118,10 +101,6 @@ export function initContact() {
       return;
     }
 
-    // With an endpoint wired, POST instead (uncomment submitToEndpoint above):
-    // setStatus("Sending…");
-    // submitToEndpoint(fields)
-    //   .then(() => { setStatus("Thank you — your enquiry has been sent."); form.reset(); })
-    //   .catch(() => { setStatus("Something went wrong — please email us directly."); });
+    // With an endpoint wired, POST instead (uncomment submitToEndpoint above): setStatus("Sending…");
   });
 }

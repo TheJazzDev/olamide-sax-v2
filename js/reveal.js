@@ -46,9 +46,7 @@ export function initReveals() {
 }
 
 /* ── Cinematic page-LOAD hero sequence (distinct from scroll reveals) ─────── */
-/* NOTE: the HOME hero is now handled by the dedicated heroIntro.js (mask-wipe
-   name + full choreographed sequence). buildHeroLoad only runs on OTHER pages'
-   heroes (archive heads etc.) — it skips the home hero to avoid double-firing. */
+/* NOTE: the HOME hero is now handled by the dedicated heroIntro.js (mask-wipe name + full choreographed sequence). */
 function buildHeroLoad(gsap) {
   const hero = $("[data-animate='hero']") || $(".hero");
   if (!hero) return;
@@ -85,8 +83,7 @@ function buildHeroLoad(gsap) {
 
 /* ── Kinetic "breathing" split-text reveals (phrased, musical stagger) ────── */
 function buildKineticType(gsap, ScrollTrigger) {
-  // NOTE: the home hero title is owned by heroIntro.js (mask-wipe). We no longer
-  // animate [data-animate="hero-title"] here to avoid a double reveal.
+  // NOTE: the home hero title is owned by heroIntro.js (mask-wipe).
 
   // Other kinetic lines / explicit splits: reveal on scroll, phrased.
   const splitTargets = $$(
@@ -135,10 +132,7 @@ function buildScrollReveals(gsap, ScrollTrigger) {
     });
   });
 
-  // Section-level [data-animate] hooks (statement, roots, featured-*, press,
-  // etc.): softly rise their meaningful inner content. We tag reveal-item onto
-  // the section's direct content children so the section box stays laid out
-  // (protecting sticky offsets + anchor targets), then animate those.
+  // Section-level [data-animate] hooks (statement, roots, featured-*, press, etc.): softly rise their meaningful inner content.
   const SECTION_HOOKS = [
     "statement",
     "roots",
@@ -165,8 +159,7 @@ function buildScrollReveals(gsap, ScrollTrigger) {
   SECTION_HOOKS.forEach((name) => {
     $$(`[data-animate='${name}']`).forEach((section) => {
       const container = $(".container", section) || section;
-      // Reveal the container's direct children as staggered items, but skip
-      // decorative holds and already-split kinetic lines.
+      // Reveal the container's direct children as staggered items, but skip decorative holds and already-split kinetic lines.
       const items = Array.from(container.children).filter((c) => {
         if (c.matches("[data-animate='kinetic-line'], [data-animate='split']"))
           return false;
@@ -190,16 +183,11 @@ function buildScrollReveals(gsap, ScrollTrigger) {
     });
   });
 
-  // Artistic Practice: image slides in from the left, text from the right. The
-  // pre-state + slide live in CSS (.js-anim-ready .practice__media/__text); here
-  // we just add .is-in when the section reaches the viewport. No reveal-item on
-  // its children (that would double up with the CSS transition).
+  // Artistic Practice: image slides in from the left, text from the right.
   $$("[data-animate='practice']").forEach((section) => {
     ScrollTrigger.create({
       trigger: section,
-      // The section opens with a tall padding block — "top 78%" fired while
-      // only that empty padding was on screen (the reveal was done before the
-      // content arrived). 55% waits until the content itself is in view.
+      // The section opens with a tall padding block — "top 78%" fired while only that empty.
       start: "top 55%",
       once: true,
       onEnter: () => section.classList.add("is-in"),
@@ -241,9 +229,7 @@ function buildBreathingHeadline(gsap, ScrollTrigger) {
   const units =
     $$(".split-word", el).length > 0 ? $$(".split-word", el) : [el];
 
-  // Transform-only breathing (compositor-friendly, no layout reflow): a gentle
-  // lift + a whisper of vertical "swell" — like a held note. Keep off any
-  // layout-triggering property (e.g. letter-spacing) to protect 60fps.
+  // Transform-only breathing (compositor-friendly, no layout reflow): a gentle lift + a.
   units.forEach((u) => {
     u.style.willChange = "transform";
     u.style.transformOrigin = "center bottom";

@@ -38,9 +38,7 @@ export function initFooterReveal() {
     defaults: { ease: "power3.out" },
   });
 
-  // 0 · The bronze surface itself wipes UP into place first — a curtain
-  //     rising from the bottom edge, given room to breathe — then the
-  //     content snaps in quickly behind it.
+  // 0 · The bronze surface itself wipes UP into place first — a curtain rising from the.
   tl.fromTo(
     footer,
     { clipPath: "inset(100% 0 0 0)" },

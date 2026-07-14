@@ -29,8 +29,7 @@ export function initMediaMotion() {
   window.addEventListener("load", refresh, { once: true });
 }
 
-/* Gallery: each cell clip-wipes + settles in on its own scroll position, so the
-   masonry cascades organically. Re-arms after filter re-renders. */
+/* Gallery: each cell clip-wipes + settles in on its own scroll position, so the masonry cascades organically. */
 function buildGalleryMotion(gsap, ScrollTrigger) {
   const grid = $("[data-gallery]");
   if (!grid) return;
@@ -50,8 +49,7 @@ function buildGalleryMotion(gsap, ScrollTrigger) {
     cell.classList.remove("gallery-cell--pre");
   }
 
-  // Backstop: reveal any armed cell already in view (batch.onEnter only fires on
-  // a cross-in from below, missing cells visible at arm time / after a re-render).
+  // Backstop: reveal any armed cell already in view (batch.onEnter only fires on a cross-in.
   function revealVisible() {
     const vh = window.innerHeight || 0;
     $$(".gallery-cell--pre", grid).forEach((c) => {
@@ -120,8 +118,7 @@ function buildGalleryMotion(gsap, ScrollTrigger) {
   mo.observe(grid, { childList: true });
 }
 
-/* Timeline: bloom ONLY the decorative mark (aria-hidden) as each node arrives —
-   reveal.js owns the node body's reveal, so a failed trigger can't hide text. */
+/* Timeline: bloom ONLY the decorative mark (aria-hidden) as each node arrives — reveal.js. */
 function buildTimelineUnfold(gsap, ScrollTrigger) {
   const host = $("[data-timeline]");
   if (!host) return;
@@ -169,8 +166,7 @@ function buildSectionTransitions(gsap, ScrollTrigger) {
   });
 }
 
-/* Live Wall stills scale-settle + veil-lift on reach. (practice__media excluded —
-   it has its own slide-in; a second opacity tween would fight it.) */
+/* Live Wall stills scale-settle + veil-lift on reach. */
 function buildFeaturedBlooms(gsap, ScrollTrigger) {
   $$(".live-wall__cell .frame-media").forEach((el) => {
     gsap.set(el, { opacity: 0, scale: 1.04, transformOrigin: "50% 50%" });

@@ -13,8 +13,7 @@ export function initSmoothScroll() {
   const gsap = window.gsap;
   const ScrollTrigger = window.ScrollTrigger;
 
-  // Progressive enhancement: if any dependency is missing, fall back to the
-  // browser's native scroll (the site stays fully usable).
+  // Progressive enhancement: if any dependency is missing, fall back to the browser's native scroll (the site stays fully usable).
   if (!Lenis || !gsap) return;
 
   const lenis = new Lenis({
@@ -29,8 +28,7 @@ export function initSmoothScroll() {
 
   window.__lenis = lenis;
 
-  // Keep ScrollTrigger locked to Lenis' scroll position — THIS is what makes
-  // reveals and pins feel perfectly in sync.
+  // Keep ScrollTrigger locked to Lenis' scroll position — THIS is what makes reveals and pins feel perfectly in sync.
   if (ScrollTrigger) {
     lenis.on("scroll", ScrollTrigger.update);
     // On refresh (fonts/images/resize), make sure ScrollTrigger re-measures.

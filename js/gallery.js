@@ -22,9 +22,7 @@ import { photos, PHOTO_CATEGORIES } from "./data.js";
 function cellMarkup(photo) {
   const placeholderClass = photo.placeholder ? " is-placeholder" : "";
   const clipAttr = photo.video ? ` data-clip="${photo.video}"` : "";
-  // gallery-cell--pre is inert unless <html>.js-anim-ready is set (motion on),
-  // so adding it at render time is safe with JS/motion off and removes the
-  // brief reveal flash on filter re-render (media-motion arms/reveals it).
+  // gallery-cell--pre is inert unless <html>.js-anim-ready is set (motion on), so adding it.
   return `
     <figure class="gallery-cell gallery-cell--pre" data-category="${photo.category}" data-id="${photo.id}">
       <div class="gallery-cell__media frame-media${placeholderClass}"${clipAttr}>

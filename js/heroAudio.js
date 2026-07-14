@@ -55,15 +55,12 @@ export function initHeroAudio() {
 
   const tryPlay = () => audio.play().catch(() => setPressed(false));
 
-  // 1 · Optimistic autoplay (works when the browser already trusts the site) —
-  //     unless this visitor muted us on a previous visit.
+  // 1 · Optimistic autoplay (works when the browser already trusts the site) — unless this visitor muted us on a previous visit.
   if (!userMuted) tryPlay();
 
   // 2 · Otherwise: first real interaction anywhere starts the sound.
   const unlock = (e) => {
-    // If that first interaction is the pill itself, stand back — its own
-    // click handler owns the decision (otherwise we'd start the audio on
-    // pointerdown and the click would instantly pause it again).
+    // If that first interaction is the pill itself, stand back — its own click handler owns the.
     if (e.target instanceof Element && e.target.closest("[data-sound-toggle]")) {
       removeUnlockListeners();
       return;
@@ -97,8 +94,7 @@ export function initHeroAudio() {
     }
   });
 
-  // Keep the pill honest whatever starts/stops playback (autoplay success,
-  // OS media keys, tab discard...).
+  // Keep the pill honest whatever starts/stops playback (autoplay success, OS media keys, tab discard...).
   on(audio, "play", () => setPressed(true));
   on(audio, "pause", () => setPressed(false));
 }

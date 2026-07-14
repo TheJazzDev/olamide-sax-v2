@@ -166,8 +166,7 @@
 
 /* 3 · VIDEO ARCHIVE (media.html) — light category tabs + facade cards. */
 
-/* Tabs / chips — shared shell used by both video tabs and gallery filter chips.
-   Underline-only, no pills, sharp. The active item wears a brass underline. */
+/* Tabs / chips — shared shell used by both video tabs and gallery filter chips. */
 .filter-bar {
   display: flex;
   flex-wrap: wrap;
@@ -253,10 +252,7 @@
 
 /* 4 · GALLERY (gallery.html) — scalable editorial mosaic. */
 
-/* ── Dense masonry wall (CSS columns) ───────────────────────────────────────
-   True masonry: cells flow top-to-bottom within columns and keep their NATIVE
-   aspect ratios, packing tightly with a small gap — an editorial gallery wall,
-   not a gappy CMS grid. Column count steps up with width. */
+/* ── Dense masonry wall (CSS columns) ─────────────────────────────────────── */
 .gallery-grid {
   margin-top: var(--space-xl);
   column-count: 2;
@@ -275,8 +271,7 @@
 }
 @media (min-width: 600px) { .gallery-cell { margin-bottom: 8px; } }
 
-/* Native aspect ratio — no forced ratios, so the varied shapes give the wall
-   its rhythm on their own. */
+/* Native aspect ratio — no forced ratios, so the varied shapes give the wall its rhythm on their own. */
 .gallery-cell__media {
   aspect-ratio: auto;
 }
@@ -286,9 +281,7 @@
   height: auto;
 }
 
-/* Caption sits ON the photo — a small, semi-transparent box pinned to the base
-   of the frame, so the text belongs to the picture instead of floating in the
-   gaps. A soft gradient keeps it legible over any image. */
+/* Caption sits ON the photo — a small, semi-transparent box pinned to the base of the. */
 .gallery-cell__caption {
   position: absolute;
   left: 0;
@@ -484,13 +477,11 @@
 /* 6 · SHARED — a modest section rhythm for archive sections (tighter than the */
 
 .archive-section { padding-block: clamp(64px, 9vh, 132px); }
-/* When an archive section follows the masthead directly (grid/ledger), it
-   sits flush to the head — the head already carries the top rhythm. */
+/* When an archive section follows the masthead directly (grid/ledger), it sits flush to the. */
 .archive-section.section--flush-top { padding-top: 0; }
 .archive-section__head { margin-bottom: var(--space-lg); }
 
-/* Deep-linked card (arrived via /media.html#v-xx from the home Craft panels):
-   a brief brass pulse so the visitor sees WHICH performance they were sent to. */
+/* Deep-linked card (arrived via /media.html#v-xx from the home Craft panels): a brief brass. */
 .video-card.is-linked {
   outline: 1px solid rgb(var(--brass-rgb) / 0.7);
   outline-offset: 4px;
@@ -501,12 +492,9 @@
   100% { outline-color: rgb(var(--brass-rgb) / 0); }
 }
 
-/* ── Gallery click-to-enlarge lightbox (Flip) ────────────────────────────────
-   The clicked cell is lifted out of the wall and Flip-morphed into a centred
-   stage over a dimmed backdrop. A ghost placeholder holds the wall's layout. */
+/* ── Gallery click-to-enlarge lightbox (Flip) ──────────────────────────────── */
 .gallery-cell { cursor: zoom-in; }
-/* The original cell stays in the wall (keeps its column slot) but goes invisible
-   while its clone is enlarged — so nothing reflows/shifts. */
+/* The original cell stays in the wall (keeps its column slot) but goes invisible while its. */
 .gallery-cell--lifted { visibility: hidden; }
 
 .gallery-lightbox {
@@ -524,8 +512,7 @@
   background: rgb(var(--ink-rgb) / 0.9);
   opacity: 0;
 }
-/* Blur is a nice-to-have; keep it off the critical path so it can't dim the
-   enlarged photo on renderers where backdrop-filter composites oddly. */
+/* Blur is a nice-to-have; */
 @supports (backdrop-filter: blur(1px)) {
   .gallery-lightbox__backdrop { backdrop-filter: blur(5px); }
 }
@@ -544,8 +531,7 @@
   height: auto;
   max-height: 88vh;
   object-fit: contain;
-  /* Full brightness in the lightbox — override the wall's warm-shadow grade so
-     the enlarged photo reads bright and clear. */
+  /* Full brightness in the lightbox — override the wall's warm-shadow grade so the enlarged photo reads bright and clear. */
   filter: saturate(1.02) contrast(1.03) brightness(1);
 }
 /* Bigger, readable caption in the lightbox. */

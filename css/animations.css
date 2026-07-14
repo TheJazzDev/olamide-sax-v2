@@ -1,8 +1,7 @@
 /* animations.css — Olamide Sax V2 · CSS keyframes only (NO JS motion here) */
 
 /* ── Film grain ─────────────────────────────────────────────────────────── */
-/* A fixed grain veil. Attach .grain to a decorative overlay element. The
-   texture is a tiny inline SVG noise, tiled — self-contained, no asset.     */
+/* A fixed grain veil. */
 
 .grain {
   position: fixed;
@@ -26,8 +25,7 @@
 }
 
 /* ── Stage-warm bloom ───────────────────────────────────────────────────── */
-/* Soft radial warm-light glow that breathes very subtly (the spotlight).
-   Sits behind content. JS (later) can boost opacity as a section activates. */
+/* Soft radial warm-light glow that breathes very subtly (the spotlight). */
 
 .stage-bloom {
   position: absolute;
@@ -49,9 +47,7 @@
 }
 
 /* ── Film-frame draw ────────────────────────────────────────────────────── */
-/* The hairline border "draws" on load, then the corner metadata fades up.
-   Uses clip-path so the rectangle appears to be inscribed. Purely cosmetic;
-   the frame is fully present without it.                                     */
+/* The hairline border "draws" on load, then the corner metadata fades up. */
 
 .frame::before {
   animation: frame-draw var(--dur-slow) var(--ease-out) both;
@@ -79,8 +75,7 @@
 }
 
 /* ── Generic reveal helper (CSS-only fallback shimmer) ──────────────────── */
-/* NOTE: real reveals are JS-gated behind .js-anim-ready (progressive
-   enhancement). This is only an optional ambient float for decor elements.  */
+/* NOTE: real reveals are JS-gated behind .js-anim-ready (progressive enhancement). */
 
 @keyframes drift-up {
   from { opacity: 0; transform: translateY(12px); }

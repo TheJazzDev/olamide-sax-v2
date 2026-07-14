@@ -66,7 +66,7 @@ export function initAboutReveal() {
     intro.from(titleLine, { yPercent: 115, duration: 1.0, ease: "power4.out" }, 0.2);
   if (lead) intro.from(lead, { opacity: 0, y: 28, duration: 0.8 }, 0.55);
   if (portrait) {
-    // The print develops: a rising wipe reveals it…
+    // The print develops: a rising wipe reveals it.
     intro.fromTo(
       portrait,
       { clipPath: "inset(100% 0 0 0)" },

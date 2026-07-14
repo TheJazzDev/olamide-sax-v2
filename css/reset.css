@@ -24,8 +24,7 @@ html {
   scroll-behavior: auto;
 }
 
-/* Hide the page scrollbar entirely (scrolling still works — wheel, touch,
-   keys). Cinematic full-bleed: no chrome at the edge of the film. */
+/* Hide the page scrollbar entirely (scrolling still works — wheel, touch, keys). */
 html {
   scrollbar-width: none;              /* Firefox */
 }
@@ -36,10 +35,7 @@ html::-webkit-scrollbar {
 body {
   min-height: 100vh;
   min-height: 100dvh;
-  /* `clip` (not `hidden`) prevents horizontal scroll WITHOUT turning <body> into
-     a scroll container — `overflow-x: hidden` forces overflow-y to `auto`, which
-     makes body the scroller and breaks ScrollTrigger pinning (the photo-wheel).
-     `clip` has no such side-effect, so the window stays the scroller. */
+  /* `clip` (not `hidden`) prevents horizontal scroll WITHOUT turning <body> into a scroll. */
   overflow-x: clip;                   /* no horizontal body scroll, ever */
   line-height: 1.5;
   background-color: var(--bg, #0B0A08);   /* warm ink, not pure black */
@@ -141,11 +137,7 @@ main {
   color: var(--ink, #0B0A08);
 }
 
-/* ----------------------------------------------------------------------------
-   Global reduced-motion guard. Individual modules also neutralise their own
-   keyframes, but this is the safety net: no animation, transition, or
-   smooth-scroll survives for users who ask for stillness.
-   -------------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------------- Global reduced-motion guard. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -158,10 +150,7 @@ main {
 }
 
 /* Page-to-page transitions ------------------------------------------------- */
-/* Cross-document View Transitions: same-origin navigations cross-fade instead
-   of hard-cutting (Chrome/Safari; other browsers keep the instant swap).
-   Both the outgoing and incoming page carry this rule (shared stylesheet),
-   which is what the opt-in requires. */
+/* Cross-document View Transitions: same-origin navigations cross-fade instead of hard-cutting (Chrome/Safari; */
 @view-transition {
   navigation: auto;
 }

@@ -248,8 +248,7 @@ textarea.form-field__control {
   pointer-events: auto;
 }
 
-/* Wordmark — visually hidden at rest (frame corner is the visible mark);
-   a real Home link, shown on focus for keyboard users. */
+/* Wordmark — visually hidden at rest (frame corner is the visible mark); */
 
 .site-nav__wordmark {
   position: absolute;
@@ -285,8 +284,7 @@ textarea.form-field__control {
 
 .site-nav__wordmark-accent { color: var(--accent); }
 
-/* Overlay + footer wordmarks are genuinely visible brand marks (no frame
-   corner competing with them there), so they keep normal in-flow styling. */
+/* Overlay + footer wordmarks are genuinely visible brand marks (no frame corner competing. */
 .site-nav__wordmark--overlay,
 .site-nav__wordmark--footer {
   position: static;
@@ -392,9 +390,7 @@ textarea.form-field__control {
 
 /* 8 · MENU OVERLAY  (full-screen, editorial) */
 
-/* Right-side sliding panel — HALF-screen on desktop, full on mobile.
-   The overlay element itself is a full-viewport layer holding a backdrop
-   (::before) + the sliding panel (__frame). */
+/* Right-side sliding panel — HALF-screen on desktop, full on mobile. */
 .menu-overlay {
   position: fixed;
   inset: 0;
@@ -416,9 +412,7 @@ textarea.form-field__control {
   pointer-events: none;
 }
 
-/* The sliding panel itself — DEEP BRONZE (gold mixed well into black). A
-   distinct surface that still lives in the site's dark mood; text stays the
-   native bone/brass palette. */
+/* The sliding panel itself — DEEP BRONZE (gold mixed well into black). */
 .menu-overlay__frame {
   position: absolute;
   top: 0;
@@ -466,8 +460,7 @@ textarea.form-field__control {
 .menu-overlay[data-open]::before { opacity: 1; }
 .menu-overlay[data-open] .menu-overlay__frame { transform: translateX(0); }
 
-/* Inner layout of the sliding panel (positioning lives in the block above).
-   Tighter horizontal padding than the page gutter — this is a narrow panel. */
+/* Inner layout of the sliding panel (positioning lives in the block above). */
 .menu-overlay__frame {
   padding: var(--space-md) clamp(1.5rem, 4vw, 3rem) var(--space-2xl);
   display: flex;
@@ -485,9 +478,7 @@ textarea.form-field__control {
   gap: var(--space-md);
 }
 
-/* Always a column now — the menu is a narrow right-side panel, so links stack
-   above the aside (contact/socials) rather than sitting in a wide side-by-side
-   row (which overflowed the panel). */
+/* Always a column now — the menu is a narrow right-side panel, so links stack above the. */
 .menu-overlay__body {
   flex: 1;
   display: flex;
@@ -504,8 +495,7 @@ textarea.form-field__control {
 }
 
 .menu-overlay__item {
-  /* Positioning context for the stretched link — the WHOLE row is clickable
-     (the anchor's ::before covers the item). */
+  /* Positioning context for the stretched link — the WHOLE row is clickable (the anchor's ::before covers the item). */
   position: relative;
   display: flex;
   align-items: baseline;
@@ -583,8 +573,7 @@ textarea.form-field__control {
 }
 
 .menu-overlay__link {
-  /* static, NOT relative — its ::before stretches to the positioned ITEM,
-     making the whole row the click target. */
+  /* static, NOT relative — its ::before stretches to the positioned ITEM, making the whole row the click target. */
   position: static;
   display: inline-block;
   font-family: var(--font-display);
@@ -682,16 +671,13 @@ textarea.form-field__control {
 /* Lock body scroll while the overlay is open (JS adds this to <body>). */
 .has-menu-open {
   overflow: hidden;
-  /* Pad by the scrollbar width (set in JS) so hiding the scrollbar doesn't
-     shift the page — kills the "jump" on menu open. */
+  /* Pad by the scrollbar width (set in JS) so hiding the scrollbar doesn't shift the page — kills the "jump" on menu open. */
   padding-right: var(--sbw, 0px);
 }
 
 /* 9 · SITE FOOTER  (editorial colophon) */
 
-/* DEEP-BRONZE footer — the CODA. The same surface as the menu drawer, so
-   the two bookend the ink site. Structured columns up top; the site signs
-   off on a colossal cropped wordmark — the final note. */
+/* DEEP-BRONZE footer — the CODA. */
 .site-footer {
   position: relative;
   overflow: hidden;                      /* crops the giant sign-off */
@@ -722,8 +708,7 @@ textarea.form-field__control {
   background: linear-gradient(90deg, rgb(var(--brass-rgb) / 0.55), rgb(var(--brass-rgb) / 0.05));
 }
 
-/* The sign-off — the name as the final note. Full-bleed, cropped by the
-   bottom edge, brass fading into the dark like a held note decaying. */
+/* The sign-off — the name as the final note. */
 .site-footer__signoff {
   margin-top: var(--space-2xl);
   font-family: var(--font-display);
@@ -749,8 +734,7 @@ textarea.form-field__control {
   font-style: italic;
 }
 
-/* Section labels (EXPLORE / CONTACT / FOLLOW): small caps, but BRASS — they
-   structure the footer instead of whispering. */
+/* Section labels (EXPLORE / CONTACT / FOLLOW): small caps, but BRASS — they structure the footer instead of whispering. */
 .site-footer .label {
   color: var(--accent);
 }
@@ -788,8 +772,7 @@ textarea.form-field__control {
   margin-top: var(--space-md);
 }
 
-/* ── The Explore RAIL: all pages in one horizontal editorial line, brass
-   dots between — reads like a set list on one breath. Wraps on mobile. ── */
+/* ── The Explore RAIL: all pages in one horizontal editorial line, brass dots between — reads like a set list on one breath. */
 .site-footer__explore {
   margin-bottom: var(--space-2xl);
 }
@@ -860,18 +843,7 @@ textarea.form-field__control {
   font-size: var(--step--1);
 }
 
-/* ── Mobile footer ──────────────────────────────────────────────────────────
-   The desktop footer is built around a horizontal "set list" rail of links and
-   a colossal sign-off cropped by the page edge. Neither survives a phone:
-
-   - The rail is a wrapping flex row with a "·" separator on each li::before.
-     When it wraps, those dots orphan to the START of the next line ("· Media",
-     "· Contact"), which reads as broken text. On mobile we drop the rail idea
-     entirely and set the links as a proper two-column index — no separators to
-     strand, and every target is a comfortable tap size.
-   - The sign-off is sized in vw and pushed down by translateY, which on a
-     narrow screen slices the letters mid-descender and leaves a dead band of
-     background beneath. On mobile it sits ON the bottom edge, uncropped. */
+/* ── Mobile footer ────────────────────────────────────────────────────────── */
 @media (max-width: 639px) {
   .site-footer { padding-top: var(--space-xl); }
   .site-footer__coda { margin-bottom: var(--space-lg); }
@@ -903,23 +875,13 @@ textarea.form-field__control {
 
   .site-footer__rule { margin-block: var(--space-lg); }
 
-  /* The sign-off rests ON the bottom edge rather than being sliced by it.
-     line-height 0.8 (the desktop value) leaves the descenders hanging outside
-     the element's own box, which .site-footer's overflow:hidden then clips.
-     So on mobile the box actually contains the type: a real line-height, and
-     padding to seat it.
-
-     NB the resting TRANSFORM is owned by js/footerReveal.js, not by this rule —
-     it animates the sign-off in, and an inline transform beats any stylesheet
-     declaration. It reads the same 640px breakpoint and rests at 0 here (vs the
-     desktop poster-crop). Change one, change the other. */
+  /* The sign-off rests ON the bottom edge rather than being sliced by it. */
   .site-footer__signoff {
     margin-top: var(--space-xl);
     font-size: clamp(2.75rem, 15vw, 4.5rem);
     line-height: 1.12;
     padding-bottom: var(--space-md);
-    /* the static resting position (no-JS / reduced-motion). footerReveal.js sets
-       the same 0 for the animated path — see the note above. */
+    /* the static resting position (no-JS / reduced-motion). */
     transform: none;
   }
 }

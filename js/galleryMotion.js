@@ -61,9 +61,7 @@ export function initGalleryMotion() {
   // Re-arm the per-cell skewers after gallery.js re-renders on filter change.
   new MutationObserver(() => armSkew()).observe(grid, { childList: true });
 
-  // ── 2 · Click-to-enlarge (Flip) ────────────────────────────────────────────
-  // Build a lightbox layer once. The clicked cell's media is Flip-morphed into a
-  // centred stage; a backdrop dims the page. Click backdrop / stage / Esc closes.
+  // ── 2 · Click-to-enlarge (Flip) ──────────────────────────────────────────── Build a lightbox layer once.
   let lightbox = document.querySelector("[data-gallery-lightbox]");
   if (!lightbox) {
     lightbox = document.createElement("div");
@@ -151,8 +149,7 @@ export function initGalleryMotion() {
     gsap.to(backdrop, { opacity: 0, duration: 0.4, ease: "power2.in" });
   }
 
-  // Delegate clicks: a click on a cell opens it; a click on the lightbox
-  // (backdrop or the enlarged clone) or Esc closes it.
+  // Delegate clicks: a click on a cell opens it;
   grid.addEventListener("click", (e) => {
     const cell = e.target.closest(".gallery-cell");
     if (cell) open(cell);

@@ -27,9 +27,7 @@
   opacity: 0;
 }
 
-/* Hover treatment — "moving through a venue": subtle scale + warm-light lift.
-   Applies regardless of the gate (it is pure hover polish, not a content
-   hide), but only on hover-capable pointers. */
+/* Hover treatment — "moving through a venue": subtle scale + warm-light lift. */
 @media (hover: hover) and (pointer: fine) {
   .gallery-cell__media {
     overflow: hidden;
@@ -47,8 +45,7 @@
   }
 }
 
-/* Optional still → clip cross-fade. The clip video is stacked over the still
-   and fades in when JS marks the media .is-clip-live. */
+/* Optional still → clip cross-fade. */
 .gallery-cell__clip {
   position: absolute;
   inset: 0;
@@ -90,11 +87,7 @@
   );
   mix-blend-mode: screen;
 }
-/* Keep the section a positioning context + content above the bloom.
-   overflow-x: clip contains the intentionally-oversized bloom glow so it
-   can't spill past the viewport and cause horizontal scroll — clip (not
-   hidden) so it doesn't create a scroll container that would break the
-   sticky media tabs or pinned Craft. */
+/* Keep the section a positioning context + content above the bloom. */
 main > section.section { position: relative; overflow-x: clip; }
 main > section.section > *:not(.section-bloom):not(.hero__stage) { position: relative; z-index: 1; }
 

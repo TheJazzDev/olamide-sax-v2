@@ -56,10 +56,7 @@ export function initCarousel() {
     return scrollRot + dragRot + clickRot.v;
   }
 
-  // Wheel dimensions, sized to the stage. `tilt` scales the vertical spread and
-  // depth: a flatter wheel spreads more vertically and recedes less. On a narrow
-  // phone the ring is pulled IN (tighter spread) so it doesn't sprawl off the top
-  // and bottom of the screen.
+  // Wheel dimensions, sized to the stage.
   const isPhone = window.matchMedia("(max-width: 767px)").matches;
   function dims() {
     const w = stage.clientWidth || window.innerWidth;
@@ -129,8 +126,7 @@ export function initCarousel() {
       if (i === active) item.setAttribute("data-active", "");
       else item.removeAttribute("data-active");
     });
-    // The caption now lives on the front photo itself (base of the image), so the
-    // separate under-ring caption element is no longer used.
+    // The caption now lives on the front photo itself (base of the image), so the separate under-ring caption element is no longer used.
   }
 
   function captionHTML(item) {
@@ -141,8 +137,7 @@ export function initCarousel() {
       : `<span class="cap-src">${source}</span>`;
   }
 
-  // Click a photo → ease it to the front by nudging clickRot along the shortest
-  // path (added on top of the scroll position). No snap of the scroll itself.
+  // Click a photo → ease it to the front by nudging clickRot along the shortest path (added on top of the scroll position).
   function bringToFront(i) {
     const rot = rotationNow();
     // angle of photo i right now, relative to front (0)
@@ -157,9 +152,7 @@ export function initCarousel() {
     });
   }
 
-  // Give each photo its own caption node, pinned to the base of the image. CSS
-  // reveals it only on the FRONT (active) photo — no hover (hover fought the
-  // drag, and the front photo is what the user is focused on anyway).
+  // Give each photo its own caption node, pinned to the base of the image.
   items.forEach((item) => {
     let cap = item.querySelector("[data-item-cap]");
     if (!cap) {
@@ -205,12 +198,7 @@ export function initCarousel() {
     });
   }
 
-  // ── Scroll-scrub: rotate the ring a full 360° as the section travels the ───
-  // viewport. No pin (pinning fights this Lenis/body-scroller + overflow layout),
-  // so no elastic bounce — the ring simply follows the scroll and settles where
-  // you leave it. The section is tall (see .featured-gallery min-height) so there
-  // is a comfortable stretch of scroll over which the whole ring turns, bringing
-  // every back photo round to the front.
+  // ── Scroll-scrub: rotate the ring a full 360° as the section travels the ─── viewport.
   if (ScrollTrigger) {
     ScrollTrigger.create({
       trigger: root,
@@ -283,9 +271,7 @@ export function initCarousel() {
     lastMoveX = e.clientX; lastMoveT = e.timeStamp || performance.now();
     velRot = 0;
     dismissHint();                 // any interaction clears the hint
-    // Capture the pointer to the stage immediately so EVERY subsequent move
-    // routes here — even if the cursor is over a (pointer-transparent) photo or
-    // leaves the stage box mid-drag. This is what makes drag work from anywhere.
+    // Capture the pointer to the stage immediately so EVERY subsequent move routes here — even.
     try { stage.setPointerCapture(e.pointerId); } catch (_) {}
     // A fresh grab cancels any in-flight momentum glide.
     gsap.killTweensOf(dragProxy);
@@ -304,8 +290,6 @@ export function initCarousel() {
     if (!dragging) return;
     if (axis === "x") {
       // Positive dx (drag right) should carry the front photo to the right, i.e.
-      // rotate the ring negatively. Sensitivity tuned so the grabbed photo roughly
-      // tracks the pointer.
       dragRot = startDragRot - dx * DRAG_SENSITIVITY;
       // Track instantaneous rotational velocity for the release glide.
       const now = e.timeStamp || performance.now();
@@ -325,15 +309,11 @@ export function initCarousel() {
     render();
   });
 
-  // Momentum glide: on release, keep the ring spinning in the drag direction and
-  // ease it to rest — the "elastic" feel so it doesn't stop dead. We tween the
-  // dragProxy from the current dragRot to a projected target (distance ∝
-  // velocity), feeding dragRot on each frame.
+  // Momentum glide: on release, keep the ring spinning in the drag direction and ease it to.
   function flingMomentum() {
     // Ignore tiny flicks (they'd just add jitter); let those settle where they are.
     if (Math.abs(velRot) < 0.02) return;
-    // Project a throw distance from the release velocity. Clamp so a hard flick
-    // can't spin forever. ~180 scales deg/ms → a natural glide of a few turns max.
+    // Project a throw distance from the release velocity.
     let throwDeg = velRot * 180;
     const MAX = 900;                      // at most ~2.5 turns of coast
     throwDeg = Math.max(-MAX, Math.min(MAX, throwDeg));
