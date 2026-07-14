@@ -138,8 +138,8 @@
 .hero__title {
   /* The soloist, set in FRAUNCES — the site's own display serif. */
   font-family: var(--font-display);
-  font-size: clamp(4rem, 17vw, 17rem);
-  line-height: 0.9;
+  font-size: clamp(3rem, 12vw, 12rem);
+  line-height: 0.92;
   font-weight: var(--display-weight);
   letter-spacing: -0.025em;
   color: var(--text);

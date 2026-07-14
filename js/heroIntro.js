@@ -7,18 +7,14 @@
 import { prefersReducedMotion } from "./utils.js";
 import { splitByChars } from "./splitText.js";
 
-/* Seconds between characters. Unhurried — a name is signed, not hammered out. */
-const PER_CHAR = 0.26;
+/* Seconds between characters. */
+const PER_CHAR = 0.11;
 
-/* How long each letter takes to arrive. The letter does not move — it simply
-   eases on. That short fade is what makes the run read as SMOOTH rather than as
-   a stutter: a bare visibility flip pops, and a row of pops is a strobe. It
-   overlaps the next letter's start, so the typing flows. */
-const CHAR_FADE = 0.3;
+/* How long each letter takes to ease on (overlaps the next so the run flows). */
+const CHAR_FADE = 0.18;
 
-/* An extra beat before the second word begins, so "Sax" lands as its own
-   deliberate line rather than running straight on from "Olamide". */
-const WORD_GAP = 0.75;
+/* A short beat before "Sax" begins. */
+const WORD_GAP = 0.35;
 
 /* Real typing is not a metronome. A little variance in the gap between letters —
    deterministic, seeded off the index, so it is identical on every load — keeps
@@ -67,13 +63,8 @@ export function initHeroIntro() {
     tl.to(eyebrow, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 0.35);
   }
 
-  /* 3 · THE NAME IS TYPED.
-         Each letter EASES in rather than snapping on. That is the whole
-         difference between a typewriter and a strobe: a bare visibility flip is
-         a hard edge, and ten hard edges in a row read as a stutter. A short fade
-         (CHAR_FADE), overlapping the next letter's start, smooths the run
-         without costing it any of its rhythm. */
-  const TYPE_AT = 0.7;
+  // 3 · The name types in (each letter eases on; see PER_CHAR/CHAR_FADE).
+  const TYPE_AT = 0.5;
 
   let at = TYPE_AT;
   let prevLine = chars[0].parentElement;
