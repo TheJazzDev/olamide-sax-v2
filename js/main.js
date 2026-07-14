@@ -7,7 +7,7 @@
    it does not implement.
    ========================================================================== */
 
-import { $, $$, prefersReducedMotion } from "./utils.js";
+import { $, $$, prefersReducedMotion, isMobile } from "./utils.js";
 import { initNavigation } from "./navigation.js";
 import { initSmoothScroll } from "./smoothScroll.js";
 import { initReveals } from "./reveal.js";
@@ -53,6 +53,27 @@ function guardAmbientVideos() {
   });
 }
 
+/* The Statement's mobile backdrop video is preload="none" and doesn't autoplay,
+   so it never competes with the hero on load. Start it (once) only when the
+   Statement nears the viewport, and only on mobile — desktop uses the fixed hero
+   video instead. Under reduced motion its source was already stripped above, so
+   this is a no-op there. */
+function initStatementBackdrop() {
+  if (!isMobile() || prefersReducedMotion()) return;
+  const video = $(".statement__video");
+  if (!video || !("IntersectionObserver" in window)) return;
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const p = video.play();
+      if (p && p.catch) p.catch(() => {});   // autoplay-block → poster stays
+      io.disconnect();
+    });
+  }, { rootMargin: "40% 0px" });   // warm it up just before it scrolls in
+  io.observe(video);
+}
+
 function init() {
   initNavigation();
   setFooterYear();
@@ -86,6 +107,8 @@ function init() {
   // Runs BEFORE the pinned-Craft scene so, under reduced motion, the clips are
   // already stripped and the pin never builds (engineLive gate).
   guardAmbientVideos();
+  // Mobile-only Statement backdrop video — lazily started when it scrolls near.
+  initStatementBackdrop();
 
   // Task 8 — media interactions + scroll set-pieces.
   // initYouTubeFacades is NOT motion-gated (the video must always be reachable);

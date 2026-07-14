@@ -278,6 +278,18 @@
          II · THE STATEMENT — a held hush, then ONE oversized Fraunces line.
          ==================================================================== -->
     <section class="section statement" id="statement" aria-labelledby="statement-line" data-animate="statement">
+      <!-- Mobile-only ambient backdrop. On desktop the fixed hero video shows
+           through this (transparent) section; on mobile that video is un-fixed
+           for performance, so this scoped, SCROLLING video gives the Statement
+           the same dark, atmospheric ground. Hidden on desktop via CSS. -->
+      <div class="statement__stage" aria-hidden="true">
+        <video class="statement__video" data-ambient-video
+               muted loop playsinline preload="none"
+               poster="assets/videos/hero-poster.jpg">
+          <source src="assets/videos/hero-loop.mp4" type="video/mp4" />
+        </video>
+        <div class="statement__veil"></div>
+      </div>
       <div class="container">
         <div class="statement__hold" aria-hidden="true"></div>
 

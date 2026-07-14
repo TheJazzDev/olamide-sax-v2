@@ -277,6 +277,10 @@
 
 /* II · THE STATEMENT  — a held hush, then ONE oversized Fraunces line. */
 
+/* Desktop: the fixed hero video shows through this transparent section — the
+   scoped mobile backdrop below is hidden. */
+.statement__stage { display: none; }
+
 .statement__hold { min-height: 22vh; }
 
 .statement__line {
@@ -302,6 +306,40 @@
   line-height: var(--leading-loose);
 }
 .statement__body strong { color: var(--text); font-weight: var(--body-weight-strong); }
+
+/* Mobile: the Statement gets its OWN ambient video backdrop that scrolls with
+   the section (the hero video is un-fixed on mobile for perf, so it no longer
+   shows through here). Styled to match the desktop hero video: barely-there,
+   darkened, under a warm ink veil — so the big line stays legible. */
+@media (max-width: 767px) {
+  .statement { position: relative; overflow: clip; }
+  .statement__stage {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .statement .container { position: relative; z-index: 1; }
+  .statement__video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.28;
+    filter: saturate(0.85) contrast(1.02) brightness(0.6);
+  }
+  .statement__veil {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      120% 90% at 30% 40%,
+      transparent 0%,
+      rgb(var(--ink-rgb) / 0.72) 100%
+    );
+  }
+}
 
 /* III · THE ROOTS  — LIGHT interlude (Bone ground, Ink text). The rhythm shift. */
 
