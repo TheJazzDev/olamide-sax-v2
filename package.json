@@ -1,0 +1,13 @@
+{
+  "name": "olamide-sax",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "bun run build.js",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "html-minifier-terser": "^7.2.0",
+    "lightningcss": "^1.27.0"
+  }
+}

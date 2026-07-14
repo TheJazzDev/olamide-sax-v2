@@ -1,0 +1,17 @@
+# Raw / working video sources — never deploy (huge, local-only)
+assets/videos/source/
+assets/videos/_work/
+assets/videos/grades/
+
+# Dev / build artifacts
+node_modules/
+.git/
+.vscode/
+.idea/
+.superpowers/
+*.log
+.DS_Store
+
+# Source (Vercel runs the build; it doesn't need to serve raw source, but we
+# keep them in git — .vercelignore only affects the upload, and the build reads
+# from the repo Vercel clones, so DON'T ignore css/js/*.html here)

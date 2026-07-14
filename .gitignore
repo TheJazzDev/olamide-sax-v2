@@ -8,3 +8,7 @@
 assets/videos/source/
 assets/videos/_work/
 assets/videos/grades/
+
+# Build output + deps (Vercel builds fresh)
+dist/
+node_modules/
