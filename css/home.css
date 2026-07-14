@@ -1,8 +1,7 @@
 /* home.css — Olamide Sax V2 · the curated homepage */
 
 /* ── Shared: hung section index (Roman numeral + name) ──────────────────── */
-/* Each movement is labelled like a track on a set list. Kept quiet — it is
-   orientation, not decoration.                                              */
+/* Each movement is labelled like a track on a set list. */
 
 .movement-index {
   display: flex;
@@ -27,8 +26,7 @@
   align-items: center;
   gap: var(--space-sm);
 }
-/* Roman numerals removed — a short gold rule now leads the eyebrow so it still
-   has a designed anchor where the numeral used to sit. */
+/* Roman numerals removed — a short gold rule now leads the eyebrow so it still has a designed anchor where the numeral used to sit. */
 .movement-index__name::before {
   content: "";
   width: clamp(1.5rem, 4vw, 2.5rem);
@@ -117,11 +115,7 @@
   overflow: clip;
 }
 
-/* The stage holds the ambient hero film (and, later, the Breath-Line
-   assembly). FIXED to the viewport so the entire page scrolls over the film —
-   sections are transparent over the warm-ink body, so the loop glows through
-   the whole home page as a persistent cinematic backdrop. Works because Lenis
-   eases NATIVE scroll (no transform wrapper to break position: fixed). */
+/* The stage holds the ambient hero film (and, later, the Breath-Line assembly). */
 .hero__stage {
   position: fixed;
   inset: 0;
@@ -138,26 +132,14 @@
   align-items: center;
 }
 
-/* Single column now (the portrait is gone; the full-bleed video IS the image),
-   so the name gets the whole width and can go bigger. */
+/* Single column now (the portrait is gone; */
 .hero__lead { min-width: 0; }
 
 .hero__eyebrow { margin-bottom: var(--space-md); }
 
 /* The soloist — huge, LIGHT Fraunces, now full-width so it can dominate. */
 .hero__title {
-  /* The soloist, set in FRAUNCES — the site's own display serif.
-
-     It used to be Great Vibes (a connected script), which is beautiful at rest
-     but fights the typewriter reveal: in a joined script the strokes are drawn
-     BETWEEN letters, so revealing one letter at a time means showing half-formed
-     connections reaching for neighbours that have not arrived yet. Fraunces'
-     letterforms stand alone, so each one landing is a complete event — the
-     effect and the type finally pull in the same direction, and the hero now
-     speaks with the same voice as the rest of the site.
-
-     Huge and LIGHT, with the tracking pulled in: at this size a display serif
-     needs negative letter-spacing or it reads as loose. */
+  /* The soloist, set in FRAUNCES — the site's own display serif. */
   font-family: var(--font-display);
   font-size: clamp(3.25rem, 13vw, 13rem);
   line-height: 0.92;
@@ -169,16 +151,12 @@
 }
 /* Each word stays whole on its own line — never a mid-word break. */
 .hero__title-line { display: block; white-space: nowrap; }
-/* The two words each get their own line. Fraunces sits on a normal baseline (no
-   script descenders swinging below), so the lines can close up to a tight,
-   deliberate stack — "Sax" reads as a second beat, not a wrap. */
+/* The two words each get their own line. */
 .hero__title-line + .hero__title-line { margin-top: -0.04em; }
-/* "Sax" in the editorial italic — the same accent move the footer sign-off
-   makes. It gives the two-word stack a hierarchy instead of two flat lines. */
-.hero__title-line--accent {
-  color: var(--text);
-  font-style: italic;
-}
+/* "Sax" takes no accent treatment of its own — both words share the one voice
+   set on .hero__title. (This rule used to force an italic here, which quietly
+   beat the title's own font-style.) */
+.hero__title-line--accent { color: var(--text); }
 
 /* Mask-wipe: heroIntro.js wraps each line in .hero__mask (overflow clip) so the
    line rising from yPercent 115→0 reads as emerging from behind an edge.
@@ -201,10 +179,7 @@
    Nothing is transformed, so the characters can stay on the normal text flow. */
 .split-char { will-change: opacity; }
 
-/* The caret trails the LAST TYPED CHARACTER — it hangs off that char, not off
-   the line box, so it sits exactly at the typing position with nothing to
-   measure. (On the line box it would park at the end of the full line, ahead of
-   the text, which gives the game away instantly.) */
+/* The caret trails the LAST TYPED CHARACTER — it hangs off that char, not off the line box, … */
 .split-char.is-caret::after {
   content: "";
   display: inline-block;
@@ -281,8 +256,7 @@
 }
 
 @media (max-width: 1023px) {
-  /* Title leads (presence before information); portrait becomes a held-in-
-     shadow accent beneath it, capped so the wordmark anchors the top. */
+  /* Title leads (presence before information); */
   .hero__inner { gap: var(--space-lg); }
   .hero__portrait {
     justify-self: start;
@@ -328,9 +302,7 @@
 
 .roots { position: relative; overflow: clip; }
 
-/* Ghost watermark — a colossal outlined italic "Roots" filling the light
-   field's empty bottom-left. Ink at a whisper; behind the content (the
-   section's children carry z-index: 1 via media-motion.css). */
+/* Ghost watermark — a colossal outlined italic "Roots" filling the light field's empty bottom-left. */
 .roots::after {
   content: "Roots";
   position: absolute;
@@ -419,9 +391,7 @@
 }
 .section--light .exhibit-label { color: color-mix(in oklab, var(--ash) 60%, var(--ink)); }
 
-/* (The Craft's OWN layout lives in craft.css — the old .craft-movement grid
-   that used to sit here was replaced by the panel-based cover-scroll and has
-   been removed.) */
+/* (The Craft's OWN layout lives in craft.css — the old .craft-movement grid that used to … */
 
 .craft__intro { margin-bottom: var(--space-2xl); }
 
@@ -486,9 +456,7 @@
 }
 .credits__title { margin-top: var(--space-md); }
 
-/* The TICKER BAND — a raised umber strip framing both drifting rows, so the
-   credits read as a physical object (tape running across the page), not
-   loose text. Hairlines top + bottom; full-bleed within the section. */
+/* The TICKER BAND — a raised umber strip framing both drifting rows, so the credits read as … */
 .credits__band {
   margin-top: clamp(2rem, 5vh, 3.5rem);
   padding-block: clamp(1.25rem, 3vh, 2rem);
@@ -531,9 +499,7 @@
   transform: translateY(-0.15em);
 }
 
-/* ── The honours LEDGER — the section's substance. Three entries set like a
-   programme: hairline-topped, huge serif numerals, small-caps captions; the
-   award entry carries the brass. ─────────────────────────────────────────── */
+/* ── The honours LEDGER — the section's substance. */
 .credits__ledger {
   margin-top: clamp(2rem, 5vh, 3.5rem);
   display: grid;
@@ -572,8 +538,7 @@
 .credits__stat--award .credits__stat-num { color: var(--accent-lit); font-style: italic; }
 .credits__stat--award .credits__stat-label { color: var(--accent); }
 
-/* ── Second band: collaborators / productions — smaller, quieter, drifting
-   the OTHER way (counter-current to the venues band above it). ───────────── */
+/* ── Second band: collaborators / productions — smaller, quieter, drifting the OTHER way … */
 .credits__marquee--roles { margin-top: clamp(0.75rem, 2vh, 1.5rem); }
 .credits__track--roles .credits__item {
   font-size: clamp(1.1rem, 3vw, 2rem);
@@ -904,8 +869,7 @@
   filter: saturate(0.92) contrast(1.02) brightness(0.94);
 }
 
-/* Reduced-motion: hide the ambient hero video entirely (poster/still remains
-   via the veil + title); the JS guard also pauses & unloads playback. */
+/* Reduced-motion: hide the ambient hero video entirely (poster/still remains via the veil + title); */
 @media (prefers-reduced-motion: reduce) {
   .hero__video { display: none; }
 }
