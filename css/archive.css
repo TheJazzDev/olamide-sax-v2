@@ -472,6 +472,8 @@
 @media (max-width: 639px) {
   .press-entry__date { margin-left: 0; }
   .press-mention { grid-template-columns: 1fr; gap: var(--space-2xs); }
+  /* Longer linked source names may exceed a narrow column — allow wrapping. */
+  a.press-mention__name { white-space: normal; }
 }
 
 /* 6 · SHARED — a modest section rhythm for archive sections (tighter than the */

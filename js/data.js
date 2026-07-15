@@ -184,13 +184,25 @@ export const press = [
     date: "2026",
     tier: "standard",
   },
+  {
+    id: "p-star",
+    source: "The Star",
+    title: "Unforgettable Night as Sheffield Theatre Group Showcases Work",
+    url: "https://www.thestar.co.uk/your-world/unforgettable-night-as-sheffield-theatre-group-showcases-work-6531919",
+    excerpt:
+      "The Star's coverage of Stand & Be Counted Theatre's Soapbox Spotlight in Sheffield, featuring Olamide Sax performing his original Afro-fusion work “Mama” — written, composed and performed on vocals and saxophone.",
+    date: "2026",
+    tier: "standard",
+  },
 ];
 
 /* Optional notable mentions — lighter than a full press entry (name + note). */
 export const pressMentions = [
   { id: "m-01", source: "Utopia Theatre", note: "Open mic night, 1 March 2026 — featured performer." },
-  { id: "m-02", source: "darts × Maya Productions", note: "Traineeship in participatory arts." },
-  { id: "m-03", source: "ArtBomb UK", note: "Collaborative participatory performance." },
+  { id: "m-02", source: "darts & Maya Productions", url: "https://wearedarts.org.uk/meet-the-artist-olamide-sax/", note: "Selected Artist, Artist Development Programme — artist profile published on the official site." },
+  { id: "m-03", source: "ArtBomb UK", url: "https://www.artbombuk.com/post/beyond-the-scroll-preview", note: "Featured Artist, Beyond the Scroll — artist profile and biography published by ArtBomb." },
+  { id: "m-04", source: "Stand & Be Counted Theatre", url: "https://www.sbctheatre.co.uk/productions/soapboxspotlight", note: "Featured Artist, Soapbox Spotlight — original work “Mama” published through the official programme." },
+  { id: "m-05", source: "Black Pride Festival", url: "https://naijaukconnect.co.uk/2026/04/06/africa-to-the-world-oodaye-the-cradle-highlights-by-atupa-the-spotlight/", note: "Featured Artist — ÀTÙPÀ (The Spotlight) and Oòdayè (The Cradle)." },
 ];
 
 /* ============================================================================
