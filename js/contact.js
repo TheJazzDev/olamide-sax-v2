@@ -7,7 +7,7 @@
 import { $, on } from './utils.js';
 
 /* The single booking address (matches the mailto: links across the site). */
-const BOOKING_EMAIL = 'olaniyanolamidephillip@gmail.com';
+const BOOKING_EMAIL = 'booking@olamidesax.co.uk';
 
 /* Human labels for the enquiry-type <select> values (used in the subject). */
 const SUBJECT_LABELS = {

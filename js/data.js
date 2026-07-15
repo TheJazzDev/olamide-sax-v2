@@ -105,11 +105,9 @@ export function clipById(id) {
 const CHANNEL_URL = "https://www.youtube.com/@Olamidesax";
 
 export const videos = [
-  { id: "v-01", category: "LIVE", youtubeId: "TODO", channelUrl: CHANNEL_URL, title: "World Record Football Scarf Procession — Stand & Be Counted Theatre", thumb: GALLERY + "sbc-stage-01.jpg",      alt: "Olamide Sax leading live saxophone during the record-breaking public procession.", meta: "Live", date: "Recent", placeholder: false },
-  { id: "v-02", category: "LIVE", youtubeId: "TODO", channelUrl: CHANNEL_URL, title: "Eco Art Fashion Show — Live Afro-Fusion Saxophone",                    thumb: GALLERY + "fashion-01.jpg",        alt: "Olamide Sax playing live saxophone at the Eco Art Fashion Show.",                   meta: "Live", date: "Recent", placeholder: false },
-  { id: "v-03", category: "LIVE", youtubeId: "TODO", channelUrl: CHANNEL_URL, title: "Sharrow Festival — Sound Café Afrobeat Ensemble",                      thumb: GALLERY + "festival-01.jpg",       alt: "Olamide Sax performing with the Sound Café Afrobeat ensemble at Sharrow Festival.", meta: "Live", date: "Recent", placeholder: false },
-  { id: "v-04", category: "LIVE", youtubeId: "TODO", channelUrl: CHANNEL_URL, title: "Spotlight, Sheffield — Before the Lord Mayor",                         thumb: GALLERY + "sheffield-01.jpg",      alt: "Olamide Sax performing in Sheffield before the Lord Mayor.",                        meta: "Live", date: "Recent", placeholder: false },
-  { id: "v-05", category: "LIVE", youtubeId: "TODO", channelUrl: CHANNEL_URL, title: "Open Mic Night — Utopia Theatre",                                     thumb: GALLERY + "sax-mic-01.jpg",        alt: "Olamide Sax at an intimate open-mic set, saxophone and microphone.",                meta: "Live", date: "1 Mar 2026", placeholder: false },
+  { id: "v-01", category: "LIVE", youtubeId: "TODO", channelUrl: CHANNEL_URL, title: "Eco Art Fashion Show — Live Afro-Fusion Saxophone", thumb: GALLERY + "fashion-01.jpg",     alt: "Olamide Sax playing live saxophone at the Eco Art Fashion Show.",       meta: "Live", date: "Recent", placeholder: false },
+  { id: "v-02", category: "LIVE", youtubeId: "TODO", channelUrl: CHANNEL_URL, title: "Live Afro-Fusion Saxophone — Camouflage Performance", thumb: GALLERY + "festival-01.jpg",  alt: "Olamide Sax performing live Afro-fusion saxophone in camouflage dress.", meta: "Live", date: "Recent", placeholder: false },
+  { id: "v-03", category: "LIVE", youtubeId: "TODO", channelUrl: CHANNEL_URL, title: "Ìyá Ìlù Bàtá — Live Percussion",                    thumb: GALLERY + "drums-stage-01.jpg", alt: "Olamide Sax on ìyá ìlù bàtá, live Yoruba percussion.",                  meta: "Live", date: "Recent", placeholder: false },
 ];
 
 /* ============================================================================
