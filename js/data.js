@@ -108,7 +108,7 @@ export const videos = [
 ];
 
 /* ============================================================================
-   PRESS / RECOGNITION — the AWARD (real, dated) followed by the 3 REAL
+   PRESS / RECOGNITION — the AWARD (real, dated) followed by the REAL
    published articles, verbatim. URLs are the real, verified article URLs.
    Tiers: "award" | "feature" | "standard".
    ========================================================================== */
@@ -125,13 +125,43 @@ export const press = [
     note: "Winner — Eko Heritage Awards 2026",
   },
   {
+    id: "p-bbc",
+    source: "BBC",
+    title: "Featured Saxophonist in the Guinness World Record Football Scarf Procession",
+    url: "https://www.bbc.co.uk/news/articles/c0myr99njy3o",
+    excerpt:
+      "BBC coverage of the record-breaking 186-metre football scarf chain in Sheffield, where Olamide Sax led live saxophone through the Stand & Be Counted Theatre procession — a public celebration of belonging, migration and cultural identity.",
+    date: "2026",
+    tier: "feature",
+  },
+  {
+    id: "p-guardian-atupa",
+    source: "The Guardian",
+    title: "Olamide Lights Up ÀTÙPÀ Stage Production with Multifaceted Performances",
+    url: "https://guardian.ng/saturday-magazine/weekend-beats/olamide-lights-up-atupa-stage-production-with-multifaceted-performances/",
+    excerpt:
+      "An independent critical review by Michael Kolawole in The Guardian, highlighting Olamide Sax's performance in ÀTÙPÀ (The Spotlight) at CAST, Doncaster.",
+    date: "2026",
+    tier: "feature",
+  },
+  {
+    id: "p-guardian-collective",
+    source: "The Guardian",
+    title: "Participation Before Performance: Olamide Sax at Collective Routes & Beyond",
+    url: "https://guardian.ng/art/participation-before-performance-olamide-sax-at-collective-routes-beyond/",
+    excerpt:
+      "An independent critical review by Chinonso Ihekire in The Guardian on Olamide Sax's participatory practice at Collective Routes & Beyond, Danum Gallery, Library and Museum, Doncaster.",
+    date: "2026",
+    tier: "standard",
+  },
+  {
     id: "p-01",
     source: "New Telegraph",
     title: "Olamide Sax Commands Spotlight Stage in Sheffield, Delivers Stirring Performance Before Lord Mayor",
     url: "https://newtelegraphng.com/olamide-sax-ignites-the-stage-with-stirring-performance-in-sheffield/",
     excerpt:
       "A stirring Afro-fusion performance in Sheffield saw Olamide Sax command the spotlight stage before the Lord Mayor — a moment that underlined his growing presence on the UK's civic and cultural circuit.",
-    date: "2024",
+    date: "2026",
     tier: "feature",
   },
   {
@@ -141,7 +171,7 @@ export const press = [
     url: "https://newtelegraphng.com/olamide-sax-delivers-afro-fusion-performance-at-black-and-minority-ethnic-united-doncaster-event/",
     excerpt:
       "At the Black and Minority Ethnic United Doncaster event, Olamide Sax delivered an Afro-fusion performance blending saxophone, voice and the rhythm of home for an audience of community and civic leaders.",
-    date: "2024",
+    date: "2026",
     tier: "standard",
   },
   {
