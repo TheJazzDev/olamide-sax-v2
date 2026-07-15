@@ -541,6 +541,7 @@ textarea.form-field__control {
 .menu-overlay[data-open] .menu-overlay__item:nth-child(6) { --stagger: 0.48s; }
 .menu-overlay[data-open] .menu-overlay__item:nth-child(7) { --stagger: 0.54s; }
 .menu-overlay[data-open] .menu-overlay__item:nth-child(8) { --stagger: 0.60s; }
+.menu-overlay[data-open] .menu-overlay__item:nth-child(9) { --stagger: 0.66s; }
 /* The aside (socials) fades in after the links. */
 .menu-overlay__aside {
   opacity: 0;
