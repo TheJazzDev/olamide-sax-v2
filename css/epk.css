@@ -1,0 +1,237 @@
+/* epk.css — Electronic Press Kit page (screen layout + print stylesheet).
+   Loaded after pages.css so it can lean on existing tokens/components and
+   layer EPK-specific structure on top. */
+
+/* ─────────────────────────────────────────────────────────────────────────
+   MASTHEAD — intro column + portrait, with the download actions.
+   ───────────────────────────────────────────────────────────────────────── */
+.epk-head__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+  align-items: start;
+}
+@media (min-width: 900px) {
+  .epk-head__grid { grid-template-columns: 1.3fr 0.7fr; gap: var(--space-2xl); }
+}
+.epk-head__roles {
+  margin-top: var(--space-sm);
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  font-size: var(--step--1);
+  color: var(--accent);
+}
+.epk-head__portrait { margin: 0; }
+.epk-head__portrait .frame-media { aspect-ratio: 3 / 4; }
+
+/* Download actions ---------------------------------------------------------- */
+.epk-actions {
+  margin-top: var(--space-lg);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+.epk-actions__note {
+  margin-top: var(--space-sm);
+  font-size: var(--step--1);
+}
+/* Placeholder button (Full press pack) until the Drive link is supplied. */
+.btn.is-disabled {
+  opacity: 0.45;
+  pointer-events: none;
+  cursor: default;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   BIO — short (quotable) beside long.
+   ───────────────────────────────────────────────────────────────────────── */
+.epk-bio__grid {
+  margin-top: var(--space-xl);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+}
+@media (min-width: 900px) {
+  .epk-bio__grid { grid-template-columns: 0.8fr 1.2fr; gap: var(--space-2xl); }
+}
+.epk-bio__label {
+  color: var(--accent);
+  margin-bottom: var(--space-sm);
+}
+.epk-bio__lede {
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  line-height: 1.4;
+  color: var(--text);
+  max-width: 30ch;
+}
+.epk-bio__long p {
+  color: var(--muted);
+  line-height: var(--leading-loose);
+  max-width: 60ch;
+}
+.epk-bio__long p + p { margin-top: var(--space-md); }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   AT A GLANCE — quick-facts strip.
+   ───────────────────────────────────────────────────────────────────────── */
+.epk-facts__list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  border-top: 1px solid var(--hairline);
+}
+@media (min-width: 640px) {
+  .epk-facts__list { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 900px) {
+  .epk-facts__list { grid-template-columns: repeat(4, 1fr); }
+}
+.epk-fact {
+  padding-top: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}
+.epk-fact__value {
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  color: var(--text);
+  line-height: 1.15;
+}
+.epk-fact__label {
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  font-size: var(--step--1);
+  color: var(--muted);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   SELECTED PRESS — scannable list.
+   ───────────────────────────────────────────────────────────────────────── */
+.epk-press__list { margin-top: var(--space-lg); }
+.epk-press__item {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2xs);
+  padding-block: var(--space-md);
+  border-bottom: 1px solid var(--hairline-soft);
+}
+@media (min-width: 720px) {
+  .epk-press__item {
+    grid-template-columns: 9rem 1fr auto;
+    align-items: baseline;
+    gap: var(--space-md);
+  }
+}
+.epk-press__source {
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  font-size: var(--step--1);
+  color: var(--accent);
+}
+.epk-press__line { color: var(--muted); margin: 0; }
+.epk-press__more { margin-top: var(--space-lg); color: var(--muted); font-size: var(--step--1); }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   PERFORMANCE HIGHLIGHTS — date + name rows.
+   ───────────────────────────────────────────────────────────────────────── */
+.epk-highlights__list { margin-top: var(--space-lg); }
+.epk-highlight {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2xs);
+  padding-block: var(--space-sm);
+  border-bottom: 1px solid var(--hairline-soft);
+}
+@media (min-width: 640px) {
+  .epk-highlight { grid-template-columns: 7rem 1fr; gap: var(--space-md); align-items: baseline; }
+}
+.epk-highlight__date {
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  font-size: var(--step--1);
+  color: var(--accent);
+}
+.epk-highlight__name { color: var(--text); }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   BOOKING & CONTACT — reuse .contact-details; add a CTA.
+   ───────────────────────────────────────────────────────────────────────── */
+.epk-contact__cta { margin-top: var(--space-xl); }
+
+/* ═════════════════════════════════════════════════════════════════════════
+   PRINT STYLESHEET — "Download EPK (PDF)" prints THIS. Reshape into a clean,
+   branded document: white paper, dark ink, no nav/footer/decoration/buttons.
+   ═════════════════════════════════════════════════════════════════════════ */
+@media print {
+  /* Force light document colors regardless of the on-screen dark theme. */
+  html, body {
+    background: #fff !important;
+    color: #14110c !important;
+  }
+
+  /* Hide everything that isn't the press-kit content. */
+  .site-nav,
+  .menu-overlay,
+  .site-footer,
+  .page-veil,
+  .grain,
+  .stage-bloom,
+  .frame,
+  .epk-actions,
+  .epk-actions__note,
+  .epk-contact__cta,
+  .epk-press__more { display: none !important; }
+
+  main.v2 { padding: 0 !important; }
+
+  .section { padding-block: 0.5cm !important; }
+  .container { max-width: 100% !important; padding-inline: 0 !important; }
+
+  /* Ink-on-paper: retitle colors to print-safe tones. */
+  .archive-head__title,
+  .sec-head__title,
+  .epk-bio__lede,
+  .epk-fact__value,
+  .epk-highlight__name,
+  .contact-detail__value { color: #14110c !important; }
+
+  .archive-head__eyebrow,
+  .epk-head__roles,
+  .movement-index__name,
+  .epk-bio__label,
+  .epk-press__source,
+  .epk-fact__label,
+  .epk-highlight__date,
+  .contact-detail__label { color: #7a5a12 !important; } /* brass, darkened for paper */
+
+  .archive-head__lead,
+  .epk-bio__long p,
+  .epk-press__line { color: #3a352c !important; }
+
+  /* Keep the portrait but cap its height so it doesn't dominate page 1. */
+  .epk-head__portrait { max-width: 6cm; }
+  .epk-head__portrait .frame-media > img { filter: none !important; }
+
+  /* Links print as plain ink; the URL text on press items is enough. */
+  a { color: #14110c !important; text-decoration: none !important; }
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.7em; color: #7a5a12; }
+  a[href^="mailto:"]::after,
+  a[href^="tel:"]::after,
+  a[href^="/"]::after { content: ""; }
+
+  /* Avoid awkward breaks inside a section header/row. */
+  .sec-head, .epk-press__item, .epk-highlight, .epk-fact, .contact-detail {
+    break-inside: avoid;
+  }
+
+  /* Hairlines that read on paper. */
+  .epk-facts__list, .epk-press__item, .epk-highlight {
+    border-color: #d9d3c6 !important;
+  }
+}

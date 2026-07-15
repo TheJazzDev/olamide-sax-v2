@@ -28,6 +28,7 @@ import { initHeroIntro } from "./heroIntro.js";
 import { initCarousel } from "./carousel.js";
 import { initMarquee } from "./marquee.js";
 import { initGalleryMotion } from "./galleryMotion.js";
+import { initEpk } from "./epk.js";
 
 function setFooterYear() {
   const yearEl = $("[data-year]");
@@ -101,6 +102,8 @@ function init() {
   initVideos();
   // Booking form — page-guarded (no-ops if the contact form is absent).
   initContact();
+  // EPK page — "Download EPK (PDF)" print trigger. Page-guarded.
+  initEpk();
   // Ambient sound toggle — page-guarded (home hero only). Click-to-play only.
   initHeroAudio();
   // Ambient videos → poster-only under reduced motion (no-ops if none present).

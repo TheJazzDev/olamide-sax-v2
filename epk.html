@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Media — Olamide Sax · Performances, Videos, Gallery & Press</title>
-  <meta name="description" content="The Olamide Sax media archive — recent performances, the video archive, the gallery and the press ledger. A living archive of an Afro-fusion artist's live and participatory work." />
+  <title>EPK — Olamide Sax · Electronic Press Kit</title>
+  <meta name="description" content="Olamide Sax electronic press kit — bio, press coverage, performance highlights and booking contact for promoters and bookers. Afro-Fusion Artist, Multi-Instrumentalist and Creative Facilitator, UK." />
 
   <!-- Favicon -->
   <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml" />
@@ -19,12 +19,12 @@
   <!-- Open Graph / social cards -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Olamide Sax" />
-  <meta property="og:title" content="Media — Olamide Sax · Performances, Videos, Gallery & Press" />
-  <meta property="og:description" content="The Olamide Sax media archive — recent performances, the video archive, the gallery and the press ledger. A living archive of an Afro-fusion artist's live and participatory work." />
+  <meta property="og:title" content="EPK — Olamide Sax · Electronic Press Kit" />
+  <meta property="og:description" content="Olamide Sax electronic press kit — bio, press coverage, performance highlights and booking contact for promoters and bookers." />
   <meta property="og:image" content="/assets/images/gallery/portrait-sbc-01.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Media — Olamide Sax · Performances, Videos, Gallery & Press" />
-  <meta name="twitter:description" content="The Olamide Sax media archive — recent performances, the video archive, the gallery and the press ledger. A living archive of an Afro-fusion artist's live and participatory work." />
+  <meta name="twitter:title" content="EPK — Olamide Sax · Electronic Press Kit" />
+  <meta name="twitter:description" content="Olamide Sax electronic press kit — bio, press coverage, performance highlights and booking contact for promoters and bookers." />
   <meta name="twitter:image" content="/assets/images/gallery/portrait-sbc-01.jpg" />
 
 
@@ -32,7 +32,7 @@
   <link rel="preload" href="assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/fonts/archivo-400.woff2" as="font" type="font/woff2" crossorigin />
 
-  <!-- CSS cascade order: reset → tokens → typography → layout → frame → components → home → archive → animations → responsive -->
+  <!-- CSS cascade order: reset → tokens → typography → layout → frame → components → home → archive → pages → animations → responsive -->
   <link rel="stylesheet" href="css/reset.css" />
   <link rel="stylesheet" href="css/tokens.css" />
   <link rel="stylesheet" href="css/typography.css" />
@@ -41,6 +41,8 @@
   <link rel="stylesheet" href="css/components.css" />
   <link rel="stylesheet" href="css/home.css" />
   <link rel="stylesheet" href="css/archive.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+  <link rel="stylesheet" href="css/epk.css" />
   <link rel="stylesheet" href="css/animations.css" />
   <link rel="stylesheet" href="css/motion.css" />
   <link rel="stylesheet" href="css/media-motion.css" />
@@ -74,9 +76,9 @@
   <!-- THE FILM-FRAME (signature device). Decorative to AT. ==>
   <div class="frame" aria-hidden="true">
     <span class="frame__corner frame__corner--tl">Olamide Sax</span>
-    <span class="frame__corner frame__corner--tr">Media</span>
+    <span class="frame__corner frame__corner--tr">EPK</span>
     <span class="frame__corner frame__corner--bl">UK / Nigeria</span>
-    <span class="frame__corner frame__corner--br">The Archive</span>
+    <span class="frame__corner frame__corner--br">Press Kit</span>
     <!-- Reserved lane for the Breath Line (Task 7) — no visual yet. ==>
     <div class="frame__spine"></div>
   -->
@@ -199,186 +201,274 @@
   <main class="v2" id="main">
 
     <!-- ====================================================================
-         MASTHEAD — the hub intro. One <h1> for the page.
+         MASTHEAD — name, positioning, hero press photo + download actions.
+         One <h1> for the page.
          ==================================================================== -->
-    <section class="section section--flush-top archive-head" aria-labelledby="media-title" data-animate="archive-head">
+    <section class="section section--flush-top archive-head epk-head" aria-labelledby="epk-title" data-animate="archive-head">
       <div class="container">
-        <p class="eyebrow eyebrow--brass archive-head__eyebrow">The Living Archive</p>
-        <h1 class="archive-head__title" id="media-title">Media</h1>
-        <p class="archive-head__lead">
-          The whole performance, kept. Every gig, screening, frame and column —
-          gathered here as one archive that grows a phrase at a time. Enter by
-          performances, videos, gallery or press.
+        <div class="epk-head__grid">
+          <div class="epk-head__intro">
+            <p class="eyebrow eyebrow--brass archive-head__eyebrow">Electronic Press Kit</p>
+            <h1 class="archive-head__title" id="epk-title">Olamide&nbsp;Sax</h1>
+            <p class="epk-head__roles">
+              Afro-Fusion Artist · Multi-Instrumentalist · Participatory Artist · Creative Facilitator
+            </p>
+            <p class="archive-head__lead">
+              A UK-based Nigerian saxophonist and multi-instrumentalist whose Afro-fusion
+              performance moves between saxophone, vocals, keys and Yoruba percussion —
+              from festival stages and theatre productions to civic occasions and
+              participatory arts.
+            </p>
+
+            <!-- DOWNLOAD ACTIONS — print-to-PDF (works now) + full asset pack
+                 (placeholder until the Drive/Dropbox link is supplied). -->
+            <div class="epk-actions">
+              <button type="button" class="btn btn--brass" data-epk-print>Download EPK (PDF)</button>
+              <a class="btn btn--ghost" href="/assets/images/gallery/portrait-sbc-01.jpg" download>Download press photo</a>
+              <!-- TODO(user): replace href="#" with the shared Drive/Dropbox folder URL,
+                   then remove is-disabled + aria-disabled and the "on request" note. -->
+              <a class="btn btn--ghost is-disabled" href="#" aria-disabled="true" data-epk-presspack>Full press pack</a>
+            </div>
+            <p class="epk-actions__note text-muted">
+              Full press pack (hi-res photos &amp; PDF) available on request — email
+              <a class="link-underline" href="mailto:olaniyanolamidephillip@gmail.com">olaniyanolamidephillip@gmail.com</a>.
+            </p>
+          </div>
+
+          <figure class="epk-head__portrait">
+            <div class="frame-media">
+              <img src="assets/images/gallery/portrait-sbc-01.jpg" alt="Olamide Sax performing live on saxophone" loading="eager" />
+            </div>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         BIO — short (quotable) + long. Kept consistent with the About page.
+         ==================================================================== -->
+    <section class="section section--tight epk-bio" aria-labelledby="epk-bio-heading" data-animate="statement">
+      <div class="container">
+        <div class="sec-head">
+          <div>
+            <p class="movement-index">
+              <span class="movement-index__name">Biography</span>
+            </p>
+            <h2 class="sec-head__title" id="epk-bio-heading" style="margin-top: var(--space-md);">The artist, in brief.</h2>
+          </div>
+        </div>
+
+        <div class="epk-bio__grid">
+          <div class="epk-bio__short">
+            <p class="epk-bio__label label">Short bio</p>
+            <p class="epk-bio__lede">
+              Olamide Sax is a UK-based Nigerian Afro-fusion artist and multi-instrumentalist
+              — saxophone, vocals, keys and Yoruba percussion — and a participatory artist and
+              creative facilitator, named Best Instrumentalist of the Year at the 2026 Eko
+              Heritage Awards.
+            </p>
+          </div>
+
+          <div class="epk-bio__long">
+            <p class="epk-bio__label label">Full bio</p>
+            <p>
+              Olamide Phillips Olaniyan — known as <strong>Olamide Sax</strong> — is a
+              Nigerian-born Afro-Fusion Artist, Multi-Instrumentalist, Theatre &amp;
+              Participatory Artist and Creative Facilitator based in the United Kingdom.
+              With over a decade of musical experience, his journey began in traditional
+              Yoruba percussion before expanding into saxophone, piano, vocal performance
+              and composition.
+            </p>
+            <p>
+              He works across live music, theatre, festivals and participatory arts, and has
+              performed at recognised UK platforms including <strong>CAST Theatre</strong>,
+              <strong>Stand &amp; Be Counted Theatre</strong>, <strong>ArtBomb UK</strong>,
+              <strong>Utopia Theatre</strong>, <strong>Manchester Africa Day Festival</strong>
+              and <strong>Black Pride Festival</strong> — spanning original music, theatre
+              productions, cultural events and multidisciplinary collaborations.
+            </p>
+            <p>
+              A graduate of the <strong>darts &amp; Maya Productions</strong> Artist
+              Development Programme in Creative Health and Participatory Arts, he develops and
+              facilitates creative workshops across singing, drumming, movement, memory and
+              community wellbeing. He is the founder of <strong>Lammy Wonder Music
+              Entertainment</strong>, a platform dedicated to Afro-fusion performance,
+              cultural engagement and live music.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         AT A GLANCE — quick facts strip for a scanning booker.
+         ==================================================================== -->
+    <section class="section section--tight epk-facts" aria-labelledby="epk-facts-heading" data-animate="credits">
+      <div class="container">
+        <h2 class="u-visually-hidden" id="epk-facts-heading">At a glance</h2>
+        <ul class="epk-facts__list">
+          <li class="epk-fact">
+            <span class="epk-fact__value">10+ yrs</span>
+            <span class="epk-fact__label">Live performance</span>
+          </li>
+          <li class="epk-fact">
+            <span class="epk-fact__value">Sax · Vocals · Keys · Percussion</span>
+            <span class="epk-fact__label">Multi-instrumentalist</span>
+          </li>
+          <li class="epk-fact">
+            <span class="epk-fact__value">Eko Heritage 2026</span>
+            <span class="epk-fact__label">Best Instrumentalist — Winner</span>
+          </li>
+          <li class="epk-fact">
+            <span class="epk-fact__value">Doncaster / Sheffield, UK</span>
+            <span class="epk-fact__label">Based in</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SELECTED PRESS — a scannable pulled set (mirrors the Press page).
+         ==================================================================== -->
+    <section class="section section--tight epk-press" aria-labelledby="epk-press-heading" data-animate="press">
+      <div class="container">
+        <div class="sec-head">
+          <div>
+            <p class="movement-index">
+              <span class="movement-index__name">Selected Press</span>
+            </p>
+            <h2 class="sec-head__title" id="epk-press-heading" style="margin-top: var(--space-md);">As others recorded it.</h2>
+          </div>
+        </div>
+
+        <ul class="epk-press__list">
+          <li class="epk-press__item">
+            <span class="epk-press__source">BBC</span>
+            <p class="epk-press__line">Featured saxophonist leading the Guinness World Record football scarf procession (186 metres) in Sheffield.</p>
+            <a class="link-underline" href="https://www.bbc.co.uk/news/articles/c0myr99njy3o" target="_blank" rel="noopener noreferrer">Read →</a>
+          </li>
+          <li class="epk-press__item">
+            <span class="epk-press__source">The Guardian</span>
+            <p class="epk-press__line">&ldquo;Olamide Lights Up ÀTÙPÀ Stage Production with Multifaceted Performances&rdquo; — review by Michael Kolawole.</p>
+            <a class="link-underline" href="https://guardian.ng/saturday-magazine/weekend-beats/olamide-lights-up-atupa-stage-production-with-multifaceted-performances/" target="_blank" rel="noopener noreferrer">Read →</a>
+          </li>
+          <li class="epk-press__item">
+            <span class="epk-press__source">New Telegraph</span>
+            <p class="epk-press__line">&ldquo;Olamide Sax Commands Spotlight Stage in Sheffield, Delivers Stirring Performance Before Lord Mayor.&rdquo;</p>
+            <a class="link-underline" href="https://newtelegraphng.com/olamide-sax-ignites-the-stage-with-stirring-performance-in-sheffield/" target="_blank" rel="noopener noreferrer">Read →</a>
+          </li>
+          <li class="epk-press__item">
+            <span class="epk-press__source">The Star</span>
+            <p class="epk-press__line">Coverage of SBC Theatre&rsquo;s Soapbox Spotlight, featuring his original work &ldquo;Mama&rdquo;.</p>
+            <a class="link-underline" href="https://www.thestar.co.uk/your-world/unforgettable-night-as-sheffield-theatre-group-showcases-work-6531919" target="_blank" rel="noopener noreferrer">Read →</a>
+          </li>
+        </ul>
+        <p class="epk-press__more">
+          More coverage on the <a class="link-underline" href="/press.html">press page</a>.
         </p>
-
-        <!-- Doorways into the four archives. -->
-        <nav class="hub-index" aria-label="Archive sections">
-          <a class="hub-entry" href="#performances">
-            <span class="hub-entry__index">01</span>
-            <span class="hub-entry__name">Performances</span>
-            <span class="hub-entry__go">By year →</span>
-            <span class="hub-entry__desc">Live and staged appearances, grouped by year — Doncaster to Sheffield.</span>
-          </a>
-          <a class="hub-entry" href="#videos">
-            <span class="hub-entry__index">02</span>
-            <span class="hub-entry__name">Videos</span>
-            <span class="hub-entry__go">Live · Interviews · Music →</span>
-            <span class="hub-entry__desc">Performance clips and screenings, framed like a private viewing.</span>
-          </a>
-          <a class="hub-entry" href="/gallery.html">
-            <span class="hub-entry__index">03</span>
-            <span class="hub-entry__name">Gallery</span>
-            <span class="hub-entry__go">Enter the gallery →</span>
-            <span class="hub-entry__desc">Photos, behind the scenes and events — the venue walk.</span>
-          </a>
-          <a class="hub-entry" href="/press.html">
-            <span class="hub-entry__index">04</span>
-            <span class="hub-entry__name">Press</span>
-            <span class="hub-entry__go">Read the press →</span>
-            <span class="hub-entry__desc">Published articles and features — the story, in others' words.</span>
-          </a>
-        </nav>
       </div>
     </section>
 
     <!-- ====================================================================
-         PERFORMANCES — by year (data-driven list rendered statically here;
-         mirrors data.js `performances`). data-animate hook inert.
+         PERFORMANCE HIGHLIGHTS — a tight curated list for bookers.
          ==================================================================== -->
-    <section class="section archive-section" id="performances" aria-labelledby="perf-heading" data-animate="performances">
+    <section class="section section--tight epk-highlights" aria-labelledby="epk-highlights-heading" data-animate="performances">
       <div class="container">
-        <div class="sec-head archive-section__head">
+        <div class="sec-head">
           <div>
             <p class="movement-index">
-              <span class="movement-index__name">Performances</span>
+              <span class="movement-index__name">Performance Highlights</span>
             </p>
-            <h2 class="sec-head__title" id="perf-heading" style="margin-top: var(--space-md);">A career, by year.</h2>
-          </div>
-          <a class="link-underline sec-more" href="/timeline.html">The full timeline →</a>
-        </div>
-
-        <!-- Recent Highlights (real, undated — no fabricated years) -->
-        <div class="perf-year">
-          <div class="perf-year__grid">
-            <p class="perf-year__label">Recent Highlights</p>
-            <div class="perf-list">
-              <article class="perf-event">
-                <div>
-                  <h3 class="perf-event__title">World Record Football Scarf Procession</h3>
-                  <p class="perf-event__venue">Stand &amp; Be Counted Theatre</p>
-                </div>
-                <p class="perf-event__date">Recent</p>
-                <p class="perf-event__note">Leading live saxophone during the record-breaking public procession — thousands brought together through music and participation.</p>
-              </article>
-              <article class="perf-event">
-                <div>
-                  <h3 class="perf-event__title">Eco Art Fashion Show</h3>
-                  <p class="perf-event__venue">Multidisciplinary collaboration</p>
-                </div>
-                <p class="perf-event__date">Recent</p>
-                <p class="perf-event__note">Live Afro-fusion saxophone woven through sustainable fashion, visual arts and audience interaction.</p>
-              </article>
-              <article class="perf-event">
-                <div>
-                  <h3 class="perf-event__title">Sharrow Festival</h3>
-                  <p class="perf-event__venue">Sound Café Afrobeat ensemble</p>
-                </div>
-                <p class="perf-event__date">Recent</p>
-                <p class="perf-event__note">A featured member of the Afrobeat ensemble — high-energy sets and a shared celebration of rhythm and dance.</p>
-              </article>
-              <article class="perf-event">
-                <div>
-                  <h3 class="perf-event__title">ÀTÙPÀ <span class="perf-event__role">— as Adigun</span></h3>
-                  <p class="perf-event__venue">CAST</p>
-                </div>
-                <p class="perf-event__date">Recent</p>
-                <p class="perf-event__note">Opening saxophone; performing the role of Adigun.</p>
-              </article>
-              <article class="perf-event">
-                <div>
-                  <h3 class="perf-event__title">BME United Doncaster</h3>
-                  <p class="perf-event__venue">Doncaster</p>
-                </div>
-                <p class="perf-event__date">Recent</p>
-                <p class="perf-event__note">Afro-fusion performance for community and civic leaders during Black History Month.</p>
-              </article>
-              <article class="perf-event">
-                <div>
-                  <h3 class="perf-event__title">Spotlight, Sheffield</h3>
-                  <p class="perf-event__venue">Sheffield</p>
-                </div>
-                <p class="perf-event__date">Recent</p>
-                <p class="perf-event__note">A stirring performance before the Lord Mayor of Sheffield.</p>
-              </article>
-            </div>
+            <h2 class="sec-head__title" id="epk-highlights-heading" style="margin-top: var(--space-md);">Where the room has been.</h2>
           </div>
         </div>
 
-        <!-- 2026 (real dates) -->
-        <div class="perf-year">
-          <div class="perf-year__grid">
-            <p class="perf-year__label">2026</p>
-            <div class="perf-list">
-              <article class="perf-event">
-                <div>
-                  <h3 class="perf-event__title">Best Instrumentalist of the Year</h3>
-                  <p class="perf-event__venue">Eko Heritage Awards</p>
-                </div>
-                <p class="perf-event__date">2026</p>
-                <p class="perf-event__note">Winner — Eko Heritage Awards 2026.</p>
-              </article>
-              <article class="perf-event">
-                <div>
-                  <h3 class="perf-event__title">Open Mic Night</h3>
-                  <p class="perf-event__venue">Utopia Theatre</p>
-                </div>
-                <p class="perf-event__date">1 Mar 2026</p>
-                <p class="perf-event__note">An intimate improvisational set — saxophone, keys and vocals.</p>
-              </article>
-            </div>
-          </div>
-        </div>
+        <ul class="epk-highlights__list">
+          <li class="epk-highlight"><span class="epk-highlight__date">Jun 2026</span><span class="epk-highlight__name">World Record Football Scarf Procession — Stand &amp; Be Counted Theatre, Sheffield</span></li>
+          <li class="epk-highlight"><span class="epk-highlight__date">Jun 2026</span><span class="epk-highlight__name">Manchester Africa Day Cultural Festival — Vocals &amp; Saxophone</span></li>
+          <li class="epk-highlight"><span class="epk-highlight__date">Jul 2026</span><span class="epk-highlight__name">Sharrow Festival — Sound Café Afrobeat ensemble, Sheffield</span></li>
+          <li class="epk-highlight"><span class="epk-highlight__date">Apr 2026</span><span class="epk-highlight__name">ÀTÙPÀ (The Spotlight) — Black Pride Festival, CAST, Doncaster</span></li>
+          <li class="epk-highlight"><span class="epk-highlight__date">Apr 2026</span><span class="epk-highlight__name">Beyond the Scroll — ArtBomb UK, with The Skintones UK</span></li>
+          <li class="epk-highlight"><span class="epk-highlight__date">Mar 2026</span><span class="epk-highlight__name">Soapbox Spotlight — original work &ldquo;Mama&rdquo;, SBC Theatre, Sheffield</span></li>
+        </ul>
+        <p class="epk-press__more">
+          The full dated record lives on the <a class="link-underline" href="/timeline.html">timeline</a>.
+        </p>
       </div>
     </section>
 
     <!-- ====================================================================
-         VIDEOS — light category tabs (Live / Interviews / Music) + FACADE
-         cards rendered by videos.js from data.js. NO live iframe (Task 8).
+         BOOKING & CONTACT — email, phone, socials, location.
          ==================================================================== -->
-    <section class="section archive-section" id="videos" aria-labelledby="videos-heading" data-animate="videos">
+    <section class="section epk-contact" aria-labelledby="epk-contact-heading" data-animate="contact">
       <div class="container">
-        <div class="sec-head archive-section__head">
+        <div class="sec-head">
           <div>
             <p class="movement-index">
-              <span class="movement-index__name">Videos</span>
+              <span class="movement-index__name">Booking &amp; Contact</span>
             </p>
-            <h2 class="sec-head__title" id="videos-heading" style="margin-top: var(--space-md);">The screenings.</h2>
+            <h2 class="sec-head__title" id="epk-contact-heading" style="margin-top: var(--space-md);">Book Olamide.</h2>
           </div>
         </div>
 
-        <!-- Tablist (accessible; roving tabindex handled in videos.js). -->
-        <div class="filter-bar" role="tablist" aria-label="Filter videos by category" data-videos-tabs>
-          <button type="button" class="filter-chip is-active" role="tab" data-tab="ALL" aria-selected="true" tabindex="0">All</button>
-          <button type="button" class="filter-chip" role="tab" data-tab="LIVE" aria-selected="false" tabindex="-1">Live</button>
-          <button type="button" class="filter-chip" role="tab" data-tab="INTERVIEW" aria-selected="false" tabindex="-1">Interviews</button>
-          <button type="button" class="filter-chip" role="tab" data-tab="MUSIC" aria-selected="false" tabindex="-1">Music Videos</button>
+        <div class="contact-details epk-contact__details">
+          <div class="contact-detail">
+            <p class="contact-detail__label">Email</p>
+            <p class="contact-detail__value">
+              <a class="link-underline" href="mailto:olaniyanolamidephillip@gmail.com">olaniyanolamidephillip@gmail.com</a>
+            </p>
+          </div>
+
+          <div class="contact-detail">
+            <p class="contact-detail__label">Phone</p>
+            <p class="contact-detail__value">
+              <a class="link-underline" href="tel:+447350166053">+44 7350 166053</a>
+            </p>
+          </div>
+
+          <div class="contact-detail">
+            <p class="contact-detail__label">Based in</p>
+            <p class="contact-detail__value">Doncaster / Sheffield, United Kingdom</p>
+          </div>
+
+          <div class="contact-detail">
+            <p class="contact-detail__label">Represented by</p>
+            <p class="contact-detail__value">Founder &amp; Lead Artist, Lammy Wonder Music Entertainment</p>
+          </div>
+
+          <div class="contact-detail">
+            <p class="contact-detail__label">Follow</p>
+            <div class="contact-socials">
+              <a class="icon-link" href="https://www.linkedin.com/in/olamide-sax" target="_blank" rel="noopener noreferrer" aria-label="Olamide Sax on LinkedIn">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path fill="currentColor" d="M6.94 5a1.94 1.94 0 1 1-3.88 0 1.94 1.94 0 0 1 3.88 0ZM7 8.48H3V21h4V8.48Zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91l.04-1.68Z"/>
+                </svg>
+              </a>
+              <a class="icon-link" href="https://www.instagram.com/olamide.sax" target="_blank" rel="noopener noreferrer" aria-label="Olamide Sax on Instagram">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+                  <circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+                  <circle cx="17.35" cy="6.65" r="1.1" fill="currentColor"/>
+                </svg>
+              </a>
+              <a class="icon-link" href="https://facebook.com/olamidesaxx/" target="_blank" rel="noopener noreferrer" aria-label="Olamide Sax on Facebook">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path fill="currentColor" d="M14.5 21v-7.6h2.55l.38-2.96h-2.93V8.55c0-.86.24-1.44 1.47-1.44h1.57V4.46c-.27-.04-1.2-.12-2.28-.12-2.26 0-3.8 1.38-3.8 3.9v2.18H8.99v2.96h2.47V21h3.04Z"/>
+                </svg>
+              </a>
+              <a class="icon-link" href="https://youtube.com/@olamidesax" target="_blank" rel="noopener noreferrer" aria-label="Olamide Sax on YouTube">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <rect x="2.5" y="6" width="19" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/>
+                  <path fill="currentColor" d="M10.6 9.5v5l4.3-2.5-4.3-2.5Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
         </div>
 
-        <!-- Facade cards rendered here by videos.js. NO iframe until Task 8. -->
-        <div class="video-grid" data-videos aria-live="polite"></div>
-
-        <!-- Empty state (hidden unless a category is empty). -->
-        <div class="archive-empty" data-videos-empty hidden>
-          <p class="archive-empty__line">No videos in this category yet.</p>
-          <p class="archive-empty__sub">New screenings are added as Olamide's live work is filmed.</p>
+        <div class="epk-contact__cta">
+          <a class="btn btn--brass" href="/contact.html">Send a booking enquiry</a>
         </div>
-
-        <noscript>
-          <p class="text-muted" style="margin-top: var(--space-lg);">
-            Enable JavaScript to browse the video archive, or
-            <a class="link-underline" href="https://youtube.com/@olamidesax" target="_blank" rel="noopener noreferrer">watch on YouTube</a>.
-          </p>
-        </noscript>
       </div>
     </section>
 
