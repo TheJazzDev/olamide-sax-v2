@@ -145,6 +145,7 @@ function buildScrollReveals(gsap, ScrollTrigger) {
     "genres",
     "repertoire",
     "participatory",
+    "teaching",
     "contexts",
     "movements",
     "about-quote",

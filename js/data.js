@@ -4,7 +4,12 @@
      videos[]       — { id, category, youtubeId, channelUrl, title, thumb, alt, meta, date, placeholder }
      clips[]        — { id, src, poster, alt, label }
      press[]        — { id, source, title, url, excerpt, date, tier }
+     pressMentions[]— { id, source, url?, note }
      performances[] — { year, events: [{ id, title, venue, role?, date, note? }] }
+     teaching[]     — { id, role, org, location, period, subjects[], note }
+     facilitation[] — { id, title, venue, role }
+     affiliations[] — { id, role, org }
+     theatreCredits[]— { id, work, role, venue }
    Categories: photos "PHOTOS"|"BTS"|"EVENTS", videos "LIVE"|"INTERVIEW"|"MUSIC". */
 
 /* Real gallery images live under assets/images/gallery/. */
@@ -206,30 +211,96 @@ export const pressMentions = [
 ];
 
 /* ============================================================================
-   PERFORMANCES — REAL recent highlights + salvaged events. Grouped by year
-   ONLY where the manifest gives a real date (2026). Undated highlights sit
-   under a "Recent Highlights" era label — no fabricated years.
-   Stable ids: e-<era>-nn.
+   PERFORMANCES — REAL, dated highlights from the CV (Oct 2025 → Jul 2026),
+   plus the 2010 origin. Grouped by year. The Timeline page shows a CURATED
+   subset of these as its dated spine; the full set is kept here as the
+   source-of-truth record. No fabricated dates — every date is from the CV.
+   Stable ids: e-<year>-nn.
    ========================================================================== */
 export const performances = [
   {
-    year: "Recent Highlights",
+    year: "2010",
     events: [
-      { id: "e-rec-01", title: "World Record Football Scarf Procession", venue: "Stand & Be Counted Theatre", role: null, date: "Recent", note: "Leading live saxophone during the record-breaking public procession — thousands brought together through music, celebration and community participation." },
-      { id: "e-rec-02", title: "Eco Art Fashion Show", venue: "Multidisciplinary collaboration", role: null, date: "Recent", note: "Live Afro-fusion saxophone woven through sustainable fashion, visual arts and audience interaction." },
-      { id: "e-rec-03", title: "Sharrow Festival", venue: "Sound Café Afrobeat ensemble", role: null, date: "Recent", note: "A featured member of Sound Café's Afrobeat ensemble — high-energy sets, a shared celebration of rhythm, dance and cultural exchange." },
-      { id: "e-rec-04", title: "ÀTÙPÀ", venue: "CAST", role: "Adigun", date: "Recent", note: "Opening saxophone; performing the role of Adigun." },
-      { id: "e-rec-05", title: "BME United Doncaster", venue: "Doncaster", role: null, date: "Recent", note: "Afro-fusion performance for community and civic leaders during Black History Month." },
-      { id: "e-rec-06", title: "Spotlight, Sheffield", venue: "Sheffield", role: null, date: "Recent", note: "A stirring performance before the Lord Mayor of Sheffield." },
+      { id: "e-2010-01", title: "The first rhythm", venue: "Yoruba percussion", role: null, date: "2010", note: "Beginnings in Yoruba percussion — cord/omele, djembe, talking drum, omele bàtá and ìyá ìlù bàtá." },
+    ],
+  },
+  {
+    year: "2025",
+    events: [
+      { id: "e-2025-01", title: "Nigeria in Doncaster Cultural Day", venue: "Doncaster", role: null, date: "Oct 2025", note: "Vocal, piano and saxophone performance." },
+      { id: "e-2025-02", title: "BME United Doncaster", venue: "Doncaster", role: null, date: "Oct 2025", note: "Opening saxophone and vocal/piano performance for Black History Month." },
     ],
   },
   {
     year: "2026",
     events: [
-      { id: "e-2026-01", title: "Best Instrumentalist of the Year", venue: "Eko Heritage Awards", role: null, date: "2026", note: "Winner — Eko Heritage Awards 2026." },
-      { id: "e-2026-02", title: "Open Mic Night", venue: "Utopia Theatre", role: null, date: "1 Mar 2026", note: "An intimate improvisational set — saxophone, keys and vocals." },
+      { id: "e-2026-01", title: "Soapbox Spotlight — \"Mama\"", venue: "Stand & Be Counted Theatre, Sheffield", role: "Writer, Composer & Performer", date: "Mar 2026", note: "Written, composed and performed original Afro-fusion work “Mama” (vocals & saxophone)." },
+      { id: "e-2026-02", title: "Migration Action Celebration", venue: "CAST, Doncaster", role: null, date: "Mar 2026", note: "Featured saxophonist, keyboardist and djembe drummer." },
+      { id: "e-2026-03", title: "Live with Arkadiusz Buja & Friends", venue: "Doncaster", role: null, date: "Mar 2026", note: "Guest performance." },
+      { id: "e-2026-04", title: "ÀTÙPÀ (The Spotlight)", venue: "Black Pride Festival, CAST, Doncaster", role: "Adigún", date: "Apr 2026", note: "Opening saxophone performance." },
+      { id: "e-2026-05", title: "Beyond the Scroll", venue: "ArtBomb UK, Doncaster", role: null, date: "Apr 2026", note: "Featured saxophonist; live collaboration with The Skintones UK and outdoor public performance activation." },
+      { id: "e-2026-06", title: "Przystanek Doncaster Cultural Festival", venue: "Doncaster", role: null, date: "Apr 2026", note: "Guest saxophonist performing with The Klin Band." },
+      { id: "e-2026-07", title: "Adira Food Pharmacy Launch", venue: "Sheffield", role: null, date: "May 2026", note: "Saxophone, piano & iya ilu bata before civic leaders and public-health stakeholders." },
+      { id: "e-2026-08", title: "World Record Football Scarf Procession", venue: "Stand & Be Counted Theatre, Sheffield", role: null, date: "Jun 2026", note: "Live saxophone at the Guinness World Record football scarf procession (186 metres) — freedom, belonging, migration and cultural identity." },
+      { id: "e-2026-09", title: "Manchester Africa Day Cultural Festival", venue: "Manchester", role: null, date: "Jun 2026", note: "Featured performing artist — vocals & saxophone." },
+      { id: "e-2026-10", title: "Collective Routes & Beyond", venue: "Danum Gallery, Library and Museum, Doncaster", role: null, date: "Jun 2026", note: "Featured artist (saxophone) & participatory music facilitator." },
+      { id: "e-2026-11", title: "Sharrow Festival", venue: "Sound Café Afrobeat ensemble, Sheffield", role: null, date: "Jul 2026", note: "Featured saxophonist in a live Afrobeat ensemble — contemporary African music with audience participation." },
+      { id: "e-2026-12", title: "Best Instrumentalist of the Year", venue: "Eko Heritage Awards", role: null, date: "2026", note: "Winner — Eko Heritage Awards 2026." },
     ],
   },
+];
+
+/* ============================================================================
+   TEACHING — paid music tuition. Source of truth for the Artistic Practice
+   "Teaching & Creative Health" section.
+   ========================================================================== */
+export const teaching = [
+  {
+    id: "t-tirosh",
+    role: "Music Tutor",
+    org: "Tirosh Koncept",
+    location: "Sheffield, UK",
+    period: "2026–present",
+    subjects: ["Saxophone", "Keyboard", "Recorder", "Drum kit"],
+    note: "Paid tuition through the Music Enrichment & Extracurricular Club — building musicianship, creativity, confidence and collaborative performance for children and young people.",
+  },
+];
+
+/* ============================================================================
+   FACILITATION / CREATIVE HEALTH — participatory workshop credits. Mirrors
+   the Artistic Practice facilitation strip. Graduate of the darts & Maya
+   Productions Artist Development Programme in Creative Health & Participatory
+   Arts.
+   ========================================================================== */
+export const facilitation = [
+  { id: "f-01", title: "Singing for Memory", venue: "darts, Doncaster", role: "Supporting Facilitator (Music & Singing)" },
+  { id: "f-02", title: "Dance On for Parkinson's", venue: "Armthorpe Community Centre, Doncaster", role: "Supporting Facilitator (Movement & Music)" },
+  { id: "f-03", title: "Quirky Choir", venue: "darts, Doncaster", role: "Supporting Facilitator (Community Singing)" },
+  { id: "f-04", title: "Community Drumming Session", venue: "CAST, Doncaster", role: "Supporting Facilitator (Rhythm & Participation)" },
+  { id: "f-05", title: "Tuneful Chatter", venue: "Grange Lane, Doncaster", role: "Supporting Facilitator (Creative Health & Music)" },
+  { id: "f-06", title: "Dance On: Strength & Balance", venue: "Woodfield, Doncaster", role: "Supporting Facilitator (Movement & Music)" },
+  { id: "f-07", title: "ÀTÙPÀ Martini Workshop", venue: "Black Pride Festival", role: "Supporting Artist (Singing, Saxophone, Percussion) — 100+ participants incl. school children" },
+];
+
+/* ============================================================================
+   AFFILIATIONS / POSITIONS — ongoing roles. Mirrors the About "Roles &
+   Affiliations" strip.
+   ========================================================================== */
+export const affiliations = [
+  { id: "a-01", role: "Founder & Lead Artist", org: "Lammy Wonder Music Entertainment" },
+  { id: "a-02", role: "Resident Pianist", org: "RCCG Maranatha Parish, Doncaster" },
+  { id: "a-03", role: "Featured Saxophonist", org: "The Skintones UK" },
+  { id: "a-04", role: "Featured Saxophonist", org: "Sound Café UK" },
+  { id: "a-05", role: "Artist Collaborator", org: "Stand & Be Counted Theatre" },
+  { id: "a-06", role: "Artist Development Graduate", org: "darts & Maya Productions" },
+];
+
+/* ============================================================================
+   THEATRE CREDITS — mirrors the About theatre credits list.
+   ========================================================================== */
+export const theatreCredits = [
+  { id: "tc-01", work: "Oòdayè (The Cradle)", role: "Adigún", venue: "Black Pride Festival, Doncaster" },
+  { id: "tc-02", work: "Mama", role: "Writer, Composer & Performer", venue: "SBC Soapbox Spotlight, Sheffield" },
 ];
 
 /* ============================================================================
