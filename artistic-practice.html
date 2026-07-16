@@ -118,6 +118,19 @@
     aria-modal="true"
     aria-label="Site menu"
   >
+    <!-- Hello Monday–style liquid edge (menuWave.js morphs the path). -->
+    <div class="menu-overlay__wave" aria-hidden="true">
+      <svg viewBox="0 0 100 1000" preserveAspectRatio="none" focusable="false">
+        <defs>
+          <linearGradient id="menu-wave-grad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#5C4520" />
+            <stop offset="48%" stop-color="#4A3719" />
+            <stop offset="100%" stop-color="#33260F" />
+          </linearGradient>
+        </defs>
+        <path data-menu-wave-path fill="url(#menu-wave-grad)" d="M100,0 L98,0 C92,170 92,170 92.8,333 C90.8,500 90.8,500 92.8,667 C92,830 92,830 98,1000 L100,1000 Z" />
+      </svg>
+    </div>
     <div class="menu-overlay__frame">
       <div class="menu-overlay__top">
         <a class="site-nav__wordmark site-nav__wordmark--overlay" href="/index.html">
