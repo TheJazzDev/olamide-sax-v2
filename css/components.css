@@ -319,92 +319,52 @@ textarea.form-field__control {
   --nav-right: clamp(16px, 2.4vw, 34px);
 }
 
-/* OPEN trigger — a VERTICAL "MENU" label pinned to the RIGHT edge of the
-   screen (Hello Monday style), vertically centred. The word runs sideways;
-   the hamburger glyph is hidden (see below). */
-.nav-toggle {
+/* OPEN/CLOSE trigger — the WAVE itself (Hello Monday style). A small curved
+   bump on the RIGHT edge, vertically centred. No text. It IS the button:
+   clicking it sweeps the wave across into the full-screen menu; clicking again
+   closes. The SVG path is morphed by menuWave.js. */
+.nav-wave-trigger {
   position: fixed;
   top: 50%;
   right: 0;
   transform: translateY(-50%);
-  z-index: calc(var(--z-overlay) + 1); /* stay clickable above the panel */
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-xs);
-  min-width: 44px;
-  min-height: 44px;
-  padding: var(--space-md) var(--space-2xs);
-  writing-mode: vertical-rl;   /* text runs top→bottom on the side */
-  background: var(--bg);
-  border: var(--border-width) solid var(--hairline);
-  border-right: 0;             /* flush to the screen edge */
-  border-radius: var(--radius-none);
-  color: var(--text);
+  z-index: calc(var(--z-overlay) + 3); /* always clickable, above the panel */
+  width: 42px;
+  height: 190px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: none;
   cursor: pointer;
-  letter-spacing: var(--tracking-label);
-  transition: border-color var(--dur-fast) var(--ease-out),
-              color var(--dur-fast) var(--ease-out),
-              background var(--dur-fast) var(--ease-out);
+  -webkit-tap-highlight-color: transparent;
 }
-.nav-toggle:hover,
-.nav-toggle:focus-visible {
-  color: var(--accent-lit);
-  border-color: var(--accent);
-  background: var(--gold-deep);
-}
-/* The side label shows only the word; the hamburger bars are hidden here. */
-.nav-toggle .nav-toggle__glyph { display: none; }
-
-/* Close trigger: identical fixed position to the Menu trigger (no cursor jump). */
-/* CLOSE mirrors the MENU trigger: vertical "CLOSE" on the right edge, centred,
-   so open/close reads as the same control toggling. */
-.nav-toggle--close {
-  position: fixed;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
-  z-index: calc(var(--z-overlay) + 2);
-}
-
-.nav-toggle:hover,
-.nav-toggle:focus-visible {
-  border-color: var(--accent);
-  color: var(--accent-lit);
-}
-
-.nav-toggle__label {
-  font-size: var(--step--1);
-}
-
-.nav-toggle__glyph {
-  display: inline-flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 4px;
-  width: 16px;
-}
-
-.nav-toggle__bar {
+.nav-wave-trigger__svg {
   display: block;
-  height: 1px;
   width: 100%;
-  background: currentColor;
-  transition: transform var(--dur-fast) var(--ease-out),
-              opacity var(--dur-fast) var(--ease-out);
+  height: 100%;
+  overflow: visible;         /* let the belly protrude left of the 42px box */
+  filter: drop-shadow(-6px 0 14px rgb(var(--ink-rgb) / 0.45));
 }
+.nav-wave-trigger__path {
+  fill: var(--accent);       /* brass bump at rest — a small gold tongue */
+  transition: fill var(--dur-fast) var(--ease-out);
+}
+.nav-wave-trigger:hover .nav-wave-trigger__path,
+.nav-wave-trigger:focus-visible .nav-wave-trigger__path {
+  fill: var(--accent-lit);
+}
+/* The trigger stays visible + on top while open so a second click closes it.
+   .site-nav is z-index:100 (its own stacking context) — below the overlay
+   (200) — so when open we lift the whole nav above the overlay, keeping the
+   trigger clickable to close. Its bump fill goes bone so it reads on gold. */
+body.has-menu-open .site-nav { z-index: calc(var(--z-overlay) + 10); }
+body.has-menu-open .nav-wave-trigger__path { fill: rgb(var(--bone-rgb) / 0.85); }
 
-/* Close variant renders an X from the same two bars. */
-.nav-toggle__glyph--x .nav-toggle__bar:first-child {
-  transform: translateY(2.5px) rotate(45deg);
-}
-.nav-toggle__glyph--x .nav-toggle__bar:last-child {
-  transform: translateY(-2.5px) rotate(-45deg);
-}
+/* The old close button is not used in the wave model — hide it. */
+.nav-toggle--close { display: none; }
 
 @media (prefers-reduced-motion: reduce) {
-  .nav-toggle,
-  .nav-toggle__bar { transition: none; }
+  .nav-wave-trigger__path { transition: none; }
 }
 
 /* 8 · MENU OVERLAY  (full-screen, editorial) */

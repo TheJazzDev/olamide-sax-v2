@@ -94,20 +94,21 @@
       <span class="site-nav__wordmark-text">Olamide<span class="site-nav__wordmark-accent">Sax</span></span>
     </a>
 
+    <!-- The menu TRIGGER is the wave itself: a small curved bump on the right
+         edge. Clicking it sweeps the wave across into the full-screen menu.
+         No text label (Hello Monday style). -->
     <button
       type="button"
-      class="nav-toggle"
+      class="nav-toggle nav-wave-trigger"
       id="nav-toggle"
       aria-haspopup="dialog"
       aria-expanded="false"
       aria-controls="menu-overlay"
       aria-label="Open menu"
     >
-      <span class="nav-toggle__label label">Menu</span>
-      <span class="nav-toggle__glyph" aria-hidden="true">
-        <span class="nav-toggle__bar"></span>
-        <span class="nav-toggle__bar"></span>
-      </span>
+      <svg class="nav-wave-trigger__svg" viewBox="0 0 60 260" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <path class="nav-wave-trigger__path" d="M60,0 L60,260 L36,260 C6,210 6,170 24,130 C6,90 6,50 36,0 Z" />
+      </svg>
     </button>
   </nav>
 
@@ -138,18 +139,6 @@
           <span class="site-nav__wordmark-text">Olamide<span class="site-nav__wordmark-accent">Sax</span></span>
         </a>
 
-        <button
-          type="button"
-          class="nav-toggle nav-toggle--close"
-          id="nav-close"
-          aria-label="Close menu"
-        >
-          <span class="nav-toggle__label label">Close</span>
-          <span class="nav-toggle__glyph nav-toggle__glyph--x" aria-hidden="true">
-            <span class="nav-toggle__bar"></span>
-            <span class="nav-toggle__bar"></span>
-          </span>
-        </button>
       </div>
 
       <div class="menu-overlay__body">
