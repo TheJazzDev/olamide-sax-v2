@@ -319,31 +319,51 @@ textarea.form-field__control {
   --nav-right: clamp(16px, 2.4vw, 34px);
 }
 
+/* OPEN trigger — a VERTICAL "MENU" label pinned to the RIGHT edge of the
+   screen (Hello Monday style), vertically centred. The word runs sideways;
+   the hamburger glyph is hidden (see below). */
 .nav-toggle {
   position: fixed;
-  top: var(--nav-top);
-  right: var(--nav-right);
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
   z-index: calc(var(--z-overlay) + 1); /* stay clickable above the panel */
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: var(--space-xs);
   min-width: 44px;
   min-height: 44px;
-  padding: var(--space-2xs) var(--space-sm);
+  padding: var(--space-md) var(--space-2xs);
+  writing-mode: vertical-rl;   /* text runs top→bottom on the side */
   background: var(--bg);
   border: var(--border-width) solid var(--hairline);
+  border-right: 0;             /* flush to the screen edge */
   border-radius: var(--radius-none);
   color: var(--text);
   cursor: pointer;
+  letter-spacing: var(--tracking-label);
   transition: border-color var(--dur-fast) var(--ease-out),
-              color var(--dur-fast) var(--ease-out);
+              color var(--dur-fast) var(--ease-out),
+              background var(--dur-fast) var(--ease-out);
 }
+.nav-toggle:hover,
+.nav-toggle:focus-visible {
+  color: var(--accent-lit);
+  border-color: var(--accent);
+  background: var(--gold-deep);
+}
+/* The side label shows only the word; the hamburger bars are hidden here. */
+.nav-toggle .nav-toggle__glyph { display: none; }
 
 /* Close trigger: identical fixed position to the Menu trigger (no cursor jump). */
+/* CLOSE mirrors the MENU trigger: vertical "CLOSE" on the right edge, centred,
+   so open/close reads as the same control toggling. */
 .nav-toggle--close {
   position: fixed;
-  top: var(--nav-top);
-  right: var(--nav-right);
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
   z-index: calc(var(--z-overlay) + 2);
 }
 
@@ -452,18 +472,28 @@ textarea.form-field__control {
 .menu-overlay__wave svg { display: block; width: 100%; height: 100%; }
 /* Fill matches the panel's --gold-deep gradient via an in-SVG <linearGradient>. */
 
-@media (min-width: 768px) {
-  /* Desktop panel is min(42vw, 600px) wide; place the wave at its left edge. */
-  .menu-overlay__wave { right: min(42vw, 600px); margin-right: -1px; }
-}
 @media (prefers-reduced-motion: reduce) {
   .menu-overlay__wave { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .menu-overlay__wave { display: none; } /* plain straight edge under reduced motion */
 }
+/* Full-screen menu (Hello Monday style) — the panel fills the whole viewport
+   at every breakpoint; no side-panel cap. */
+
+/* Full-screen layout: bigger editorial links, content held to a comfortable
+   column and centred vertically in the viewport. */
+.menu-overlay__body {
+  justify-content: center;
+  max-width: min(90vw, 60rem);
+}
 @media (min-width: 768px) {
-  .menu-overlay__frame { width: min(42vw, 600px); }
+  .menu-overlay__link { font-size: clamp(2.5rem, 7vw, 6rem); }
+  .menu-overlay__body { gap: var(--space-2xl); }
+}
+@media (min-width: 1100px) {
+  /* Two-ish column feel on wide screens: let the links row-wrap the aside beside. */
+  .menu-overlay__frame { padding-inline: clamp(3rem, 8vw, 9rem); }
 }
 
 /* ── Bronze-drawer theme ──────────────────────────────────────────────────── */
