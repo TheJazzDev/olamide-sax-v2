@@ -9,7 +9,6 @@
 
 import { $, $$, prefersReducedMotion, isMobile } from "./utils.js";
 import { initNavigation } from "./navigation.js";
-import { initMenuWave } from "./menuWave.js";
 import { initSmoothScroll } from "./smoothScroll.js";
 import { initReveals } from "./reveal.js";
 // SET ASIDE (signature under rework — uncomment to restore the Breath Line):
@@ -78,8 +77,6 @@ function initStatementBackdrop() {
 
 function init() {
   initNavigation();
-  // Hello Monday–style liquid edge on the menu panel. Page-guarded, GSAP-optional.
-  initMenuWave();
   setFooterYear();
 
   // GSAP motion foundation (Task 6). Order matters: smooth-scroll first so the
