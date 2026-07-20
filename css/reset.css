@@ -176,9 +176,25 @@ main {
   opacity: 1;
   transition: opacity 0.5s ease;
   view-transition-name: none;
+  /* Centre the brand splash while the veil is up. */
+  display: grid;
+  place-items: center;
+}
+.page-veil__logo {
+  width: clamp(56px, 9vw, 84px);
+  height: auto;
+  animation: veil-logo-breathe 2.2s ease-in-out infinite;
+}
+@keyframes veil-logo-breathe {
+  0%, 100% { transform: scale(1);    opacity: 0.72; }
+  50%      { transform: scale(1.06); opacity: 1; }
 }
 html.is-ready .page-veil {
   opacity: 0;
+}
+html.is-ready .page-veil__logo { animation: none; }
+@media (prefers-reduced-motion: reduce) {
+  .page-veil__logo { animation: none; opacity: 0.9; }
 }
 /* Once faded, stop it intercepting anything (belt-and-braces with pointer-events). */
 html.is-ready .page-veil {
