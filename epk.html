@@ -53,20 +53,40 @@
   <!-- Intro veil: covers the blank first-paint gap, fades once ready. -->
   <div class="page-veil" aria-hidden="true"><img class="page-veil__logo" src="/assets/icons/olamide-logo-brass.svg" alt="" width="72" height="72" /></div>
   <script>
-    // Reveal as soon as the page is parsed + a frame has painted, so content
-    // fades in cleanly instead of flashing. Also fires on bfcache restore.
+    // Welcome veil: hold the brand logo for a brief, deliberate beat (min ~1.2s
+    // from load) so it reads, THEN reveal the page. We still wait for the DOM to
+    // parse; the hold only extends the wait, never shortens it. bfcache restores
+    // reveal instantly (no re-intro on back/forward).
     (function () {
+      var MIN_HOLD = 1200; // ms — minimum time the welcome logo stays visible
+      var start = (window.performance && performance.now) ? performance.now() : Date.now();
+      var revealed = false;
       var reveal = function () {
+        if (revealed) return;
+        revealed = true;
         requestAnimationFrame(function () {
           requestAnimationFrame(function () {
             document.documentElement.classList.add("is-ready");
           });
         });
       };
-      if (document.readyState === "loading")
-        document.addEventListener("DOMContentLoaded", reveal, { once: true });
-      else reveal();
-      // If arriving via back/forward cache, ensure the veil is not stuck.
+      var revealAfterHold = function () {
+        var now = (window.performance && performance.now) ? performance.now() : Date.now();
+        var wait = Math.max(0, MIN_HOLD - (now - start));
+        setTimeout(reveal, wait);
+      };
+      // Honor reduced-motion: skip the hold, reveal promptly.
+      var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduce) {
+        if (document.readyState === "loading")
+          document.addEventListener("DOMContentLoaded", reveal, { once: true });
+        else reveal();
+      } else if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", revealAfterHold, { once: true });
+      } else {
+        revealAfterHold();
+      }
+      // If arriving via back/forward cache, reveal instantly (no re-intro).
       window.addEventListener("pageshow", function (e) {
         if (e.persisted) document.documentElement.classList.add("is-ready");
       });
