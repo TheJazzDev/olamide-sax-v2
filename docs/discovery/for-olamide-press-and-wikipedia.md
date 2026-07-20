@@ -47,7 +47,7 @@ A piece where **you are the whole story.** Here's how:
 - Your stage work in **ÀTÙPÀ (The Spotlight)** was **reviewed by The Guardian.**
 - Your **participatory / creative-health work** — music for wellbeing, memory, community. This is a strong human-interest angle, not just "musician plays sax."
 
-**Make sure it's about you.** When someone agrees, say plainly: *"I'd love this to be a profile about my journey and my work."* If they ask what to focus on, ive them questions like:
+**Make sure it's about you.** When someone agrees, say plainly: *"I'd love this to be a profile about my journey and my work."* If they ask what to focus on, give them questions like:
 - Your journey from Yoruba percussion in Nigeria to Afro-fusion in the UK.
 - What Afro-fusion is, and how you blend sax, voice and traditional drums.
 - Leading saxophone at a Guinness World Record event.
