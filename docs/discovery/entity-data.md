@@ -42,7 +42,13 @@ On the new artist page: **Edit → Add relationship → URL**, add each:
 - Official homepage → `https://www.olamidesax.co.uk`
 - YouTube → `https://www.youtube.com/@olamidesax`
 - Instagram → `https://www.instagram.com/olamide.sax`
-- (Add Audiomack / Spotify / Apple Music later when confirmed)
+- Apple Music → `https://music.apple.com/gb/artist/olamide-sax/1869263999`
+- Spotify → `https://open.spotify.com/artist/7dbeGBEtnfXPDIgmwcIvG8`
+- Audiomack → `https://audiomack.com/olamidesax`
+
+**STATUS: DONE ✅** — MusicBrainz artist page created (2026-07-20) at
+`musicbrainz.org/artist/b9abe24e-a60c-4087-bc03-779cde09dad3`, with all the
+above links, aliases (OlamideSax, Olamide Phillips Olaniyan), and genre tags.
 
 ---
 
