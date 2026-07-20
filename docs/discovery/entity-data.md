@@ -54,6 +54,14 @@ above links, aliases (OlamideSax, Olamide Phillips Olaniyan), and genre tags.
 
 ## 2 · Wikidata — https://www.wikidata.org
 
+**STATUS: DONE ✅** — item created (2026-07-20):
+**[Q140632146](https://www.wikidata.org/wiki/Q140632146)**. Statements: instance
+of → human; occupation → musician + saxophonist; citizenship → Nigeria;
+instrument → saxophone; genre → Afrobeats; official website; MusicBrainz artist
+ID (P434, cross-linked); Instagram. (YouTube channel ID skipped — property
+rejected the @handle; YouTube is covered via MusicBrainz + site JSON-LD.)
+Optional later pass: add press URLs as references on the statements.
+
 Wikidata has a **lower bar than a Wikipedia article** and directly feeds Google's
 knowledge panel, so this is high-value and achievable now.
 
