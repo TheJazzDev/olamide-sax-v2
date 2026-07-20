@@ -55,33 +55,52 @@
   <link rel="stylesheet" href="css/media-motion.css" />
   <link rel="stylesheet" href="css/responsive.css" />
 
-  <!-- Structured data (JSON-LD) — the artist as a Person, for rich results. -->
+  <!-- Structured data (JSON-LD) — the artist as a Person + MusicGroup, plus
+       the WebSite, for rich results and entity disambiguation. sameAs lists the
+       social profiles AND the independent press/coverage that reference him, so
+       Google resolves "Olamide Sax" / "OlamideSax" to this one distinct entity
+       (not the unrelated rapper "Olamide"). -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Olamide Sax",
-    "alternateName": "Olamide Phillips Olaniyan",
-    "url": "https://www.olamidesax.co.uk/",
-    "image": "https://www.olamidesax.co.uk/assets/images/gallery/sbc-stage-02.jpg",
-    "jobTitle": "Afro-Fusion Artist, Multi-Instrumentalist, Participatory Artist & Creative Facilitator",
-    "description": "Nigerian-born, UK-based Afro-fusion artist and multi-instrumentalist — saxophone, vocals, keys and Yoruba percussion — and a participatory artist and creative facilitator. Winner, Eko Heritage Awards 2026 · Best Instrumentalist.",
-    "nationality": "Nigerian",
-    "homeLocation": {
-      "@type": "Place",
-      "name": "Yorkshire, United Kingdom"
-    },
-    "worksFor": {
-      "@type": "Organization",
-      "name": "Lammy Wonder Music Entertainment"
-    },
-    "award": "Eko Heritage Awards 2026 — Best Instrumentalist of the Year",
-    "knowsAbout": ["Afro-fusion", "Saxophone", "Yoruba percussion", "Participatory arts", "Creative health"],
-    "sameAs": [
-      "https://www.instagram.com/olamide.sax",
-      "https://www.linkedin.com/in/olamide-sax",
-      "https://youtube.com/@olamidesax",
-      "https://facebook.com/olamidesaxx/"
+    "@graph": [
+      {
+        "@type": ["Person", "MusicGroup"],
+        "@id": "https://www.olamidesax.co.uk/#olamidesax",
+        "name": "Olamide Sax",
+        "alternateName": ["OlamideSax", "Olamide Phillips Olaniyan", "Olaniyan Olamide Phillips"],
+        "url": "https://www.olamidesax.co.uk/",
+        "image": "https://www.olamidesax.co.uk/assets/images/gallery/sbc-stage-02.jpg",
+        "logo": "https://www.olamidesax.co.uk/assets/icons/olamide-logo.svg",
+        "genre": ["Afro-fusion", "Afrobeat", "Instrumental"],
+        "jobTitle": "Afro-Fusion Artist, Multi-Instrumentalist, Participatory Artist & Creative Facilitator",
+        "description": "Nigerian-born, UK-based Afro-fusion artist and multi-instrumentalist — saxophone, vocals, keys and Yoruba percussion — and a participatory artist and creative facilitator. Winner, Eko Heritage Awards 2026 · Best Instrumentalist.",
+        "nationality": "Nigerian",
+        "homeLocation": { "@type": "Place", "name": "Yorkshire, United Kingdom" },
+        "worksFor": { "@type": "Organization", "name": "Lammy Wonder Music Entertainment" },
+        "award": "Eko Heritage Awards 2026 — Best Instrumentalist of the Year",
+        "knowsAbout": ["Afro-fusion", "Saxophone", "Yoruba percussion", "Participatory arts", "Creative health"],
+        "sameAs": [
+          "https://www.instagram.com/olamide.sax",
+          "https://www.linkedin.com/in/olamide-sax",
+          "https://youtube.com/@olamidesax",
+          "https://facebook.com/olamidesaxx/",
+          "https://www.bbc.co.uk/news/articles/c0myr99njy3o",
+          "https://guardian.ng/saturday-magazine/weekend-beats/olamide-lights-up-atupa-stage-production-with-multifaceted-performances/",
+          "https://guardian.ng/art/participation-before-performance-olamide-sax-at-collective-routes-beyond/",
+          "https://newtelegraphng.com/olamide-sax-ignites-the-stage-with-stirring-performance-in-sheffield/",
+          "https://www.thestar.co.uk/your-world/unforgettable-night-as-sheffield-theatre-group-showcases-work-6531919",
+          "https://wearedarts.org.uk/meet-the-artist-olamide-sax/"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.olamidesax.co.uk/#website",
+        "url": "https://www.olamidesax.co.uk/",
+        "name": "Olamide Sax",
+        "alternateName": "OlamideSax",
+        "publisher": { "@id": "https://www.olamidesax.co.uk/#olamidesax" }
+      }
     ]
   }
   </script>
