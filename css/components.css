@@ -278,6 +278,8 @@ textarea.form-field__control {
   width: 1.75rem;
   height: 1.75rem;
   flex-shrink: 0;
+  background: none;   /* override the global img placeholder tone — this is a
+                         transparent logo, not a photo, so no dark box behind it */
 }
 
 /* Top nav: logo mark only — hide the text there to keep the bar minimal. */
@@ -790,24 +792,26 @@ textarea.form-field__control {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  column-gap: var(--space-md);
-  row-gap: var(--space-xs);
+  column-gap: var(--space-sm);
+  row-gap: var(--space-2xs);
 }
 .site-footer__explore li {
-  display: flex;
+  display: inline-flex;
   align-items: baseline;
-  gap: var(--space-md);
+  gap: var(--space-sm);
 }
-.site-footer__explore li + li::before {
+/* Separator TRAILS each item (except the last). A trailing dot at a line-end
+   reads far cleaner than a leading dot orphaned at a line-start on wrap. */
+.site-footer__explore li:not(:last-child)::after {
   content: "·";
   color: var(--accent);
-  font-size: var(--step-1);
+  font-size: var(--step-0);
 }
 .site-footer__explore a {
   font-family: var(--font-display);
   font-weight: var(--display-weight);
-  font-size: clamp(1.3rem, 1.1rem + 1vw, 2rem);
-  line-height: 1.2;
+  font-size: clamp(1.15rem, 1rem + 0.7vw, 1.6rem);
+  line-height: 1.25;
   color: rgb(var(--bone-rgb) / 0.8);
   text-decoration: none;
   transition: color 0.25s ease;

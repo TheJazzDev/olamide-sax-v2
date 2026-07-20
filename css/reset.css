@@ -61,8 +61,10 @@ video {
   height: auto;
 }
 
-/* Warm placeholder tone while images load (never a grey box). */
-img {
+/* Warm placeholder tone while raster images load (never a grey box). SVG icons
+   are excluded — they're transparent vector marks, not photos, so a tone box
+   would show as a dark square behind them. */
+img:not([src$=".svg"]) {
   background-color: var(--umber, #171310);
 }
 
