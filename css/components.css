@@ -653,9 +653,11 @@ textarea.form-field__control {
 
 /* Socials: a quiet row of circular ICON buttons at the panel's foot. */
 .menu-overlay__socials {
-  display: flex;
-  flex-wrap: wrap;
+  /* 4-per-row grid → 7 icons lay out cleanly as 4 on top, 3 below (not 6+1). */
+  display: grid;
+  grid-template-columns: repeat(4, 44px);
   gap: var(--space-sm);
+  justify-content: start;
 }
 .menu-overlay__social {
   display: inline-flex;
@@ -830,6 +832,14 @@ textarea.form-field__control {
 .site-footer__contact a:hover,
 .site-footer__contact a:focus-visible {
   color: var(--accent-lit);
+}
+
+/* Footer socials: 4-per-row grid so the 7 icons read as 4 on top, 3 below. */
+.site-footer__socials ul {
+  display: grid;
+  grid-template-columns: repeat(4, 44px);
+  gap: var(--space-sm);
+  justify-content: start;
 }
 
 .site-footer__rule {

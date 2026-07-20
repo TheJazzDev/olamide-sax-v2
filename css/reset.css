@@ -185,18 +185,25 @@ main {
 .page-veil__logo {
   width: clamp(56px, 9vw, 84px);
   height: auto;
-  animation: veil-logo-breathe 2.2s ease-in-out infinite;
+  /* Quick, one-shot scale-in then hold steady (no looping pulse — that read as
+     'flashy'). The veil's own hold/fade duration is unchanged. */
+  animation: veil-logo-in 0.55s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)) both;
 }
-@keyframes veil-logo-breathe {
-  0%, 100% { transform: scale(1);    opacity: 0.72; }
-  50%      { transform: scale(1.06); opacity: 1; }
+@keyframes veil-logo-in {
+  from { transform: scale(0.9); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
 }
 html.is-ready .page-veil {
   opacity: 0;
 }
-html.is-ready .page-veil__logo { animation: none; }
+/* On reveal, the logo eases back out with the veil (no snap). */
+html.is-ready .page-veil__logo {
+  opacity: 0;
+  transform: scale(1.02);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
 @media (prefers-reduced-motion: reduce) {
-  .page-veil__logo { animation: none; opacity: 0.9; }
+  .page-veil__logo { animation: none; opacity: 0.9; transform: none; }
 }
 /* Once faded, stop it intercepting anything (belt-and-braces with pointer-events). */
 html.is-ready .page-veil {
