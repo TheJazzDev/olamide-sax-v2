@@ -95,19 +95,31 @@ export function clipById(id) {
 }
 
 /* ============================================================================
-   VIDEOS — FACADE cards seeded from Olamide's REAL performances. Specific
-   YouTube video ids could NOT be scraped (consent-wall). Each card therefore
-   carries `youtubeId: "TODO"` and links to the CHANNEL as the primary CTA;
-   the poster (`thumb`) reuses a relevant real gallery photograph.
-   TODO(youtube): replace each youtubeId "TODO" with the real 11-char id once
-   Olamide supplies the specific video links (channel: @Olamidesax).
+   VIDEOS — real videos from Olamide's YouTube channel (@Olamidesax). Each card
+   carries the real 11-char `youtubeId`; the facade plays an embedded (nocookie)
+   player on click. Thumbnails come straight from YouTube (i.ytimg.com), so they
+   always match the actual video. Curated + categorised from the channel.
    ========================================================================== */
 const CHANNEL_URL = "https://www.youtube.com/@Olamidesax";
+const YT = (id) => `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
 
 export const videos = [
-  { id: "v-01", category: "LIVE", youtubeId: "TODO", channelUrl: CHANNEL_URL, title: "Eco Art Fashion Show — Live Afro-Fusion Saxophone", thumb: GALLERY + "fashion-01.jpg",     alt: "Olamide Sax playing live saxophone at the Eco Art Fashion Show.",       meta: "Live", date: "Recent", placeholder: false },
-  { id: "v-02", category: "LIVE", youtubeId: "TODO", channelUrl: CHANNEL_URL, title: "Live Afro-Fusion Saxophone — Camouflage Performance", thumb: GALLERY + "festival-01.jpg",  alt: "Olamide Sax performing live Afro-fusion saxophone in camouflage dress.", meta: "Live", date: "Recent", placeholder: false },
-  { id: "v-03", category: "LIVE", youtubeId: "TODO", channelUrl: CHANNEL_URL, title: "Ìyá Ìlù Bàtá — Live Percussion",                    thumb: GALLERY + "drums-stage-01.jpg", alt: "Olamide Sax on ìyá ìlù bàtá, live Yoruba percussion.",                  meta: "Live", date: "Recent", placeholder: false },
+  // LIVE — performances
+  { id: "v-01", category: "LIVE", youtubeId: "vR9Esv2KY6k", channelUrl: CHANNEL_URL, title: "“Prisoner” (Lucky Dube) — Guinness World Record Football Scarf Event", thumb: YT("vR9Esv2KY6k"), alt: "Olamide Sax performing at the Guinness World Record football scarf event.", meta: "Live", date: "2026", placeholder: false },
+  { id: "v-02", category: "LIVE", youtubeId: "jJhszknDSwM", channelUrl: CHANNEL_URL, title: "Afrobeats Live at Sharrow Festival — Olamide Sax × Sound Café", thumb: YT("jJhszknDSwM"), alt: "Olamide Sax performing Afrobeats live at Sharrow Festival, Sheffield.", meta: "Live", date: "2026", placeholder: false },
+  { id: "v-03", category: "LIVE", youtubeId: "y2_7x9VwqHg", channelUrl: CHANNEL_URL, title: "Interactive Community Saxophone — Eco Art Fashion Show", thumb: YT("y2_7x9VwqHg"), alt: "Olamide Sax in an interactive community saxophone performance at the Eco Art Fashion Show.", meta: "Live", date: "2026", placeholder: false },
+  { id: "v-04", category: "LIVE", youtubeId: "Irps27Od-8w", channelUrl: CHANNEL_URL, title: "Opening Performance — ÀTÙPÀ (The Spotlight), Doncaster", thumb: YT("Irps27Od-8w"), alt: "Olamide Sax opening performance at ÀTÙPÀ (The Spotlight), Doncaster.", meta: "Live", date: "2026", placeholder: false },
+  { id: "v-05", category: "LIVE", youtubeId: "Ss26Eo-HU2k", channelUrl: CHANNEL_URL, title: "Live with The Skintones UK — ArtBomb Doncaster", thumb: YT("Ss26Eo-HU2k"), alt: "Olamide Sax performing live with The Skintones UK at ArtBomb, Doncaster.", meta: "Live", date: "2026", placeholder: false },
+  { id: "v-06", category: "LIVE", youtubeId: "t1GLk2uv30I", channelUrl: CHANNEL_URL, title: "The Worship Continued — RCCG Maranatha, Doncaster", thumb: YT("t1GLk2uv30I"), alt: "Olamide Sax playing saxophone in worship at RCCG Maranatha, Doncaster.", meta: "Live", date: "Recent", placeholder: false },
+
+  // MUSIC — covers & studio pieces
+  { id: "v-07", category: "MUSIC", youtubeId: "Cr1aq0kq1Xw", channelUrl: CHANNEL_URL, title: "All of Me (John Legend) — Live Sax & Piano ft. Arkadiusz Buja", thumb: YT("Cr1aq0kq1Xw"), alt: "Olamide Sax performing an All of Me sax and piano cover with Arkadiusz Buja.", meta: "Cover", date: "Recent", placeholder: false },
+  { id: "v-08", category: "MUSIC", youtubeId: "7WCsbC1MBQQ", channelUrl: CHANNEL_URL, title: "“Seven Lives” (Beautiful Nubia) — Live Performance", thumb: YT("7WCsbC1MBQQ"), alt: "Olamide Sax performing Seven Lives by Beautiful Nubia.", meta: "Cover", date: "Recent", placeholder: false },
+  { id: "v-09", category: "MUSIC", youtubeId: "t6J8e-f1wx4", channelUrl: CHANNEL_URL, title: "Duduke — Saxophone Cover", thumb: YT("t6J8e-f1wx4"), alt: "Olamide Sax playing a Duduke saxophone cover.", meta: "Cover", date: "Recent", placeholder: false },
+  { id: "v-10", category: "MUSIC", youtubeId: "GjtaLdsFW6w", channelUrl: CHANNEL_URL, title: "Bà nu so (Brymo) — Sax Refix", thumb: YT("GjtaLdsFW6w"), alt: "Olamide Sax playing a saxophone refix of Bànuso by Brymo.", meta: "Cover", date: "Recent", placeholder: false },
+
+  // INTERVIEW / feature
+  { id: "v-11", category: "INTERVIEW", youtubeId: "jxmaE8bs77Q", channelUrl: CHANNEL_URL, title: "Lammy Wonder Music Band on the Sound Spark Show (YME Studio)", thumb: YT("jxmaE8bs77Q"), alt: "Olamide Sax with Lammy Wonder Music Band featured on the Sound Spark Show.", meta: "Feature", date: "2024", placeholder: false },
 ];
 
 /* ============================================================================

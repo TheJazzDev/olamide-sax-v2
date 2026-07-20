@@ -1,9 +1,6 @@
 # Getting you on Wikipedia & Google — your part
 
-We're doing this together. I'm handling everything technical — the website, the
-SEO, the databases, and submitting the Wikipedia page when it's time. This page
-is **your side**: the things only you can do, because they depend on you,
-your performances, and journalists.
+I will submit the Wikipedia page when it's time. This side is **your side**: the things only you can do, because they depend on you, your performances, and journalists.
 
 Here's the deal, plain and simple.
 
@@ -11,26 +8,18 @@ Here's the deal, plain and simple.
 
 ## The one thing that matters
 
-To get you on Wikipedia, **UK journalists have to write about you.** Not you
-writing about yourself, not me, not your website — actual journalists, in real
-outlets, writing proper articles **about you.**
+To get you on Wikipedia, **UK journalists have to write about you.** Not you writing about yourself, not me, not your website — actual journalists, in real outlets, writing proper articles **about you.**
 
-Wikipedia only gives a page once **several independent journalists have covered
-you.** And it must never look arranged or paid for — Wikipedia editors check for
-that and delete anything that looks set up. So this is real: we need journalists
-to genuinely find you interesting and decide to write about you themselves.
+Wikipedia only gives a page once **several independent journalists have covered you.** And it must never look arranged or paid for — Wikipedia editors check for that and delete anything that looks set up. So this is real: we need journalists to genuinely find you interesting and decide to write about you themselves.
 
-You're already partway there — you've got the two Guardian reviews and a real
-award. We need **one or two more solid pieces about you**, and then Wikipedia is
-on.
+You're already partway there — you've got the two Guardian reviews and a real award. We need **one or two more solid pieces about you**, and then Wikipedia is on.
 
 ---
 
 ## What counts (so you don't waste effort)
 
 A piece only helps if it's:
-- **about YOU** — your story, your music — not an event that just mentions your
-  name,
+- **about YOU** — your story, your music — not an event that just mentions your name,
 - **in a real outlet** — BBC, national papers, established music magazines,
 - **written by the journalist themselves.**
 
@@ -45,29 +34,20 @@ You need two or three of those. Everything below is how you get them.
 A piece where **you are the whole story.** Here's how:
 
 **Who to go to (you're in Yorkshire, so start local — it's the easiest door):**
-- **BBC Introducing (Yorkshire)** — made exactly for artists like you. You can
-  upload your music to them directly. Start here.
-- **BBC Radio Sheffield / BBC Radio Leeds** — they interview local artists and
-  do live sessions. Pitch them for an interview.
-- **The Star** (Sheffield — already covered you once, go back), **Yorkshire
-  Post**, **Doncaster Free Press**.
-- **The Guardian NG** — they've reviewed you; go back for a full **interview /
-  profile** this time, not a review.
+- **BBC Introducing (Yorkshire)** — made exactly for artists like you. You can upload your music to them directly. Start here.
+- **BBC Radio Sheffield / BBC Radio Leeds** — they interview local artists and do live sessions. Pitch them for an interview.
+- **The Star** (Sheffield — already covered you once, go back), **Yorkshire Post**, **Doncaster Free Press**.
+- **The Guardian NG** — they've reviewed you; go back for a full **interview / profile** this time, not a review.
 
-**How:** send a short pitch email (template at the bottom — just fill it in and
-send). Lead with your strongest hooks.
+**How:** send a short pitch email (template at the bottom — just fill it in and send). Lead with your strongest hooks.
 
 **Your hooks — the reasons they should care:**
 - **Best Instrumentalist of the Year, 2026 Eko Heritage Awards.**
 - You **led live saxophone at a Guinness World Record event** in Sheffield.
 - Your stage work in **ÀTÙPÀ (The Spotlight)** was **reviewed by The Guardian.**
-- Your **participatory / creative-health work** — music for wellbeing, memory,
-  community. This is a strong human-interest angle, not just "musician plays
-  sax."
+- Your **participatory / creative-health work** — music for wellbeing, memory, community. This is a strong human-interest angle, not just "musician plays sax."
 
-**Make sure it's about you.** When someone agrees, say plainly: *"I'd love this
-to be a profile about my journey and my work."* If they ask what to focus on,
-give them questions like:
+**Make sure it's about you.** When someone agrees, say plainly: *"I'd love this to be a profile about my journey and my work."* If they ask what to focus on, ive them questions like:
 - Your journey from Yoruba percussion in Nigeria to Afro-fusion in the UK.
 - What Afro-fusion is, and how you blend sax, voice and traditional drums.
 - Leading saxophone at a Guinness World Record event.
@@ -77,42 +57,30 @@ give them questions like:
 
 ### 2. Get the BBC writing about YOU (not just mentioning you)
 
-Being *in* a BBC event article is good, but for Wikipedia we need the BBC to
-write something where **you're the subject.** Upload to **BBC Introducing**,
-pitch **Radio Sheffield / Leeds** for an interview or live session. If they do
-it, send me the link and date.
+Being *in* a BBC event article is good, but for Wikipedia we need the BBC to write something where **you're the subject.** Upload to **BBC Introducing**, pitch **Radio Sheffield / Leeds** for an interview or live session. If they do it, send me the link and date.
 
 ### 3. Turn every performance into press
 
-Every festival, show, workshop or award is a chance for coverage. Ask the
-venue's press person to include you and connect you with journalists covering
-it. Whenever an article appears, **send me the link** — I keep your press page
-updated, and that list is what we hand Wikipedia later.
+Every festival, show, workshop or award is a chance for coverage. Ask the venue's press person to include you and connect you with journalists covering it. Whenever an article appears, **send me the link** — I keep your press page updated, and that list is what we hand Wikipedia later.
 
 ### 4. Music platforms & databases (I'll set these up — just send me what I need)
 
 - Make sure your music is on **Audiomack / Spotify / Apple Music / YouTube** as
   **"Olamide Sax"**, each linking to your site.
-- **Send me your YouTube links** so I can put the real videos on your media page
-  (they're placeholders right now).
-- I'll handle **MusicBrainz** and **Wikidata** (free databases Google reads) —
-  I've already prepped your details.
+- I'll handle **MusicBrainz** and **Wikidata** (free databases Google reads) - I've already prepped your details.
 
 ### 5. Keep your name consistent
 
 Everywhere — Instagram, YouTube, LinkedIn, Facebook, press bios — use the exact
 name **"Olamide Sax"**, link to **olamidesax.co.uk**, same bio, same photo. It's
-how Google keeps you separate from the rapper "Olamide."
+how Google keeps you separate from the rapper "Olamide." or "Olamide Baddo"
 
 ---
 
 ## What we don't do
 
-- We **don't** write your Wikipedia page ourselves or submit it in your name —
-  that gets it deleted. When it's time, a neutral person submits the draft I've
-  prepared, and an independent editor reviews it.
-- We **never** pay anyone who says "I'll put you on Wikipedia" — fake sources,
-  gets deleted, often a scam.
+- We **don't** write your Wikipedia page ourselves or submit it in your name — that gets it deleted. When it's time, a neutral person submits the draft I've prepared, and an independent editor reviews it.
+- We **never** pay anyone who says "I'll put you on Wikipedia" — fake sources, gets deleted, often a scam.
 - Your own site and socials **don't count** as proof — only real journalism does.
 
 ---
