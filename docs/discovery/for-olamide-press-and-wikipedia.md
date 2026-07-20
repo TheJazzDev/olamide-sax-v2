@@ -1,195 +1,144 @@
-# Olamide — how we get you on Wikipedia (and properly on Google)
+# Getting you on Wikipedia & Google — your part
 
-Hi Olamide. This is the plan for getting you a proper presence online — the
-Wikipedia page, the "musician" box on Google, all of it. I've written out
-exactly what you need to do, step by step, so you know where to put your energy.
+We're doing this together. I'm handling everything technical — the website, the
+SEO, the databases, and submitting the Wikipedia page when it's time. This page
+is **your side**: the things only you can do, because they depend on you,
+your performances, and journalists.
 
-Read this once fully, then work down the list. I'll handle everything on the
-website and technical side; the items here are the ones only **you** can do,
-because they depend on your relationships, your performances, and journalists
-writing about you.
+Here's the deal, plain and simple.
 
 ---
 
-## First, the honest truth about how this works
+## The one thing that matters
 
-Back in Nigeria, you had a system: after an event you'd send your write-up to
-your contact, and he'd get it published in *The Guardian* and the other papers.
-That's why you already have that coverage — and it genuinely helps.
+To get you on Wikipedia, **UK journalists have to write about you.** Not you
+writing about yourself, not me, not your website — actual journalists, in real
+outlets, writing proper articles **about you.**
 
-**The UK doesn't work that way, and neither does Wikipedia.** Here you can't send
-a write-up and have it published as a favour. UK journalists write their own
-articles, and they only write about you if they find you *interesting or
-newsworthy*. And Wikipedia will only give you a page once **several independent
-journalists have written proper articles about you** — not articles you sent
-them, not your own website, not adverts. Wikipedia editors can tell the
-difference, and they delete anything that looks arranged or paid for.
+Wikipedia only gives a page once **several independent journalists have covered
+you.** And it must never look arranged or paid for — Wikipedia editors check for
+that and delete anything that looks set up. So this is real: we need journalists
+to genuinely find you interesting and decide to write about you themselves.
 
-So the real work is this: **we need to get UK journalists genuinely interested in
-writing about YOU.** Everything below is how you make that happen. It takes a few
-months, but you're already partway there.
+You're already partway there — you've got the two Guardian reviews and a real
+award. We need **one or two more solid pieces about you**, and then Wikipedia is
+on.
 
 ---
 
-## What "counts" — so you don't waste effort
+## What counts (so you don't waste effort)
 
-When a journalist covers you, it only helps your Wikipedia case if it's:
+A piece only helps if it's:
+- **about YOU** — your story, your music — not an event that just mentions your
+  name,
+- **in a real outlet** — BBC, national papers, established music magazines,
+- **written by the journalist themselves.**
 
-- **About YOU** — the article is about you, your story, your music. An article
-  about an *event* that only mentions your name in passing is much weaker.
-- **In a real outlet** — BBC, national newspapers, established music magazines.
-  Not a personal blog, not a paid listing.
-- **Written independently** — by the journalist, not sent by you or your team.
-
-You need **two or three of these** before Wikipedia will accept a page. You
-already have the two Guardian reviews. So realistically you need **one or two
-more strong ones**, ideally an interview or feature that is entirely about you.
+You need two or three of those. Everything below is how you get them.
 
 ---
 
-## YOUR ACTION LIST (in order of importance)
+## Your list
 
-### 1. Land ONE proper interview or feature about you (most important thing)
+### 1. Land one proper interview or feature about you — this is the big one
 
-This single item is what unlocks Wikipedia. Not event coverage — a piece where
-**you are the whole story.** Here's how to get one:
+A piece where **you are the whole story.** Here's how:
 
-**Who to approach (UK):**
-- **BBC local/regional first — this is your best route.** Because you're in
-  Yorkshire, the right doors are:
-  - **BBC Radio Sheffield** and **BBC Radio Leeds** — they interview local
-    artists and cover community culture.
-  - **BBC Introducing (Yorkshire)** — this is specifically for emerging artists;
-    you can **upload your music to them directly** and they feature local talent.
-  - **BBC Yorkshire** (TV/online arts).
-- **Local newspapers doing an artist profile:** *The Star* (Sheffield — already
-  covered you once, go back to them), *Yorkshire Post*, *Doncaster Free Press*.
-- **UK music / Afrobeat / world-music platforms** with real editors (not blogs).
-- **Nigerian national press for a proper profile** — *The Guardian NG* has
-  already reviewed you; going back to them for a full **interview/profile** (not
-  a review) would be ideal, since you have that relationship.
+**Who to go to (you're in Yorkshire, so start local — it's the easiest door):**
+- **BBC Introducing (Yorkshire)** — made exactly for artists like you. You can
+  upload your music to them directly. Start here.
+- **BBC Radio Sheffield / BBC Radio Leeds** — they interview local artists and
+  do live sessions. Pitch them for an interview.
+- **The Star** (Sheffield — already covered you once, go back), **Yorkshire
+  Post**, **Doncaster Free Press**.
+- **The Guardian NG** — they've reviewed you; go back for a full **interview /
+  profile** this time, not a review.
 
-**How to reach them — send a short pitch email** (I've written you a ready
-template at the bottom of this document — "PITCH EMAIL"). You send it to the
-arts/music editor or the show's producer. Keep it short, lead with a hook.
+**How:** send a short pitch email (template at the bottom — just fill it in and
+send). Lead with your strongest hooks.
 
-**Your hooks (the reasons a journalist should care) — use these:**
-- You won **Best Instrumentalist of the Year at the 2026 Eko Heritage Awards.**
-- You **led live saxophone at a Guinness World Record event** (the football scarf
-  procession in Sheffield with Stand & Be Counted Theatre).
+**Your hooks — the reasons they should care:**
+- **Best Instrumentalist of the Year, 2026 Eko Heritage Awards.**
+- You **led live saxophone at a Guinness World Record event** in Sheffield.
 - Your stage work in **ÀTÙPÀ (The Spotlight)** was **reviewed by The Guardian.**
-- Your story: **Nigerian-born, Yorkshire-based**, roots in Yoruba percussion,
-  now Afro-fusion across music, theatre and community arts.
-- You do **participatory / creative-health work** — music for wellbeing,
-  memory, community. Journalists love this angle; it's a human-interest story,
-  not just "musician plays sax."
+- Your **participatory / creative-health work** — music for wellbeing, memory,
+  community. This is a strong human-interest angle, not just "musician plays
+  sax."
 
-**When the interview happens — make sure it's about YOU.** When a producer or
-journalist agrees, say clearly: *"I'd love this to be a profile about my journey
-and my work as an artist."* If they're planning to just mention you inside a
-wider piece, that's fine too, but ask if they'd consider a dedicated feature.
+**Make sure it's about you.** When someone agrees, say plainly: *"I'd love this
+to be a profile about my journey and my work."* If they ask what to focus on,
+give them questions like:
+- Your journey from Yoruba percussion in Nigeria to Afro-fusion in the UK.
+- What Afro-fusion is, and how you blend sax, voice and traditional drums.
+- Leading saxophone at a Guinness World Record event.
+- Winning Best Instrumentalist at the Eko Heritage Awards.
+- The workshops — the wellbeing and community side of your work.
+- What you're building next in the UK.
 
-**Questions you can suggest they ask you** (send these if they ask for an angle —
-they steer the piece toward being *about you*, which is what Wikipedia needs):
-- "Tell us about your journey from Yoruba percussion in Nigeria to Afro-fusion
-  in the UK."
-- "What is Afro-fusion, and how do you blend saxophone, voice and traditional
-  drums?"
-- "What was it like leading saxophone at a Guinness World Record event?"
-- "You won Best Instrumentalist at the Eko Heritage Awards — what did that mean
-  to you?"
-- "Your work isn't only performance — tell us about the participatory and
-  wellbeing side, the workshops."
-- "What are you working on next in the UK?"
+### 2. Get the BBC writing about YOU (not just mentioning you)
 
-### 2. Get BBC coverage that is ABOUT you (not just mentioning you)
+Being *in* a BBC event article is good, but for Wikipedia we need the BBC to
+write something where **you're the subject.** Upload to **BBC Introducing**,
+pitch **Radio Sheffield / Leeds** for an interview or live session. If they do
+it, send me the link and date.
 
-You've been *in* a BBC article (the world-record event). That's good, but for
-Wikipedia we need the BBC to write something where **you are the subject.**
-- Upload your music and story to **BBC Introducing** (Yorkshire) — this is
-  literally built for discovering artists like you.
-- Pitch **BBC Radio Sheffield / Radio Leeds** for a **live session or an
-  interview** — regional radio does this often for local artists with a good
-  story, and you have one.
-- If they do a segment or write you up, **save the link and the date** — send it
-  to me.
+### 3. Turn every performance into press
 
-### 3. Keep every performance producing an article
+Every festival, show, workshop or award is a chance for coverage. Ask the
+venue's press person to include you and connect you with journalists covering
+it. Whenever an article appears, **send me the link** — I keep your press page
+updated, and that list is what we hand Wikipedia later.
 
-Every festival, theatre run, workshop series or award is a chance for coverage.
-- Ask the **venue or festival's press person** to include you in their press
-  release and to connect you with any journalists covering it.
-- After each event, **note down any article that appears, with its link and
-  date, and send it to me.** I keep your press page updated, and this list is
-  also what we hand Wikipedia later.
+### 4. Music platforms & databases (I'll set these up — just send me what I need)
 
-### 4. Music platforms & databases (I can help you set these up)
+- Make sure your music is on **Audiomack / Spotify / Apple Music / YouTube** as
+  **"Olamide Sax"**, each linking to your site.
+- **Send me your YouTube links** so I can put the real videos on your media page
+  (they're placeholders right now).
+- I'll handle **MusicBrainz** and **Wikidata** (free databases Google reads) —
+  I've already prepped your details.
 
-These build your "musician" identity across the internet and help Google show
-you properly:
-- **Audiomack / Spotify / Apple Music / YouTube** — make sure your music is on
-  these under **"Olamide Sax"**, and that each profile links to your website.
-- **MusicBrainz** and **Wikidata** — free, open music databases that Google
-  reads. I've already prepared all your details for these; I'll enter them (or
-  guide you), and they strengthen your presence. (These have a lower bar than
-  Wikipedia and we can do them now.)
-- **Send me your YouTube video links** — I'll embed the real videos on your
-  media page (right now they're placeholders).
+### 5. Keep your name consistent
 
-### 5. Keep your name consistent everywhere
-
-On every profile (Instagram, YouTube, LinkedIn, Facebook, press bios), use:
-- the exact name **"Olamide Sax"**,
-- a link to **https://www.olamidesax.co.uk**,
-- the same short bio and the same main photo.
-
-This is how Google learns all of these are the same person — and it helps
-separate you from the Nigerian rapper "Olamide" who shares part of your name.
+Everywhere — Instagram, YouTube, LinkedIn, Facebook, press bios — use the exact
+name **"Olamide Sax"**, link to **olamidesax.co.uk**, same bio, same photo. It's
+how Google keeps you separate from the rapper "Olamide."
 
 ---
 
-## What we do NOT do (this is important)
+## What we don't do
 
-- ❌ **We don't write your Wikipedia page ourselves, and you don't submit it.**
-  Wikipedia bans people from creating their own pages — it gets deleted, and it
-  makes the next attempt harder. When the time is right, a **neutral person**
-  (not you, not me as your team) submits the draft I've already prepared, and an
-  independent Wikipedia editor reviews it.
-- ❌ **We never pay anyone who says "I'll put you on Wikipedia."** They use fake
-  sources; those pages get deleted, and some are scams.
-- ❌ **We don't rely on your own website or social media as "proof"** for
-  Wikipedia — those don't count. Only independent journalism counts.
+- We **don't** write your Wikipedia page ourselves or submit it in your name —
+  that gets it deleted. When it's time, a neutral person submits the draft I've
+  prepared, and an independent editor reviews it.
+- We **never** pay anyone who says "I'll put you on Wikipedia" — fake sources,
+  gets deleted, often a scam.
+- Your own site and socials **don't count** as proof — only real journalism does.
 
 ---
 
-## The order I'd tackle it, if I were you
+## Start here
 
-1. This week: pick **3 targets** from the list (e.g. BBC Radio Sheffield, The
-   Star, BBC Introducing) and send them the pitch email below.
-2. Upload to **BBC Introducing** and get your music on **Audiomack/Spotify** if
-   not already.
-3. Send me your **YouTube links** so I finish your media page.
-4. For your **next performance**, arrange press with the venue in advance.
-5. Every time an article appears, **send me the link.**
-6. Once you have **2–3 strong pieces about you**, tell me — I'll get the
-   Wikipedia draft submitted through the proper channel.
-
-You're not starting from zero. You already have Guardian coverage, a real award,
-a world-record moment, and a genuine story. We just need to convert that into a
-couple more solid articles, and then Wikipedia becomes realistic.
+1. Pick 3 targets this week (say BBC Introducing, BBC Radio Sheffield, The Star)
+   and send the pitch email.
+2. Get your music on Audiomack/Spotify and send me your YouTube links.
+3. Line up press for your next show in advance.
+4. Send me every article that appears.
+5. Once you've got 2–3 strong pieces about you, tell me — I'll get the Wikipedia
+   page submitted.
 
 ---
 
-## PITCH EMAIL — copy, fill the [brackets], send
+## Pitch email — fill the [brackets] and send
 
 > **Subject:** Story idea: Yorkshire-based Nigerian saxophonist, Eko Heritage
 > "Best Instrumentalist" 2026
 >
 > Hi [Name],
 >
-> My name is Olamide Sax (Olamide Phillips Olaniyan) — a Nigerian-born,
-> Yorkshire-based Afro-fusion artist and saxophonist. I thought my story might
-> interest [outlet / your listeners].
+> I'm Olamide Sax (Olamide Phillips Olaniyan) — a Nigerian-born, Yorkshire-based
+> Afro-fusion artist and saxophonist. I thought my story might interest
+> [outlet / your listeners].
 >
 > A few things that might make a good piece:
 > - I was named **Best Instrumentalist of the Year at the 2026 Eko Heritage
@@ -199,20 +148,20 @@ couple more solid articles, and then Wikipedia becomes realistic.
 > - My stage work in *ÀTÙPÀ (The Spotlight)* at CAST Doncaster was reviewed by
 >   *The Guardian.*
 > - Beyond performing, I run **participatory and creative-health workshops** —
->   using music for wellbeing, memory and community.
+>   music for wellbeing, memory and community.
 >
 > My journey runs from traditional Yoruba percussion in Nigeria to Afro-fusion
 > here in Yorkshire, blending saxophone, voice and African rhythm.
 >
-> You can see my work, press and music here: https://www.olamidesax.co.uk
-> (there's a press kit at https://www.olamidesax.co.uk/epk).
+> My work, press and music: https://www.olamidesax.co.uk (press kit at
+> https://www.olamidesax.co.uk/epk).
 >
 > I'd be glad to come in for an interview or a live session — whatever suits.
 >
-> Thank you for considering it,
+> Thanks for considering it,
 > Olamide Sax
 > [phone] · booking@olamidesax.co.uk
 
-*(Find the right person: on each outlet's website look for "arts editor",
-"music editor", "news desk", or a show's "contact"/"get in touch" page. For BBC
-Introducing Yorkshire, use their upload page to submit your music directly.)*
+*(Find the right person on each outlet's site — "arts editor", "music editor",
+"news desk", or a show's contact page. For BBC Introducing Yorkshire, use their
+upload page to submit your music directly.)*
