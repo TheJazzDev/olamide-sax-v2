@@ -50,7 +50,7 @@ Soapbox Spotlight in Sheffield was covered by *The Star*.[4]
 
 He is a graduate of the darts and Maya Productions Artist Development Programme
 in creative health and participatory arts, and is the founder of Lammy Wonder
-Music Entertainment.[5]
+Creatives.[5]
 
 ### Recognition
 
@@ -111,7 +111,7 @@ reviewed his performance in the stage production ''ÀTÙPÀ (The Spotlight)'' at
 CAST, Doncaster.<ref name="guardian-atupa"/> His original work "Mama" at Stand &
 Be Counted Theatre's Soapbox Spotlight was covered by ''The Star''.<ref name="star"/>
 
-He is the founder of Lammy Wonder Music Entertainment.
+He is the founder of Lammy Wonder Creatives.
 
 == Recognition ==
 Olaniyan received Best Instrumentalist of the Year at the 2026 Eko Heritage

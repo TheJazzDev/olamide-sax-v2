@@ -297,7 +297,7 @@ export const facilitation = [
    Affiliations" strip.
    ========================================================================== */
 export const affiliations = [
-  { id: "a-01", role: "Founder & Lead Artist", org: "Lammy Wonder Music Entertainment" },
+  { id: "a-01", role: "Founder & Lead Artist", org: "Lammy Wonder Creatives" },
   { id: "a-02", role: "Resident Pianist", org: "RCCG Maranatha Parish, Doncaster" },
   { id: "a-03", role: "Featured Saxophonist", org: "The Skintones UK" },
   { id: "a-04", role: "Featured Saxophonist", org: "Sound Café UK" },
